@@ -77,7 +77,7 @@ const StyledNavBar = styled.div`
         }
 
         form {
-          width: 100%;
+          width: calc(100% - 1rem);
           height: fit-content;
           display: flex;
           align-items: center;
@@ -134,6 +134,23 @@ const StyledNavBar = styled.div`
 
       .menu-btns {
         .menu-list {
+          form {
+            width: calc(100% - 1rem);
+            flex-direction: column;
+            align-items: flex-start;
+
+            input {
+              width: 95%;
+              height: 35px;
+              padding: 10px;
+            }
+
+            button {
+              padding: 5px;
+              margin: 10px 0px;
+            }
+          }
+
           li {
             &:hover {
               background: unset;

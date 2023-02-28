@@ -1,8 +1,21 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import StyledNavBar from '../styles/navbar.styles';
 
 export default function Navbar() {
-  const [showNavbar, setShowNavbar] = React.useState(false);
+  const [showSideMenu, setShowSideMenu] = React.useState(false);
+
+  const removeSideMenu = () => {
+    if (showSideMenu) {
+      setShowSideMenu(false);
+    }
+  };
+
+  // document.body.addEventListener('click', () => {
+  //   removeSideMenu();
+  //   console.log('body clicked');
+  // });
 
   const handleSearch = (drink) => {
     console.log('drink entered', drink);
@@ -19,13 +32,15 @@ export default function Navbar() {
           <button
             className="category-btn"
             type="button"
-            onClick={() => setShowNavbar((prev) => !prev)}
+            onClick={() => setShowSideMenu((prev) => !prev)}
           >
             Categories
           </button>
 
           <ul
-            className={showNavbar ? 'menu-list active-menu-list' : 'menu-list'}
+            className={
+              showSideMenu ? 'menu-list active-menu-list' : 'menu-list'
+            }
           >
             <form
               onSubmit={(e) => {
@@ -37,12 +52,12 @@ export default function Navbar() {
               <input type="text" id="search_input" placeholder="Search drink" />
               <button type="submit">Search</button>
             </form>
-            <li>Water</li>
-            <li>Milk</li>
-            <li>Bear</li>
-            <li>Cider</li>
-            <li>Wine</li>
-            <li>Spirits</li>
+            <li onClick={removeSideMenu}>Water</li>
+            <li onClick={removeSideMenu}>Milk</li>
+            <li onClick={removeSideMenu}>Bear</li>
+            <li onClick={removeSideMenu}>Cider</li>
+            <li onClick={removeSideMenu}>Wine</li>
+            <li onClick={removeSideMenu}>Spirits</li>
           </ul>
         </div>
       </div>
