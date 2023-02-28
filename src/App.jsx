@@ -1,9 +1,16 @@
 import './styles/App.css';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import Body from './components/Body';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <div className="App">
-      <h1>Welcome Rash</h1>
+      <Navbar />
+      <Hero />
+      <Body />
+      <Footer />
     </div>
   );
 }
