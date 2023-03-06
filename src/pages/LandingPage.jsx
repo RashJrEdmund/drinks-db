@@ -30,7 +30,7 @@ export default function LandingPage() {
             <button
               className="sign_up_btn"
               type="button"
-              name="signup"
+              name="register"
               onClick={(e) => navigateToForm(e.target.name)}
             >
               SignUp
