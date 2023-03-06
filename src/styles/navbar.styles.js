@@ -35,7 +35,7 @@ const StyledNavBar = styled.div`
         transition: 0.5s color;
 
         &:hover {
-          color: #000;
+          color: #a52a2a;
         }
       }
     }
@@ -98,6 +98,7 @@ const StyledNavBar = styled.div`
         }
 
         li {
+          color: #a52a2a;
           width: 100%;
           height: fit-content;
           text-align: left;
@@ -115,7 +116,7 @@ const StyledNavBar = styled.div`
               #00000065,
               #00000065
             );
-            color: whitesmoke;
+            color: #fff;
           }
         }
       }
@@ -154,7 +155,7 @@ const StyledNavBar = styled.div`
           li {
             &:hover {
               background: unset;
-              color: black;
+              color: #a52a2a;
             }
           }
         }

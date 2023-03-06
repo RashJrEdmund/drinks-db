@@ -24,7 +24,7 @@ function Register() {
     navigate('/login');
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="regiter_form" onSubmit={handleSubmit}>
       <h1>Please create your account</h1>
       <p>{isLoading ? 'Loading...' : ''}</p>
       <input type="text" placeholder="First Name" name="firstName" required />

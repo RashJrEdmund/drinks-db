@@ -34,7 +34,7 @@ function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="login_form" onSubmit={handleSubmit}>
       <h1>Please login to your account</h1>
       {isLoading && <p>Loading...</p>}
       {error && <p className="error">{error}</p>}
