@@ -49,7 +49,11 @@ export default function Navbar() {
                 e.target.elements.search_input.value = '';
               }}
             >
-              <input type="text" id="search_input" placeholder="Search drink" />
+              <input
+                type="text"
+                id="search_input"
+                placeholder="Search drink / Category"
+              />
               <button type="submit">Search</button>
             </form>
             <li onClick={removeSideMenu}>Water</li>
