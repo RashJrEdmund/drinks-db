@@ -2,33 +2,23 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import './styles/App.css';
 import React from 'react';
-import MYContext from './context/MyContext';
-import FetchData from './data/FetchData';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Main from './pages/Main';
+import LandingPage from './pages/LandingPage';
+import Login from './components/Login';
+import Register from './components/Register';
 
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Body from './components/Body';
-import Footer from './components/Footer';
-
-function App() {
-  const [drinks, setDrinks] = React.useState({});
-
-  React.useEffect(() => {
-    FetchData()
-      .then((res) => setDrinks(res))
-      .catch((err) => console.log('Erro!', err));
-  }, []);
-
+export default function App() {
   return (
     <div className="App">
-      <MYContext.Provider value={{ drinks }}>
-        <Navbar />
-        <Hero />
-        <Body />
-        <Footer />
-      </MYContext.Provider>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/main" element={<Main />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
-
-export default App;
