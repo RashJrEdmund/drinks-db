@@ -1,8 +1,9 @@
+/* eslint-disable import/named */
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-no-constructed-context-values */
 import '../styles/Main.css';
 import React from 'react';
-import MYContext from '../context/MyContext';
+import { MainContext } from '../context/MyContext';
 import FetchData from '../data/FetchData';
 
 import Navbar from '../components/Navbar';
@@ -21,12 +22,12 @@ function Main() {
 
   return (
     <div className="Main">
-      <MYContext.Provider value={{ drinks }}>
+      <MainContext.Provider value={{ drinks }}>
         <Navbar />
         <Hero />
         <Body />
         <Footer />
-      </MYContext.Provider>
+      </MainContext.Provider>
     </div>
   );
 }

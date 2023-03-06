@@ -1,5 +1,6 @@
 import React from 'react';
 
-const MYContext = React.createContext();
+const MainContext = React.createContext();
+const AppContext = React.createContext();
 
-export default MYContext;
+export default { MainContext, AppContext };
