@@ -17,7 +17,7 @@ function Login() {
         <h1>Please login to your account</h1>
         <input
           type="email"
-          placeholder="Email Address"
+          placeholder="Login With Email"
           name="emailAddress"
           required
         />
