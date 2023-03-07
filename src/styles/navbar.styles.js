@@ -70,6 +70,7 @@ const StyledNavBar = styled.div`
         list-style: none;
         padding: 50px 0 0;
         transition: 0.4s ease-in transform;
+        overflow: auto;
         /* z-index: 1; */
 
         &.active-menu-list {

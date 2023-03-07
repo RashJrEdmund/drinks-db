@@ -27,6 +27,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   padding: 1.5rem 10px;
+  overflow: auto;
 }
 
 .sub_alternatives {

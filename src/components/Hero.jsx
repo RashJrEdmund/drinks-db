@@ -6,7 +6,7 @@ export default function Hero() {
     <StyledHero className="hero" id="hero">
       <h1>
         <span className="text1">the</span>
-        <span className="text2">drinksDB</span>
+        <span className="text2"> drinks DB</span>
       </h1>
     </StyledHero>
   );

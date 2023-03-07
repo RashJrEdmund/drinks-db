@@ -53,6 +53,9 @@ export default function Navbar() {
                 type="text"
                 id="search_input"
                 placeholder="Search drink / Category"
+                onChange={(e) => {
+                  handleSearch(e.target.elements.search_input.value);
+                }}
               />
               <button type="submit">Search</button>
             </form>
