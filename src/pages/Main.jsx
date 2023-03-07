@@ -13,6 +13,7 @@ import Footer from '../components/Footer';
 
 function Main() {
   const [drinks, setDrinks] = React.useState({});
+  const [userStatus, setUserStatus] = React.useState('Guest');
 
   React.useEffect(() => {
     FetchData()
@@ -22,7 +23,7 @@ function Main() {
 
   return (
     <div className="Main">
-      <MainContext.Provider value={{ drinks }}>
+      <MainContext.Provider value={{ drinks, userStatus, setUserStatus }}>
         <Navbar />
         <Hero />
         <Body />

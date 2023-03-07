@@ -1,10 +1,15 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { MainContext } from '../context/MyContext';
 import StyledNavBar from '../styles/navbar.styles';
 
 export default function Navbar() {
+  const { userStatus } = React.useContext(MainContext);
   const [showSideMenu, setShowSideMenu] = React.useState(false);
+  const navigate = useNavigate();
 
   const removeSideMenu = () => {
     if (showSideMenu) {
@@ -24,19 +29,29 @@ export default function Navbar() {
   return (
     <StyledNavBar>
       <div className="navBar-container">
-        <a href="#hero">
-          <h1>Home</h1>
-        </a>
+        <button
+          className="side_menu_btn"
+          type="button"
+          onClick={() => setShowSideMenu((prev) => !prev)}
+        >
+          {showSideMenu ? 'close Filter' : 'open Filter'}
+        </button>
+
+        <div className="user_details">
+          <p className="user_status">
+            myStatus: <span>{userStatus}</span>
+          </p>
+
+          <span
+            className="profile_section"
+            onClick={() => navigate('/profile')}
+          >
+            <div className="profile_logo" />
+            <span>my Profile</span>
+          </span>
+        </div>
 
         <div className="menu-btns">
-          <button
-            className="category-btn"
-            type="button"
-            onClick={() => setShowSideMenu((prev) => !prev)}
-          >
-            Categories
-          </button>
-
           <ul
             className={
               showSideMenu ? 'menu-list active-menu-list' : 'menu-list'
@@ -52,19 +67,18 @@ export default function Navbar() {
               <input
                 type="text"
                 id="search_input"
-                placeholder="Search drink / Category"
+                placeholder="Search Users"
                 onChange={(e) => {
                   handleSearch(e.target.elements.search_input.value);
                 }}
               />
               <button type="submit">Search</button>
             </form>
-            <li onClick={removeSideMenu}>Water</li>
-            <li onClick={removeSideMenu}>Milk</li>
-            <li onClick={removeSideMenu}>Bear</li>
-            <li onClick={removeSideMenu}>Cider</li>
-            <li onClick={removeSideMenu}>Wine</li>
-            <li onClick={removeSideMenu}>Spirits</li>
+            <li onClick={removeSideMenu}>Users</li>
+            <li onClick={removeSideMenu}>Drinks</li>
+            <li onClick={removeSideMenu}>Categories</li>
+            <li onClick={removeSideMenu}>glasses</li>
+            <li onClick={removeSideMenu}>Ingredients</li>
           </ul>
         </div>
       </div>

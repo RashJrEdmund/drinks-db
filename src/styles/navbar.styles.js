@@ -20,22 +20,61 @@ const StyledNavBar = styled.div`
     padding: 0 1rem;
     transition: 0.6s color;
 
-    a {
-      margin: 0 1rem 0 0;
+    .side_menu_btn {
+      background-color: green;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 3px;
+      padding: 12px 1rem;
+      margin: 0;
+    }
+
+    .user_details {
       width: fit-content;
       height: fit-content;
+      margin: 0 0 0 7rem;
+      display: flex;
+      align-items: center;
 
-      h1 {
-        color: whitesmoke;
+      .user_status {
         width: fit-content;
         height: fit-content;
-        letter-spacing: 5px;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: 0.5s color;
+        color: #f5f5f5;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin: 0;
 
-        &:hover {
-          color: #a52a2a;
+        span {
+          color: #8a2be2;
+          font-size: 2rem;
+          font-weight: 700;
+        }
+      }
+
+      .profile_section {
+        height: fit-content;
+        width: fit-content;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 0 0 2rem;
+        padding: 0;
+        cursor: pointer;
+
+        .profile_logo {
+          background-color: #f5f5f5;
+          background-position: center;
+          background-size: cover;
+          height: 80px;
+          width: 80px;
+          border-radius: 50px;
+          margin: 5px 0 0;
+        }
+
+        span {
+          color: #8a2be2;
+          font-weight: 700;
+          margin: 5px 0 2px;
         }
       }
     }
@@ -46,14 +85,6 @@ const StyledNavBar = styled.div`
       align-items: center;
       width: fit-content;
       height: fit-content;
-
-      .category-btn {
-        background-color: green;
-        font-weight: 700;
-        font-size: 1rem;
-        padding: 12px 1rem;
-        margin: 0;
-      }
 
       .menu-list {
         background: linear-gradient(to bottom, #00000065, #000000be, #000);
@@ -126,10 +157,17 @@ const StyledNavBar = styled.div`
 
   @media only screen and (max-width: 768px) {
     .navBar-container {
-      a {
-        h1 {
-          &:hover {
-            color: whitesmoke;
+      .user_details {
+        margin: 0 0 0 3rem;
+
+        .profile_section {
+          .profile_logo {
+            height: 60px;
+            width: 60px;
+          }
+
+          span {
+            /* display: none; */
           }
         }
       }
@@ -159,6 +197,34 @@ const StyledNavBar = styled.div`
               color: #a52a2a;
             }
           }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .navBar-container {
+      .user_details {
+        margin: 0 0 0 5rem;
+
+        .profile_section {
+          margin: 0 0 0 2rem;
+
+          span {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 400px) {
+    .navBar-container {
+      .user_details {
+        margin: 0 0 0 3rem;
+
+        .profile_section {
+          margin: 0 0 0 1.5rem;
         }
       }
     }
