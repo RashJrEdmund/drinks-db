@@ -161,6 +161,7 @@ const StyledNavBar = styled.div`
               color: #a52a2a;
               font-size: 1.5rem;
               letter-spacing: 3px;
+              cursor: pointer;
             }
 
             label {

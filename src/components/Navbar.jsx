@@ -9,20 +9,14 @@ import StyledNavBar from '../styles/navbar.styles';
 export default function Navbar() {
   const { userStatus } = React.useContext(MainContext);
   const [showSideMenu, setShowSideMenu] = React.useState(false);
-  const navigate = useNavigate();
-  // const filterBtnRef = React.useRef();
+  const [showOptionList, setShowOptionList] = React.useState({
+    Categories: false,
+    Glasses: false,
+    Ingredients: false,
+    Alcoholic: false,
+  });
 
-  // React.useEffect(() => {
-  //   document.body.addEventListener('click', (e) => {
-  //     e.stopPropagation();
-  //     console.clear();
-  //     console.log('body clicked', e.target);
-  //     if (e.target !== filterBtnRef.current) {
-  //       setShowSideMenu(false);
-  //       console.log('event caught');
-  //     }
-  //   });
-  // }, []);
+  const navigate = useNavigate();
 
   const filterOptions = [
     {
@@ -47,11 +41,17 @@ export default function Navbar() {
     console.log('change happened in form', e.target.id);
   };
 
+  const toggleOptionList = (nom) => {
+    setShowOptionList(() => ({
+      ...showOptionList,
+      [nom]: !showOptionList[nom],
+    }));
+  };
+
   return (
     <StyledNavBar>
       <div className="navBar-container">
         <button
-          // ref={filterBtnRef}
           className="side_menu_btn"
           type="button"
           onClick={() => setShowSideMenu((prev) => !prev)}
@@ -86,14 +86,17 @@ export default function Navbar() {
             <form onChange={handleFilterOptions}>
               {filterOptions?.map((option) => (
                 <li className="filter_option" key={option.title}>
-                  <h2>{option.title}</h2>
+                  <h2 onClick={() => toggleOptionList(option.title)}>
+                    {option.title}
+                  </h2>
 
-                  {option.list.map((list) => (
-                    <label htmlFor={list} key={list}>
-                      <input type="checkbox" id={list} />
-                      {list}
-                    </label>
-                  ))}
+                  {showOptionList[option.title] &&
+                    option.list.map((list) => (
+                      <label htmlFor={list} key={list}>
+                        <input type="checkbox" id={list} />
+                        {list}
+                      </label>
+                    ))}
                 </li>
               ))}
             </form>
