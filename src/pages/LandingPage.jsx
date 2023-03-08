@@ -24,6 +24,7 @@ export default function LandingPage() {
   return (
     <div className="landing_page">
       <div className="alternatives">
+        <h2>Welcome to the DrinksDB</h2>
         <div className="sub_alternatives">
           <div className="sign_up_section">
             <p>don&apos;t have an account yet?</p>

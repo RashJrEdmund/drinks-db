@@ -49,6 +49,25 @@ const StyledBody = styled.div`
     }
   }
 
+  .body2_images {
+    background-color: green;
+    margin: 0 auto 1rem;
+    width: 95vw;
+    max-width: 1224px;
+    display: flex;
+    overflow: auto;
+
+    .first_img {
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      min-height: 300px;
+      min-width: 300px;
+      box-shadow: 0 0 10px #000;
+      margin: 0 10px;
+    }
+  }
+
   @media only screen and (max-width: 768px) {
     .drinks-container,
     .drinks-container_2 {

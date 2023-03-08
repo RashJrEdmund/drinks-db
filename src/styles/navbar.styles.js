@@ -79,7 +79,7 @@ const StyledNavBar = styled.div`
       }
     }
 
-    .menu-btns {
+    .side_menu {
       margin: 0 2rem;
       display: flex;
       align-items: center;
@@ -108,47 +108,68 @@ const StyledNavBar = styled.div`
           transform: translate(0);
         }
 
-        form {
-          width: calc(100% - 1rem);
-          height: fit-content;
-          display: flex;
-          align-items: center;
-          margin: 0 0 1rem 1rem;
-
-          input {
-            height: 50px;
-            font-size: 1.2rem;
-            padding: 10px;
-            margin: 0;
-          }
-
-          button {
-            padding: 15px;
-            font-weight: 700;
-            font-size: 1rem;
-          }
-        }
-
-        li {
-          color: #a52a2a;
+        .result_count {
+          color: #f5f5f5;
           width: 100%;
           height: fit-content;
           text-align: left;
           padding: 1rem;
-          font-size: 1.5rem;
-          letter-spacing: 10px;
+          font-size: 17px;
+          letter-spacing: 5px;
           font-weight: 700;
-          cursor: pointer;
-          transition: 0.7s;
 
-          &:hover {
-            background: linear-gradient(
-              to bottom,
-              #00000065,
-              #00000065,
-              #00000065
-            );
-            color: #fff;
+          span {
+            color: #a52a2a;
+            font-size: 1.4rem;
+            letter-spacing: 0;
+          }
+        }
+
+        form {
+          /* width: calc(100% - 1rem); */
+          width: 100%;
+          height: fit-content;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 1rem;
+
+          label {
+            display: flex;
+            align-items: center;
+
+            input {
+              width: 20px;
+              height: 20px;
+              font-size: 1.2rem;
+              padding: 10px;
+              margin: 0 10px 0 0;
+            }
+          }
+
+          li {
+            width: 100%;
+            height: fit-content;
+            padding: 1rem 0;
+            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            border-bottom: 1px solid grey;
+
+            h2 {
+              color: #a52a2a;
+              font-size: 1.5rem;
+              letter-spacing: 3px;
+            }
+
+            label {
+              color: green;
+              width: 100%;
+              text-align: left;
+              padding: 10px 15px;
+              margin: 5px 0;
+            }
           }
         }
       }
@@ -165,37 +186,22 @@ const StyledNavBar = styled.div`
             height: 60px;
             width: 60px;
           }
-
-          span {
-            /* display: none; */
-          }
         }
       }
 
-      .menu-btns {
+      .side_menu {
         .menu-list {
+          .result_count {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+          }
+
           form {
             width: calc(100% - 1rem);
             flex-direction: column;
             align-items: flex-start;
-
-            input {
-              width: 95%;
-              height: 35px;
-              padding: 10px;
-            }
-
-            button {
-              padding: 5px;
-              margin: 10px 0px;
-            }
-          }
-
-          li {
-            &:hover {
-              background: unset;
-              color: #a52a2a;
-            }
           }
         }
       }

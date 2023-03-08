@@ -10,26 +10,48 @@ export default function Navbar() {
   const { userStatus } = React.useContext(MainContext);
   const [showSideMenu, setShowSideMenu] = React.useState(false);
   const navigate = useNavigate();
+  // const filterBtnRef = React.useRef();
 
-  const removeSideMenu = () => {
-    if (showSideMenu) {
-      setShowSideMenu(false);
-    }
-  };
+  // React.useEffect(() => {
+  //   document.body.addEventListener('click', (e) => {
+  //     e.stopPropagation();
+  //     console.clear();
+  //     console.log('body clicked', e.target);
+  //     if (e.target !== filterBtnRef.current) {
+  //       setShowSideMenu(false);
+  //       console.log('event caught');
+  //     }
+  //   });
+  // }, []);
 
-  // document.body.addEventListener('click', () => {
-  //   removeSideMenu();
-  //   console.log('body clicked');
-  // });
+  const filterOptions = [
+    {
+      title: 'Categories',
+      list: ['option_1', 'option_2', 'option_3', 'option_4'],
+    },
+    {
+      title: 'Glasses',
+      list: ['option_1', 'option_2', 'option_3', 'option_4'],
+    },
+    {
+      title: 'Ingredients',
+      list: ['option_1', 'option_2', 'option_3', 'option_4'],
+    },
+    {
+      title: 'Alcoholic',
+      list: ['YES', 'NO', 'BOTH'],
+    },
+  ];
 
-  const handleSearch = (drink) => {
-    console.log('drink entered', drink);
+  const handleFilterOptions = (e) => {
+    console.log('change happened in form', e.target.id);
   };
 
   return (
     <StyledNavBar>
       <div className="navBar-container">
         <button
+          // ref={filterBtnRef}
           className="side_menu_btn"
           type="button"
           onClick={() => setShowSideMenu((prev) => !prev)}
@@ -51,34 +73,30 @@ export default function Navbar() {
           </span>
         </div>
 
-        <div className="menu-btns">
+        <div className="side_menu">
           <ul
             className={
               showSideMenu ? 'menu-list active-menu-list' : 'menu-list'
             }
           >
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleSearch(e.target.elements.search_input.value);
-                e.target.elements.search_input.value = '';
-              }}
-            >
-              <input
-                type="text"
-                id="search_input"
-                placeholder="Search Users"
-                onChange={(e) => {
-                  handleSearch(e.target.elements.search_input.value);
-                }}
-              />
-              <button type="submit">Search</button>
+            <li className="result_count">
+              showing: <span className="count">6 products</span>
+            </li>
+
+            <form onChange={handleFilterOptions}>
+              {filterOptions?.map((option) => (
+                <li className="filter_option" key={option.title}>
+                  <h2>{option.title}</h2>
+
+                  {option.list.map((list) => (
+                    <label htmlFor={list} key={list}>
+                      <input type="checkbox" id={list} />
+                      {list}
+                    </label>
+                  ))}
+                </li>
+              ))}
             </form>
-            <li onClick={removeSideMenu}>Users</li>
-            <li onClick={removeSideMenu}>Drinks</li>
-            <li onClick={removeSideMenu}>Categories</li>
-            <li onClick={removeSideMenu}>glasses</li>
-            <li onClick={removeSideMenu}>Ingredients</li>
           </ul>
         </div>
       </div>

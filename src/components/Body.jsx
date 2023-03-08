@@ -1,4 +1,3 @@
-import React from 'react';
 import StyledBody from '../styles/StyledBody';
 import pourWineImg from '../images/pour_wine_glass_2.png';
 
@@ -21,7 +20,6 @@ export default function Body() {
           <p>this the body</p>
         </div>
       </div>
-
       <div className="body_images">
         <div
           className="first_img"
@@ -32,7 +30,6 @@ export default function Body() {
           style={{ backgroundImage: `url(${pourWineImg})` }}
         />
       </div>
-
       <div className="drinks-container_2">
         <div className="drink">
           <h3>this the Title</h3>

@@ -49,7 +49,7 @@ export default function UserProfile() {
               name="emailAddress"
               disabled
             />
-            <input type="text" placeholder="Phone Number" name="phone" />
+            <input type="tel" placeholder="Phone Number" name="phone" />
             <input type="password" disabled />
 
             <button type="submit">Update Profile</button>

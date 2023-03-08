@@ -22,7 +22,7 @@ function Register() {
           name="emailAddress"
           required
         />
-        <input type="phone" placeholder="Phone Number" name="phone" />
+        <input type="tel" placeholder="Phone Number" name="phone" />
         <input
           type="password"
           placeholder="Password"
