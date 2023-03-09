@@ -1,0 +1,192 @@
+{
+  "Users": [
+      {
+          "id": 1,
+          "first_name": "Rash",
+          "last_name": "Edmund",
+          "password": "1234",
+          "email": "rasho@gmail.com",
+          "apikey": null,
+          "phone": 67011,
+          "is_admin": false,
+          "createdAt": "2023-03-09T12:39:40.000Z",
+          "updatedAt": "2023-03-09T12:39:40.000Z",
+          "deletedAt": null
+      },
+      {
+          "id": 2,
+          "first_name": "Godden",
+          "last_name": "Chriss",
+          "password": "1234",
+          "email": "chriss@gmail.com",
+          "apikey": null,
+          "phone": 67012,
+          "is_admin": false,
+          "createdAt": "2023-03-09T12:40:01.000Z",
+          "updatedAt": "2023-03-09T12:40:01.000Z",
+          "deletedAt": null
+      },
+      {
+          "id": 3,
+          "first_name": "Alaric",
+          "last_name": "Kiven",
+          "password": "1234",
+          "email": "kiven@gmail.com",
+          "apikey": null,
+          "phone": 67013,
+          "is_admin": false,
+          "createdAt": "2023-03-09T12:40:14.000Z",
+          "updatedAt": "2023-03-09T12:40:14.000Z",
+          "deletedAt": null
+      }
+    ],
+
+  "Drinks": [
+    {
+      "name": "Cabernet Sauvignon. Red",
+      "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity.",
+      "image_url": "http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT5iLNJLqdpnnlhfBHXtU-TCA0rBtfvEY9trzEhyWS5B90qmxomLpyBLF0KjEvzEf1_eQJFvYE4JBacYbU",
+      "recipe": [
+          "A glass jar for fermentation (capacity of 1-2 gallons)",
+          "Secondary jars/containers",
+          "Empty glass bottles",
+          "A funnel",
+          "Airlocks/Corks",
+          "Strainer/Nylon mesh",
+          "Plastic tubing for siphoning",
+          "A stirrer",
+          "Plentiful supply of fruit (preferably red grapes)",
+          "Sugar/honey/brown sugar",
+          "Wine yeast",
+          "Distilled/filtered water",
+          "Campden tablets (optional)"
+          ],
+      "category_id": 1,
+      "ingredient_id": 1,
+      "is_alcoholic": 1,
+      "userid": "2"
+    },
+    {
+      "name": "Cabern Rose",
+      "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity.",
+      "image_url": "http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT5iLNJLqdpnnlhfBHXtU-TCA0rBtfvEY9trzEhyWS5B90qmxomLpyBLF0KjEvzEf1_eQJFvYE4JBacYbU",
+      "recipe": [
+          "A glass jar for fermentation (capacity of 1-2 gallons)",
+          "Secondary jars/containers",
+          "Empty glass bottles",
+          "A funnel",
+          "Airlocks/Corks",
+          "Strainer/Nylon mesh",
+          "Plastic tubing for siphoning",
+          "A stirrer",
+          "Plentiful supply of fruit (preferably red grapes)",
+          "Sugar/honey/brown sugar",
+          "Wine yeast",
+          "Distilled/filtered water",
+          "Campden tablets (optional)"
+          ],
+      "category_id": 1,
+      "ingredient_id": 1,
+      "is_alcoholic": 1,
+      "userid": "2"
+    },
+    {
+      "name": "Sauvignon Grape",
+      "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity.",
+      "image_url": "http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT5iLNJLqdpnnlhfBHXtU-TCA0rBtfvEY9trzEhyWS5B90qmxomLpyBLF0KjEvzEf1_eQJFvYE4JBacYbU",
+      "recipe": [
+          "A glass jar for fermentation (capacity of 1-2 gallons)",
+          "Secondary jars/containers",
+          "Empty glass bottles",
+          "A funnel",
+          "Airlocks/Corks",
+          "Strainer/Nylon mesh",
+          "Plastic tubing for siphoning",
+          "A stirrer",
+          "Plentiful supply of fruit (preferably red grapes)",
+          "Sugar/honey/brown sugar",
+          "Wine yeast",
+          "Distilled/filtered water",
+          "Campden tablets (optional)"
+          ],
+      "category_id": 1,
+      "ingredient_id": 1,
+      "is_alcoholic": 1,
+      "userid": "2"
+    }
+  ],
+
+  "Categories": [
+    {
+      "id": 1,
+      "name": "Wine",
+      "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity."
+    },
+    {
+      "id": 2,
+      "name": "Milky",
+      "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity."
+    },
+    {
+      "id": 3,
+      "name": "Tea",
+      "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity."
+    },
+    {
+      "id": 4,
+      "name": "Water",
+      "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity."
+    }
+  ],
+
+  "Glasses": [
+    {
+      "id": 1,
+      "name": "Desperado",
+      "description": "big"
+    },
+    {
+      "id": 2,
+      "name": "Minato",
+      "description": "big"
+    },
+    {
+      "id": 3,
+      "name": "Kakashi",
+      "description": "medium"
+    },
+    {
+      "id": 4,
+      "name": "Uzumaki",
+      "description": "small"
+    },
+    {
+      "id": 5,
+      "name": "Uchiha",
+      "description": "medium"
+    }
+  ],
+
+  "Ingredients": [
+    {
+      "id": 1,
+      "name": "leaf",
+      "description": "hidden leaf village, village hidden in the leaf"
+    },
+    {
+      "id": 2,
+      "name": "sand",
+      "description": "hidden sand village, village hidden in the sand"
+    },
+    {
+      "id": 3,
+      "name": "midst",
+      "description": "hidden midst village, village hidden in the midst"
+    },
+    {
+      "id": 4,
+      "name": "rain",
+      "description": "hidden rain village, village hidden in the rain"
+    }
+  ]
+}

@@ -3,11 +3,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MainContext } from '../context/MyContext';
+import MyContext from '../context/MyContext';
 import StyledNavBar from '../styles/navbar.styles';
 
 export default function Navbar() {
-  const { userStatus } = React.useContext(MainContext);
+  const { userStatus, Simulation } = React.useContext(MyContext);
   const [showSideMenu, setShowSideMenu] = React.useState(false);
   const [showOptionList, setShowOptionList] = React.useState({
     Categories: false,
@@ -21,15 +21,12 @@ export default function Navbar() {
   const filterOptions = [
     {
       title: 'Categories',
-      list: ['option_1', 'option_2', 'option_3', 'option_4'],
     },
     {
       title: 'Glasses',
-      list: ['option_1', 'option_2', 'option_3', 'option_4'],
     },
     {
       title: 'Ingredients',
-      list: ['option_1', 'option_2', 'option_3', 'option_4'],
     },
     {
       title: 'Alcoholic',
@@ -84,19 +81,29 @@ export default function Navbar() {
             </li>
 
             <form onChange={handleFilterOptions}>
-              {filterOptions?.map((option) => (
-                <li className="filter_option" key={option.title}>
-                  <h2 onClick={() => toggleOptionList(option.title)}>
-                    {option.title}
-                  </h2>
+              {filterOptions?.map(({ title }) => (
+                <li className="filter_option" key={title}>
+                  <h2 onClick={() => toggleOptionList(title)}>{title}</h2>
 
-                  {showOptionList[option.title] &&
-                    option.list.map((list) => (
-                      <label htmlFor={list} key={list}>
-                        <input type="checkbox" id={list} />
-                        {list}
-                      </label>
-                    ))}
+                  {showOptionList[title] &&
+                    (title !== 'Alcoholic'
+                      ? Simulation[title].map(({ name }) => {
+                          return (
+                            <label htmlFor={name} key={name}>
+                              <input type="checkbox" id={name} />
+                              {name}
+                            </label>
+                          );
+                        })
+                      : filterOptions.pop().list.map(
+                          // i'm using a tenary to check if it's the is alcoholic part already
+                          (val) => (
+                            <label htmlFor={val} key={val}>
+                              <input type="radio" id={val} />
+                              {val}
+                            </label>
+                          )
+                        ))}
                 </li>
               ))}
             </form>
