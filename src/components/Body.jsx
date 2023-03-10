@@ -28,6 +28,7 @@ export default function Body() {
         {Drinks?.map((drink, index) =>
           index <= Math.floor((Drinks.length - 1) / 2) && Drinks.length > 10 ? (
             <div
+              key={(drink.name, index)}
               className="drink"
               style={{ backgroundImage: `url("${drink.image_url}")` }}
             >
@@ -56,6 +57,7 @@ export default function Body() {
       <div className="drinks-container_2">
         {secondHalf?.map((drink, index) => (
           <div
+            key={(drink.name, index)}
             className="drink"
             style={{ backgroundImage: `url("${drink.image_url}")` }}
           >
