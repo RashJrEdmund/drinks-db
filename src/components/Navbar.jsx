@@ -100,7 +100,7 @@ export default function Navbar() {
                           (val) => (
                             <label htmlFor={val} key={val}>
                               <input
-                                type="radio"
+                                type="checkbox"
                                 id={val}
                                 name={`${val} val`}
                               />

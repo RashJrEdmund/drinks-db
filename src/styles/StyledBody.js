@@ -12,7 +12,6 @@ const StyledBody = styled.div`
 
   .drinks-container,
   .drinks-container_2 {
-    background-color: brown;
     margin: 3rem auto;
     width: 95vw;
     max-width: 1224px;
