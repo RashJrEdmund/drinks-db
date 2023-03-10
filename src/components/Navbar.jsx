@@ -7,7 +7,8 @@ import MyContext from '../context/MyContext';
 import StyledNavBar from '../styles/navbar.styles';
 
 export default function Navbar() {
-  const { userStatus, Simulation, setFilterData } = React.useContext(MyContext);
+  const { userStatus, Simulation, setFilterData, bodyref } =
+    React.useContext(MyContext);
   const [showSideMenu, setShowSideMenu] = React.useState(false);
   const [showOptionList, setShowOptionList] = React.useState({
     Categories: false,
@@ -91,7 +92,10 @@ export default function Navbar() {
           >
             <li className="result_count">
               showing:{' '}
-              <span className="count">
+              <span
+                className="count"
+                onClick={() => window.scrollTo(0, bodyref.current.offsetTop)}
+              >
                 {`${Drinks.length} Product${Drinks.length > 1 ? 's' : ''}`}
               </span>
             </li>

@@ -18,6 +18,7 @@ export default function App() {
   const [fetchedData, setFetchedData] = React.useState({});
   const [userStatus, setUserStatus] = React.useState('Guest');
   const [filterData, setFilterData] = React.useState(Simulation);
+  const bodyref = React.useRef();
 
   React.useEffect(() => {
     FetchData()
@@ -37,6 +38,7 @@ export default function App() {
           Simulation,
           filterData,
           setFilterData,
+          bodyref,
         }}
       >
         <BrowserRouter>

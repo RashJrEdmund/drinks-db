@@ -45,7 +45,7 @@ const StyledNavBar = styled.div`
         margin: 0;
 
         span {
-          color: #8a2be2;
+          color: #a52a2a;
           font-size: 2rem;
           font-weight: 700;
         }
@@ -72,7 +72,7 @@ const StyledNavBar = styled.div`
         }
 
         span {
-          color: #8a2be2;
+          color: #a52a2a;
           font-weight: 700;
           margin: 5px 0 2px;
         }
@@ -117,11 +117,13 @@ const StyledNavBar = styled.div`
           font-size: 17px;
           letter-spacing: 5px;
           font-weight: 700;
+          cursor: default;
 
           span {
             color: #a52a2a;
             font-size: 1.4rem;
             letter-spacing: 0;
+            cursor: pointer;
           }
         }
 

@@ -8,7 +8,7 @@ import wineGlasses from '../images/wine_glasses.png';
 import MyContext from '../context/MyContext';
 
 export default function Body() {
-  const { Simulation } = React.useContext(MyContext);
+  const { Simulation, bodyref } = React.useContext(MyContext);
   const { Drinks } = Simulation;
   const secondHalf = [];
 
@@ -24,7 +24,7 @@ export default function Body() {
 
   return (
     <StyledBody className="body-section" id="body_section">
-      <div className="drinks-container">
+      <div ref={bodyref} className="drinks-container">
         {Drinks?.map((drink, index) =>
           index <= Math.floor((Drinks.length - 1) / 2) && Drinks.length > 10 ? (
             <div
