@@ -7,6 +7,7 @@ const StyledHero = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  /* background-attachment: fixed; */
 
   margin: 0;
   width: 100%;

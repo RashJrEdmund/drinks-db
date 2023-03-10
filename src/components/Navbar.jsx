@@ -99,7 +99,11 @@ export default function Navbar() {
                           // i'm using a tenary to check if it's the is alcoholic part already
                           (val) => (
                             <label htmlFor={val} key={val}>
-                              <input type="radio" id={val} />
+                              <input
+                                type="radio"
+                                id={val}
+                                name={`${val} val`}
+                              />
                               {val}
                             </label>
                           )

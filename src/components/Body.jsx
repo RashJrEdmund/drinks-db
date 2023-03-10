@@ -1,13 +1,28 @@
+import React from 'react';
+
 import StyledBody from '../styles/StyledBody';
 import pourWineImg from '../images/pour_wine_glass_2.png';
 import blueWine from '../images/blue_wine_glass.png';
 import standingGlass from '../images/standing_wine_glass.png';
 import wineGlasses from '../images/wine_glasses.png';
+import MyContext from '../context/MyContext';
 
 export default function Body() {
+  const { Simulation } = React.useContext(MyContext);
+  const { Drinks } = Simulation;
+  console.log('this Drinks', Drinks[0].image_url);
   return (
     <StyledBody className="body-section" id="body_section">
       <div className="drinks-container">
+        {Drinks?.map((drink) => (
+          <div
+            className="drink"
+            style={{ backgroundImage: `url("${drink.image_url}")` }}
+          >
+            <h3>{drink.name}</h3>
+            <p>{drink.description}</p>
+          </div>
+        ))}
         <div className="drink">
           <h3>this the Title</h3>
           <p>this the body</p>

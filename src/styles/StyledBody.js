@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 const StyledBody = styled.div`
-  background-color: gold;
+  background-color: #331012;
   margin: 0;
   padding: 3rem 0;
   width: 100%;
@@ -14,7 +14,7 @@ const StyledBody = styled.div`
   .drinks-container_2 {
     background-color: brown;
     margin: 3rem auto;
-    width: 98vw;
+    width: 95vw;
     max-width: 1224px;
     height: fit-content;
     min-height: 500px;
@@ -23,11 +23,66 @@ const StyledBody = styled.div`
     gap: 10px;
 
     .drink {
-      background-color: green;
+      position: relative;
+      background-color: #fff;
+      background-position: center;
+      background-size: cover;
       width: 100%;
       height: fit-content;
       min-height: 300px;
       margin: 10px 0;
+
+      h3 {
+        background-color: #a52a2a;
+        background: linear-gradient(to bottom, #00000065, #00000065, #00000065);
+        color: #fff;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: fit-content;
+        font-size: 1.2rem;
+        transition: 0.5s;
+      }
+
+      p {
+        background-color: #a52a2a;
+        background: linear-gradient(to bottom, #00000065, #00000065, #00000065);
+        color: black;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        font-size: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* opacity: 0; */
+        transition: 0.5s;
+      }
+
+      &:hover {
+        p {
+          background-color: #a52a2a;
+          background: linear-gradient(
+            to bottom,
+            #00000065,
+            #00000065,
+            #00000065
+          );
+          color: #fff;
+          opacity: 1;
+          height: 100%;
+          font-size: unset;
+        }
+
+        h3 {
+          bottom: unset;
+          top: 0;
+          font-size: unset;
+        }
+      }
     }
   }
 

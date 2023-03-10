@@ -4,13 +4,31 @@ import StyledFooter from '../styles/StyledFooter';
 export default function Footer() {
   return (
     <StyledFooter className="footer" id="footer">
-      <button
-        className="to_top_btn"
-        type="button"
-        onClick={() => window.scrollTo(0, 0)}
-      >
-        Back to top
-      </button>
+      <div className="footer_column1">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab commodi
+          facilis deserunt magnam sint repellendus!
+        </p>
+        <p>contact us</p>
+        <div className="media_links">
+          <p>something@gmail.com</p>
+          <p>facbook</p>
+          <p>Instagram</p>
+          <p>twitter</p>
+          <p>+237 6701</p>
+        </div>
+      </div>
+
+      <div className="footer_column2">
+        <button
+          className="to_top_btn"
+          type="button"
+          onClick={() => window.scrollTo(0, 0)}
+        >
+          Back to top
+        </button>
+        <p>how do you like our services?</p>
+      </div>
     </StyledFooter>
   );
 }

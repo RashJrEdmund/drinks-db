@@ -142,27 +142,27 @@
   "Glasses": [
     {
       "id": 1,
-      "name": "Desperado",
+      "name": "glass 1",
       "description": "big"
     },
     {
       "id": 2,
-      "name": "Minato",
+      "name": "glass 2",
       "description": "big"
     },
     {
       "id": 3,
-      "name": "Kakashi",
+      "name": "glass 3",
       "description": "medium"
     },
     {
       "id": 4,
-      "name": "Uzumaki",
+      "name": "glass 4",
       "description": "small"
     },
     {
       "id": 5,
-      "name": "Uchiha",
+      "name": "glass 5",
       "description": "medium"
     }
   ],
