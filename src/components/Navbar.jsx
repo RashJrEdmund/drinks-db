@@ -7,7 +7,7 @@ import MyContext from '../context/MyContext';
 import StyledNavBar from '../styles/navbar.styles';
 
 export default function Navbar() {
-  const { userStatus, Simulation } = React.useContext(MyContext);
+  const { userStatus, Simulation, setFilterData } = React.useContext(MyContext);
   const [showSideMenu, setShowSideMenu] = React.useState(false);
   const [showOptionList, setShowOptionList] = React.useState({
     Categories: false,
@@ -15,6 +15,8 @@ export default function Navbar() {
     Ingredients: false,
     Alcoholic: false,
   });
+
+  const { Drinks } = Simulation;
 
   const navigate = useNavigate();
 
@@ -33,9 +35,20 @@ export default function Navbar() {
       list: ['YES', 'NO', 'BOTH'],
     },
   ];
+  localStorage.setItem('selectedFilters', []);
+  let selectedFilters = [];
 
   const handleFilterOptions = (e) => {
-    console.log('change happened in form', e.target.id);
+    // e.preventDefault();
+    console.clear();
+    selectedFilters = [...selectedFilters, e.target.id];
+    setFilterData(selectedFilters);
+    console.log(
+      'change happened in form',
+      selectedFilters,
+      e.target.checked,
+      e
+    );
   };
 
   const toggleOptionList = (nom) => {
@@ -77,7 +90,10 @@ export default function Navbar() {
             }
           >
             <li className="result_count">
-              showing: <span className="count">6 products</span>
+              showing:{' '}
+              <span className="count">
+                {`${Drinks.length} Product${Drinks.length > 1 ? 's' : ''}`}
+              </span>
             </li>
 
             <form onChange={handleFilterOptions}>
@@ -90,7 +106,7 @@ export default function Navbar() {
                       ? Simulation[title].map(({ name }) => {
                           return (
                             <label htmlFor={name} key={name}>
-                              <input type="checkbox" id={name} />
+                              <input type="checkbox" id={[title, name]} />
                               {name}
                             </label>
                           );
@@ -100,8 +116,8 @@ export default function Navbar() {
                           (val) => (
                             <label htmlFor={val} key={val}>
                               <input
-                                type="checkbox"
-                                id={val}
+                                type="radio"
+                                id={['Alcoholic', val]}
                                 name={`${val} val`}
                               />
                               {val}

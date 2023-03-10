@@ -13,17 +13,15 @@ export default function Body() {
   const secondHalf = [];
 
   if (Drinks.length > 10) {
-    console.clear();
     for (
       let i = Math.floor((Drinks.length - 1) / 2);
-      i <= Drinks.length - 1;
+      i < Drinks.length - 1;
       i += 1
     ) {
       secondHalf.push(Drinks[i]);
     }
   }
 
-  console.log('this Drinks', Drinks[0].image_url);
   return (
     <StyledBody className="body-section" id="body_section">
       <div className="drinks-container">
@@ -33,7 +31,9 @@ export default function Body() {
               className="drink"
               style={{ backgroundImage: `url("${drink.image_url}")` }}
             >
-              <h3>{drink.name}</h3>
+              <h3>
+                {drink.name} {index + 1}
+              </h3>
               <p>{drink.description}</p>
             </div>
           ) : (
@@ -54,12 +54,14 @@ export default function Body() {
       </div>
 
       <div className="drinks-container_2">
-        {secondHalf?.map((drink) => (
+        {secondHalf?.map((drink, index) => (
           <div
             className="drink"
             style={{ backgroundImage: `url("${drink.image_url}")` }}
           >
-            <h3>{drink.name}</h3>
+            <h3>
+              {drink.name} {index + 7}
+            </h3>
             <p>{drink.description}</p>
           </div>
         ))}

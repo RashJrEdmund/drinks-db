@@ -17,6 +17,7 @@ import Simulation from './data/DataSimulation.json';
 export default function App() {
   const [fetchedData, setFetchedData] = React.useState({});
   const [userStatus, setUserStatus] = React.useState('Guest');
+  const [filterData, setFilterData] = React.useState(Simulation);
 
   React.useEffect(() => {
     FetchData()
@@ -29,7 +30,14 @@ export default function App() {
   return (
     <div className="App">
       <MyContext.Provider
-        value={{ fetchedData, userStatus, setUserStatus, Simulation }}
+        value={{
+          fetchedData,
+          userStatus,
+          setUserStatus,
+          Simulation,
+          filterData,
+          setFilterData,
+        }}
       >
         <BrowserRouter>
           <Routes>
