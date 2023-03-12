@@ -1,7 +1,7 @@
-const API_KEY = 1;
+const apikey = process.env.API_KEY;
 
 function FetchData() {
-  const URL = `http://localhost:3000/users?apikey=${API_KEY}`;
+  const URL = `http://localhost:3000/users?apikey=${apikey}`;
   return fetch(URL).then((res) => res.json());
 }
 
