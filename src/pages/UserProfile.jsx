@@ -21,13 +21,20 @@ export default function UserProfile() {
             <div className="profile_img" />
             <ul>
               <li className="status">
-                staus: <span>GUEST</span>
+                My status: <span>GUEST</span>
               </li>
-              <li>profile info 1</li>
-              <li>profile info 2</li>
-              <li>profile info 3</li>
-              <li>profile info 4</li>
-              <li>profile info 5</li>
+              <li>
+                first Name: <span>Tata</span>
+              </li>
+              <li>
+                last Name: <span>Rash</span>
+              </li>
+              <li>
+                email: <span>something@gmail.com</span>
+              </li>
+              <li>
+                phone: <span>+237 67011</span>
+              </li>
             </ul>
           </div>
 
@@ -50,7 +57,6 @@ export default function UserProfile() {
               disabled
             />
             <input type="tel" placeholder="Phone Number" name="phone" />
-            <input type="password" disabled />
 
             <button type="submit">Update Profile</button>
           </form>

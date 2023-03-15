@@ -1,8 +1,11 @@
-const apikey = process.env.API_KEY;
+import axios from 'axios';
 
-function FetchData() {
+const apikey = 1;
+
+const FetchData = async () => {
   const URL = `http://localhost:3000/users?apikey=${apikey}`;
-  return fetch(URL).then((res) => res.json());
-}
+  const allData = await axios.get(URL);
+  return allData.data;
+};
 
 export default FetchData;

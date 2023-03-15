@@ -172,6 +172,7 @@ const StyledNavBar = styled.div`
               text-align: left;
               padding: 10px 15px;
               margin: 5px 0;
+              cursor: pointer;
             }
           }
         }

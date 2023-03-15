@@ -7,7 +7,7 @@ import MyContext from '../context/MyContext';
 import StyledNavBar from '../styles/navbar.styles';
 
 export default function Navbar() {
-  const { userStatus, Simulation, setFilterData, bodyref } =
+  const { userStatus, Simulation, filterData, setFilterData, bodyref } =
     React.useContext(MyContext);
   const [showSideMenu, setShowSideMenu] = React.useState(false);
   const [showOptionList, setShowOptionList] = React.useState({
@@ -36,20 +36,18 @@ export default function Navbar() {
       list: ['YES', 'NO', 'BOTH'],
     },
   ];
-  localStorage.setItem('selectedFilters', []);
-  let selectedFilters = [];
+  // localStorage.setItem('selectedFilters', []);
 
   const handleFilterOptions = (e) => {
+    // localStorage.setItem('selectedFilters', JSON.stringify(e.target.id))
     // e.preventDefault();
     console.clear();
-    selectedFilters = [...selectedFilters, e.target.id];
-    setFilterData(selectedFilters);
-    console.log(
-      'change happened in form',
-      selectedFilters,
-      e.target.checked,
-      e
-    );
+    setFilterData(() => {
+      if (filterData.includes(e.target.id)) {
+        return filterData.filter((item) => item !== e.target.id);
+      }
+      return [...filterData, e.target.id];
+    });
   };
 
   const toggleOptionList = (nom) => {
@@ -109,7 +107,7 @@ export default function Navbar() {
                     (title !== 'Alcoholic'
                       ? Simulation[title].map(({ name }) => {
                           return (
-                            <label htmlFor={name} key={name}>
+                            <label htmlFor={[title, name]} key={name}>
                               <input type="checkbox" id={[title, name]} />
                               {name}
                             </label>
@@ -118,7 +116,7 @@ export default function Navbar() {
                       : filterOptions.pop().list.map(
                           // i'm using a tenary to check if it's the is alcoholic part already
                           (val) => (
-                            <label htmlFor={val} key={val}>
+                            <label htmlFor={['Alcoholic', val]} key={val}>
                               <input
                                 type="radio"
                                 id={['Alcoholic', val]}

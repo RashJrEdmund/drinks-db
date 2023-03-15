@@ -8,9 +8,18 @@ import wineGlasses from '../images/wine_glasses.png';
 import MyContext from '../context/MyContext';
 
 export default function Body() {
-  const { Simulation, bodyref } = React.useContext(MyContext);
+  const { Simulation, bodyref, filterData } = React.useContext(MyContext);
   const { Drinks } = Simulation;
   const secondHalf = [];
+
+  const sortDrinks = () => {
+    const holder = filterData;
+    holder.forEach((item) => {
+      const newItem = item.split(',');
+      console.log('this item', newItem);
+    });
+    console.log('this data', holder);
+  };
 
   if (Drinks.length > 10) {
     for (
@@ -21,6 +30,8 @@ export default function Body() {
       secondHalf.push(Drinks[i]);
     }
   }
+
+  sortDrinks();
 
   return (
     <StyledBody className="body-section" id="body_section">

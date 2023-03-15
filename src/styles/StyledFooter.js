@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 const StyledFooter = styled.div`
   background-color: #0f0303;
-  color: green;
+  color: #fff;
   margin: 0;
   width: 100%;
   height: fit-content;

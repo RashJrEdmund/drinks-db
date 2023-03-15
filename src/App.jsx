@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import MyContext from './context/MyContext';
 import FetchData from './data/FetchData';
+import AlertMessage from './components/AlertMessage';
 import Main from './pages/Main';
 import LandingPage from './pages/LandingPage';
 import Login from './components/Login';
@@ -17,8 +18,22 @@ import Simulation from './data/DataSimulation.json';
 export default function App() {
   const [fetchedData, setFetchedData] = React.useState({});
   const [userStatus, setUserStatus] = React.useState('Guest');
-  const [filterData, setFilterData] = React.useState(Simulation);
+  const [filterData, setFilterData] = React.useState([]);
+
+  const [alertMsg, setAlertMsg] = React.useState({
+    message: '',
+    show: false,
+  });
+
   const bodyref = React.useRef();
+
+  const toggleAlert = (msg) => {
+    setAlertMsg((prev) => ({ message: msg, show: !prev.show }));
+
+    setTimeout(() => {
+      setAlertMsg((prev) => ({ message: '', show: !prev.show }));
+    }, 2000);
+  };
 
   React.useEffect(() => {
     FetchData()
@@ -32,21 +47,30 @@ export default function App() {
     <div className="App">
       <MyContext.Provider
         value={{
+          alertMsg,
+          toggleAlert,
+
           fetchedData,
+
           userStatus,
           setUserStatus,
+
           Simulation,
+
           filterData,
           setFilterData,
+
           bodyref,
         }}
       >
+        {alertMsg.show && <AlertMessage message={alertMsg.message} />}
+
         <BrowserRouter>
           <Routes>
-            <Route index element={<LandingPage />} />
+            <Route index element={<Main />} />
+            <Route path="/landing" element={<LandingPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/main" element={<Main />} />
 
             <Route path="/profile" element={<UserProfile />} />
           </Routes>
