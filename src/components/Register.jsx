@@ -2,16 +2,19 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import MyContext from '../context/MyContext';
-// import API_BASE_URL from '../constants';
+import { register } from '../api/authentication';
 
 function Register() {
   // const URL = `http://localhost:3000/users?apikey=${apikey}`;
   const { toggleAlert } = React.useContext(MyContext);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const getUserReady = (data) => {
+    localStorage.setItem('currentUser', JSON.stringify(data));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.clear();
 
@@ -30,15 +33,7 @@ function Register() {
       is_admin: false,
     };
 
-    const options = {
-      method: 'POST',
-      url: `http://localhost:3000/users`,
-      body: data,
-    };
-
-    console.log('this data', data);
-
-    axios.post(options).then((res) => console.log('this, res', res));
+    await register(data).then(() => getUserReady(data));
 
     // navigate('/login');
   };
