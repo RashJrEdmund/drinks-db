@@ -6,13 +6,13 @@ export default function UserProfile() {
   const navigate = useNavigate();
 
   const handleProfileUpdate = () => {
-    navigate('/main');
+    window.history.back();
   };
 
   return (
     <div className="profile_page">
       <div className="profile_update_container">
-        <button type="button" onClick={() => navigate('/main')}>
+        <button type="button" onClick={() => navigate('/')}>
           go to home
         </button>
 

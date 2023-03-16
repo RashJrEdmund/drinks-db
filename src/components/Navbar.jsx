@@ -7,7 +7,7 @@ import MyContext from '../context/MyContext';
 import StyledNavBar from '../styles/navbar.styles';
 
 export default function Navbar() {
-  const { userStatus, Simulation, filterData, setFilterData, bodyref } =
+  const { userStatus, Simulation, setFilterData, bodyref, toggleAlert } =
     React.useContext(MyContext);
   const [showSideMenu, setShowSideMenu] = React.useState(false);
   const [showOptionList, setShowOptionList] = React.useState({
@@ -33,21 +33,81 @@ export default function Navbar() {
     },
     {
       title: 'Alcoholic',
-      list: ['YES', 'NO', 'BOTH'],
+      list: ['yes', 'no', 'both'],
     },
   ];
-  // localStorage.setItem('selectedFilters', []);
+
+  const capitalizedWord = (word, all = false) => {
+    if (all) {
+      return word.toUpperCase();
+    }
+
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  };
+
+  const handleSearch = () => {
+    console.clear();
+    if (1 === 2) {
+      toggleAlert('Filter searching');
+    }
+
+    const searchData = JSON.parse(localStorage.getItem('filteredDrinks'));
+
+    const results = searchData.map((item) => {
+      const newItem = item.split(','); // newItem looks like ['categories', 'wine']
+      console.log('newIt[0]', newItem[0], Drinks[0][newItem[0].toLowerCase()]);
+
+      return Drinks.filter(
+        (drink) => drink[newItem[0].toLowerCase()] === newItem[1]
+      );
+    });
+
+    let finalResults = [];
+
+    results.forEach((res) => {
+      finalResults = [...finalResults, ...res]; // i'm doing this since finalResults is at first an array of arrays
+    });
+
+    /* Since i'm having multiple repeated values, i'll change my array to a set, then spread it 
+    or use the Array.from(finalResults) to create a new a array with unique entries */
+
+    console.log('this new set', new Set(finalResults));
+    finalResults = Array.from(new Set(finalResults));
+
+    console.log(
+      'this searchDAta',
+      searchData,
+      '\n',
+      finalResults,
+      '\n',
+      results
+    );
+  };
+
+  // localStorage.clear();
 
   const handleFilterOptions = (e) => {
-    // localStorage.setItem('selectedFilters', JSON.stringify(e.target.id))
-    // e.preventDefault();
     console.clear();
-    setFilterData(() => {
-      if (filterData.includes(e.target.id)) {
-        return filterData.filter((item) => item !== e.target.id);
-      }
-      return [...filterData, e.target.id];
-    });
+
+    const localData = JSON.parse(localStorage.getItem('filteredDrinks'));
+    if (!localData) {
+      localStorage.setItem('filteredDrinks', JSON.stringify([e.target.id]));
+    } else if (localData?.includes(e.target.id)) {
+      const holder = JSON.parse(localStorage.getItem('filteredDrinks')).filter(
+        (item) => item !== e.target.id
+      );
+
+      localStorage.setItem('filteredDrinks', JSON.stringify(holder));
+    } else {
+      localStorage.setItem(
+        'filteredDrinks',
+        JSON.stringify([...localData, e.target.id])
+      );
+    }
+
+    setFilterData(JSON.parse(localStorage.getItem('filteredDrinks')));
+
+    // handleSearch();
   };
 
   const toggleOptionList = (nom) => {
@@ -98,6 +158,10 @@ export default function Navbar() {
               </span>
             </li>
 
+            <button className="filter_btn" type="button" onClick={handleSearch}>
+              Filter
+            </button>
+
             <form onChange={handleFilterOptions}>
               {filterOptions?.map(({ title }) => (
                 <li className="filter_option" key={title}>
@@ -109,7 +173,7 @@ export default function Navbar() {
                           return (
                             <label htmlFor={[title, name]} key={name}>
                               <input type="checkbox" id={[title, name]} />
-                              {name}
+                              {capitalizedWord(name)}
                             </label>
                           );
                         })
@@ -122,7 +186,7 @@ export default function Navbar() {
                                 id={['Alcoholic', val]}
                                 name={`${val} val`}
                               />
-                              {val}
+                              {capitalizedWord(val, true)}
                             </label>
                           )
                         ))}

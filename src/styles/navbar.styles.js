@@ -127,6 +127,15 @@ const StyledNavBar = styled.div`
           }
         }
 
+        .filter_btn {
+          background-color: #a52a2a;
+          color: #f5f5f5;
+          font-weight: 700;
+          padding: 10px 1.2rem;
+          align-self: flex-end;
+          margin: 10px 1rem;
+        }
+
         form {
           /* width: calc(100% - 1rem); */
           width: 100%;

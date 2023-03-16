@@ -16,13 +16,13 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const { target } = e;
     console.clear();
 
-    if (e.target.password.value !== e.target.passwordConfirmation.value) {
+    if (target.password.value !== target.passwordConfirmation.value) {
       toggleAlert("passwords don't match");
       return;
     }
-    const { target } = e;
 
     const data = {
       first_name: target.firstName.value,

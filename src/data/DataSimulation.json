@@ -62,6 +62,8 @@
           "Campden tablets (optional)"
           ],
       "category_id": 1,
+      "categories": "wine",
+      "glasses": "glass 1",
       "ingredient_id": 1,
       "is_alcoholic": 1,
       "userid": "2"
@@ -86,6 +88,8 @@
           "Campden tablets (optional)"
           ],
       "category_id": 1,
+      "categories": "wine",
+      "glasses": "glass 1",
       "ingredient_id": 1,
       "is_alcoholic": 1,
       "userid": "2"
@@ -110,6 +114,8 @@
           "Campden tablets (optional)"
           ],
       "category_id": 1,
+      "categories": "wine",
+      "glasses": "glass 1",
       "ingredient_id": 1,
       "is_alcoholic": 1,
       "userid": "2"
@@ -134,6 +140,8 @@
           "Campden tablets (optional)"
           ],
       "category_id": 1,
+      "categories": "wine",
+      "glasses": "glass 1",
       "ingredient_id": 1,
       "is_alcoholic": 1,
       "userid": "2"
@@ -158,6 +166,8 @@
           "Campden tablets (optional)"
           ],
       "category_id": 1,
+      "categories": "wine",
+      "glasses": "glass 1",
       "ingredient_id": 1,
       "is_alcoholic": 1,
       "userid": "2"
@@ -182,6 +192,8 @@
           "Campden tablets (optional)"
           ],
       "category_id": 1,
+      "categories": "wine",
+      "glasses": "glass 1",
       "ingredient_id": 1,
       "is_alcoholic": 1,
       "userid": "2"
@@ -206,6 +218,8 @@
           "Campden tablets (optional)"
           ],
       "category_id": 1,
+      "categories": "wine",
+      "glasses": "glass 1",
       "ingredient_id": 1,
       "is_alcoholic": 1,
       "userid": "2"
@@ -230,6 +244,8 @@
           "Campden tablets (optional)"
           ],
       "category_id": 1,
+      "categories": "wine",
+      "glasses": "glass 1",
       "ingredient_id": 1,
       "is_alcoholic": 1,
       "userid": "2"
@@ -254,6 +270,8 @@
           "Campden tablets (optional)"
           ],
       "category_id": 1,
+      "categories": "wine",
+      "glasses": "glass 1",
       "ingredient_id": 1,
       "is_alcoholic": 1,
       "userid": "2"
@@ -278,6 +296,8 @@
           "Campden tablets (optional)"
           ],
       "category_id": 1,
+      "categories": "milky",
+      "glasses": "glass 1",
       "ingredient_id": 1,
       "is_alcoholic": 1,
       "userid": "2"
@@ -302,6 +322,8 @@
           "Campden tablets (optional)"
           ],
       "category_id": 1,
+      "categories": "milky",
+      "glasses": "glass 1",
       "ingredient_id": 1,
       "is_alcoholic": 1,
       "userid": "2"
@@ -326,6 +348,8 @@
           "Campden tablets (optional)"
           ],
       "category_id": 1,
+      "categories": "tea",
+      "glasses": "glass 1",
       "ingredient_id": 1,
       "is_alcoholic": 1,
       "userid": "2"
@@ -335,22 +359,22 @@
   "Categories": [
     {
       "id": 1,
-      "name": "Wine",
+      "name": "wine",
       "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity."
     },
     {
       "id": 2,
-      "name": "Milky",
+      "name": "milky",
       "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity."
     },
     {
       "id": 3,
-      "name": "Tea",
+      "name": "tea",
       "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity."
     },
     {
       "id": 4,
-      "name": "Water",
+      "name": "water",
       "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity."
     }
   ],

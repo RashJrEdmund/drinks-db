@@ -99,6 +99,7 @@ const StyledBody = styled.div`
       background-repeat: no-repeat;
       height: 300px;
       width: 300px;
+      max-width: 90vw;
       box-shadow: 0 0 10px #000;
     }
   }
