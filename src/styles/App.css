@@ -66,7 +66,7 @@
 
 .regiter_form .switch_paragraph,
 .login_form .switch_paragraph {
-  margin: 1rem 0;
+  margin: 1rem 0 0;
 }
 
 .regiter_form .switch_fomr_btn,
@@ -76,4 +76,11 @@
   letter-spacing: 2px;
   font-size: 17px;
   font-weight: 700;
+}
+
+.login_container .forgot_password {
+  color: #8a2be2;
+  width: fit-content;
+  margin: 0 0 1rem;
+  cursor: pointer;
 }

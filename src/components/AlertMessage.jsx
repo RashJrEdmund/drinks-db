@@ -32,6 +32,24 @@ const StyledAlertMessage = styled.div`
   align-items: flex-start;
   justify-content: center;
   border-radius: 10px;
+  border: 1px solid gray;
+
+  p {
+    color: blueviolet;
+
+    &::before {
+      content: ' ';
+      position: absolute;
+      bottom: calc(100% - 14.5px);
+      background-color: #000;
+      border-left: 1px solid gray;
+      border-top: 1px solid gray;
+      transform: rotate(45deg);
+      height: 30px;
+      width: 30px;
+      z-index: -1;
+    }
+  }
 `;
 
 function AlertMessage({ message }) {
