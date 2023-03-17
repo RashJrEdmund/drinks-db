@@ -79,21 +79,6 @@ const StyledNavBar = styled.div`
         font-weight: 700;
         margin: 5px 0 2px;
       }
-
-      .profile_dropdown {
-        position: absolute;
-        top: calc(100% + 1rem);
-        background-color: gold;
-        width: fit-content;
-        height: fit-content;
-        padding: 10px;
-
-        p {
-          background-color: green;
-          width: 100%;
-          margin: 10px 0;
-        }
-      }
     }
 
     .menu-list {
@@ -198,6 +183,14 @@ const StyledNavBar = styled.div`
 
   @media only screen and (max-width: 768px) {
     .navBar-container {
+      .left_group {
+        .side_menu_btn {
+          font-size: 0.9rem;
+          letter-spacing: 2px;
+          padding: 8px 10px;
+        }
+      }
+
       .profile_section {
         margin: 0;
       }

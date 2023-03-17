@@ -30,7 +30,7 @@ function Login() {
       return;
     }
 
-    customAlert('loged in');
+    customAlert('logged in');
     navigate('/');
   };
 

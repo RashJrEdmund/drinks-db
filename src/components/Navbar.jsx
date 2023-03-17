@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -19,6 +20,8 @@ export default function Navbar() {
     Ingredients: false,
     Alcoholic: false,
   });
+
+  const sideMenuRef = React.useRef(null);
 
   const { Drinks } = Simulation;
 
@@ -125,9 +128,11 @@ export default function Navbar() {
           <button
             className="side_menu_btn"
             type="button"
-            onClick={() =>
-              setShowMenu((prev) => ({ side: !prev.side, dropDown: false }))
-            }
+            onClick={() => {
+              setShowMenu((prev) => ({ side: !prev.side, dropDown: false }));
+              sideMenuRef.current.focus();
+              console.log('this sideMenuRef', sideMenuRef);
+            }}
           >
             {showMenu.side ? 'close Filter' : 'open Filter'}
           </button>
@@ -152,6 +157,11 @@ export default function Navbar() {
         </span>
 
         <ul
+          tabIndex="0"
+          // ref={sideMenuRef}
+          onBlur={() =>
+            setShowMenu((prev) => ({ side: !prev.side, dropDown: false }))
+          }
           className={showMenu.side ? 'menu-list active-menu-list' : 'menu-list'}
         >
           <li className="result_count">
