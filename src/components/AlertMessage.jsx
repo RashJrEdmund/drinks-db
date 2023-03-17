@@ -35,7 +35,7 @@ const StyledAlertMessage = styled.div`
   border: 1px solid gray;
 
   p {
-    color: blueviolet;
+    color: #fff;
 
     &::before {
       content: ' ';

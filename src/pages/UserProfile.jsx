@@ -1,13 +1,17 @@
 import React from 'react';
 import '../styles/userProfile.css';
 import { useNavigate } from 'react-router-dom';
+import MyContext from '../context/MyContext';
 
 export default function UserProfile() {
+  const { userDetails } = React.useContext(MyContext);
   const navigate = useNavigate();
 
   const handleProfileUpdate = () => {
     window.history.back();
   };
+
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
   return (
     <div className="profile_page">
@@ -21,19 +25,19 @@ export default function UserProfile() {
             <div className="profile_img" />
             <ul>
               <li className="status">
-                My status: <span>GUEST</span>
+                My status: <span>{userDetails?.status}</span>
               </li>
               <li>
-                first Name: <span>Tata</span>
+                first Name: <span>{currentUser?.first_name}</span>
               </li>
               <li>
-                last Name: <span>Rash</span>
+                last Name: <span>{currentUser?.last_name}</span>
               </li>
               <li>
-                email: <span>something@gmail.com</span>
+                email: <span>{currentUser?.email}</span>
               </li>
               <li>
-                phone: <span>+237 67011</span>
+                phone: <span>{currentUser?.phone}</span>
               </li>
             </ul>
           </div>
@@ -52,7 +56,7 @@ export default function UserProfile() {
             <input type="text" placeholder="Last Name" name="lastName" />
             <input
               type="email"
-              value="somethin@gmail.com"
+              value={currentUser?.email}
               name="emailAddress"
               disabled
             />

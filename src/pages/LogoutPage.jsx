@@ -1,9 +1,9 @@
 /* eslint-disable no-fallthrough */
 import React from 'react';
-import '../styles/landingPage.css';
+import '../styles/logoutPage.css';
 import { useNavigate } from 'react-router-dom';
 
-export default function LandingPage() {
+export default function LogoutPage() {
   const navigate = useNavigate();
 
   const navigateToForm = (param) => {
@@ -14,8 +14,8 @@ export default function LandingPage() {
       case 'register':
         navigate('/register');
         break;
-      case 'main':
-        navigate('/main');
+      case '/':
+        navigate('/');
       default:
         break;
     }
@@ -55,7 +55,7 @@ export default function LandingPage() {
           <button
             className="guest_user"
             type="button"
-            name="main"
+            name="/"
             onClick={(e) => navigateToForm(e.target.name)}
           >
             Next

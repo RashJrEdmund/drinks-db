@@ -8,7 +8,7 @@ import MyContext from './context/MyContext';
 import FetchData from './data/FetchData';
 import AlertMessage from './components/AlertMessage';
 import Main from './pages/Main';
-import LandingPage from './pages/LandingPage';
+import LogoutPage from './pages/LogoutPage';
 import Login from './components/Login';
 import Register from './components/Register';
 import UserProfile from './pages/UserProfile';
@@ -17,7 +17,11 @@ import Simulation from './data/DataSimulation.json';
 
 export default function App() {
   const [fetchedData, setFetchedData] = React.useState({});
-  const [userStatus, setUserStatus] = React.useState('Guest');
+  const [userDetails, setUserDetails] = React.useState({
+    name: JSON.parse(localStorage.getItem('currentUser'))?.last_name,
+    status: 'Guest',
+    isAdmin: JSON.parse(localStorage.getItem('currentUser'))?.is_admin,
+  });
   const [filterData, setFilterData] = React.useState([]);
 
   const [alertMsg, setAlertMsg] = React.useState({
@@ -25,15 +29,15 @@ export default function App() {
     show: false,
   });
 
-  const bodyref = React.useRef();
-
-  const toggleAlert = (msg) => {
+  const customAlert = (msg) => {
     setAlertMsg((prev) => ({ message: msg, show: !prev.show }));
 
     setTimeout(() => {
-      setAlertMsg((prev) => ({ message: '', show: !prev.show }));
+      setAlertMsg((prev) => ({ ...prev, show: !prev.show }));
     }, 2000);
   };
+
+  const bodyref = React.useRef();
 
   React.useEffect(() => {
     FetchData()
@@ -48,12 +52,12 @@ export default function App() {
       <MyContext.Provider
         value={{
           alertMsg,
-          toggleAlert,
+          customAlert,
 
           fetchedData,
 
-          userStatus,
-          setUserStatus,
+          userDetails,
+          setUserDetails,
 
           Simulation,
 
@@ -68,9 +72,9 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route index element={<Main />} />
-            <Route path="/landing" element={<LandingPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/logout" element={<LogoutPage />} />
 
             <Route path="/profile" element={<UserProfile />} />
           </Routes>

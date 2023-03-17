@@ -7,7 +7,7 @@ import { register } from '../api/authentication';
 
 function Register() {
   // const URL = `http://localhost:3000/users?apikey=${apikey}`;
-  const { toggleAlert } = React.useContext(MyContext);
+  const { customAlert } = React.useContext(MyContext);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -21,7 +21,7 @@ function Register() {
     console.clear();
 
     if (target.password.value !== target.passwordConfirmation.value) {
-      toggleAlert("passwords don't match");
+      customAlert("user passwords don't match");
       return;
     }
 
@@ -35,18 +35,17 @@ function Register() {
     };
 
     setIsLoading(true);
+
     await register(data)
       .then(() => getUserReady(data))
       .then(() => setIsLoading(false))
       .then(() => navigate('/login'));
-
-    // navigate('/login');
   };
 
   return (
     <div className="register_container">
       <form className="regiter_form" onSubmit={handleSubmit}>
-        <h1>Please create your account</h1>
+        <h1>Create An account</h1>
         <p>{isLoading ? 'Loading...' : ''}</p>
         <input type="text" placeholder="First Name" name="firstName" required />
         <input type="text" placeholder="Last Name" name="lastName" required />

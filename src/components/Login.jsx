@@ -6,39 +6,40 @@ import { useNavigate } from 'react-router-dom';
 import MyContext from '../context/MyContext';
 
 function Login() {
-  const { toggleAlert } = React.useContext(MyContext);
+  const { customAlert } = React.useContext(MyContext);
   const navigate = useNavigate();
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
   const handleForgotPassword = () => {
-    toggleAlert('this feature is not yet available');
+    customAlert('this feature is not yet available');
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { target } = e;
     const data = {
-      email: target.email,
-      password: target.password,
+      email: target.email.value,
+      password: target.password.value,
     };
 
     if (
       data.password !== currentUser.password ||
       data.email !== currentUser.email
     ) {
-      toggleAlert('Incorrect logins');
+      customAlert('Incorrect logins');
       return;
     }
 
+    customAlert('loged in');
     navigate('/');
   };
 
-  console.log('this current user', currentUser);
+  console.log('this currentUser', currentUser);
 
   return (
     <div className="login_container">
       <form className="login_form" onSubmit={handleSubmit}>
-        <h1>Please login to your account</h1>
+        <h1>Login to your account</h1>
         <input
           type="email"
           placeholder="Login With Email"

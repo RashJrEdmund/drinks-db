@@ -2,14 +2,17 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import MyContext from '../context/MyContext';
 import StyledNavBar from '../styles/navbar.styles';
+import ProfileDropDown from './ProfileDropDown';
 
 export default function Navbar() {
-  const { userStatus, Simulation, setFilterData, bodyref, toggleAlert } =
+  const { userDetails, Simulation, setFilterData, bodyref, customAlert } =
     React.useContext(MyContext);
-  const [showSideMenu, setShowSideMenu] = React.useState(false);
+  const [showMenu, setShowMenu] = React.useState({
+    side: false,
+    dropDown: false,
+  });
   const [showOptionList, setShowOptionList] = React.useState({
     Categories: false,
     Glasses: false,
@@ -18,8 +21,6 @@ export default function Navbar() {
   });
 
   const { Drinks } = Simulation;
-
-  const navigate = useNavigate();
 
   const filterOptions = [
     {
@@ -48,7 +49,7 @@ export default function Navbar() {
   const handleSearch = () => {
     console.clear();
     if (1 === 2) {
-      toggleAlert('Filter searching');
+      customAlert('Filter searching');
     }
 
     const searchData = JSON.parse(localStorage.getItem('filteredDrinks'));
@@ -120,81 +121,85 @@ export default function Navbar() {
   return (
     <StyledNavBar>
       <div className="navBar-container">
-        <button
-          className="side_menu_btn"
-          type="button"
-          onClick={() => setShowSideMenu((prev) => !prev)}
-        >
-          {showSideMenu ? 'close Filter' : 'open Filter'}
-        </button>
-
-        <div className="user_details">
-          <p className="user_status">
-            myStatus: <span>{userStatus}</span>
-          </p>
-
-          <span
-            className="profile_section"
-            onClick={() => navigate('/profile')}
-          >
-            <div className="profile_logo" />
-            <span>my Profile</span>
-          </span>
-        </div>
-
-        <div className="side_menu">
-          <ul
-            className={
-              showSideMenu ? 'menu-list active-menu-list' : 'menu-list'
+        <div className="left_group">
+          <button
+            className="side_menu_btn"
+            type="button"
+            onClick={() =>
+              setShowMenu((prev) => ({ side: !prev.side, dropDown: false }))
             }
           >
-            <li className="result_count">
-              showing:{' '}
-              <span
-                className="count"
-                onClick={() => window.scrollTo(0, bodyref.current.offsetTop)}
-              >
-                {`${Drinks.length} Product${Drinks.length > 1 ? 's' : ''}`}
-              </span>
-            </li>
+            {showMenu.side ? 'close Filter' : 'open Filter'}
+          </button>
 
-            <button className="filter_btn" type="button" onClick={handleSearch}>
-              Filter
-            </button>
-
-            <form onChange={handleFilterOptions}>
-              {filterOptions?.map(({ title }) => (
-                <li className="filter_option" key={title}>
-                  <h2 onClick={() => toggleOptionList(title)}>{title}</h2>
-
-                  {showOptionList[title] &&
-                    (title !== 'Alcoholic'
-                      ? Simulation[title].map(({ name }) => {
-                          return (
-                            <label htmlFor={[title, name]} key={name}>
-                              <input type="checkbox" id={[title, name]} />
-                              {capitalizedWord(name)}
-                            </label>
-                          );
-                        })
-                      : filterOptions.pop().list.map(
-                          // i'm using a tenary to check if it's the is alcoholic part already
-                          (val) => (
-                            <label htmlFor={['Alcoholic', val]} key={val}>
-                              <input
-                                type="radio"
-                                id={['Alcoholic', val]}
-                                name={`${val} val`}
-                              />
-                              {capitalizedWord(val, true)}
-                            </label>
-                          )
-                        ))}
-                </li>
-              ))}
-            </form>
-          </ul>
+          <p className="user_status">
+            myStatus: <span>{userDetails?.status}</span>
+          </p>
         </div>
+
+        <span
+          className="profile_section"
+          onClick={() =>
+            setShowMenu((prev) => ({ ...prev, dropDown: !prev.dropDown }))
+          }
+        >
+          <div className="profile_logo" />
+          <span>{userDetails?.name}</span>
+
+          {/* This the profileDropDown */}
+
+          {showMenu.dropDown && <ProfileDropDown />}
+        </span>
+
+        <ul
+          className={showMenu.side ? 'menu-list active-menu-list' : 'menu-list'}
+        >
+          <li className="result_count">
+            showing:{' '}
+            <span
+              className="count"
+              onClick={() => window.scrollTo(0, bodyref.current.offsetTop)}
+            >
+              {`${Drinks.length} Product${Drinks.length > 1 ? 's' : ''}`}
+            </span>
+          </li>
+
+          <button className="filter_btn" type="button" onClick={handleSearch}>
+            Filter
+          </button>
+
+          <form onChange={handleFilterOptions}>
+            {filterOptions?.map(({ title }) => (
+              <li className="filter_option" key={title}>
+                <h2 onClick={() => toggleOptionList(title)}>{title}</h2>
+
+                {showOptionList[title] &&
+                  (title !== 'Alcoholic'
+                    ? Simulation[title].map(({ name }) => {
+                        return (
+                          <label htmlFor={[title, name]} key={name}>
+                            <input type="checkbox" id={[title, name]} />
+                            {capitalizedWord(name)}
+                          </label>
+                        );
+                      })
+                    : filterOptions.pop().list.map(
+                        // i'm using a tenary to check if it's the is alcoholic part already
+                        (val) => (
+                          <label htmlFor={['Alcoholic', val]} key={val}>
+                            <input
+                              type="radio"
+                              id={['Alcoholic', val]}
+                              name={`${val} val`}
+                            />
+                            {capitalizedWord(val, true)}
+                          </label>
+                        )
+                      ))}
+              </li>
+            ))}
+          </form>
+        </ul>
       </div>
     </StyledNavBar>
   );
