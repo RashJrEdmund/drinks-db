@@ -14,6 +14,7 @@ import Register from './components/Register';
 import UserProfile from './pages/UserProfile';
 
 import Simulation from './data/DataSimulation.json';
+import DialogueMsg from './components/DialogueMsg';
 
 export default function App() {
   const [fetchedData, setFetchedData] = React.useState({});
@@ -29,12 +30,40 @@ export default function App() {
     show: false,
   });
 
+  const [dialogueDetails, setdialogueDetails] = React.useState({
+    message1: '',
+    message2: '',
+    job: '',
+    fxntoCall: null,
+    show: false,
+  });
+
+  // setdialogueDetails((prev) => ({ // edit and call this function along where you want it to work
+  //   ...prev,
+  //   show: true,
+  //   job: 'Logout',
+  //   message2: 'are you sure you want to log out',
+  //   fxntoCall() {
+  //     localStorage.removeItem('currentUser');
+  //     navigate('/logout');
+  //     setdialogueDetails((previous) => ({ ...previous, show: false }));
+  //   },
+  // }));
+
   const customAlert = (msg) => {
     setAlertMsg((prev) => ({ message: msg, show: !prev.show }));
 
     setTimeout(() => {
       setAlertMsg((prev) => ({ ...prev, show: !prev.show }));
     }, 2000);
+  };
+
+  const toggleBodyOverFlow = () => {
+    if (dialogueDetails.show) {
+      document.body.style = 'overflow: hidden';
+    } else {
+      document.body.style = 'overflow: unset';
+    }
   };
 
   const bodyref = React.useRef();
@@ -45,6 +74,10 @@ export default function App() {
       .catch((err) => console.log('Erro!', err));
   }, []);
 
+  React.useEffect(() => {
+    toggleBodyOverFlow();
+  }, [dialogueDetails.show]);
+
   console.log('this fetchedData', fetchedData);
 
   return (
@@ -53,6 +86,8 @@ export default function App() {
         value={{
           alertMsg,
           customAlert,
+
+          setdialogueDetails,
 
           fetchedData,
 
@@ -68,6 +103,13 @@ export default function App() {
         }}
       >
         {alertMsg.show && <AlertMessage message={alertMsg.message} />}
+
+        {dialogueDetails.show && (
+          <DialogueMsg
+            message={dialogueDetails}
+            setmessage={setdialogueDetails}
+          />
+        )}
 
         <BrowserRouter>
           <Routes>

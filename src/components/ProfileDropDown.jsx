@@ -3,6 +3,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
+import MyContext from '../context/MyContext';
 
 const StyledDropDown = styled.div`
   position: absolute;
@@ -41,15 +42,25 @@ const StyledDropDown = styled.div`
     margin: 10px 0;
   }
 `;
-localStorage.clear();
+// localStorage.clear();
 
 export default function ProfileDropDown() {
+  const { setdialogueDetails } = React.useContext(MyContext);
   const navigate = useNavigate();
-  localStorage.removeItem('currentUser');
+  // localStorage.removeItem('currentUser');
 
   const handleLogOut = () => {
-    document.localStorage.clear();
-    navigate('/logout');
+    setdialogueDetails((prev) => ({
+      ...prev,
+      show: true,
+      job: 'Logout',
+      message2: 'are you sure you want to log out',
+      fxntoCall() {
+        localStorage.removeItem('currentUser');
+        navigate('/logout');
+        setdialogueDetails((previous) => ({ ...previous, show: false }));
+      },
+    }));
   };
 
   const userDetails = JSON.parse(localStorage.getItem('currentUser'));
