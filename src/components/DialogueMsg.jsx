@@ -56,8 +56,6 @@ export default function DialogueMsg({ message, setmessage }) {
   return (
     <StyledDialogueDiv
       onClick={() => setmessage((prev) => ({ ...prev, show: false }))}
-      zoro
-      slowed
     >
       <div className="dialogue-div">
         <p>{message?.message1}</p>

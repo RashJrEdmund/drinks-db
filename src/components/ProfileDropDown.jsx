@@ -7,11 +7,13 @@ import MyContext from '../context/MyContext';
 
 const StyledDropDown = styled.div`
   position: absolute;
+  left: -100%;
   top: calc(100% + 1.8rem);
   background: linear-gradient(to bottom, #000000, #000000df, #000000cf);
   width: fit-content;
+  min-width: 140px;
   height: fit-content;
-  padding: 10px;
+  padding: 1rem;
   border: 1px solid grey;
   border-radius: 10px;
   z-index: 6;
@@ -35,7 +37,7 @@ const StyledDropDown = styled.div`
     color: #f5f5f5;
     color: #a52a2a;
     text-align: left;
-    line-height: 30px;
+    line-height: 40px;
     letter-spacing: 2px;
     font-weight: 500;
     width: 100%;
@@ -77,14 +79,12 @@ export default function ProfileDropDown() {
 
   return (
     <StyledDropDown className="profile_dropdown" id="profile_dropdown">
-      <StyledDropDown className="profile_dropdown">
-        <p onClick={() => navigate('/')}>Home</p>
-        <p onClick={() => navigate('/profile')}>Profile</p>
-        <p>Drinks</p>
-        <p>Categories</p>
-        <p>Ingredients</p>
-        <p onClick={handleLogOut}>Logout</p>
-      </StyledDropDown>
+      <p onClick={() => navigate('/')}>Home</p>
+      <p onClick={() => navigate('/profile')}>Profile</p>
+      <p>Drinks</p>
+      <p>Categories</p>
+      <p>Ingredients</p>
+      <p onClick={handleLogOut}>Logout</p>
     </StyledDropDown>
   );
 }
