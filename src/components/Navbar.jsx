@@ -14,6 +14,7 @@ export default function Navbar() {
     side: false,
     dropDown: false,
   });
+
   const [showOptionList, setShowOptionList] = React.useState({
     Categories: false,
     Glasses: false,
@@ -21,7 +22,7 @@ export default function Navbar() {
     Alcoholic: false,
   });
 
-  const sideMenuRef = React.useRef(null);
+  const dropRef = React.useRef(null);
 
   const { Drinks } = Simulation;
 
@@ -130,8 +131,6 @@ export default function Navbar() {
             type="button"
             onClick={() => {
               setShowMenu((prev) => ({ side: !prev.side, dropDown: false }));
-              sideMenuRef.current.focus();
-              console.log('this sideMenuRef', sideMenuRef);
             }}
           >
             {showMenu.side ? 'close Filter' : 'open Filter'}
@@ -144,21 +143,21 @@ export default function Navbar() {
 
         <span
           className="profile_section"
-          onClick={() =>
-            setShowMenu((prev) => ({ ...prev, dropDown: !prev.dropDown }))
-          }
+          onClick={() => {
+            setShowMenu((prev) => ({ ...prev, dropDown: !prev.dropDown }));
+            // dropRef.current.focus();
+          }}
         >
           <div className="profile_logo" />
           <span>{userDetails?.name}</span>
 
           {/* This the profileDropDown */}
 
-          {showMenu.dropDown && <ProfileDropDown />}
+          {showMenu.dropDown && <ProfileDropDown setState={setShowMenu} />}
         </span>
 
         <ul
           tabIndex="0"
-          // ref={sideMenuRef}
           onBlur={() =>
             setShowMenu((prev) => ({ side: !prev.side, dropDown: false }))
           }
