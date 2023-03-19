@@ -35,6 +35,7 @@ const StyledNavBar = styled.div`
         letter-spacing: 3px;
         padding: 12px 1rem;
         margin: 0 1rem 0 0;
+        z-index: 4;
       }
 
       .user_status {
@@ -81,6 +82,17 @@ const StyledNavBar = styled.div`
       }
     }
 
+    .menu-list-overlay {
+      background-color: #000;
+      opacity: 0.05;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 3;
+    }
+
     .menu-list {
       background: linear-gradient(to bottom, #00000065, #000000be, #000);
       position: absolute;
@@ -97,6 +109,7 @@ const StyledNavBar = styled.div`
       padding: 50px 0 0;
       transition: 0.4s ease-in transform;
       overflow: auto;
+      z-index: 4;
 
       &.active-menu-list {
         transform: translate(0);

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/tabindex-no-positive */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
@@ -35,14 +34,13 @@ const StyledDropDown = styled.div`
   }
 
   p {
-    background-color: #f5f5f5;
     color: #a52a2a;
     text-align: left;
     line-height: 40px;
     letter-spacing: 2px;
     font-weight: 500;
     width: 100%;
-    margin: 10px 0;
+    margin: 1rem 0;
   }
 
   @media only screen and (max-width: 800px) {
@@ -51,7 +49,7 @@ const StyledDropDown = styled.div`
 `;
 // localStorage.clear();
 
-export default function ProfileDropDown({ setState }) {
+export default function ProfileDropDown() {
   const { setdialogueDetails } = React.useContext(MyContext);
   const navigate = useNavigate();
   // localStorage.removeItem('currentUser');
@@ -72,31 +70,26 @@ export default function ProfileDropDown({ setState }) {
 
   const userDetails = JSON.parse(localStorage.getItem('currentUser'));
 
-  return !userDetails?.isAdmin ? (
-    <StyledDropDown
-      className="profile_dropdown"
-      id="profile_dropdown"
-      tabIndex="1"
-      onClick={() => console.log('clicked')}
-      onBlur={() => {
-        console.log('ive been blured');
-      }}
-    >
+  return userDetails?.isAdmin ? (
+    <StyledDropDown className="profile_dropdown" id="profile_dropdown">
       <p onClick={() => navigate('/')}>Home</p>
       <p onClick={() => navigate('/profile')}>Profile</p>
+      <p>Drinks</p>
+      <p>Categories</p>
+      <p>Ingredients</p>
       <p onClick={handleLogOut}>Logout</p>
     </StyledDropDown>
   ) : (
     <StyledDropDown
       className="profile_dropdown"
       id="profile_dropdown"
-      tabIndex="1"
+      // onClick={() => console.log('clicked')}
+      // onBlur={() => {
+      //   console.log('ive been blured');
+      // }}
     >
       <p onClick={() => navigate('/')}>Home</p>
       <p onClick={() => navigate('/profile')}>Profile</p>
-      <p>Drinks</p>
-      <p>Categories</p>
-      <p>Ingredients</p>
       <p onClick={handleLogOut}>Logout</p>
     </StyledDropDown>
   );

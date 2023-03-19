@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/tabindex-no-positive */
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
@@ -21,8 +22,6 @@ export default function Navbar() {
     Ingredients: false,
     Alcoholic: false,
   });
-
-  const dropRef = React.useRef(null);
 
   const { Drinks } = Simulation;
 
@@ -130,37 +129,43 @@ export default function Navbar() {
             className="side_menu_btn"
             type="button"
             onClick={() => {
-              setShowMenu((prev) => ({ side: !prev.side, dropDown: false }));
+              setShowMenu((prev) => ({ ...prev, side: !prev.side }));
             }}
           >
             {showMenu.side ? 'close Filter' : 'open Filter'}
           </button>
 
           <p className="user_status">
-            myStatus: <span>{userDetails?.status}</span>
+            user Status: <span>{userDetails?.status}</span>
           </p>
         </div>
 
         <span
           className="profile_section"
-          onClick={() => {
-            setShowMenu((prev) => ({ ...prev, dropDown: !prev.dropDown }));
-            // dropRef.current.focus();
-          }}
+          tabIndex="0"
+          onClick={() =>
+            setShowMenu((prev) => ({ ...prev, dropDown: !prev.dropDown }))
+          }
+          onBlur={() => setShowMenu((prev) => ({ ...prev, dropDown: false }))}
         >
           <div className="profile_logo" />
           <span>{userDetails?.name}</span>
 
           {/* This the profileDropDown */}
 
-          {showMenu.dropDown && <ProfileDropDown setState={setShowMenu} />}
+          {showMenu.dropDown && <ProfileDropDown />}
         </span>
 
+        {showMenu.side && (
+          <div
+            className="menu-list-overlay"
+            onClick={() => {
+              setShowMenu((prev) => ({ ...prev, side: !prev.side }));
+            }}
+          />
+        )}
+
         <ul
-          tabIndex="0"
-          onBlur={() =>
-            setShowMenu((prev) => ({ side: !prev.side, dropDown: false }))
-          }
           className={showMenu.side ? 'menu-list active-menu-list' : 'menu-list'}
         >
           <li className="result_count">
