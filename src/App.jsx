@@ -6,15 +6,17 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import MyContext from './context/MyContext';
 import FetchData from './data/FetchData';
-import AlertMessage from './components/AlertMessage';
 import Main from './pages/Main';
 import LogoutPage from './pages/LogoutPage';
 import Login from './components/Login';
 import Register from './components/Register';
 import UserProfile from './pages/UserProfile';
 
-import Simulation from './data/DataSimulation.json';
+import AlertMessage from './components/AlertMessage';
 import DialogueMsg from './components/DialogueMsg';
+import LoadingAnime from './components/LoadingAnime';
+
+import Simulation from './data/DataSimulation.json';
 
 export default function App() {
   const [fetchedData, setFetchedData] = React.useState({});
@@ -24,6 +26,8 @@ export default function App() {
     isAdmin: JSON.parse(localStorage.getItem('currentUser'))?.is_admin,
   });
   const [filterData, setFilterData] = React.useState([]);
+
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const [alertMsg, setAlertMsg] = React.useState({
     message: '',
@@ -89,6 +93,9 @@ export default function App() {
 
           setdialogueDetails,
 
+          isLoading,
+          setIsLoading,
+
           fetchedData,
 
           userDetails,
@@ -110,6 +117,8 @@ export default function App() {
             setmessage={setdialogueDetails}
           />
         )}
+
+        {!isLoading && <LoadingAnime />}
 
         <BrowserRouter>
           <Routes>

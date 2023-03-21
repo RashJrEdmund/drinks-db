@@ -26,18 +26,6 @@ export default function LogoutPage() {
       <div className="alternatives">
         <h2>Welcome to the DrinksDB</h2>
         <div className="sub_alternatives">
-          <div className="sign_up_section">
-            <p>don&apos;t have an account yet?</p>
-            <button
-              className="sign_up_btn"
-              type="button"
-              name="register"
-              onClick={(e) => navigateToForm(e.target.name)}
-            >
-              SignUp
-            </button>
-          </div>
-
           <div className="login_section">
             <p>login to existing account</p>
             <button
@@ -49,16 +37,29 @@ export default function LogoutPage() {
               Login
             </button>
           </div>
+
+          <div className="sign_up_section">
+            <p>don&apos;t have an account yet?</p>
+            <button
+              className="sign_up_btn"
+              type="button"
+              name="register"
+              onClick={(e) => navigateToForm(e.target.name)}
+            >
+              SignUp
+            </button>
+          </div>
         </div>
+
         <div className="guest_alternative">
-          <p>i am a guest user</p>
+          <p>i&apos;m a guest user</p>
           <button
             className="guest_user"
             type="button"
             name="/"
             onClick={(e) => navigateToForm(e.target.name)}
           >
-            Next
+            Skip
           </button>
         </div>
       </div>

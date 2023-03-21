@@ -23,6 +23,8 @@ export default function Navbar() {
     Alcoholic: false,
   });
 
+  const navRef = React.useRef();
+
   const { Drinks } = Simulation;
 
   const filterOptions = [
@@ -48,6 +50,20 @@ export default function Navbar() {
 
     return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
   };
+
+  React.useEffect(() => {
+    let YscrollHolder = 0;
+    window.addEventListener('scroll', () => {
+      if (
+        (!showMenu.side || showMenu.dropDown) &&
+        window.scrollY >= YscrollHolder
+      )
+        navRef.current.classList.add('active_navBar_container');
+      else navRef.current.classList.remove('active_navBar_container');
+
+      YscrollHolder = window.scrollY;
+    });
+  }, [showMenu]);
 
   const handleSearch = () => {
     console.clear();
@@ -123,7 +139,7 @@ export default function Navbar() {
 
   return (
     <StyledNavBar>
-      <div className="navBar-container">
+      <div ref={navRef} className="navBar-container">
         <div className="left_group">
           <button
             className="side_menu_btn"
@@ -172,7 +188,10 @@ export default function Navbar() {
             showing:{' '}
             <span
               className="count"
-              onClick={() => window.scrollTo(0, bodyref.current.offsetTop)}
+              onClick={() => {
+                setShowMenu((prev) => ({ ...prev, side: false }));
+                window.scrollTo(0, bodyref.current.offsetTop);
+              }}
             >
               {`${Drinks.length} Product${Drinks.length > 1 ? 's' : ''}`}
             </span>

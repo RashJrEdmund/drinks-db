@@ -11,7 +11,6 @@ const StyledNavBar = styled.div`
 
   .navBar-container {
     position: relative;
-    background-color: #ffd901;
     background: linear-gradient(to bottom, #00000065, #00000065, #00000065);
     width: 100%;
     min-height: 90px;
@@ -20,6 +19,11 @@ const StyledNavBar = styled.div`
     justify-content: space-between;
     padding: 0 1rem;
     transition: 0.6s color;
+    transition: 0.4s transform;
+
+    &.active_navBar_container {
+      transform: translateY(-100%);
+    }
 
     .left_group {
       width: fit-content;

@@ -72,7 +72,7 @@ export default function ProfileDropDown() {
 
   return userDetails?.isAdmin ? (
     <StyledDropDown className="profile_dropdown" id="profile_dropdown">
-      <p onClick={() => navigate('/')}>Home</p>
+      <p onClick={() => window.scrollTo(0, 0)}>Home</p>
       <p onClick={() => navigate('/profile')}>Profile</p>
       <p>Drinks</p>
       <p>Categories</p>
@@ -88,7 +88,7 @@ export default function ProfileDropDown() {
       //   console.log('ive been blured');
       // }}
     >
-      <p onClick={() => navigate('/')}>Home</p>
+      <p onClick={() => window.scrollTo(0, 0)}>Home</p>
       <p onClick={() => navigate('/profile')}>Profile</p>
       <p onClick={handleLogOut}>Logout</p>
     </StyledDropDown>

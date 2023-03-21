@@ -1,5 +1,5 @@
 .landing_page {
-  background: linear-gradient(to bottom, #00000065, #00000065, #00000065), url('../images/dark_wine.png');
+  background: linear-gradient(to bottom, #00000065, #00000065, #00000065), url('../images/wine_collection.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -14,6 +14,7 @@
 
 .landing_page .alternatives {
   background: none;
+  background: linear-gradient(to bottom, #00000091, #00000091, #00000091);
   border: 1px solid #f5f5f5;
   width: 95vw;
   max-width: 600px;
@@ -28,7 +29,9 @@
 }
 
 .alternatives > h2 {
+  border-bottom: 1px solid #f5f5f5;
   margin: 0 0 1rem;
+  padding:  0 0 10px;
 }
 
 .sub_alternatives {
@@ -45,7 +48,6 @@
 .alternatives .sign_up_section,
 .alternatives .login_section,
 .alternatives .guest_alternative {
-  border: 1px solid #f5f5f5;
   width: fit-content;
   max-width: 250px;
   display: flex;
