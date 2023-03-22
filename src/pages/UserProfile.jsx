@@ -1,20 +1,43 @@
 import React from 'react';
-import '../styles/userProfile.css';
 import { useNavigate } from 'react-router-dom';
+import StyledUserProfile from '../styles/StyledUserProfile';
 import MyContext from '../context/MyContext';
 
 export default function UserProfile() {
-  const { userDetails } = React.useContext(MyContext);
+  const { userDetails, setdialogueDetails, setLoadingAime, customAlert } =
+    React.useContext(MyContext);
   const navigate = useNavigate();
 
   const handleProfileUpdate = () => {
     window.history.back();
   };
 
+  const deleteAccount = () => {
+    setLoadingAime({ message: 'deleting...', show: true });
+
+    setTimeout(() => {
+      setLoadingAime({ message: '', show: false });
+
+      customAlert('account test deleted');
+    }, 1000);
+  };
+
+  const handleDeleteAccount = () => {
+    setdialogueDetails({
+      message1: 'are you sure you want',
+      message2: 'to delete account?',
+      job: 'Proceed',
+      fxntoCall() {
+        deleteAccount();
+      },
+      show: true,
+    });
+  };
+
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
   return (
-    <div className="profile_page">
+    <StyledUserProfile>
       <div className="profile_update_container">
         <button type="button" onClick={() => navigate('/')}>
           go to home
@@ -65,7 +88,14 @@ export default function UserProfile() {
             <button type="submit">Update Profile</button>
           </form>
         </div>
+        <button
+          type="button"
+          className="delete_acount_btn"
+          onClick={handleDeleteAccount}
+        >
+          {/* delte account */}
+        </button>
       </div>
-    </div>
+    </StyledUserProfile>
   );
 }

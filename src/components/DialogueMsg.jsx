@@ -18,7 +18,7 @@ const StyledDialogueDiv = styled.div`
     background: linear-gradient(to bottom, #000000ce, #000000ce, #000000ce);
     color: #f5f5f5;
     width: 95vw;
-    max-width: 400px;
+    max-width: 340px;
     height: fit-content;
     display: flex;
     align-items: center;

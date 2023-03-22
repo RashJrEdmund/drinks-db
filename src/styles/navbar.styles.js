@@ -241,7 +241,7 @@ const StyledNavBar = styled.div`
 
       .profile_section {
         span {
-          display: none;
+          /* display: none; */
         }
       }
     }

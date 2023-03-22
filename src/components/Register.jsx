@@ -7,7 +7,7 @@ import { register } from '../api/authentication';
 
 function Register() {
   // const URL = `http://localhost:3000/users?apikey=${apikey}`;
-  const { customAlert, setUserDetails, setIsLoading } =
+  const { customAlert, setUserDetails, setLoadingAime } =
     React.useContext(MyContext);
 
   const navigate = useNavigate();
@@ -35,12 +35,12 @@ function Register() {
       is_admin: false,
     };
 
-    setIsLoading(true);
+    setLoadingAime({ message: 'registering...', show: true });
 
     await register(data)
       .then(() => getUserReady(data))
       .then(() => setUserDetails(data))
-      .then(() => setIsLoading(false))
+      .then(() => setLoadingAime({ message: '', show: false }))
       .then(() => navigate('/login'));
   };
 

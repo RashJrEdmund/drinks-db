@@ -28,7 +28,10 @@ export default function App() {
   });
   const [filterData, setFilterData] = React.useState([]);
 
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [loadingAime, setLoadingAime] = React.useState({
+    show: false,
+    message: '',
+  });
 
   const [alertMsg, setAlertMsg] = React.useState({
     message: '',
@@ -64,7 +67,7 @@ export default function App() {
   };
 
   const toggleBodyOverFlow = () => {
-    if (dialogueDetails.show || isLoading) {
+    if (dialogueDetails.show || loadingAime.show) {
       document.body.style = 'overflow: hidden';
     } else {
       document.body.style = 'overflow: unset';
@@ -81,7 +84,7 @@ export default function App() {
 
   React.useEffect(() => {
     toggleBodyOverFlow();
-  }, [dialogueDetails.show, isLoading]);
+  }, [dialogueDetails.show, loadingAime.show]);
 
   console.log('this fetchedData', fetchedData);
 
@@ -94,8 +97,8 @@ export default function App() {
 
           setdialogueDetails,
 
-          isLoading,
-          setIsLoading,
+          loadingAime,
+          setLoadingAime,
 
           fetchedData,
 
@@ -119,7 +122,7 @@ export default function App() {
           />
         )}
 
-        {isLoading && <LoadingAnime message="spinning" />}
+        {loadingAime.show && <LoadingAnime message={loadingAime.message} />}
 
         <BrowserRouter>
           <Routes>

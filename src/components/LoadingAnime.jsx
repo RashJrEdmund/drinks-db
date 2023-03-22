@@ -3,7 +3,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import loadingIcon from '../images/loading-icon.svg';
 
-export default function LoadingAnime({ message = 'Processing...' }) {
+export default function LoadingAnime({ message }) {
   const StyledLoadingAmin = styled.div`
     position: fixed;
     background: linear-gradient(to bottom, #00000067, #00000067, #00000067);
@@ -57,7 +57,7 @@ export default function LoadingAnime({ message = 'Processing...' }) {
     <StyledLoadingAmin>
       <div className="loading_container">
         <img src={loadingIcon} alt="Image_loading_icon" />
-        <p>{message}</p>
+        <p>{message || 'processing...'}</p>
       </div>
     </StyledLoadingAmin>
   );

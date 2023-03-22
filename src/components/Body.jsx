@@ -36,22 +36,18 @@ export default function Body() {
   return (
     <StyledBody className="body-section" id="body_section">
       <div ref={bodyref} className="drinks-container">
-        {Drinks?.map((drink, index) =>
-          index <= Math.floor((Drinks.length - 1) / 2) && Drinks.length > 10 ? (
-            <div
-              key={(drink.name, index)}
-              className="drink"
-              style={{ backgroundImage: `url("${drink.image_url}")` }}
-            >
-              <h3>
-                {drink.name} {index + 1}
-              </h3>
-              <p>{drink.description}</p>
-            </div>
-          ) : (
-            ''
-          )
-        )}
+        {Drinks?.map((drink, index) => (
+          <div
+            key={(drink.name, index)}
+            className="drink"
+            style={{ backgroundImage: `url("${drink.image_url}")` }}
+          >
+            <h3>
+              {drink.name} {index + 1}
+            </h3>
+            <p>{drink.description}</p>
+          </div>
+        ))}
       </div>
 
       <div className="body_images">
