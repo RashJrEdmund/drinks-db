@@ -9,7 +9,6 @@ const StyledFooter = styled.div`
   min-height: 500px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: center;
   padding: 2rem;
   gap: 20px;
 
@@ -18,12 +17,19 @@ const StyledFooter = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    text-align: left;
 
     p {
       width: fit-content;
       margin: 10px 0;
       font-size: 1.3rem;
+
+      .getkey_btn {
+        background-color: #a52a2a;
+        margin: 0 10px;
+        padding: 6px 13px;
+        font-weight: 700;
+      }
     }
   }
 

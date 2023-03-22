@@ -62,6 +62,7 @@ export default function ProfileDropDown() {
       message2: 'are you sure you want to log out',
       fxntoCall() {
         localStorage.removeItem('currentUser');
+        localStorage.removeItem('filteredDrinks');
         navigate('/logout');
         setdialogueDetails((previous) => ({ ...previous, show: false }));
       },

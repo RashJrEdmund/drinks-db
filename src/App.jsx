@@ -17,6 +17,7 @@ import DialogueMsg from './components/DialogueMsg';
 import LoadingAnime from './components/LoadingAnime';
 
 import Simulation from './data/DataSimulation.json';
+import ApiPage from './pages/ApiPage';
 
 export default function App() {
   const [fetchedData, setFetchedData] = React.useState({});
@@ -63,7 +64,7 @@ export default function App() {
   };
 
   const toggleBodyOverFlow = () => {
-    if (dialogueDetails.show) {
+    if (dialogueDetails.show || isLoading) {
       document.body.style = 'overflow: hidden';
     } else {
       document.body.style = 'overflow: unset';
@@ -80,7 +81,7 @@ export default function App() {
 
   React.useEffect(() => {
     toggleBodyOverFlow();
-  }, [dialogueDetails.show]);
+  }, [dialogueDetails.show, isLoading]);
 
   console.log('this fetchedData', fetchedData);
 
@@ -118,7 +119,7 @@ export default function App() {
           />
         )}
 
-        {!isLoading && <LoadingAnime />}
+        {isLoading && <LoadingAnime message="spinning" />}
 
         <BrowserRouter>
           <Routes>
@@ -128,6 +129,7 @@ export default function App() {
             <Route path="/logout" element={<LogoutPage />} />
 
             <Route path="/profile" element={<UserProfile />} />
+            <Route path="/apipage" element={<ApiPage />} />
           </Routes>
         </BrowserRouter>
       </MyContext.Provider>

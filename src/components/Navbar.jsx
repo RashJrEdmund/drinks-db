@@ -58,18 +58,18 @@ export default function Navbar() {
         (!showMenu.side || showMenu.dropDown) &&
         window.scrollY >= YscrollHolder
       )
-        navRef.current.classList.add('active_navBar_container');
-      else navRef.current.classList.remove('active_navBar_container');
+        navRef.current?.classList.add('active_navBar_container');
+      else navRef.current?.classList.remove('active_navBar_container');
 
       YscrollHolder = window.scrollY;
     });
-  }, [showMenu]);
+  }, [showMenu.side]);
 
   const handleSearch = () => {
     console.clear();
-    if (1 === 2) {
-      customAlert('Filter searching');
-    }
+    // if (1 === 2) {
+    customAlert('Filtering');
+    // }
 
     const searchData = JSON.parse(localStorage.getItem('filteredDrinks'));
 
@@ -131,9 +131,9 @@ export default function Navbar() {
   };
 
   const toggleOptionList = (nom) => {
-    setShowOptionList(() => ({
-      ...showOptionList,
-      [nom]: !showOptionList[nom],
+    setShowOptionList((prev) => ({
+      ...prev,
+      [nom]: !prev[nom],
     }));
   };
 
