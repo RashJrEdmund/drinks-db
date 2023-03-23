@@ -11,6 +11,7 @@ export default function Body() {
   const { Simulation, bodyref, filterData } = React.useContext(MyContext);
   const { Drinks } = Simulation;
   const secondHalf = [];
+  const localDrinks = JSON.parse(localStorage.getItem('localDrinks'));
 
   const sortDrinks = () => {
     const holder = filterData;
@@ -36,7 +37,7 @@ export default function Body() {
   return (
     <StyledBody className="body-section" id="body_section">
       <div ref={bodyref} className="drinks-container">
-        {Drinks?.map((drink, index) => (
+        {localDrinks?.map((drink, index) => (
           <div
             key={(drink.name, index)}
             className="drink"

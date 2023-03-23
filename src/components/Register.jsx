@@ -13,6 +13,7 @@ function Register() {
   const navigate = useNavigate();
 
   const getUserReady = (data) => {
+    console.log('reading user ...');
     localStorage.setItem('currentUser', JSON.stringify(data));
   };
 
@@ -38,8 +39,8 @@ function Register() {
     setLoadingAime({ message: 'registering...', show: true });
 
     await register(data)
-      .then(() => getUserReady(data))
       .then(() => setUserDetails(data))
+      .then(() => getUserReady(data))
       .then(() => setLoadingAime({ message: '', show: false }))
       .then(() => navigate('/login'));
   };

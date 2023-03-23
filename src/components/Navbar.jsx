@@ -52,6 +52,13 @@ export default function Navbar() {
   };
 
   React.useEffect(() => {
+    const localDrinks = JSON.parse(localStorage.getItem('localDrinks'));
+    if (!localDrinks) {
+      localStorage.setItem('localDrinks', JSON.stringify(Drinks));
+    }
+  }, []);
+
+  React.useEffect(() => {
     let YscrollHolder = 0;
     window.addEventListener('scroll', () => {
       if (
@@ -73,7 +80,7 @@ export default function Navbar() {
 
     const searchData = JSON.parse(localStorage.getItem('filteredDrinks'));
 
-    const results = searchData.map((item) => {
+    const results = searchData?.map((item) => {
       const newItem = item.split(','); // newItem looks like ['categories', 'wine']
       console.log('newIt[0]', newItem[0], Drinks[0][newItem[0].toLowerCase()]);
 
@@ -84,7 +91,7 @@ export default function Navbar() {
 
     let finalResults = [];
 
-    results.forEach((res) => {
+    results?.forEach((res) => {
       finalResults = [...finalResults, ...res]; // i'm doing this since finalResults is at first an array of arrays
     });
 
@@ -93,6 +100,7 @@ export default function Navbar() {
 
     console.log('this new set', new Set(finalResults));
     finalResults = Array.from(new Set(finalResults));
+    localStorage.setItem('localDrinks', JSON.stringify(finalResults));
 
     console.log(
       'this searchDAta',
@@ -165,7 +173,7 @@ export default function Navbar() {
           onBlur={() => setShowMenu((prev) => ({ ...prev, dropDown: false }))}
         >
           <div className="profile_logo" />
-          <span>my name is {userDetails?.name}</span>
+          <span>{userDetails?.name || 'userName'}</span>
 
           {/* This the profileDropDown */}
 

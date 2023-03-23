@@ -63,10 +63,22 @@ export default function ProfileDropDown() {
       fxntoCall() {
         localStorage.removeItem('currentUser');
         localStorage.removeItem('filteredDrinks');
+        localStorage.removeItem('localDrinks');
         navigate('/logout');
         setdialogueDetails((previous) => ({ ...previous, show: false }));
       },
     }));
+  };
+
+  const checkUserLoggedIn = () => {
+    const localUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    if (localUser) {
+      navigate('/profile');
+      return;
+    }
+
+    navigate('/login');
   };
 
   const userDetails = JSON.parse(localStorage.getItem('currentUser'));
@@ -74,24 +86,21 @@ export default function ProfileDropDown() {
   return userDetails?.isAdmin ? (
     <StyledDropDown className="profile_dropdown" id="profile_dropdown">
       <p onClick={() => window.scrollTo(0, 0)}>Home</p>
-      <p onClick={() => navigate('/profile')}>Profile</p>
+      <p onClick={checkUserLoggedIn}>Profile</p>
       <p>Drinks</p>
       <p>Categories</p>
       <p>Ingredients</p>
-      <p onClick={handleLogOut}>Logout</p>
+      {JSON.parse(localStorage.getItem('currentUser')) && (
+        <p onClick={handleLogOut}>Logout</p>
+      )}
     </StyledDropDown>
   ) : (
-    <StyledDropDown
-      className="profile_dropdown"
-      id="profile_dropdown"
-      // onClick={() => console.log('clicked')}
-      // onBlur={() => {
-      //   console.log('ive been blured');
-      // }}
-    >
+    <StyledDropDown className="profile_dropdown" id="profile_dropdown">
       <p onClick={() => window.scrollTo(0, 0)}>Home</p>
-      <p onClick={() => navigate('/profile')}>Profile</p>
-      <p onClick={handleLogOut}>Logout</p>
+      <p onClick={checkUserLoggedIn}>Profile</p>
+      {JSON.parse(localStorage.getItem('currentUser')) && (
+        <p onClick={handleLogOut}>Logout</p>
+      )}
     </StyledDropDown>
   );
 }

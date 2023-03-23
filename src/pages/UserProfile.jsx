@@ -24,8 +24,8 @@ export default function UserProfile() {
 
   const handleDeleteAccount = () => {
     setdialogueDetails({
-      message1: 'are you sure you want',
-      message2: 'to delete account?',
+      message1: 'are you sure you want to delete account?',
+      message2: 'your progress will be lost',
       job: 'Proceed',
       fxntoCall() {
         deleteAccount();
