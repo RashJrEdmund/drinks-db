@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import '../styles/Main.css';
 import React from 'react';
 
@@ -6,7 +7,6 @@ import Body from '../components/Body';
 import Footer from '../components/Footer';
 import AuthGaurd from '../components/AuthGaurd';
 
-// eslint-disable-next-line react/prop-types
 function Main({ name, user }) {
   return (
     <div className="Main">
