@@ -7,19 +7,11 @@ import standingGlass from '../images/standing_wine_glass.png';
 import wineGlasses from '../images/wine_glasses.png';
 import MyContext from '../context/MyContext';
 
-import API_BASE_URL from '../constants';
-
 export default function Body() {
   const { Simulation, bodyref, filterData } = React.useContext(MyContext);
   const { Drinks } = Simulation;
   const secondHalf = [];
   const localDrinks = JSON.parse(localStorage.getItem('localDrinks'));
-
-  console.log(
-    'this apibaseurl',
-    API_BASE_URL,
-    process.env.REACT_APP_API_BASE_URL
-  );
 
   const sortDrinks = () => {
     const holder = filterData;

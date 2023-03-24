@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const logIn = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => resolve({firstName: "Gaston", lastName: "Che"}), 5000);
-  })
+  });
 }
 
 const AuthGaurd = (Component) => {

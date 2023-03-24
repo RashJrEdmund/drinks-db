@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -5,8 +6,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import MyContext from '../context/MyContext';
 
+import { loginWithEmailPassword } from '../api/authentication';
+import { saveToken } from '../utils';
+
 function Login() {
-  const { customAlert } = React.useContext(MyContext);
+  const { customAlert, setLoadingAime } = React.useContext(MyContext);
   const navigate = useNavigate();
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
@@ -14,20 +18,38 @@ function Login() {
     customAlert('this feature is not yet available');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { target } = e;
-    const data = {
+    const user = {
       email: target.email.value,
       password: target.password.value,
     };
 
+    await setLoadingAime({ message: 'processing...', show: true });
+
     if (
-      data.password !== currentUser.password ||
-      data.email !== currentUser.email
+      user.password !== currentUser.password ||
+      user.email !== currentUser.email
     ) {
+      await setLoadingAime({ message: '', show: false });
       customAlert('Incorrect logins');
+
+      target.password.value = '';
       return;
+    }
+
+    try {
+      const { data } = await loginWithEmailPassword(user.email, user.password);
+      saveToken(data.token);
+      navigate('/dashboard');
+    } catch (e) {
+      console.log(e);
+      if (e.response.status === 401) {
+        customAlert('Invalid username or password');
+      }
+    } finally {
+      setLoadingAime({ message: '', show: false });
     }
 
     customAlert('logged in');

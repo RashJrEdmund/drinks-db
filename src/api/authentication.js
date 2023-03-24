@@ -4,8 +4,8 @@ const register = (user) => {
   return httpClient.post(`users`, user);
 };
 
-const login = (username, password) => {
+const loginWithEmailPassword = (username, password) => {
   return httpClient.post('login', { username, password });
 };
 
-export { register, login };
+export { register, loginWithEmailPassword };
