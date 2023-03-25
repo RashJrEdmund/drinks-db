@@ -40,11 +40,11 @@ function Register() {
     await register(user)
       .then(() => {
         getUserReady(user);
-        navigate('/login');
+        navigate('/login', { replace: true });
       })
       .catch((err) => {
-        const { message } = err;
-        customAlert(message);
+        const { response, message } = err;
+        customAlert(response?.data || message);
       })
       .finally(() => setLoadingAime({ message: '', show: false }));
   };

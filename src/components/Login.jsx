@@ -42,9 +42,10 @@ function Login() {
     try {
       const { data } = await loginWithEmailPassword(user.email, user.password);
       saveToken(data.token);
-      navigate('/dashboard');
+      navigate('/');
     } catch (e) {
-      console.log(e);
+      const { response, message } = e;
+      customAlert(response || message);
       if (e.response.status === 401) {
         customAlert('Invalid username or password');
       }
@@ -55,8 +56,6 @@ function Login() {
     customAlert('logged in');
     navigate('/');
   };
-
-  console.log('this currentUser', currentUser);
 
   return (
     <div className="login_container">

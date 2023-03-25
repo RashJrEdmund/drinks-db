@@ -28,7 +28,7 @@
   border: 1px solid #eee;
   gap: 20px;
   margin: 0 auto;
-  padding: 10px;
+  padding: 10px 10px 1rem;
 }
 
 .regiter_form h1,
@@ -80,6 +80,6 @@
 .login_container .forgot_password {
   color: #a52a2a;
   width: fit-content;
-  margin: 0 0 1rem;
+  margin: 0;
   cursor: pointer;
 }

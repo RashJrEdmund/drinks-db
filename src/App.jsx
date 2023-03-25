@@ -86,7 +86,7 @@ export default function App() {
     toggleBodyOverFlow();
   }, [dialogueDetails.show, loadingAime.show]);
 
-  console.log('this fetchedData', fetchedData);
+  // console.log('this fetchedData', fetchedData);
 
   return (
     <div className="App">
