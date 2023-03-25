@@ -78,7 +78,7 @@ export default function ProfileDropDown() {
       return;
     }
 
-    navigate('/login');
+    navigate('/login', { replace: true });
   };
 
   const userDetails = JSON.parse(localStorage.getItem('currentUser'));

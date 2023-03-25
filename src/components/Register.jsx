@@ -7,12 +7,11 @@ import { register } from '../api/authentication';
 
 function Register() {
   // const URL = `http://localhost:3000/users?apikey=${apikey}`;
-  const { customAlert, setUserDetails, setLoadingAime } =
-    React.useContext(MyContext);
+  const { customAlert, setLoadingAime } = React.useContext(MyContext);
 
   const navigate = useNavigate();
 
-  const getUserReady = (data) => {
+  const getUserReady = async (data) => {
     console.log('reading user ...');
     localStorage.setItem('currentUser', JSON.stringify(data));
   };
@@ -27,7 +26,9 @@ function Register() {
       return;
     }
 
-    const data = {
+    setLoadingAime({ message: 'registering...', show: true });
+
+    const user = {
       first_name: target.firstName.value,
       last_name: target.lastName.value,
       password: target.password.value,
@@ -36,13 +37,16 @@ function Register() {
       is_admin: false,
     };
 
-    setLoadingAime({ message: 'registering...', show: true });
-
-    await register(data)
-      .then(() => setUserDetails(data))
-      .then(() => getUserReady(data))
-      .then(() => setLoadingAime({ message: '', show: false }))
-      .then(() => navigate('/login'));
+    await register(user)
+      .then(() => {
+        getUserReady(user);
+        navigate('/login');
+      })
+      .catch((err) => {
+        const { message } = err;
+        customAlert(message);
+      })
+      .finally(() => setLoadingAime({ message: '', show: false }));
   };
 
   return (

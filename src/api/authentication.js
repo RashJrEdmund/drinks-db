@@ -1,10 +1,10 @@
 import httpClient from './axios';
 
-const register = (user) => {
+const register = async (user) => {
   return httpClient.post(`users`, user);
 };
 
-const loginWithEmailPassword = (username, password) => {
+const loginWithEmailPassword = async (username, password) => {
   return httpClient.post('login', { username, password });
 };
 
