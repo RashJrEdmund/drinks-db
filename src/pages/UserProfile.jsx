@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import StyledUserProfile from '../styles/StyledUserProfile';
 import MyContext from '../context/MyContext';
+import { deleteUser } from '../api/authentication';
 
 export default function UserProfile() {
   const { userDetails, setdialogueDetails, setLoadingAime, customAlert } =
@@ -12,14 +13,24 @@ export default function UserProfile() {
     window.history.back();
   };
 
-  const deleteAccount = () => {
+  const deleteAccount = async () => {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (!user) return;
+
     setLoadingAime({ message: 'deleting...', show: true });
+    navigate('/');
 
-    setTimeout(() => {
-      setLoadingAime({ message: '', show: false });
-
-      customAlert('account test deleted');
-    }, 1000);
+    await deleteUser(user)
+      .then(() => {
+        localStorage.clear('currentUser');
+        localStorage.removeItem('filteredDrinks');
+        localStorage.removeItem('localDrinks');
+        navigate('/', { replace: true });
+        window.location.reload();
+        customAlert('account deleted');
+      })
+      .catch(() => customAlert('error occured while deleting account'))
+      .finally(() => setLoadingAime({ message: '', show: false }));
   };
 
   const handleDeleteAccount = () => {
@@ -62,6 +73,9 @@ export default function UserProfile() {
               <li>
                 phone: <span>{currentUser?.phone}</span>
               </li>
+              <li>
+                Joined Since: <span>{currentUser?.joinedSince}</span>
+              </li>
             </ul>
           </div>
 
@@ -88,13 +102,16 @@ export default function UserProfile() {
             <button type="submit">Update Profile</button>
           </form>
         </div>
-        <button
-          type="button"
-          className="delete_acount_btn"
-          onClick={handleDeleteAccount}
-        >
-          {/* delte account */}
-        </button>
+
+        {JSON.parse(localStorage.getItem('currentUser')) && (
+          <button
+            type="button"
+            className="delete_acount_btn"
+            onClick={handleDeleteAccount}
+          >
+            delte account
+          </button>
+        )}
       </div>
     </StyledUserProfile>
   );

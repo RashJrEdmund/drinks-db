@@ -59,10 +59,10 @@ export default function App() {
   // }));
 
   const customAlert = (msg) => {
-    setAlertMsg((prev) => ({ message: msg, show: !prev.show }));
+    setAlertMsg(() => ({ message: msg, show: true }));
 
     setTimeout(() => {
-      setAlertMsg((prev) => ({ ...prev, show: !prev.show }));
+      setAlertMsg(() => ({ message: '', show: false }));
     }, 2000);
   };
 
@@ -92,7 +92,6 @@ export default function App() {
     <div className="App">
       <MyContext.Provider
         value={{
-          alertMsg,
           customAlert,
 
           setdialogueDetails,

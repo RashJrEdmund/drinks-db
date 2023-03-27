@@ -40,7 +40,7 @@ const StyledDropDown = styled.div`
     letter-spacing: 2px;
     font-weight: 500;
     width: 100%;
-    margin: 1rem 0;
+    margin: 1rem 0 0;
   }
 
   @media only screen and (max-width: 800px) {
@@ -65,6 +65,7 @@ export default function ProfileDropDown() {
         localStorage.removeItem('filteredDrinks');
         localStorage.removeItem('localDrinks');
         navigate('/logout');
+        window.location.reload();
         setdialogueDetails((previous) => ({ ...previous, show: false }));
       },
     }));
@@ -78,7 +79,7 @@ export default function ProfileDropDown() {
       return;
     }
 
-    navigate('/login', { replace: true });
+    navigate('/login');
   };
 
   const userDetails = JSON.parse(localStorage.getItem('currentUser'));

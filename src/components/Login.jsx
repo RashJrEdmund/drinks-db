@@ -18,6 +18,23 @@ function Login() {
     customAlert('this feature is not yet available');
   };
 
+  const getUserReady = async (data) => {
+    let user = data;
+    delete user.deletedAt;
+
+    const { createdAt } = user;
+    const day = createdAt.split('-').pop().split('T').shift();
+    const month = createdAt.split('-')[1];
+    const year = createdAt.split('-')[0];
+
+    const joinedSince = `${day}-${month}-${year}`;
+
+    user = { ...user, joinedSince };
+
+    console.log('reading user ...');
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { target } = e;
@@ -28,33 +45,38 @@ function Login() {
 
     await setLoadingAime({ message: 'processing...', show: true });
 
-    if (
-      user.password !== currentUser.password ||
-      user.email !== currentUser.email
-    ) {
-      await setLoadingAime({ message: '', show: false });
-      customAlert('Incorrect logins');
+    // if (
+    //   user.password !== currentUser.password ||
+    //   user.email !== currentUser.email
+    // ) {
+    //   await setLoadingAime({ message: '', show: false });
+    //   customAlert('Incorrect logins');
 
-      target.password.value = '';
-      return;
-    }
+    //   target.password.value = '';
+    //   return;
+    // }
 
     try {
-      const { data } = await loginWithEmailPassword(user.email, user.password);
-      saveToken(data.token);
-      navigate('/');
+      await loginWithEmailPassword(user.email, user.password)
+        .then(({ data }) => {
+          console.log('thies loginData', data);
+          saveToken(data.token);
+          getUserReady(data.user);
+        })
+        .then(() => {
+          navigate('/', { replace: true });
+          customAlert('logged in');
+        });
     } catch (e) {
+      console.log('catch entered', e);
       const { response, message } = e;
-      customAlert(response || message);
-      if (e.response.status === 401) {
+      customAlert(response?.data || message);
+      if (response.status === 401) {
         customAlert('Invalid username or password');
       }
     } finally {
       setLoadingAime({ message: '', show: false });
     }
-
-    customAlert('logged in');
-    navigate('/');
   };
 
   return (
@@ -80,7 +102,7 @@ function Login() {
           don&apos;t yet have an account?{' '}
           <span
             className="switch_fomr_btn"
-            onClick={() => navigate('/register')}
+            onClick={() => navigate('/register', { replace: true })}
           >
             register
           </span>

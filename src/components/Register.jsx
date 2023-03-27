@@ -11,11 +11,6 @@ function Register() {
 
   const navigate = useNavigate();
 
-  const getUserReady = async (data) => {
-    console.log('reading user ...');
-    localStorage.setItem('currentUser', JSON.stringify(data));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { target } = e;
@@ -39,7 +34,6 @@ function Register() {
 
     await register(user)
       .then(() => {
-        getUserReady(user);
         navigate('/login', { replace: true });
       })
       .catch((err) => {
@@ -73,7 +67,10 @@ function Register() {
 
         <p className="switch_paragraph">
           already have an account?{' '}
-          <span className="switch_fomr_btn" onClick={() => navigate('/login')}>
+          <span
+            className="switch_fomr_btn"
+            onClick={() => navigate('/login', { replace: true })}
+          >
             logIn
           </span>
         </p>
