@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import StyledUserProfile from '../styles/StyledUserProfile';
 import MyContext from '../context/MyContext';
 import { deleteUser } from '../api/authentication';
-import uploadIcon from '../images/uploadfile.png';
+import uploadIcon from '../images/darkImageIcon.png';
 
 export default function UserProfile() {
   const { userDetails, setdialogueDetails, setLoadingAime, customAlert } =
@@ -11,6 +11,7 @@ export default function UserProfile() {
   const navigate = useNavigate();
 
   const handleProfileUpdate = () => {
+    window.scrollTo(0, 0);
     window.history.back();
   };
 
@@ -91,16 +92,14 @@ export default function UserProfile() {
 
             <span
               className="upload_image_holder"
-              style={{
-                backgroundImage: `url(${uploadIcon})`,
-              }}
+              style={{ backgroundImage: `url(${uploadIcon})` }}
             >
-              {/* <input
+              <input
                 type="file"
                 id="upload_image"
                 className="upload_image_field"
-              /> */}
-              <GrUpload />
+              />
+              <img src={uploadIcon} alt="upload_icon" />
             </span>
 
             <input type="text" placeholder="first Name" name="lastName" />

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import styled from '@emotion/styled';
 
@@ -27,7 +29,13 @@ const StyledApiPage = styled.div`
 export default function ApiPage() {
   return (
     <StyledApiPage>
-      <h1>gEt_ApI_pAgE</h1>
+      <h1
+        onClick={() => {
+          window.open('http://localhost:3000/api-docs/');
+        }}
+      >
+        gEt_ApI_pAgE
+      </h1>
       <a href="http://localhost:3000/api-docs/" target="blank">
         how to use / guide
       </a>

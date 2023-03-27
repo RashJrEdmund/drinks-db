@@ -24,6 +24,7 @@ const StyledUserProfile = styled.div`
     border-right: 1px solid #a52a2a;
 
     button {
+      background-color: #cce;
       padding: 6px 10px;
       font-size: 16px;
       margin: 0 0 2rem;
@@ -49,10 +50,10 @@ const StyledUserProfile = styled.div`
         padding: 1rem;
 
         .profile_img {
-          background-color: #f5f5f5;
+          background-color: #cce;
           height: 90px;
           width: 90px;
-          border-radius: 50px;
+          border-radius: 5px;
           margin: 0 0 10px;
         }
 
@@ -106,20 +107,41 @@ const StyledUserProfile = styled.div`
         }
 
         .upload_image_holder {
+          background-color: #cce;
+          background-position: center;
+          background-size: cover;
+          position: relative;
+          border: 1px solid #cce;
           height: 90px;
           width: 90px;
           overflow: hidden;
           border-radius: 50px;
-          position: relative;
+          cursor: pointer;
 
-          .upload_image_field {
+          &:hover {
+            background-color: #cce;
+          }
+
+          input {
             position: absolute;
-            background-color: gold;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -70%) scale(5);
+            opacity: 0;
             margin: 0;
             padding: 0;
-            height: 100%;
-            width: 100%;
-            transform: scale(2);
+            z-index: 4;
+            cursor: pointer;
+          }
+
+          img {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            transform: translate(50%);
+            width: 40px;
+            height: 40px;
+            z-index: 3;
           }
         }
 
