@@ -84,7 +84,7 @@ export default function ProfileDropDown() {
 
   const userDetails = JSON.parse(localStorage.getItem('currentUser'));
 
-  return userDetails?.isAdmin ? (
+  return userDetails?.is_admin ? (
     <StyledDropDown className="profile_dropdown" id="profile_dropdown">
       <p onClick={() => window.scrollTo(0, 0)}>Home</p>
       <p onClick={checkUserLoggedIn}>Profile</p>

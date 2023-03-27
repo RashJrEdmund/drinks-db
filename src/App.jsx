@@ -21,11 +21,9 @@ import ApiPage from './pages/ApiPage';
 
 export default function App() {
   const [fetchedData, setFetchedData] = React.useState({});
-  const [userDetails, setUserDetails] = React.useState({
-    name: JSON.parse(localStorage.getItem('currentUser'))?.last_name,
-    status: 'Guest',
-    isAdmin: JSON.parse(localStorage.getItem('currentUser'))?.is_admin,
-  });
+  const [userDetails, setUserDetails] = React.useState(
+    JSON.parse(localStorage.getItem('currentUser'))
+  );
   const [filterData, setFilterData] = React.useState([]);
 
   const [loadingAime, setLoadingAime] = React.useState({

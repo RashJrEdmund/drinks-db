@@ -160,7 +160,12 @@ export default function Navbar() {
           </button>
 
           <p className="user_status">
-            user Status: <span>{userDetails?.status}</span>
+            user Status:{' '}
+            <span>
+              {userDetails?.is_admin
+                ? 'Admin'
+                : (userDetails && 'Api User') || 'Guest'}
+            </span>
           </p>
         </div>
 
@@ -173,7 +178,7 @@ export default function Navbar() {
           onBlur={() => setShowMenu((prev) => ({ ...prev, dropDown: false }))}
         >
           <div className="profile_logo" />
-          <span>{userDetails?.name || 'userName'}</span>
+          <span>{userDetails?.last_name || 'userName'}</span>
 
           {/* This the profileDropDown */}
 
