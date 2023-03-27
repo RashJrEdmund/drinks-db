@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import StyledUserProfile from '../styles/StyledUserProfile';
 import MyContext from '../context/MyContext';
 import { deleteUser } from '../api/authentication';
+import uploadIcon from '../images/uploadfile.png';
 
 export default function UserProfile() {
   const { userDetails, setdialogueDetails, setLoadingAime, customAlert } =
@@ -88,7 +89,20 @@ export default function UserProfile() {
           >
             <h1>Update Profile</h1>
 
-            <input type="file" id="upload_image" />
+            <span
+              className="upload_image_holder"
+              style={{
+                backgroundImage: `url(${uploadIcon})`,
+              }}
+            >
+              {/* <input
+                type="file"
+                id="upload_image"
+                className="upload_image_field"
+              /> */}
+              <GrUpload />
+            </span>
+
             <input type="text" placeholder="first Name" name="lastName" />
             <input type="text" placeholder="Last Name" name="lastName" />
             <input

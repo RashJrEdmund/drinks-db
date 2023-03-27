@@ -105,6 +105,24 @@ const StyledUserProfile = styled.div`
           padding: 10px 15px;
         }
 
+        .upload_image_holder {
+          height: 90px;
+          width: 90px;
+          overflow: hidden;
+          border-radius: 50px;
+          position: relative;
+
+          .upload_image_field {
+            position: absolute;
+            background-color: gold;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            transform: scale(2);
+          }
+        }
+
         button {
           background-color: #a52a2a;
           color: #fff;
