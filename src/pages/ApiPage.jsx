@@ -31,7 +31,9 @@ export default function ApiPage() {
     <StyledApiPage>
       <h1
         onClick={() => {
-          window.open('http://localhost:3000/api-docs/');
+          window.open(
+            'https://www.figma.com/file/1NEcrfj0ZHVVJe0Swzw6kn/tourism-site-(Community)?node-id=49-366'
+          );
         }}
       >
         gEt_ApI_pAgE

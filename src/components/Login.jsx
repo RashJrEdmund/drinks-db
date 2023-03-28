@@ -5,14 +5,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import MyContext from '../context/MyContext';
+import StyledRegisterLoginForm from '../styles/StyledrRegisterLoginform';
 
 import { loginWithEmailPassword } from '../api/authentication';
-import { saveToken } from '../utils';
+import { saveToken } from '../services/utils';
 
 function Login() {
   const { customAlert, setLoadingAime } = React.useContext(MyContext);
   const navigate = useNavigate();
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  const [inputType, setInputType] = React.useState('password');
 
   const handleForgotPassword = () => {
     customAlert('this feature is not yet available');
@@ -80,7 +82,7 @@ function Login() {
   };
 
   return (
-    <div className="login_container">
+    <StyledRegisterLoginForm>
       <form className="login_form" onSubmit={handleSubmit}>
         <h1>Login to your account</h1>
         <input
@@ -90,12 +92,25 @@ function Login() {
           defaultValue={currentUser?.email}
           required
         />
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          required
-        />
+        <span className="password-span">
+          <input
+            type={inputType}
+            placeholder="Password"
+            name="password"
+            required
+          />
+          <button
+            type="button"
+            onClick={() =>
+              setInputType((prev) =>
+                prev === 'password' ? 'text' : 'password'
+              )
+            }
+          >
+            see
+          </button>
+        </span>
+
         <button type="submit">Login</button>
 
         <p className="switch_paragraph">
@@ -112,7 +127,7 @@ function Login() {
           forgot Password ?
         </p>
       </form>
-    </div>
+    </StyledRegisterLoginForm>
   );
 }
 

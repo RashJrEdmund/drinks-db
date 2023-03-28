@@ -5,6 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import MyContext from '../context/MyContext';
 
+import {
+  updateDrinks,
+  updateCategories,
+  updateIngredients,
+} from '../services/adminActions';
+
 const StyledDropDown = styled.div`
   position: absolute;
   left: -100%;
@@ -54,6 +60,23 @@ export default function ProfileDropDown() {
   const navigate = useNavigate();
   // localStorage.removeItem('currentUser');
 
+  const handleChooseEdit = (type) => {
+    console.log('type entered', type);
+    switch (type) {
+      case 'drinks':
+        updateDrinks();
+        break;
+      case 'categories':
+        updateCategories();
+        break;
+      case 'ingredients':
+        updateIngredients();
+        break;
+      default:
+        break;
+    }
+  };
+
   const handleLogOut = () => {
     setdialogueDetails((prev) => ({
       ...prev,
@@ -88,9 +111,16 @@ export default function ProfileDropDown() {
     <StyledDropDown className="profile_dropdown" id="profile_dropdown">
       <p onClick={() => window.scrollTo(0, 0)}>Home</p>
       <p onClick={checkUserLoggedIn}>Profile</p>
-      <p>Drinks</p>
-      <p>Categories</p>
-      <p>Ingredients</p>
+      <p name="drinks" onClick={(e) => handleChooseEdit(e.target.name)}>
+        Drinks
+      </p>
+      <p name="categories" onClick={(e) => handleChooseEdit(e.target.name)}>
+        Categories
+      </p>
+      <p name="ingredients" onClick={(e) => handleChooseEdit(e.target.name)}>
+        Ingredients
+      </p>
+
       {JSON.parse(localStorage.getItem('currentUser')) && (
         <p onClick={handleLogOut}>Logout</p>
       )}
