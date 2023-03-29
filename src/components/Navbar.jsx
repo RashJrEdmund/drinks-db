@@ -177,7 +177,7 @@ export default function Navbar() {
           }
           onBlur={() => setShowMenu((prev) => ({ ...prev, dropDown: false }))}
         >
-          <div className="profile_logo" />
+          <div className="profile_logo" title="go to profile" />
           <span>{currentUser?.last_name || 'userName'}</span>
 
           {/* This the profileDropDown */}

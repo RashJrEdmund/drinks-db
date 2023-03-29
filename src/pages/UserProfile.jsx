@@ -27,6 +27,7 @@ export default function UserProfile() {
       !(target.firstName.value || target.lastName.value || target.phone.value)
     ) {
       setLoadingAime({ message: '', show: false });
+      customAlert('cannot update profile');
       return;
     }
 
@@ -122,6 +123,10 @@ export default function UserProfile() {
               </li>
               <li>
                 phone: <span>{currentUser?.phone}</span>
+              </li>
+              <li>
+                apikey: <br />
+                <span>{currentUser?.apikey}</span>
               </li>
               <li>
                 Joined Since: <span>{currentUser?.joinedSince}</span>
