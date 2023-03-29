@@ -16,7 +16,6 @@ export default function LogoutPage() {
         break;
       case '/':
         navigate('/');
-        window.location.reload();
       default:
         break;
     }

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
@@ -55,8 +56,14 @@ const StyledDropDown = styled.div`
 `;
 // localStorage.clear();
 
+function ProfileAndLoginBtn({ fxn }) {
+  const { currentUser } = React.useContext(MyContext);
+  return <p onClick={fxn}>{currentUser ? 'Profile' : 'Login'}</p>;
+}
+
 export default function ProfileDropDown() {
-  const { setdialogueDetails } = React.useContext(MyContext);
+  const { currentUser, setdialogueDetails, customAlert } =
+    React.useContext(MyContext);
   const navigate = useNavigate();
   // localStorage.removeItem('currentUser');
 
@@ -84,20 +91,17 @@ export default function ProfileDropDown() {
       job: 'Logout',
       message2: 'are you sure you want to log out',
       fxntoCall() {
-        localStorage.removeItem('currentUser');
-        localStorage.removeItem('filteredDrinks');
-        localStorage.removeItem('localDrinks');
-        navigate('/logout');
+        localStorage.clear();
+        navigate('/logout', { replace: true });
         window.location.reload();
+        customAlert('logged out');
         setdialogueDetails((previous) => ({ ...previous, show: false }));
       },
     }));
   };
 
   const checkUserLoggedIn = () => {
-    const localUser = JSON.parse(localStorage.getItem('currentUser'));
-
-    if (localUser) {
+    if (currentUser) {
       navigate('/profile');
       return;
     }
@@ -105,12 +109,10 @@ export default function ProfileDropDown() {
     navigate('/login');
   };
 
-  const userDetails = JSON.parse(localStorage.getItem('currentUser'));
-
-  return userDetails?.is_admin ? (
+  return currentUser?.is_admin ? (
     <StyledDropDown className="profile_dropdown" id="profile_dropdown">
       <p onClick={() => window.scrollTo(0, 0)}>Home</p>
-      <p onClick={checkUserLoggedIn}>Profile</p>
+      <ProfileAndLoginBtn fxn={checkUserLoggedIn} />
       <p name="drinks" onClick={(e) => handleChooseEdit(e.target.name)}>
         Drinks
       </p>
@@ -121,17 +123,14 @@ export default function ProfileDropDown() {
         Ingredients
       </p>
 
-      {JSON.parse(localStorage.getItem('currentUser')) && (
-        <p onClick={handleLogOut}>Logout</p>
-      )}
+      <p onClick={handleLogOut}>Logout</p>
     </StyledDropDown>
   ) : (
     <StyledDropDown className="profile_dropdown" id="profile_dropdown">
       <p onClick={() => window.scrollTo(0, 0)}>Home</p>
-      <p onClick={checkUserLoggedIn}>Profile</p>
-      {JSON.parse(localStorage.getItem('currentUser')) && (
-        <p onClick={handleLogOut}>Logout</p>
-      )}
+      <ProfileAndLoginBtn fxn={checkUserLoggedIn} />
+
+      {currentUser && <p onClick={handleLogOut}>Logout</p>}
     </StyledDropDown>
   );
 }

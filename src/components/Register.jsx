@@ -73,7 +73,7 @@ function Register() {
               }))
             }
           >
-            see
+            {inputType.one === 'password' ? 'show' : 'hide'}
           </button>
         </span>
 
@@ -93,7 +93,7 @@ function Register() {
               }))
             }
           >
-            see
+            {inputType.two === 'password' ? 'show' : 'hide'}
           </button>
         </span>
 

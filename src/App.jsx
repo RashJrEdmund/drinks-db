@@ -21,7 +21,7 @@ import ApiPage from './pages/ApiPage';
 
 export default function App() {
   const [fetchedData, setFetchedData] = React.useState({});
-  const [userDetails, setUserDetails] = React.useState(
+  const [currentUser, setCurrentUser] = React.useState(
     JSON.parse(localStorage.getItem('currentUser'))
   );
   const [filterData, setFilterData] = React.useState([]);
@@ -99,8 +99,8 @@ export default function App() {
 
           fetchedData,
 
-          userDetails,
-          setUserDetails,
+          currentUser,
+          setCurrentUser,
 
           Simulation,
 

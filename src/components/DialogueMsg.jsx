@@ -60,6 +60,7 @@ export default function DialogueMsg({ message, setmessage }) {
       <div className="dialogue-div">
         <p>{message?.message1}</p>
         <p>{message?.message2}</p>
+        <p>{message?.message3}</p>
 
         <div className="dialogue-btns">
           <button

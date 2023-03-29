@@ -9,7 +9,7 @@ import StyledNavBar from '../styles/navbar.styles';
 import ProfileDropDown from './ProfileDropDown';
 
 export default function Navbar() {
-  const { userDetails, Simulation, setFilterData, bodyref, customAlert } =
+  const { currentUser, Simulation, setFilterData, bodyref, customAlert } =
     React.useContext(MyContext);
   const [showMenu, setShowMenu] = React.useState({
     side: false,
@@ -162,9 +162,9 @@ export default function Navbar() {
           <p className="user_status">
             user Status:{' '}
             <span>
-              {userDetails?.is_admin
+              {currentUser?.is_admin
                 ? 'Admin'
-                : (userDetails && 'Api User') || 'Guest'}
+                : (currentUser && 'Api User') || 'Guest'}
             </span>
           </p>
         </div>
@@ -178,7 +178,7 @@ export default function Navbar() {
           onBlur={() => setShowMenu((prev) => ({ ...prev, dropDown: false }))}
         >
           <div className="profile_logo" />
-          <span>{userDetails?.last_name || 'userName'}</span>
+          <span>{currentUser?.last_name || 'userName'}</span>
 
           {/* This the profileDropDown */}
 

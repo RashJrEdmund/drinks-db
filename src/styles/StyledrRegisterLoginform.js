@@ -37,11 +37,13 @@ const StyledRegisterLoginForm = styled.div`
     }
 
     input {
+      background-color: #f5f5f5;
       width: 100%;
       height: 50px;
       padding: 5px 10px;
       box-sizing: border-box;
       border: 1px solid #a52a2a;
+      letter-spacing: 2px;
     }
 
     .password-span {
@@ -63,11 +65,12 @@ const StyledRegisterLoginForm = styled.div`
         background-color: #f5f5f5;
         position: absolute;
         right: 0;
-        top: 0;
+        top: 50%;
+        transform: translateY(-50%);
         color: #000;
         width: fit-content;
-        height: 100%;
-        padding: 0;
+        height: calc(100% - 2px);
+        padding: 0 0 0 3px;
         margin: 0;
       }
     }

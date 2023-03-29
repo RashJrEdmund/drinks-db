@@ -8,7 +8,7 @@ import MyContext from '../context/MyContext';
 import StyledRegisterLoginForm from '../styles/StyledrRegisterLoginform';
 
 import { loginWithEmailPassword } from '../api/authentication';
-import { saveToken } from '../services/utils';
+import { saveToken, getUserReady } from '../services/utils';
 
 function Login() {
   const { customAlert, setLoadingAime } = React.useContext(MyContext);
@@ -18,23 +18,6 @@ function Login() {
 
   const handleForgotPassword = () => {
     customAlert('this feature is not yet available');
-  };
-
-  const getUserReady = async (data) => {
-    let user = data;
-    delete user.deletedAt;
-
-    const { createdAt } = user;
-    const day = createdAt.split('-').pop().split('T').shift();
-    const month = createdAt.split('-')[1];
-    const year = createdAt.split('-')[0];
-
-    const joinedSince = `${day}-${month}-${year}`;
-
-    user = { ...user, joinedSince };
-
-    console.log('reading user ...');
-    localStorage.setItem('currentUser', JSON.stringify(user));
   };
 
   const handleSubmit = async (e) => {
@@ -47,21 +30,9 @@ function Login() {
 
     await setLoadingAime({ message: 'processing...', show: true });
 
-    // if (
-    //   user.password !== currentUser.password ||
-    //   user.email !== currentUser.email
-    // ) {
-    //   await setLoadingAime({ message: '', show: false });
-    //   customAlert('Incorrect logins');
-
-    //   target.password.value = '';
-    //   return;
-    // }
-
     try {
       await loginWithEmailPassword(user.email, user.password)
         .then(({ data }) => {
-          console.log('thies loginData', data);
           saveToken(data.token);
           getUserReady(data.user);
         })
@@ -107,7 +78,7 @@ function Login() {
               )
             }
           >
-            see
+            {inputType === 'password' ? 'show' : 'hide'}
           </button>
         </span>
 
