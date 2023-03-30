@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 
 const StyleCrudPage = styled.div`
+  position: relative;
+  background-color: gold;
   width: 100%;
   height: fit-content;
   min-height: 100vh;
@@ -8,6 +10,19 @@ const StyleCrudPage = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+
+  .back-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 1rem;
+
+    background-color: #a52a2a;
+    font-weight: 600;
+    color: #f5f5f5;
+    padding: 7px 10px;
+    box-shadow: 0 0 10px #222;
+  }
 
   .header {
     font-weight: 600;

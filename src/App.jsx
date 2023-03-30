@@ -19,6 +19,9 @@ import LoadingAnime from './components/LoadingAnime';
 import Simulation from './data/DataSimulation.json';
 import ApiPage from './pages/ApiPage';
 import CrudPage from './pages/CrudPage';
+import NestedDrinks from './nested routes/NestedDrinks';
+import NestedCategories from './nested routes/NestedCategories';
+import NestedIngredients from './nested routes/NestedIngredients';
 
 export default function App() {
   const [fetchedData, setFetchedData] = React.useState({});
@@ -129,7 +132,14 @@ export default function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/logout" element={<LogoutPage />} />
 
-            <Route path="/cruding" element={<CrudPage />} />
+            {currentUser?.is_admin && (
+              <Route path="/cruding" element={<CrudPage />}>
+                <Route path="drinks" element={<NestedDrinks />} />
+                <Route path="categories" element={<NestedCategories />} />
+                <Route path="ingredients" element={<NestedIngredients />} />
+              </Route>
+            )}
+
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/apipage" element={<ApiPage />} />
           </Routes>
