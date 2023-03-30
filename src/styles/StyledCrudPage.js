@@ -1,8 +1,7 @@
 import styled from '@emotion/styled';
 
 const StyleCrudPage = styled.div`
-  position: relative;
-  background-color: gold;
+  background-color: #f5f5f5;
   width: 100%;
   height: fit-content;
   min-height: 100vh;
@@ -12,7 +11,7 @@ const StyleCrudPage = styled.div`
   gap: 2rem;
 
   .back-btn {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     margin: 1rem;
@@ -32,12 +31,14 @@ const StyleCrudPage = styled.div`
   }
 
   .card-options {
-    max-width: 90vw;
+    max-width: calc(97vw - 10px);
     width: fit-content;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    overflow: auto;
+    gap: 20px;
     margin: 1rem 0 0;
+    padding: 16px 10px;
 
     [data-test] {
       display: flex;
@@ -46,7 +47,7 @@ const StyleCrudPage = styled.div`
       justify-content: center;
       background-color: #a52a2a;
       color: #f5f5f5;
-      width: 230px;
+      width: 240px;
       height: 230px;
       border-radius: 10px;
       box-shadow: 0 0 10px #222;
@@ -59,12 +60,11 @@ const StyleCrudPage = styled.div`
     }
   }
 
-  @media only screen and (max-width: 768px) {
+  /* @media only screen and (max-width: 768px) {
     .card-options {
-      /* grid-template-columns: 1fr; */
       overflow: auto;
     }
-  }
+  } */
 `;
 
 export default StyleCrudPage;

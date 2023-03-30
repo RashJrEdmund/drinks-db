@@ -20,24 +20,31 @@ export default function CrudPage() {
         home
       </button>
 
-      <h1 className="header">start cruding</h1>
+      <h1 className="header">exercise your Admin Rights</h1>
 
       <div className="card-options">
-        <div data-test onClick={() => navigate('drinks')}>
-          <h1>CRUD </h1>
+        <div data-test onClick={() => navigate('drinks', { replace: true })}>
+          <h1>EDIT </h1>
           <h1>DRINKS</h1>
         </div>
 
-        <div data-test onClick={() => navigate('categories')}>
-          <h1>CRUD </h1>
+        <div
+          data-test
+          onClick={() => navigate('categories', { replace: true })}
+        >
+          <h1>EDIT </h1>
           <h1>CATEGORIES</h1>
         </div>
 
-        <div data-test onClick={() => navigate('ingredients')}>
-          <h1>CRUD </h1>
+        <div
+          data-test
+          onClick={() => navigate('ingredients', { replace: true })}
+        >
+          <h1>EDIT </h1>
           <h1>INGREDIENTS</h1>
         </div>
       </div>
+
       <Outlet />
     </StyleCrudPage>
   );
