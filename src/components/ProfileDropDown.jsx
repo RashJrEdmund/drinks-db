@@ -6,19 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import MyContext from '../context/MyContext';
 
-import {
-  updateDrinks,
-  updateCategories,
-  updateIngredients,
-} from '../services/adminActions';
-
 const StyledDropDown = styled.div`
   position: absolute;
-  left: -100%;
+  left: -170%;
   top: calc(100% + 1.8rem);
   background: linear-gradient(to bottom, #000000, #000000df, #000000cf);
   width: fit-content;
-  min-width: 140px;
+  min-width: 185px;
   height: fit-content;
   padding: 1rem;
   border: 1px solid grey;
@@ -46,12 +40,13 @@ const StyledDropDown = styled.div`
     line-height: 40px;
     letter-spacing: 2px;
     font-weight: 500;
-    width: 100%;
+    width: fit-content;
     margin: 1rem 0 0;
+    word-break: keep-all;
   }
 
   @media only screen and (max-width: 800px) {
-    left: -120%;
+    left: -190%;
   }
 `;
 // localStorage.clear();
@@ -66,23 +61,6 @@ export default function ProfileDropDown() {
     React.useContext(MyContext);
   const navigate = useNavigate();
   // localStorage.removeItem('currentUser');
-
-  const handleChooseEdit = (type) => {
-    console.log('type entered', type);
-    switch (type) {
-      case 'drinks':
-        updateDrinks();
-        break;
-      case 'categories':
-        updateCategories();
-        break;
-      case 'ingredients':
-        updateIngredients();
-        break;
-      default:
-        break;
-    }
-  };
 
   const handleLogOut = () => {
     setdialogueDetails((prev) => ({
@@ -112,16 +90,8 @@ export default function ProfileDropDown() {
   return currentUser?.is_admin ? (
     <StyledDropDown className="profile_dropdown" id="profile_dropdown">
       <p onClick={() => window.scrollTo(0, 0)}>Home</p>
-      <ProfileAndLoginBtn fxn={checkUserLoggedIn} />
-      <p name="drinks" onClick={(e) => handleChooseEdit(e.target.name)}>
-        Drinks
-      </p>
-      <p name="categories" onClick={(e) => handleChooseEdit(e.target.name)}>
-        Categories
-      </p>
-      <p name="ingredients" onClick={(e) => handleChooseEdit(e.target.name)}>
-        Ingredients
-      </p>
+      <p onClick={() => navigate('/cruding')}>CRUD as admin</p>
+      <p onClick={() => navigate('/profile')}>Profile</p>
 
       <p onClick={handleLogOut}>Logout</p>
     </StyledDropDown>

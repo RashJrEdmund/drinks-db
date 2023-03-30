@@ -16,6 +16,8 @@ function Login() {
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const [inputType, setInputType] = React.useState('password');
 
+  const inputRef = React.useRef();
+
   const handleForgotPassword = () => {
     customAlert('this feature is not yet available');
   };
@@ -65,6 +67,7 @@ function Login() {
         />
         <span className="password-span">
           <input
+            ref={inputRef}
             type={inputType}
             placeholder="Password"
             name="password"
@@ -72,11 +75,13 @@ function Login() {
           />
           <button
             type="button"
-            onClick={() =>
+            onClick={() => {
               setInputType((prev) =>
                 prev === 'password' ? 'text' : 'password'
-              )
-            }
+              );
+
+              inputRef.current.focus();
+            }}
           >
             {inputType === 'password' ? 'show' : 'hide'}
           </button>

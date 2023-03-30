@@ -169,7 +169,7 @@ export default function UserProfile() {
             className="delete_acount_btn"
             onClick={handleDeleteAccount}
           >
-            delte account
+            delete account
           </button>
         )}
       </div>

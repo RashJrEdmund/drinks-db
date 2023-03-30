@@ -18,6 +18,7 @@ import LoadingAnime from './components/LoadingAnime';
 
 import Simulation from './data/DataSimulation.json';
 import ApiPage from './pages/ApiPage';
+import CrudPage from './pages/CrudPage';
 
 export default function App() {
   const [fetchedData, setFetchedData] = React.useState({});
@@ -128,6 +129,7 @@ export default function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/logout" element={<LogoutPage />} />
 
+            <Route path="/cruding" element={<CrudPage />} />
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/apipage" element={<ApiPage />} />
           </Routes>

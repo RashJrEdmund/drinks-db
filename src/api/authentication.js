@@ -16,4 +16,14 @@ const deleteUser = async (user) => {
   return httpClient.delete(`users/${user?.id}`);
 };
 
-export { register, loginWithEmailPassword, updateUserProfile, deleteUser };
+const another = async (param) => {
+  console.log(param);
+};
+
+export {
+  register,
+  loginWithEmailPassword,
+  updateUserProfile,
+  deleteUser,
+  another,
+};
