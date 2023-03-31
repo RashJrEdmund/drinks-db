@@ -35,17 +35,23 @@ const StyleCrudPage = styled.div`
     width: fit-content;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    /* display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%); */
     overflow: auto;
     gap: 20px;
     margin: 1rem 0 0;
     padding: 16px 10px;
 
     [data-test] {
+      background-color: #a52a2a;
       display: flex;
       align-items: center;
       flex-direction: column;
       justify-content: center;
-      background-color: #a52a2a;
       color: #f5f5f5;
       width: 240px;
       height: 230px;

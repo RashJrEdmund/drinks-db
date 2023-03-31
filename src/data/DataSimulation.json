@@ -43,6 +43,7 @@
 
   "Drinks": [
     {
+      "id": 1,
       "name": "Cabernet Sauvignon. Red",
       "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity.",
       "image_url": "http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT5iLNJLqdpnnlhfBHXtU-TCA0rBtfvEY9trzEhyWS5B90qmxomLpyBLF0KjEvzEf1_eQJFvYE4JBacYbU",
@@ -69,6 +70,7 @@
       "userid": "2"
     },
     {
+      "id": 2,
       "name": "Cabern Rose",
       "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity.",
       "image_url": "http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT5iLNJLqdpnnlhfBHXtU-TCA0rBtfvEY9trzEhyWS5B90qmxomLpyBLF0KjEvzEf1_eQJFvYE4JBacYbU",
@@ -95,6 +97,7 @@
       "userid": "2"
     },
     {
+      "id": 3,
       "name": "Sauvignon Grape",
       "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity.",
       "image_url": "http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT5iLNJLqdpnnlhfBHXtU-TCA0rBtfvEY9trzEhyWS5B90qmxomLpyBLF0KjEvzEf1_eQJFvYE4JBacYbU",
@@ -121,6 +124,7 @@
       "userid": "2"
     },
     {
+      "id": 4,
       "name": "Sauvignon Grape",
       "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity.",
       "image_url": "http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT5iLNJLqdpnnlhfBHXtU-TCA0rBtfvEY9trzEhyWS5B90qmxomLpyBLF0KjEvzEf1_eQJFvYE4JBacYbU",
@@ -147,6 +151,7 @@
       "userid": "2"
     },
     {
+      "id": 5,
       "name": "Sauvignon Grape",
       "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity.",
       "image_url": "http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT5iLNJLqdpnnlhfBHXtU-TCA0rBtfvEY9trzEhyWS5B90qmxomLpyBLF0KjEvzEf1_eQJFvYE4JBacYbU",
@@ -173,6 +178,7 @@
       "userid": "2"
     },
     {
+      "id": 6,
       "name": "Sauvignon Grape",
       "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity.",
       "image_url": "http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT5iLNJLqdpnnlhfBHXtU-TCA0rBtfvEY9trzEhyWS5B90qmxomLpyBLF0KjEvzEf1_eQJFvYE4JBacYbU",
@@ -199,6 +205,7 @@
       "userid": "2"
     },
     {
+      "id": 7,
       "name": "Cabernet Sauvignon. Red",
       "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity.",
       "image_url": "http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT5iLNJLqdpnnlhfBHXtU-TCA0rBtfvEY9trzEhyWS5B90qmxomLpyBLF0KjEvzEf1_eQJFvYE4JBacYbU",
@@ -225,6 +232,7 @@
       "userid": "2"
     },
     {
+      "id": 8,
       "name": "Cabern Rose",
       "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity.",
       "image_url": "http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT5iLNJLqdpnnlhfBHXtU-TCA0rBtfvEY9trzEhyWS5B90qmxomLpyBLF0KjEvzEf1_eQJFvYE4JBacYbU",
@@ -251,6 +259,7 @@
       "userid": "2"
     },
     {
+      "id": 9,
       "name": "Sauvignon Grape",
       "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity.",
       "image_url": "http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT5iLNJLqdpnnlhfBHXtU-TCA0rBtfvEY9trzEhyWS5B90qmxomLpyBLF0KjEvzEf1_eQJFvYE4JBacYbU",
@@ -277,6 +286,7 @@
       "userid": "2"
     },
     {
+      "id": 10,
       "name": "Sauvignon Grape",
       "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity.",
       "image_url": "http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT5iLNJLqdpnnlhfBHXtU-TCA0rBtfvEY9trzEhyWS5B90qmxomLpyBLF0KjEvzEf1_eQJFvYE4JBacYbU",
@@ -303,6 +313,7 @@
       "userid": "2"
     },
     {
+      "id": 11,
       "name": "Sauvignon Grape",
       "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity.",
       "image_url": "http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT5iLNJLqdpnnlhfBHXtU-TCA0rBtfvEY9trzEhyWS5B90qmxomLpyBLF0KjEvzEf1_eQJFvYE4JBacYbU",
@@ -329,6 +340,61 @@
       "userid": "2"
     },
     {
+      "id": 12,
+      "name": "Sauvignon Grape",
+      "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity.",
+      "image_url": "http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT5iLNJLqdpnnlhfBHXtU-TCA0rBtfvEY9trzEhyWS5B90qmxomLpyBLF0KjEvzEf1_eQJFvYE4JBacYbU",
+      "recipe": [
+          "A glass jar for fermentation (capacity of 1-2 gallons)",
+          "Secondary jars/containers",
+          "Empty glass bottles",
+          "A funnel",
+          "Airlocks/Corks",
+          "Strainer/Nylon mesh",
+          "Plastic tubing for siphoning",
+          "A stirrer",
+          "Plentiful supply of fruit (preferably red grapes)",
+          "Sugar/honey/brown sugar",
+          "Wine yeast",
+          "Distilled/filtered water",
+          "Campden tablets (optional)"
+          ],
+      "category_id": 1,
+      "categories": "tea",
+      "glasses": "glass 5",
+      "ingredient_id": 1,
+      "is_alcoholic": 1,
+      "userid": "2"
+    },
+    {
+      "id": 13,
+      "name": "Sauvignon Grape",
+      "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity.",
+      "image_url": "http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT5iLNJLqdpnnlhfBHXtU-TCA0rBtfvEY9trzEhyWS5B90qmxomLpyBLF0KjEvzEf1_eQJFvYE4JBacYbU",
+      "recipe": [
+          "A glass jar for fermentation (capacity of 1-2 gallons)",
+          "Secondary jars/containers",
+          "Empty glass bottles",
+          "A funnel",
+          "Airlocks/Corks",
+          "Strainer/Nylon mesh",
+          "Plastic tubing for siphoning",
+          "A stirrer",
+          "Plentiful supply of fruit (preferably red grapes)",
+          "Sugar/honey/brown sugar",
+          "Wine yeast",
+          "Distilled/filtered water",
+          "Campden tablets (optional)"
+          ],
+      "category_id": 1,
+      "categories": "water",
+      "glasses": "glass 4",
+      "ingredient_id": 1,
+      "is_alcoholic": 1,
+      "userid": "2"
+    },
+    {
+      "id": 14,
       "name": "Sauvignon Grape",
       "description": "Cabernet Sauvignon is well known for its firm tannins and full and rich taste, including such notes as blackcurrant, as well as woodsy flavors, such as cedar, oak, and herbs. The wine also contains great potential for aging, thanks to its high rate of tannins and perceptible acidity.",
       "image_url": "http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT5iLNJLqdpnnlhfBHXtU-TCA0rBtfvEY9trzEhyWS5B90qmxomLpyBLF0KjEvzEf1_eQJFvYE4JBacYbU",

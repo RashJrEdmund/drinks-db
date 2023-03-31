@@ -13,15 +13,13 @@ const StyledUserProfile = styled.div`
 
   .profile_update_container {
     width: 95vw;
-    max-width: 1224px;
+    max-width: 1000px;
     height: fit-content;
     min-height: 100vh;
     margin: 0 auto;
     padding: 4rem 2rem 2rem;
     display: flex;
     flex-direction: column;
-    border-left: 1px solid #a52a2a;
-    border-right: 1px solid #a52a2a;
 
     button {
       background-color: #cce;
@@ -41,6 +39,7 @@ const StyledUserProfile = styled.div`
       gap: 1rem;
 
       .profile_sidebar {
+        background: linear-gradient(to bottom, #00000065, #00000065, #00000065);
         border: 1px solid #a52a2a;
         display: flex;
         flex-direction: column;
@@ -86,6 +85,7 @@ const StyledUserProfile = styled.div`
       /* editing the form */
 
       .profile_update_form {
+        background: linear-gradient(to bottom, #00000065, #00000065, #00000065);
         display: flex;
         flex-direction: column;
         align-items: center;

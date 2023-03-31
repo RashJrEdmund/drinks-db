@@ -20,7 +20,7 @@ export default function CrudPage() {
         home
       </button>
 
-      <h1 className="header">exercise your Admin Rights</h1>
+      <h1 className="header">start Editing</h1>
 
       <div className="card-options">
         <div data-test onClick={() => navigate('drinks', { replace: true })}>

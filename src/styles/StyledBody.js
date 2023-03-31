@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 
 const StyledBody = styled.div`
-  /* background-color: #331012; */
-  background-color: #f5f5f5;
+  background-color: #331012;
+  /* background-color: #f5f5f5; */
   margin: 0;
   padding: 3rem 0;
   width: 100%;

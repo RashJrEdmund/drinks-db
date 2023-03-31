@@ -90,7 +90,7 @@ export default function ProfileDropDown() {
   return currentUser?.is_admin ? (
     <StyledDropDown className="profile_dropdown" id="profile_dropdown">
       <p onClick={() => window.scrollTo(0, 0)}>Home</p>
-      <p onClick={() => navigate('/cruding')}>CRUD as admin</p>
+      <p onClick={() => navigate('/cruding/drinks')}>login as admin</p>
       <p onClick={() => navigate('/profile')}>Profile</p>
 
       <p onClick={handleLogOut}>Logout</p>
