@@ -13,13 +13,22 @@ export default function CrudPage() {
   const cardOptionsRef = React.useRef();
 
   const [edit, setEdit] = React.useState({
-    drinks: false,
-    categories: false,
-    ingredients: false,
+    drink: {
+      chosenOne: {},
+      show: false,
+    },
+    category: {
+      chosenOne: {},
+      show: false,
+    },
+    ingredient: {
+      chosenOne: {},
+      show: false,
+    },
   });
 
   React.useEffect(() => {
-    customAlert('admin previledges');
+    customAlert('admin dashboard');
   }, []);
 
   React.useEffect(() => {

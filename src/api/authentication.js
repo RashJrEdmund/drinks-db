@@ -16,8 +16,8 @@ const deleteUser = async (user) => {
   return httpClient.delete(`users/${user?.id}`);
 };
 
-const another = async (param) => {
-  console.log(param);
+const postDrink = async (drink) => {
+  return httpClient.post('drinks', drink);
 };
 
 const deleteDrink = async (id) => {
@@ -30,5 +30,5 @@ export {
   updateUserProfile,
   deleteUser,
   deleteDrink,
-  another,
+  postDrink,
 };

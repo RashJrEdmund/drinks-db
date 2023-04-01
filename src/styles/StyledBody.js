@@ -131,8 +131,10 @@ const StyledBody = styled.div`
     }
 
     .body_images {
-      flex-direction: column;
-      gap: 20px;
+      .first_img {
+        height: 260px;
+        width: 260px;
+      }
     }
   }
 
@@ -140,6 +142,11 @@ const StyledBody = styled.div`
     .drinks-container,
     .drinks-container_2 {
       grid-template-columns: 1fr;
+    }
+
+    .body_images {
+      flex-direction: column;
+      gap: 20px;
     }
   }
 `;

@@ -79,24 +79,39 @@ export default function NestedDrinks() {
     await setdialogueDetails({
       message1: '',
       message2: 'are you sure you want',
-      message3: 'to remove this drink ?',
+      message3: 'to delete this drink ?',
       show: true,
-      job: 'remove',
+      job: 'delete',
       async fxntoCall() {
         setLoadingAnime({ message: 'deleting...', show: true });
-        // await deleteDrink(id)
-        //   .then(() => customAlert('drink removed'))
-        //   .catch(({ data }) => customAlert(data))
-        //   .finally(() => setLoadingAnime({ message: '', show: false }));
+        await deleteDrink(id)
+          .then((res) => {
+            customAlert(res.data);
+          })
+          .catch(({ response }) => {
+            customAlert(response.data);
+          })
+          .finally(() => setLoadingAnime({ message: '', show: false }));
       },
     });
+  };
 
-    console.log(id, 'clicked');
+  const handleDrinkEdit = (id) => {
+    const { log, clear } = console;
+    const holder = edit;
+    const [drinkToEdit] = Drinks.filter((drink) => drink.id === id);
+    holder.drink.show = true;
+    holder.drink.chosenOne = drinkToEdit;
+
+    setEdit(() => ({ ...holder }));
+
+    clear();
+    log('clicked drink', id, drinkToEdit);
   };
 
   return (
     <StlydeNestedDrinks>
-      {edit?.drinks && <DrinksForm setEdit={setEdit} />}
+      {edit.drink.show && <DrinksForm drink={edit?.drink} setEdit={setEdit} />}
 
       <button className="create-new-btn" type="button">
         create New
@@ -127,7 +142,7 @@ export default function NestedDrinks() {
               <button
                 name={drink.id}
                 type="button"
-                onClick={() => setEdit((prev) => ({ ...prev, drinks: true }))}
+                onClick={(e) => handleDrinkEdit(+e.target.name)}
               >
                 edit
               </button>
