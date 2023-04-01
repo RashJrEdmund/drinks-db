@@ -13,32 +13,32 @@ export default function Body() {
   const secondHalf = [];
   const localDrinks = JSON.parse(localStorage.getItem('localDrinks'));
 
-  let overallDrinkHolder = [];
+  // let overallDrinkHolder = [];
 
-  if (Drinks.length > 12 || Drinks.length % 12 === 0) {
-    console.clear();
-    let dotLength = 0;
-    for (let k = 0; k < Math.ceil(Drinks.length % 12); k += 1) {
-      dotLength += 1;
-    }
+  // if (Drinks.length > 12 || Drinks.length % 12 === 0) {
+  //   console.clear();
+  //   let dotLength = 0;
+  //   for (let k = 0; k < Math.ceil(Drinks.length % 12); k += 1) {
+  //     dotLength += 1;
+  //   }
 
-    overallDrinkHolder[0] = [Drinks[0]];
-    console.log('this first overallDrinkHolder', overallDrinkHolder);
+  //   overallDrinkHolder[0] = [Drinks[0]];
+  //   console.log('this first overallDrinkHolder', overallDrinkHolder);
 
-    let start = 0;
-    let end = 12;
+  //   let start = 0;
+  //   let end = 12;
 
-    for (let i = 0; i < dotLength; i += 1) {
-      for (let j = start; j < end; j += 1) {
-        overallDrinkHolder[i] = [...overallDrinkHolder[i], Drinks[j]];
-      }
+  //   for (let i = 0; i < dotLength; i += 1) {
+  //     for (let j = start; j < end; j += 1) {
+  //       overallDrinkHolder[i] = [...overallDrinkHolder[i], Drinks[j]];
+  //     }
 
-      start = end;
-      end += Drinks.length - end > 12 ? 12 : Drinks.length - 12;
-    }
-    overallDrinkHolder = Drinks.slice(0, Drinks[12]);
-    console.log('this overallDrinkHolder', overallDrinkHolder, dotLength);
-  }
+  //     start = end;
+  //     end += Drinks.length - end > 12 ? 12 : Drinks.length - 12;
+  //   }
+  //   overallDrinkHolder = Drinks.slice(0, Drinks[12]);
+  //   console.log('this overallDrinkHolder', overallDrinkHolder, dotLength);
+  // }
 
   const sortDrinks = () => {
     const holder = filterData;

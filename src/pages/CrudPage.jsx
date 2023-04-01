@@ -10,6 +10,12 @@ export default function CrudPage() {
   const { customAlert } = React.useContext(MyContext);
   const navigate = useNavigate();
 
+  const [edit, setEdit] = React.useState({
+    drinks: false,
+    categories: false,
+    ingredients: false,
+  });
+
   React.useEffect(() => {
     customAlert('admin previledges');
   }, []);
@@ -45,7 +51,7 @@ export default function CrudPage() {
         </div>
       </div>
 
-      <Outlet />
+      <Outlet edit={edit} setEdit={setEdit} />
     </StyleCrudPage>
   );
 }

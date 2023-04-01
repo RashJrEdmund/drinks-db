@@ -1,6 +1,9 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from '@emotion/styled';
 import data from '../data/DataSimulation.json';
+import DrinksForm from '../components/DrinksForm';
 
 const StlydeNestedDrinks = styled.div`
   display: flex;
@@ -61,15 +64,21 @@ const StlydeNestedDrinks = styled.div`
   }
 `;
 
-export default function NestedDrinks() {
+export default function NestedDrinks(props) {
   // const localDrinks = JSON.parse(localStorage.getItem('localDrinks'));
 
   const bodyref = React.useRef();
 
   const { Drinks } = data;
 
+  const handleDeleteDrink = (e) => {
+    console.log(e, 'clicked', props);
+  };
+
   return (
     <StlydeNestedDrinks>
+      {props?.edit?.drinks && <DrinksForm setEdit={props?.setEdit} />}
+
       <button className="create-new-btn" type="button">
         create New
       </button>
@@ -89,16 +98,19 @@ export default function NestedDrinks() {
 
             <div className="action-btns">
               <button
-                id={drink.id}
+                name={drink.id}
                 type="button"
-                onClick={(e) => console.log(e.target.id, 'clicked')}
+                onClick={(e) => handleDeleteDrink(+e.target.name)}
               >
                 del
               </button>
 
               <button
+                name={drink.id}
                 type="button"
-                onClick={(e) => console.log(e.target.id, 'clicked')}
+                onClick={() =>
+                  props?.setEdit((prev) => ({ ...prev, drinks: true }))
+                }
               >
                 edit
               </button>
