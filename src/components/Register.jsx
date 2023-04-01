@@ -2,13 +2,13 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import MyContext from '../context/MyContext';
+import { MyContext } from '../context/MyContext';
 import { register } from '../api/authentication';
 import StyledRegisterLoginForm from '../styles/StyledrRegisterLoginform';
 
 function Register() {
   // const URL = `http://localhost:3000/users?apikey=${apikey}`;
-  const { customAlert, setLoadingAime } = React.useContext(MyContext);
+  const { customAlert, setLoadingAnime } = React.useContext(MyContext);
   const [inputType, setInputType] = React.useState({
     one: 'password',
     two: 'password',
@@ -26,7 +26,7 @@ function Register() {
       return;
     }
 
-    setLoadingAime({ message: 'registering...', show: true });
+    setLoadingAnime({ message: 'registering...', show: true });
 
     const user = {
       first_name: target.firstName.value,
@@ -45,7 +45,7 @@ function Register() {
         const { response, message } = err;
         customAlert(response?.data || message);
       })
-      .finally(() => setLoadingAime({ message: '', show: false }));
+      .finally(() => setLoadingAnime({ message: '', show: false }));
   };
 
   return (

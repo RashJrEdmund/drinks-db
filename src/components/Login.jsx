@@ -4,14 +4,14 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import MyContext from '../context/MyContext';
+import { MyContext } from '../context/MyContext';
 import StyledRegisterLoginForm from '../styles/StyledrRegisterLoginform';
 
 import { loginWithEmailPassword } from '../api/authentication';
 import { saveToken, getUserReady } from '../services/utils';
 
 function Login() {
-  const { customAlert, setLoadingAime } = React.useContext(MyContext);
+  const { customAlert, setLoadingAnime } = React.useContext(MyContext);
   const navigate = useNavigate();
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const [inputType, setInputType] = React.useState('password');
@@ -30,7 +30,7 @@ function Login() {
       password: target.password.value,
     };
 
-    await setLoadingAime({ message: 'processing...', show: true });
+    await setLoadingAnime({ message: 'processing...', show: true });
 
     try {
       await loginWithEmailPassword(user.email, user.password)
@@ -50,7 +50,7 @@ function Login() {
         customAlert('Invalid username or password');
       }
     } finally {
-      setLoadingAime({ message: '', show: false });
+      setLoadingAnime({ message: '', show: false });
     }
   };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import StyledUserProfile from '../styles/StyledUserProfile';
-import MyContext from '../context/MyContext';
+import { MyContext } from '../context/MyContext';
 import { deleteUser, updateUserProfile } from '../api/authentication';
 import uploadIcon from '../images/darkImageIcon.png';
 import { getUserReady } from '../services/utils';
@@ -11,7 +11,7 @@ export default function UserProfile() {
     currentUser,
     setCurrentUser,
     setdialogueDetails,
-    setLoadingAime,
+    setLoadingAnime,
     customAlert,
   } = React.useContext(MyContext);
   const navigate = useNavigate();
@@ -20,13 +20,13 @@ export default function UserProfile() {
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
 
-    setLoadingAime({ message: 'updating...', show: true });
+    setLoadingAnime({ message: 'updating...', show: true });
     const { target } = e;
 
     if (
       !(target.firstName.value || target.lastName.value || target.phone.value)
     ) {
-      setLoadingAime({ message: '', show: false });
+      setLoadingAnime({ message: '', show: false });
       customAlert('cannot update profile');
       return;
     }
@@ -59,14 +59,14 @@ export default function UserProfile() {
         const { response, message } = er;
         customAlert(response?.data || message);
       })
-      .finally(() => setLoadingAime({ message: '', show: false }));
+      .finally(() => setLoadingAnime({ message: '', show: false }));
   };
 
   const deleteAccount = async () => {
     const user = JSON.parse(localStorage.getItem('currentUser'));
     if (!user) return;
 
-    setLoadingAime({ message: 'deleting...', show: true });
+    setLoadingAnime({ message: 'deleting...', show: true });
     navigate('/');
 
     await deleteUser(user)
@@ -77,7 +77,7 @@ export default function UserProfile() {
         customAlert('account deleted');
       })
       .catch(() => customAlert('error occured while deleting account'))
-      .finally(() => setLoadingAime({ message: '', show: false }));
+      .finally(() => setLoadingAnime({ message: '', show: false }));
   };
 
   const handleDeleteAccount = () => {
@@ -86,10 +86,10 @@ export default function UserProfile() {
       message2: "all changes you've made will be lost",
       message3: 'this action cannot be undone',
       job: 'Proceed',
+      show: true,
       fxntoCall() {
         deleteAccount();
       },
-      show: true,
     });
   };
 

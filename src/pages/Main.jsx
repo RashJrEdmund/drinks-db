@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar';
 import Body from '../components/Body';
 import Footer from '../components/Footer';
 import AuthGaurd from '../components/AuthGaurd';
-import MyContext from '../context/MyContext';
+import { MyContext } from '../context/MyContext';
 
 function Main({ name, user }) {
   const { setCurrentUser } = React.useContext(MyContext);

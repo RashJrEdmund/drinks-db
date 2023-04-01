@@ -5,7 +5,7 @@ import pourWineImg from '../images/pour_wine_glass_2.png';
 import blueWine from '../images/blue_wine_glass.png';
 import standingGlass from '../images/standing_wine_glass.png';
 import wineGlasses from '../images/wine_glasses.png';
-import MyContext from '../context/MyContext';
+import { MyContext } from '../context/MyContext';
 
 export default function Body() {
   const { Simulation, bodyref, filterData } = React.useContext(MyContext);

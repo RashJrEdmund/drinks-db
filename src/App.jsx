@@ -4,7 +4,7 @@ import './styles/App.css';
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import MyContext from './context/MyContext';
+import { MyContext } from './context/MyContext';
 import FetchData from './data/FetchData';
 import Main from './pages/Main';
 import LogoutPage from './pages/LogoutPage';
@@ -30,7 +30,7 @@ export default function App() {
   );
   const [filterData, setFilterData] = React.useState([]);
 
-  const [loadingAime, setLoadingAime] = React.useState({
+  const [loadingAnime, setLoadingAnime] = React.useState({
     show: false,
     message: '',
   });
@@ -69,7 +69,7 @@ export default function App() {
   };
 
   const toggleBodyOverFlow = () => {
-    if (dialogueDetails.show || loadingAime.show) {
+    if (dialogueDetails.show || loadingAnime.show) {
       document.body.style = 'overflow: hidden';
     } else {
       document.body.style = 'overflow: unset';
@@ -86,7 +86,7 @@ export default function App() {
 
   React.useEffect(() => {
     toggleBodyOverFlow();
-  }, [dialogueDetails.show, loadingAime.show]);
+  }, [dialogueDetails.show, loadingAnime.show]);
 
   // console.log('this fetchedData', fetchedData);
 
@@ -98,8 +98,8 @@ export default function App() {
 
           setdialogueDetails,
 
-          loadingAime,
-          setLoadingAime,
+          loadingAnime,
+          setLoadingAnime,
 
           fetchedData,
 
@@ -123,7 +123,7 @@ export default function App() {
           />
         )}
 
-        {loadingAime.show && <LoadingAnime message={loadingAime.message} />}
+        {loadingAnime.show && <LoadingAnime message={loadingAnime.message} />}
 
         <BrowserRouter>
           <Routes>

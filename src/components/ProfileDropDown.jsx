@@ -4,7 +4,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
-import MyContext from '../context/MyContext';
+import { MyContext } from '../context/MyContext';
 
 const StyledDropDown = styled.div`
   position: absolute;

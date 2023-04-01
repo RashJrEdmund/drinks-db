@@ -1,14 +1,16 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/jsx-no-constructed-context-values */
 import React from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
-import MyContext from '../context/MyContext';
+import { MyContext, CrudContext } from '../context/MyContext';
 import StyleCrudPage from '../styles/StyledCrudPage';
 
 export default function CrudPage() {
   const { customAlert } = React.useContext(MyContext);
   const navigate = useNavigate();
+  const topBtnRef = React.useRef();
+  const cardOptionsRef = React.useRef();
 
   const [edit, setEdit] = React.useState({
     drinks: false,
@@ -20,38 +22,64 @@ export default function CrudPage() {
     customAlert('admin previledges');
   }, []);
 
+  React.useEffect(() => {
+    let YscrollHolder = 0;
+    window.addEventListener('scroll', () => {
+      if (window.scrollY >= 135 && window.scrollY <= YscrollHolder) {
+        topBtnRef.current?.classList.add('active_top_btn');
+      } else topBtnRef.current?.classList.remove('active_top_btn');
+
+      YscrollHolder = window.scrollY;
+    });
+  }, []);
+
   return (
-    <StyleCrudPage>
-      <button className="back-btn" type="button" onClick={() => navigate('/')}>
-        home
-      </button>
-
-      <h1 className="header">start Editing</h1>
-
-      <div className="card-options">
-        <div data-test onClick={() => navigate('drinks', { replace: true })}>
-          <h1>EDIT </h1>
-          <h1>DRINKS</h1>
-        </div>
-
-        <div
-          data-test
-          onClick={() => navigate('categories', { replace: true })}
+    <CrudContext.Provider value={{ edit, setEdit }}>
+      <StyleCrudPage>
+        <button
+          className="back-btn"
+          type="button"
+          onClick={() => navigate('/')}
         >
-          <h1>EDIT </h1>
-          <h1>CATEGORIES</h1>
+          home
+        </button>
+
+        <h1 className="header">start Editing</h1>
+
+        <div ref={cardOptionsRef} className="card-options">
+          <div data-test onClick={() => navigate('drinks', { replace: true })}>
+            <h1>EDIT </h1>
+            <h1>DRINKS</h1>
+          </div>
+
+          <div
+            data-test
+            onClick={() => navigate('categories', { replace: true })}
+          >
+            <h1>EDIT </h1>
+            <h1>CATEGORIES</h1>
+          </div>
+
+          <div
+            data-test
+            onClick={() => navigate('ingredients', { replace: true })}
+          >
+            <h1>EDIT </h1>
+            <h1>INGREDIENTS</h1>
+          </div>
         </div>
 
-        <div
-          data-test
-          onClick={() => navigate('ingredients', { replace: true })}
+        <button
+          ref={topBtnRef}
+          className="to_top_btn"
+          type="button"
+          onClick={() => window.scrollTo(0, cardOptionsRef.current.ofsettop)}
         >
-          <h1>EDIT </h1>
-          <h1>INGREDIENTS</h1>
-        </div>
-      </div>
+          &top;
+        </button>
 
-      <Outlet edit={edit} setEdit={setEdit} />
-    </StyleCrudPage>
+        <Outlet />
+      </StyleCrudPage>
+    </CrudContext.Provider>
   );
 }

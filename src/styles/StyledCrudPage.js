@@ -66,6 +66,24 @@ const StyleCrudPage = styled.div`
     }
   }
 
+  .to_top_btn {
+    display: none;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 1rem;
+
+    background-color: #a52a2a;
+    font-weight: 600;
+    color: #f5f5f5;
+    padding: 7px 10px;
+    box-shadow: 0 0 10px #222;
+
+    &.active_top_btn {
+      display: unset;
+    }
+  }
+
   /* @media only screen and (max-width: 768px) {
     .card-options {
       overflow: auto;

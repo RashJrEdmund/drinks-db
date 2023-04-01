@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
-import MyContext from '../context/MyContext';
+import { MyContext } from '../context/MyContext';
 import StyledNavBar from '../styles/navbar.styles';
 import ProfileDropDown from './ProfileDropDown';
 

@@ -1,9 +1,11 @@
-/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from '@emotion/styled';
-import data from '../data/DataSimulation.json';
+import simulationData from '../data/DataSimulation.json';
 import DrinksForm from '../components/DrinksForm';
+import { CrudContext, MyContext } from '../context/MyContext';
+
+import { deleteDrink } from '../api/authentication';
 
 const StlydeNestedDrinks = styled.div`
   display: flex;
@@ -20,7 +22,7 @@ const StlydeNestedDrinks = styled.div`
     max-width: 1224px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    gap: 16px;
     margin: 10px auto 0;
     padding: 0 0 4rem;
 
@@ -45,7 +47,7 @@ const StlydeNestedDrinks = styled.div`
 
         button {
           border: 1px solid #a52a2a;
-          /* cursor: pointer; */
+          cursor: pointer;
         }
       }
     }
@@ -64,20 +66,37 @@ const StlydeNestedDrinks = styled.div`
   }
 `;
 
-export default function NestedDrinks(props) {
+export default function NestedDrinks() {
   // const localDrinks = JSON.parse(localStorage.getItem('localDrinks'));
-
+  const { customAlert, setLoadingAnime, setdialogueDetails } =
+    React.useContext(MyContext);
+  const { edit, setEdit } = React.useContext(CrudContext);
   const bodyref = React.useRef();
 
-  const { Drinks } = data;
+  const { Drinks } = simulationData;
 
-  const handleDeleteDrink = (e) => {
-    console.log(e, 'clicked', props);
+  const handleDeleteDrink = async (id) => {
+    await setdialogueDetails({
+      message1: '',
+      message2: 'are you sure you want',
+      message3: 'to remove this drink ?',
+      show: true,
+      job: 'remove',
+      async fxntoCall() {
+        setLoadingAnime({ message: 'deleting...', show: true });
+        // await deleteDrink(id)
+        //   .then(() => customAlert('drink removed'))
+        //   .catch(({ data }) => customAlert(data))
+        //   .finally(() => setLoadingAnime({ message: '', show: false }));
+      },
+    });
+
+    console.log(id, 'clicked');
   };
 
   return (
     <StlydeNestedDrinks>
-      {props?.edit?.drinks && <DrinksForm setEdit={props?.setEdit} />}
+      {edit?.drinks && <DrinksForm setEdit={setEdit} />}
 
       <button className="create-new-btn" type="button">
         create New
@@ -108,9 +127,7 @@ export default function NestedDrinks(props) {
               <button
                 name={drink.id}
                 type="button"
-                onClick={() =>
-                  props?.setEdit((prev) => ({ ...prev, drinks: true }))
-                }
+                onClick={() => setEdit((prev) => ({ ...prev, drinks: true }))}
               >
                 edit
               </button>

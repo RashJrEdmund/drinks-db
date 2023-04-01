@@ -20,10 +20,15 @@ const another = async (param) => {
   console.log(param);
 };
 
+const deleteDrink = async (id) => {
+  return httpClient.delete(`drinks/${id}`);
+};
+
 export {
   register,
   loginWithEmailPassword,
   updateUserProfile,
   deleteUser,
+  deleteDrink,
   another,
 };
