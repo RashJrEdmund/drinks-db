@@ -1,9 +1,12 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import styled from '@emotion/styled';
+import closeIcon from '../images/close icon.png';
+import { MyContext } from '../context/MyContext';
 
 const StyledDrinksFrom = styled.div`
   .drink_form_overlay {
@@ -62,19 +65,49 @@ const StyledDrinksFrom = styled.div`
       h3 {
         width: 100%;
         color: #f5f5f5;
-
-        &:nth-of-type(2) {
-          border-bottom: 1px solid #f5f5f5;
-          padding: 0 0 5px 0;
-        }
+        cursor: default;
       }
 
-      textarea {
-        min-height: 35px;
+      .drink_name {
+        background: none;
+        color: #f5f5f5;
+        border: none;
+        border-bottom: 1px solid #f5f5f5;
+        height: 35px;
         width: 100%;
-        padding: 10px;
+        padding: 10px 0;
+        font-size: 1.1rem;
+        text-align: center;
+        margin: 10px 0;
+      }
+
+      .text_area_and_image {
+        background-color: brown;
+        width: 100%;
+        height: fit-content;
+        min-height: 260px;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
         margin: 7px 0;
-        line-height: 20px;
+        padding: 10px 0;
+        overflow: auto;
+
+        textarea {
+          height: fit-content;
+          min-height: 240px;
+
+          min-width: 100%;
+          padding: 10px;
+          margin: 0;
+          line-height: 20px;
+        }
+
+        .image-div {
+          min-width: 100%;
+          height: 250px;
+          background-color: green;
+        }
       }
 
       span {
@@ -106,31 +139,31 @@ const StyledDrinksFrom = styled.div`
         display: flex;
         align-items: flex-start;
         gap: 10px;
+        margin: 7px 0;
 
         p {
           color: #f5f5f5;
-          background-color: gold;
           text-align: left;
           height: fit-content;
           width: 100%;
           padding: 10px;
           word-wrap: break-word;
           word-break: normal;
+          cursor: default;
         }
 
-        button {
-          background: none;
-          background-color: gold;
-          min-width: 40px;
-          color: #a52a2a;
-          font-weight: 1000;
-          padding: 0;
-          font-size: 2.5rem;
+        img {
+          background-color: #a52a2a;
+          width: 30px;
+          height: 30px;
           border-radius: 100px;
+          cursor: pointer;
         }
       }
 
       .submit-drink-btn {
+        background-color: #a52a2a;
+        color: #f5f5f5;
         margin: 1rem auto 0;
         width: 100%;
         padding: 10px 0;
@@ -143,20 +176,9 @@ const StyledDrinksFrom = styled.div`
 
 export default function DrinksForm(props) {
   const { drink, setEdit } = props;
-  const [drinkData, setDrinkData] = React.useState(drink.chosenOne);
 
-  const handleAddRecipe = (e) => {
-    e.preventDefault();
-    const { target } = e;
-    if (!target.recipe.value) return;
-    setDrinkData((prev) => [...prev, target.recipe.value]);
-
-    target.recipe.value = '';
-  };
-
-  const submitDrinkFrom = () => {
-    console.log('handle post Drink');
-  };
+  const { customAlert } = React.useContext(MyContext);
+  const [drinkData, setDrinkData] = React.useState(drink?.chosenOne);
 
   const closeForm = () => {
     setEdit((prev) => {
@@ -166,51 +188,118 @@ export default function DrinksForm(props) {
     });
   };
 
+  const deleteRecipe = (e) => {
+    const { name } = e.target;
+    const newRecipeList = drinkData.recipe.filter((item) => item !== name);
+    setDrinkData((prev) => ({
+      ...prev,
+      recipe: newRecipeList,
+    }));
+  };
+
+  const updateDrinkInfo = (e) => {
+    e.preventDefault();
+    const { recipe, drinkName, description } = e.target; // cant believe this worked
+
+    console.log('this description', description.value);
+
+    if (!drinkData.recipe) {
+      setDrinkData({
+        name: drinkName.value || '',
+        recipe: [recipe.value] || [],
+        description,
+      });
+      e.target.recipe.value = '';
+
+      return;
+    }
+
+    const newRecipeList = recipe.value
+      ? [...drinkData.recipe, recipe.value]
+      : [...drinkData.recipe];
+
+    setDrinkData((prev) => ({
+      ...prev,
+      name: prev.name === drinkName ? prev.name : drinkName,
+      recipe: newRecipeList,
+      description,
+    }));
+
+    e.target.recipe.value = ''; // value has refused to be assigned to directly, so i going back to using this longer one
+  };
+
+  const handleSaveDrink = () => {
+    if (!drinkData.recipe || !drinkData.name) {
+      customAlert("you have'nt created a drink yet");
+    }
+    console.log('handle post Drink');
+  };
+
   return (
     <StyledDrinksFrom>
-      <div
-        className="drink_form_overlay"
-        onClick={() => setEdit((prev) => ({ ...prev, drinks: false }))}
-      />
+      <div className="drink_form_overlay" onClick={closeForm} />
 
       <div className="form_container">
-        <button name="cancel-btn" type="button" onClick={closeForm}>
+        <button
+          title="discard form"
+          name="cancel-btn"
+          type="button"
+          onClick={closeForm}
+        >
           cancel
         </button>
 
-        <form onSubmit={handleAddRecipe}>
-          <h3>Edit Drink</h3>
-          <h3>{drinkData.name}</h3>
-
-          <textarea
-            cols="30"
-            rows="10"
+        <form onSubmit={updateDrinkInfo}>
+          <h3>{drinkData?.name ? 'Edit Drink' : 'Create Drink'}</h3>
+          <input
+            className="drink_name"
             type="text"
-            name="description"
-            placeholder="drink description"
-            defaultValue={drinkData.description}
+            name="drinkName"
+            defaultValue={drinkData?.name}
+            placeholder="name drink"
+            required
           />
 
+          <div className="text_area_and_image">
+            <textarea
+              cols="30"
+              rows="10"
+              type="text"
+              name="description"
+              placeholder="drink description"
+              defaultValue={drinkData?.description}
+              required
+            />
+
+            <div className="image-div">image here</div>
+          </div>
+
           <span>
-            <input type="text" name="recipe" placeholder="add recipe" />
+            <input type="text" name="recipe" placeholder="add to recipe" />
             <button className="add_recipe_btn" type="submit">
               +
             </button>
           </span>
 
-          {drinkData?.recipe?.map((peice) => (
-            <div key={peice} className="recipe-option">
+          {drinkData?.recipe?.map((peice, ind) => (
+            <div key={[peice, ind]} className="recipe-option">
               <p>{peice}</p>
-              <button type="button">x</button>
+              <img
+                title="delete step ?"
+                src={closeIcon}
+                name={peice}
+                alt="close_icon_image"
+                onClick={deleteRecipe}
+              />
             </div>
           ))}
 
           <button
             type="button"
             className="submit-drink-btn"
-            onClick={submitDrinkFrom}
+            onClick={handleSaveDrink}
           >
-            submit Drink
+            save Drink
           </button>
         </form>
       </div>

@@ -113,7 +113,26 @@ export default function NestedDrinks() {
     <StlydeNestedDrinks>
       {edit.drink.show && <DrinksForm drink={edit?.drink} setEdit={setEdit} />}
 
-      <button className="create-new-btn" type="button">
+      <button
+        className="create-new-btn"
+        type="button"
+        onClick={() =>
+          setEdit({
+            drink: {
+              chosenOne: {},
+              show: true,
+            },
+            category: {
+              chosenOne: {},
+              show: false,
+            },
+            ingredient: {
+              chosenOne: {},
+              show: false,
+            },
+          })
+        }
+      >
         create New
       </button>
 
