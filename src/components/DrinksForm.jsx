@@ -7,6 +7,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import closeIcon from '../images/close icon.png';
 import { MyContext } from '../context/MyContext';
+import { postDrink } from '../api/authentication';
 
 const StyledDrinksFrom = styled.div`
   .drink_form_overlay {
@@ -81,8 +82,18 @@ const StyledDrinksFrom = styled.div`
         margin: 10px 0;
       }
 
+      .swipe_to_see_img {
+        justify-self: right;
+        text-align: right;
+        width: 100%;
+        color: #f5f5f5;
+
+        &::after {
+          content: ' ->';
+        }
+      }
+
       .text_area_and_image {
-        background-color: brown;
         width: 100%;
         height: fit-content;
         min-height: 260px;
@@ -104,9 +115,38 @@ const StyledDrinksFrom = styled.div`
         }
 
         .image-div {
+          position: relative;
+
+          background-position: center;
+          background-size: contain;
+          background-repeat: no-repeat;
           min-width: 100%;
           height: 250px;
-          background-color: green;
+          cursor: pointer;
+
+          &.active-image-div {
+            /* transform: scale(2.5); */
+          }
+
+          .image_input {
+            background: none;
+            border: none;
+            width: 87px;
+            position: absolute;
+            left: 10%;
+            bottom: 0;
+            margin: 10px;
+          }
+
+          .clear_img_btn {
+            background: #0000006e;
+            color: #f5f5f5;
+            font-weight: 600;
+            position: absolute;
+            right: 10%;
+            bottom: 0;
+            margin: 10px;
+          }
         }
       }
 
@@ -172,6 +212,18 @@ const StyledDrinksFrom = styled.div`
       }
     }
   }
+
+  @media only screen and (max-width: 600px) {
+    .image-div {
+      .image_input {
+        left: 0;
+      }
+
+      .clear_img_btn {
+        right: 0;
+      }
+    }
+  }
 `;
 
 export default function DrinksForm(props) {
@@ -179,6 +231,7 @@ export default function DrinksForm(props) {
 
   const { customAlert } = React.useContext(MyContext);
   const [drinkData, setDrinkData] = React.useState(drink?.chosenOne);
+  const [imagePath, setImagePath] = React.useState();
 
   const closeForm = () => {
     setEdit((prev) => {
@@ -197,18 +250,27 @@ export default function DrinksForm(props) {
     }));
   };
 
+  const handleUploadImage = async (e) => {
+    const path = URL.createObjectURL(e.target.files[0]);
+    setImagePath(path);
+    e.target.value = '';
+    console.log('thies imagepath', imagePath);
+  };
+
   const updateDrinkInfo = (e) => {
     e.preventDefault();
     const { recipe, drinkName, description } = e.target; // cant believe this worked
 
-    console.log('this description', description.value);
+    const imgPathHolder = imagePath;
+    console.log('this image \n', imgPathHolder);
 
     if (!drinkData.recipe) {
-      setDrinkData({
+      setDrinkData((prev) => ({
         name: drinkName.value || '',
         recipe: [recipe.value] || [],
-        description,
-      });
+        description: description.value,
+        image_url: imgPathHolder || prev.image_url || '',
+      }));
       e.target.recipe.value = '';
 
       return;
@@ -220,19 +282,24 @@ export default function DrinksForm(props) {
 
     setDrinkData((prev) => ({
       ...prev,
-      name: prev.name === drinkName ? prev.name : drinkName,
+      name: prev.name === drinkName.value ? prev.name : drinkName.value,
       recipe: newRecipeList,
-      description,
+      description: description.value,
+      image_url: imgPathHolder || prev.image_url,
     }));
 
     e.target.recipe.value = ''; // value has refused to be assigned to directly, so i going back to using this longer one
   };
 
-  const handleSaveDrink = () => {
-    if (!drinkData.recipe || !drinkData.name) {
+  const handleSaveDrink = async () => {
+    if (!(drinkData.recipe && drinkData.name)) {
       customAlert("you have'nt created a drink yet");
+      return;
     }
-    console.log('handle post Drink');
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    // await postDrink({ ...drinkData, userId: currentUser.id });
+    console.log('handle post Drink', currentUser.id, '\n', drinkData);
   };
 
   return (
@@ -260,6 +327,8 @@ export default function DrinksForm(props) {
             required
           />
 
+          <p className="swipe_to_see_img">swipe to see image</p>
+
           <div className="text_area_and_image">
             <textarea
               cols="30"
@@ -271,7 +340,30 @@ export default function DrinksForm(props) {
               required
             />
 
-            <div className="image-div">image here</div>
+            <div
+              className="image-div active-image-div"
+              style={{
+                backgroundImage: `URL(${imagePath || drinkData?.image_url})`,
+              }}
+            >
+              <input
+                type="file"
+                name="uploadedImage"
+                className="image_input"
+                placeholder="add an image"
+                accept="image/jpeg, image/png, image/jpg, image/svg"
+                onChange={handleUploadImage}
+              />
+              {imagePath && (
+                <button
+                  className="clear_img_btn"
+                  type="button"
+                  onClick={() => setImagePath(null)}
+                >
+                  clear Image
+                </button>
+              )}
+            </div>
           </div>
 
           <span>

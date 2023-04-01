@@ -84,7 +84,7 @@ export default function CrudPage() {
           type="button"
           onClick={() => window.scrollTo(0, cardOptionsRef.current.ofsettop)}
         >
-          &top;
+          {/* &top; */}
         </button>
 
         <Outlet />

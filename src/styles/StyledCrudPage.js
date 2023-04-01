@@ -67,20 +67,37 @@ const StyleCrudPage = styled.div`
   }
 
   .to_top_btn {
-    display: none;
+    /* display: none; */
     position: fixed;
     right: 0;
     bottom: 0;
     margin: 1rem;
 
     background-color: #a52a2a;
-    font-weight: 600;
-    color: #f5f5f5;
     padding: 7px 10px;
     box-shadow: 0 0 10px #222;
 
+    width: 20px;
+    height: 40px;
+
     &.active_top_btn {
       display: unset;
+    }
+
+    &::before {
+      content: ' ';
+      background: none;
+      position: absolute;
+      top: -100%;
+      left: 50%;
+      height: 0;
+      width: 0;
+      border-top: 25px solid transparent;
+      border-right: 25px solid transparent;
+      border-bottom: 25px solid #a52a2a;
+      border-left: 25px solid transparent;
+
+      transform: translate(-50%);
     }
   }
 
