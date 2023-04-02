@@ -17,15 +17,32 @@ const StyledUserProfile = styled.div`
     height: fit-content;
     min-height: 100vh;
     margin: 0 auto;
-    padding: 4rem 2rem 2rem;
+    padding: 4rem 5px 2rem;
     display: flex;
     flex-direction: column;
 
-    button {
-      background-color: #cce;
-      padding: 6px 10px;
-      font-size: 16px;
+    .profile-btns {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: space-between;
+
+      width: 100%;
+      height: fit-content;
       margin: 0 0 2rem;
+
+      .back-btn {
+        background-color: #cce;
+        padding: 6px 10px;
+        font-size: 16px;
+        margin: 0;
+      }
+
+      .edit_profile_btn {
+        padding: 6px 10px;
+        font-size: 16px;
+        margin: 0;
+      }
     }
 
     .profile_detail_holder {
@@ -33,20 +50,36 @@ const StyledUserProfile = styled.div`
       height: fit-content;
       margin: 0;
       padding: 0;
-      display: grid;
+      /* display: grid;
       grid-template-columns: 40% 1fr;
-      justify-content: space-between;
+      justify-content: space-between; */
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: flex-start;
       gap: 1rem;
 
       .profile_sidebar {
         background: linear-gradient(to bottom, #00000065, #00000065, #00000065);
         border: 1px solid #a52a2a;
+        flex-basis: 100%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         width: calc(100% - 1rem);
         height: fit-content;
         padding: 1rem;
+        transition: 0.7s;
+
+        &.active_profile_sidebar {
+          flex-basis: 10%;
+          min-height: 500px;
+          background-color: #a52a2a;
+
+          * {
+            display: none;
+            transform: scale(0);
+          }
+        }
 
         .zoom_overlay {
           background: linear-gradient(
@@ -70,7 +103,6 @@ const StyledUserProfile = styled.div`
           width: 90px;
           border-radius: 5px;
           margin: 0 0 10px;
-          /* cursor: pointer; */
 
           &.active_profile_img {
             position: fixed;
@@ -108,13 +140,23 @@ const StyledUserProfile = styled.div`
               }
             }
           }
+
+          .delete_acount_btn {
+            background: none;
+            color: #a52a2a;
+
+            margin: 3rem 0 0;
+            padding: 0;
+            font-weight: 700;
+          }
         }
       }
 
       /* editing the form */
 
       .profile_update_form {
-        background: linear-gradient(to bottom, #00000065, #00000065, #00000065);
+        background-color: #00000065;
+        flex-basis: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -123,6 +165,18 @@ const StyledUserProfile = styled.div`
         margin: 0;
         padding: 2rem 10px;
         border: 1px solid #a52a2a;
+        transition: 0.7s;
+
+        &.active_profile_update_form {
+          flex-basis: 10%;
+          min-height: 500px;
+          background-color: #a52a2a;
+
+          * {
+            display: none;
+            transform: scale(0);
+          }
+        }
 
         h1 {
           margin: 0 0 1rem;
@@ -136,45 +190,35 @@ const StyledUserProfile = styled.div`
         }
 
         .upload_image_holder {
+          position: relative;
           background-color: #cce;
           background-position: center;
           background-size: cover;
-          position: relative;
+
+          align-self: flex-start;
           border: 1px solid #cce;
-          height: 90px;
-          width: 90px;
+          height: 60px;
+          width: 60px;
           overflow: hidden;
           border-radius: 50px;
-          cursor: pointer;
-
-          &:hover {
-            background-color: #cce;
-          }
+          margin: 10px 0;
 
           input {
             position: absolute;
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -70%) scale(5);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -80%) scale(3);
             opacity: 0;
             margin: 0;
             padding: 0;
-            z-index: 4;
+            z-index: 2;
+            height: 60px;
+            width: 50px;
             cursor: pointer;
-          }
-
-          img {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            transform: translate(50%);
-            width: 40px;
-            height: 40px;
-            z-index: 3;
           }
         }
 
-        button {
+        [type='submit'] {
           background-color: #a52a2a;
           color: #fff;
           width: 100%;
@@ -185,23 +229,20 @@ const StyledUserProfile = styled.div`
         }
       }
     }
-
-    .delete_acount_btn {
-      align-self: flex-end;
-      background-color: #a52a2a;
-
-      margin: 5rem 0 0;
-      color: #f5f5f5;
-      font-weight: 700;
-    }
   }
 
   @media only screen and (max-width: 600px) {
     .profile_update_container {
       .profile_detail_holder {
+        gap: 5px;
+
         .profile_sidebar {
           width: 100%;
           margin-bottom: 1.3rem;
+
+          &.active_profile_sidebar {
+            flex-basis: 1%;
+          }
 
           .profile_img {
             &.active_profile_img {
@@ -211,8 +252,11 @@ const StyledUserProfile = styled.div`
           }
         }
 
-        grid-template-columns: 1fr;
-        justify-content: space-evenly;
+        .profile_update_form {
+          &.active_profile_update_form {
+            flex-basis: 1%;
+          }
+        }
       }
     }
   }

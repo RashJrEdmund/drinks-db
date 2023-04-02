@@ -71,11 +71,8 @@ export default function App() {
   };
 
   const toggleBodyOverFlow = () => {
-    if (dialogueDetails.show || loadingAnime.show) {
-      document.body.style = 'overflow: hidden';
-    } else {
-      document.body.style = 'overflow: unset';
-    }
+    document.body.style.overflow =
+      document.body.style.overflow === 'hidden' ? 'unset' : 'hidden';
   };
 
   const bodyref = React.useRef();

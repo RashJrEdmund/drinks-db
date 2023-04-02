@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
@@ -22,6 +23,7 @@ export default function UserProfile() {
   const navigate = useNavigate();
   const profileRef = React.useRef();
   const [imagePath, setImagePath] = React.useState(null);
+  const [showSideEdit, setShowSideEdit] = React.useState(false);
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
@@ -38,22 +40,13 @@ export default function UserProfile() {
     const user = {
       id: JSON.parse(localStorage.getItem('currentUser')).id,
     };
-    if (firstName.value) {
-      user.first_name = firstName.value;
-      firstName.value = '';
-    }
-    if (lastName.value) {
-      user.last_name = lastName.value;
-      lastName.value = '';
-    }
-    if (phone.value) {
-      user.phone = phone.value;
-      phone.value = '';
-    }
-    if (imageUpload.value) {
-      user.image_url = imageUpload.value;
-      imageUpload.value = '';
-    }
+    if (firstName.value) user.first_name = firstName.value;
+
+    if (lastName.value) user.last_name = lastName.value;
+
+    if (phone.value) user.phone = phone.value;
+
+    if (imageUpload.value) user.image_url = imageUpload.value;
 
     await updateUserProfile(user)
       .then(async (res) => {
@@ -62,6 +55,14 @@ export default function UserProfile() {
         setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
         customAlert('Profile Updated');
         window.scrollTo(0, profileRef.current.scrollIntoView());
+
+        if (firstName.value) firstName.value = '';
+
+        if (lastName.value) lastName.value = '';
+
+        if (phone.value) phone.value = '';
+
+        if (imageUpload.value) imageUpload.value = '';
       })
       .catch((er) => {
         const { response, message } = er;
@@ -109,12 +110,32 @@ export default function UserProfile() {
   return (
     <StyledUserProfile>
       <div className="profile_update_container">
-        <button type="button" onClick={() => window.history.back()}>
-          &lt; Back
-        </button>
+        <div className="profile-btns">
+          <button
+            className="back-btn"
+            type="button"
+            onClick={() => window.history.back()}
+          >
+            &lt; Back
+          </button>
+
+          <button
+            className="edit_profile_btn"
+            type="button"
+            onClick={() => setShowSideEdit((prev) => !prev)}
+          >
+            {showSideEdit ? 'cancel' : 'edit'}
+          </button>
+        </div>
 
         <div ref={profileRef} className="profile_detail_holder">
-          <div className="profile_sidebar">
+          <div
+            className={
+              showSideEdit
+                ? 'active_profile_sidebar profile_sidebar'
+                : 'profile_sidebar'
+            }
+          >
             {zoomPhoto && (
               <div
                 className="zoom_overlay"
@@ -165,10 +186,27 @@ export default function UserProfile() {
               <li>
                 Joined Since: <span>{currentUser?.joinedSince}</span>
               </li>
+
+              {JSON.parse(localStorage.getItem('currentUser')) && (
+                <button
+                  type="button"
+                  className="delete_acount_btn"
+                  onClick={handleDeleteAccount}
+                >
+                  delete account
+                </button>
+              )}
             </ul>
           </div>
 
-          <form className="profile_update_form" onSubmit={handleProfileUpdate}>
+          <form
+            className={
+              !showSideEdit
+                ? 'active_profile_update_form profile_update_form'
+                : 'profile_update_form'
+            }
+            onSubmit={handleProfileUpdate}
+          >
             <h1>Update Profile</h1>
 
             <span
@@ -184,10 +222,10 @@ export default function UserProfile() {
                 accept="image/jpeg, image/png, image/jpg, image/svg"
                 id="upload_image"
                 name="imageUpload"
+                title="upload profile ?"
                 className="upload_image_field"
                 onChange={handleProfilePhoto}
               />
-              <img src={uploadIcon} alt="upload_icon" />
             </span>
 
             <input type="text" placeholder="first Name" name="firstName" />
@@ -203,16 +241,6 @@ export default function UserProfile() {
             <button type="submit">Update Profile</button>
           </form>
         </div>
-
-        {JSON.parse(localStorage.getItem('currentUser')) && (
-          <button
-            type="button"
-            className="delete_acount_btn"
-            onClick={handleDeleteAccount}
-          >
-            delete account
-          </button>
-        )}
       </div>
     </StyledUserProfile>
   );
