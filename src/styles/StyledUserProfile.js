@@ -48,12 +48,41 @@ const StyledUserProfile = styled.div`
         height: fit-content;
         padding: 1rem;
 
+        .zoom_overlay {
+          background: linear-gradient(
+            to bottom,
+            #00000065,
+            #00000065,
+            #00000065
+          );
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+        }
+
         .profile_img {
           background-color: #cce;
+          background-position: center;
+          background-size: cover;
           height: 90px;
           width: 90px;
           border-radius: 5px;
           margin: 0 0 10px;
+          /* cursor: pointer; */
+
+          &.active_profile_img {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            height: 500px;
+            width: 500px;
+            max-width: 97vw;
+            z-index: 6;
+          }
         }
 
         ul {
@@ -173,6 +202,13 @@ const StyledUserProfile = styled.div`
         .profile_sidebar {
           width: 100%;
           margin-bottom: 1.3rem;
+
+          .profile_img {
+            &.active_profile_img {
+              height: 300px;
+              width: 300px;
+            }
+          }
         }
 
         grid-template-columns: 1fr;

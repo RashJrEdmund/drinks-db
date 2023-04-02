@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import StyledUserProfile from '../styles/StyledUserProfile';
@@ -8,6 +10,9 @@ import { getUserReady } from '../services/utils';
 
 export default function UserProfile() {
   const {
+    zoomPhoto,
+    setZoomPhoto,
+
     currentUser,
     setCurrentUser,
     setdialogueDetails,
@@ -16,16 +21,15 @@ export default function UserProfile() {
   } = React.useContext(MyContext);
   const navigate = useNavigate();
   const profileRef = React.useRef();
+  const [imagePath, setImagePath] = React.useState(null);
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
 
     setLoadingAnime({ message: 'updating...', show: true });
-    const { target } = e;
+    const { firstName, lastName, phone, imageUpload } = e.target;
 
-    if (
-      !(target.firstName.value || target.lastName.value || target.phone.value)
-    ) {
+    if (!(firstName.value || lastName.value || phone.value)) {
       setLoadingAnime({ message: '', show: false });
       customAlert('cannot update profile');
       return;
@@ -34,17 +38,21 @@ export default function UserProfile() {
     const user = {
       id: JSON.parse(localStorage.getItem('currentUser')).id,
     };
-    if (target.firstName.value) {
-      user.first_name = target.firstName.value;
-      target.firstName.value = '';
+    if (firstName.value) {
+      user.first_name = firstName.value;
+      firstName.value = '';
     }
-    if (target.lastName.value) {
-      user.last_name = target.lastName.value;
-      target.lastName.value = '';
+    if (lastName.value) {
+      user.last_name = lastName.value;
+      lastName.value = '';
     }
-    if (target.phone.value) {
-      user.phone = target.phone.value;
-      target.phone.value = '';
+    if (phone.value) {
+      user.phone = phone.value;
+      phone.value = '';
+    }
+    if (imageUpload.value) {
+      user.image_url = imageUpload.value;
+      imageUpload.value = '';
     }
 
     await updateUserProfile(user)
@@ -93,6 +101,11 @@ export default function UserProfile() {
     });
   };
 
+  const handleProfilePhoto = (e) => {
+    const path = URL.createObjectURL(e.target.files[0]);
+    setImagePath(path);
+  };
+
   return (
     <StyledUserProfile>
       <div className="profile_update_container">
@@ -102,7 +115,28 @@ export default function UserProfile() {
 
         <div ref={profileRef} className="profile_detail_holder">
           <div className="profile_sidebar">
-            <div className="profile_img" />
+            {zoomPhoto && (
+              <div
+                className="zoom_overlay"
+                onClick={() => setZoomPhoto(false)}
+              />
+            )}
+
+            <div
+              className={
+                zoomPhoto ? 'profile_img active_profile_img' : 'profile_img'
+              }
+              title={!zoomPhoto && 'view profile'}
+              style={{
+                backgroundImage: `url(${
+                  imagePath || currentUser?.image_url || uploadIcon
+                })`,
+
+                cursor: !zoomPhoto && 'pointer',
+              }}
+              onClick={() => setZoomPhoto((prev) => !prev)}
+            />
+
             <ul>
               <li className="status">
                 My status:{' '}
@@ -139,12 +173,19 @@ export default function UserProfile() {
 
             <span
               className="upload_image_holder"
-              style={{ backgroundImage: `url(${uploadIcon})` }}
+              style={{
+                backgroundImage: `url(${
+                  imagePath || currentUser?.image_url || uploadIcon
+                })`,
+              }}
             >
               <input
                 type="file"
+                accept="image/jpeg, image/png, image/jpg, image/svg"
                 id="upload_image"
+                name="imageUpload"
                 className="upload_image_field"
+                onChange={handleProfilePhoto}
               />
               <img src={uploadIcon} alt="upload_icon" />
             </span>

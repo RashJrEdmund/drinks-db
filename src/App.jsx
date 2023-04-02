@@ -30,6 +30,8 @@ export default function App() {
   );
   const [filterData, setFilterData] = React.useState([]);
 
+  const [zoomPhoto, setZoomPhoto] = React.useState(false);
+
   const [loadingAnime, setLoadingAnime] = React.useState({
     show: false,
     message: '',
@@ -86,7 +88,7 @@ export default function App() {
 
   React.useEffect(() => {
     toggleBodyOverFlow();
-  }, [dialogueDetails.show, loadingAnime.show]);
+  }, [dialogueDetails.show, loadingAnime.show, zoomPhoto]);
 
   // console.log('this fetchedData', fetchedData);
 
@@ -110,6 +112,9 @@ export default function App() {
 
           filterData,
           setFilterData,
+
+          zoomPhoto,
+          setZoomPhoto,
 
           bodyref,
         }}

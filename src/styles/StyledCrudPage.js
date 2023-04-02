@@ -67,16 +67,14 @@ const StyleCrudPage = styled.div`
   }
 
   .to_top_btn {
-    /* display: none; */
+    display: none;
+    background-color: #a52a2a;
     position: fixed;
     right: 0;
     bottom: 0;
     margin: 1rem;
-
-    background-color: #a52a2a;
     padding: 7px 10px;
     box-shadow: 0 0 10px #222;
-
     width: 20px;
     height: 40px;
 

@@ -67,7 +67,7 @@
       "glasses": "glass 1",
       "ingredient_id": 1,
       "is_alcoholic": 1,
-      "userid": "2"
+      "userId": "2"
     },
     {
       "id": 2,
@@ -94,7 +94,7 @@
       "glasses": "glass 1",
       "ingredient_id": 1,
       "is_alcoholic": 1,
-      "userid": "2"
+      "userId": "2"
     },
     {
       "id": 3,
@@ -121,7 +121,7 @@
       "glasses": "glass 1",
       "ingredient_id": 1,
       "is_alcoholic": 1,
-      "userid": "2"
+      "userId": "2"
     },
     {
       "id": 4,
@@ -148,7 +148,7 @@
       "glasses": "glass 1",
       "ingredient_id": 5,
       "is_alcoholic": 1,
-      "userid": "2"
+      "userId": "2"
     },
     {
       "id": 5,
@@ -175,7 +175,7 @@
       "glasses": "glass 3",
       "ingredient_id": 1,
       "is_alcoholic": 1,
-      "userid": "2"
+      "userId": "2"
     },
     {
       "id": 6,
@@ -202,7 +202,7 @@
       "glasses": "glass 3",
       "ingredient_id": 1,
       "is_alcoholic": 1,
-      "userid": "2"
+      "userId": "2"
     },
     {
       "id": 7,
@@ -229,7 +229,7 @@
       "glasses": "glass 3",
       "ingredient_id": 1,
       "is_alcoholic": 1,
-      "userid": "2"
+      "userId": "2"
     },
     {
       "id": 8,
@@ -256,7 +256,7 @@
       "glasses": "glass 4",
       "ingredient_id": 1,
       "is_alcoholic": 1,
-      "userid": "2"
+      "userId": "2"
     },
     {
       "id": 9,
@@ -283,7 +283,7 @@
       "glasses": "glass 3",
       "ingredient_id": 1,
       "is_alcoholic": 1,
-      "userid": "2"
+      "userId": "2"
     },
     {
       "id": 10,
@@ -310,7 +310,7 @@
       "glasses": "glass 2",
       "ingredient_id": 1,
       "is_alcoholic": 1,
-      "userid": "2"
+      "userId": "2"
     },
     {
       "id": 11,
@@ -337,7 +337,7 @@
       "glasses": "glass 5",
       "ingredient_id": 1,
       "is_alcoholic": 1,
-      "userid": "2"
+      "userId": "2"
     },
     {
       "id": 12,
@@ -364,7 +364,7 @@
       "glasses": "glass 5",
       "ingredient_id": 1,
       "is_alcoholic": 1,
-      "userid": "2"
+      "userId": "2"
     },
     {
       "id": 13,
@@ -391,7 +391,7 @@
       "glasses": "glass 4",
       "ingredient_id": 1,
       "is_alcoholic": 1,
-      "userid": "2"
+      "userId": "2"
     },
     {
       "id": 14,
@@ -418,7 +418,7 @@
       "glasses": "glass 5",
       "ingredient_id": 1,
       "is_alcoholic": 1,
-      "userid": "2"
+      "userId": "2"
     }
   ],
 

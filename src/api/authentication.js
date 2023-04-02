@@ -16,12 +16,20 @@ const deleteUser = async (user) => {
   return httpClient.delete(`users/${user?.id}`);
 };
 
+/* Drink routes */
+
 const postDrink = async (drink) => {
   return httpClient.post('drinks', drink);
 };
 
 const deleteDrink = async (id) => {
   return httpClient.delete(`drinks/${id}`);
+};
+
+/* Category routes */
+
+const deleteCategory = (id) => {
+  return httpClient.delete(`categories/${id}`);
 };
 
 export {
@@ -31,4 +39,5 @@ export {
   deleteUser,
   deleteDrink,
   postDrink,
+  deleteCategory,
 };

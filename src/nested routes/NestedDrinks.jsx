@@ -29,9 +29,9 @@ const StlydeNestedDrinks = styled.div`
     .drink {
       border: 1px solid #a52a2a;
       padding: 10px;
-      height: 250px;
+      height: 300px;
       width: 100%;
-      border-radius: 10px;
+      /* border-radius: 10px; */
       cursor: default;
 
       * {
@@ -46,7 +46,9 @@ const StlydeNestedDrinks = styled.div`
         margin: 2rem auto 0;
 
         button {
-          border: 1px solid #a52a2a;
+          background-color: #a52a2a;
+          color: #f5f5f5;
+          font-weight: 600;
           cursor: pointer;
         }
       }
@@ -100,8 +102,11 @@ export default function NestedDrinks() {
     const { log, clear } = console;
     const holder = edit;
     const [drinkToEdit] = Drinks.filter((drink) => drink.id === id);
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
     holder.drink.show = true;
     holder.drink.chosenOne = drinkToEdit;
+    holder.drink.chosenOne.userId = currentUser.id;
 
     setEdit(() => ({ ...holder }));
 
@@ -147,7 +152,7 @@ export default function NestedDrinks() {
             <h3>
               {drink.name} {drink.id}
             </h3>
-            <p>{drink.description}</p>
+            {/* <p>{drink.description}</p> */}
 
             <div className="action-btns">
               <button

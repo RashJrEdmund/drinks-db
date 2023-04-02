@@ -236,7 +236,7 @@ export default function Navbar() {
                             <input
                               type="radio"
                               id={['Alcoholic', val]}
-                              name={`${val} val`}
+                              name="alcoholic_options" // it show's that all the radio types should have the same name before you'll be able to alternate between them
                             />
                             {capitalizedWord(val, true)}
                           </label>

@@ -231,7 +231,9 @@ export default function DrinksForm(props) {
 
   const { customAlert } = React.useContext(MyContext);
   const [drinkData, setDrinkData] = React.useState(drink?.chosenOne);
+
   const [imagePath, setImagePath] = React.useState();
+  const formRef = React.useRef();
 
   const closeForm = () => {
     setEdit((prev) => {
@@ -252,26 +254,43 @@ export default function DrinksForm(props) {
 
   const handleUploadImage = async (e) => {
     const path = URL.createObjectURL(e.target.files[0]);
-    setImagePath(path);
+
+    setDrinkData((prev) => ({ ...prev, image_url: path }));
+    setImagePath(path); // this is just to give the ui's background and hide the clear image btn
+
     e.target.value = '';
-    console.log('thies imagepath', imagePath);
   };
 
-  const updateDrinkInfo = (e) => {
-    e.preventDefault();
-    const { recipe, drinkName, description } = e.target; // cant believe this worked
+  const handleSaveDrink = async () => {
+    if (!(drinkData.recipe && drinkData.name)) {
+      customAlert("you have'nt created a drink yet");
+      return;
+    }
 
-    const imgPathHolder = imagePath;
-    console.log('this image \n', imgPathHolder);
+    customAlert('createding drink...');
+
+    // await postDrink(drinkData);
+    console.log('handle post Drink \n', drinkData);
+  };
+
+  const handleSubmit = (e, saveDrink = false) => {
+    if (!saveDrink) e.preventDefault();
+
+    const { recipe, drinkName, description } = saveDrink ? e : e.target; // cant believe this worked
 
     if (!drinkData.recipe) {
       setDrinkData((prev) => ({
+        ...prev,
         name: drinkName.value || '',
         recipe: [recipe.value] || [],
         description: description.value,
-        image_url: imgPathHolder || prev.image_url || '',
       }));
       e.target.recipe.value = '';
+
+      if (saveDrink) {
+        handleSaveDrink();
+        e.recipe.value = ''; // note that e could either be from formRef.current ('which cannot be targeted by doing e.target....') || the form ('which is targeted by e.target....')
+      }
 
       return;
     }
@@ -285,21 +304,15 @@ export default function DrinksForm(props) {
       name: prev.name === drinkName.value ? prev.name : drinkName.value,
       recipe: newRecipeList,
       description: description.value,
-      image_url: imgPathHolder || prev.image_url,
     }));
 
-    e.target.recipe.value = ''; // value has refused to be assigned to directly, so i going back to using this longer one
-  };
-
-  const handleSaveDrink = async () => {
-    if (!(drinkData.recipe && drinkData.name)) {
-      customAlert("you have'nt created a drink yet");
+    if (saveDrink) {
+      handleSaveDrink();
+      e.recipe.value = ''; // note that e could either be from formRef.current ('which cannot be targeted by doing e.target....') || the form ('which is targeted by e.target....')
       return;
     }
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-    // await postDrink({ ...drinkData, userId: currentUser.id });
-    console.log('handle post Drink', currentUser.id, '\n', drinkData);
+    e.target.recipe.value = ''; // value has refused to be assigned to directly, so i going back to using this longer one
   };
 
   return (
@@ -316,7 +329,7 @@ export default function DrinksForm(props) {
           cancel
         </button>
 
-        <form onSubmit={updateDrinkInfo}>
+        <form ref={formRef} onSubmit={handleSubmit}>
           <h3>{drinkData?.name ? 'Edit Drink' : 'Create Drink'}</h3>
           <input
             className="drink_name"
@@ -389,7 +402,7 @@ export default function DrinksForm(props) {
           <button
             type="button"
             className="submit-drink-btn"
-            onClick={handleSaveDrink}
+            onClick={() => handleSubmit(formRef.current, true)} // the second parameter means, handleSubmit is allowed to call the saveDrink() function
           >
             save Drink
           </button>
