@@ -1,3 +1,5 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -31,7 +33,9 @@ export default function UserProfile() {
     setLoadingAnime({ message: 'updating...', show: true });
     const { firstName, lastName, phone, imageUpload } = e.target;
 
-    if (!(firstName.value || lastName.value || phone.value)) {
+    if (
+      !(firstName.value || lastName.value || phone.value || imageUpload.value)
+    ) {
       setLoadingAnime({ message: '', show: false });
       customAlert('cannot update profile');
       return;
@@ -46,7 +50,7 @@ export default function UserProfile() {
 
     if (phone.value) user.phone = phone.value;
 
-    if (imageUpload.value) user.image_url = imageUpload.value;
+    if (imageUpload.value) user.image_url = imageUpload.files[0];
 
     await updateUserProfile(user)
       .then(async (res) => {
@@ -63,6 +67,8 @@ export default function UserProfile() {
         if (phone.value) phone.value = '';
 
         if (imageUpload.value) imageUpload.value = '';
+
+        setShowSideEdit(false);
       })
       .catch((er) => {
         const { response, message } = er;
@@ -116,7 +122,7 @@ export default function UserProfile() {
             type="button"
             onClick={() => window.history.back()}
           >
-            &lt; Back
+            Back
           </button>
 
           <button
@@ -124,7 +130,7 @@ export default function UserProfile() {
             type="button"
             onClick={() => setShowSideEdit((prev) => !prev)}
           >
-            {showSideEdit ? 'cancel' : 'edit'}
+            {showSideEdit ? 'cancel' : 'modify'}
           </button>
         </div>
 
@@ -135,6 +141,12 @@ export default function UserProfile() {
                 ? 'active_profile_sidebar profile_sidebar'
                 : 'profile_sidebar'
             }
+            style={{
+              cursor: showSideEdit && 'pointer',
+            }}
+            onClick={() => {
+              if (showSideEdit) setShowSideEdit(false);
+            }}
           >
             {zoomPhoto && (
               <div
@@ -147,7 +159,7 @@ export default function UserProfile() {
               className={
                 zoomPhoto ? 'profile_img active_profile_img' : 'profile_img'
               }
-              title={!zoomPhoto && 'view profile'}
+              title={!zoomPhoto ? 'view profile' : ''}
               style={{
                 backgroundImage: `url(${
                   imagePath || currentUser?.image_url || uploadIcon
@@ -180,7 +192,7 @@ export default function UserProfile() {
                 phone: <span>{currentUser?.phone}</span>
               </li>
               <li>
-                apikey: <br />
+                apikey: {window.screen.availHeight < 600 && <br />}
                 <span>{currentUser?.apikey}</span>
               </li>
               <li>
@@ -206,6 +218,12 @@ export default function UserProfile() {
                 : 'profile_update_form'
             }
             onSubmit={handleProfileUpdate}
+            onClick={() => {
+              if (!showSideEdit) setShowSideEdit(true);
+            }}
+            style={{
+              cursor: !showSideEdit && 'pointer',
+            }}
           >
             <h1>Update Profile</h1>
 
@@ -228,15 +246,27 @@ export default function UserProfile() {
               />
             </span>
 
-            <input type="text" placeholder="first Name" name="firstName" />
-            <input type="text" placeholder="Last Name" name="lastName" />
+            <input
+              type="text"
+              placeholder={`first Name: ${currentUser?.first_name}`}
+              name="firstName"
+            />
+            <input
+              type="text"
+              placeholder={`last Name: ${currentUser?.last_name}`}
+              name="lastName"
+            />
             <input
               type="email"
               value={currentUser?.email}
-              name="emailAddress"
+              placeholder={`emai: ${currentUser?.email}`}
               disabled
             />
-            <input type="tel" placeholder="Phone Number" name="phone" />
+            <input
+              type="tel"
+              placeholder={`Phone: ${currentUser?.phone}`}
+              name="phone"
+            />
 
             <button type="submit">Update Profile</button>
           </form>

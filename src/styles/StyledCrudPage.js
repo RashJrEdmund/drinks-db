@@ -10,24 +10,35 @@ const StyleCrudPage = styled.div`
   align-items: center;
   gap: 2rem;
 
-  .back-btn {
+  .admin_nav {
     position: fixed;
     top: 0;
     left: 0;
     margin: 1rem;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    transition: 400ms;
 
-    background-color: #a52a2a;
-    font-weight: 600;
-    color: #f5f5f5;
-    padding: 7px 10px;
-    box-shadow: 0 0 10px #222;
+    button {
+      background-color: #a52a2a;
+      font-weight: 600;
+      color: #f5f5f5;
+      padding: 7px 10px;
+      box-shadow: 0 0 10px #222;
+      margin: 0;
+    }
   }
 
   .header {
     font-weight: 600;
     border-bottom: 1px solid grey;
     padding-bottom: 5px;
-    margin: 2rem 0 0;
+    margin: 4rem 0 0;
   }
 
   .card-options {
@@ -99,11 +110,16 @@ const StyleCrudPage = styled.div`
     }
   }
 
-  /* @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 768px) {
+    .admin_nav {
+      &.active_admin_nav {
+        transform: translateY(-170%);
+      }
+    }
     .card-options {
       overflow: auto;
     }
-  } */
+  }
 `;
 
 export default StyleCrudPage;

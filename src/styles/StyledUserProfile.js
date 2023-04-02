@@ -31,16 +31,13 @@ const StyledUserProfile = styled.div`
       height: fit-content;
       margin: 0 0 2rem;
 
-      .back-btn {
-        background-color: #cce;
-        padding: 6px 10px;
-        font-size: 16px;
-        margin: 0;
-      }
-
+      .back-btn,
       .edit_profile_btn {
+        background-color: #a52a2a;
+        color: #f5f5f5;
         padding: 6px 10px;
         font-size: 16px;
+        font-weight: 600;
         margin: 0;
       }
     }
@@ -147,6 +144,7 @@ const StyledUserProfile = styled.div`
 
             margin: 3rem 0 0;
             padding: 0;
+            font-size: 15px;
             font-weight: 700;
           }
         }

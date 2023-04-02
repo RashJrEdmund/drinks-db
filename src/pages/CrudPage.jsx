@@ -11,6 +11,7 @@ export default function CrudPage() {
   const navigate = useNavigate();
   const topBtnRef = React.useRef();
   const cardOptionsRef = React.useRef();
+  const adminNavRef = React.useRef();
 
   const [edit, setEdit] = React.useState({
     drink: {
@@ -33,11 +34,21 @@ export default function CrudPage() {
 
   React.useEffect(() => {
     let YscrollHolder = 0;
-    window.addEventListener('scroll', () => {
+    const checkAminNav = () => {
+      if (window.scrollY > YscrollHolder) {
+        adminNavRef.current?.classList?.add('active_admin_nav');
+      } else adminNavRef.current?.classList?.remove('active_admin_nav');
+    };
+
+    const checkToTopBtn = () => {
       if (window.scrollY >= 135 && window.scrollY <= YscrollHolder) {
         topBtnRef.current?.classList.add('active_top_btn');
       } else topBtnRef.current?.classList.remove('active_top_btn');
+    };
 
+    window.addEventListener('scroll', () => {
+      checkAminNav();
+      checkToTopBtn();
       YscrollHolder = window.scrollY;
     });
   }, []);
@@ -45,13 +56,29 @@ export default function CrudPage() {
   return (
     <CrudContext.Provider value={{ edit, setEdit }}>
       <StyleCrudPage>
-        <button
-          className="back-btn"
-          type="button"
-          onClick={() => navigate('/')}
-        >
-          home
-        </button>
+        <div ref={adminNavRef} className="admin_nav">
+          <button
+            className="back-btn"
+            type="button"
+            onClick={() => navigate('/')}
+          >
+            Home
+          </button>
+          <button
+            className="profile-btn"
+            type="button"
+            onClick={() => navigate('/profile')}
+          >
+            Profile
+          </button>
+          <button
+            className="logout-btn"
+            type="button"
+            onClick={() => navigate('/cruding')}
+          >
+            Logout
+          </button>
+        </div>
 
         <h1 className="header">start Editing</h1>
 
