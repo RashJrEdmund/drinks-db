@@ -12,6 +12,10 @@ const updateUserProfile = async (user) => {
   return httpClient.patch(`users/${user?.id}`, user);
 };
 
+const getCurrentUser = async () => {
+  return httpClient.get('current-user').then(({ data }) => data);
+};
+
 const deleteUser = async (user) => {
   return httpClient.delete(`users/${user?.id}`);
 };
@@ -36,6 +40,7 @@ export {
   register,
   loginWithEmailPassword,
   updateUserProfile,
+  getCurrentUser,
   deleteUser,
   deleteDrink,
   postDrink,

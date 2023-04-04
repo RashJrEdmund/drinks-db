@@ -1,3 +1,4 @@
+/* eslint-disable */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/prop-types */
@@ -10,6 +11,7 @@ import { MyContext } from '../context/MyContext';
 import { deleteUser, updateUserProfile } from '../api/authentication';
 import uploadIcon from '../images/darkImageIcon.png';
 import { getUserReady } from '../services/utils';
+import FormData from 'form-data';
 
 export default function UserProfile() {
   const {
@@ -30,8 +32,15 @@ export default function UserProfile() {
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
 
-    setLoadingAnime({ message: 'updating...', show: true });
+    // setLoadingAnime({ message: 'updating...', show: true });
     const { firstName, lastName, phone, imageUpload } = e.target;
+    const formData = new FormData();
+
+    if (imageUpload.value) {
+      formData.append('image', imageUpload.files[0]);
+      console.clear();
+      console.log('this image', imageUpload.files[0], formData);
+    }
 
     if (
       !(firstName.value || lastName.value || phone.value || imageUpload.value)
@@ -50,31 +59,31 @@ export default function UserProfile() {
 
     if (phone.value) user.phone = phone.value;
 
-    if (imageUpload.value) user.image_url = imageUpload.files[0];
+    // if (imageUpload.value) user.image_url = imageUpload.files[0];
 
-    await updateUserProfile(user)
-      .then(async (res) => {
-        const { data } = res;
-        await getUserReady(data); // stores the user in local storage with the joined since attribute
-        setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
-        customAlert('Profile Updated');
-        window.scrollTo(0, profileRef.current.scrollIntoView());
+    // await updateUserProfile(user)
+    //   .then(async (res) => {
+    //     const { data } = res;
+    //     await getUserReady(data); // stores the user in local storage with the joined since attribute
+    //     setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
+    //     customAlert('Profile Updated');
+    //     window.scrollTo(0, profileRef.current.scrollIntoView());
 
-        if (firstName.value) firstName.value = '';
+    //     if (firstName.value) firstName.value = '';
 
-        if (lastName.value) lastName.value = '';
+    //     if (lastName.value) lastName.value = '';
 
-        if (phone.value) phone.value = '';
+    //     if (phone.value) phone.value = '';
 
-        if (imageUpload.value) imageUpload.value = '';
+    //     if (imageUpload.value) imageUpload.value = '';
 
-        setShowSideEdit(false);
-      })
-      .catch((er) => {
-        const { response, message } = er;
-        customAlert(response?.data || message);
-      })
-      .finally(() => setLoadingAnime({ message: '', show: false }));
+    //     setShowSideEdit(false);
+    //   })
+    //   .catch((er) => {
+    //     const { response, message } = er;
+    //     customAlert(response?.data || message);
+    //   })
+    //   .finally(() => setLoadingAnime({ message: '', show: false }));
   };
 
   const deleteAccount = async () => {

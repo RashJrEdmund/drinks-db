@@ -6,6 +6,7 @@ import { readToken } from '../services/utils';
 
 const httpClient = axios.create({
   baseURL: API_BASE_URL,
+  'x-api-key': process.env.API_KEY,
 });
 
 httpClient.interceptors.request.use(

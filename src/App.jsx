@@ -25,9 +25,7 @@ import NestedIngredients from './nested routes/NestedIngredients';
 
 export default function App() {
   const [fetchedData, setFetchedData] = React.useState({});
-  const [currentUser, setCurrentUser] = React.useState(
-    JSON.parse(localStorage.getItem('currentUser'))
-  );
+  const [currentUser, setCurrentUser] = React.useState(null);
   const [filterData, setFilterData] = React.useState([]);
 
   const [zoomPhoto, setZoomPhoto] = React.useState(false);
@@ -78,6 +76,8 @@ export default function App() {
   const bodyref = React.useRef();
 
   React.useEffect(() => {
+    setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
+
     FetchData()
       .then((res) => setFetchedData(res))
       .catch((err) => console.log('Erro!', err));
