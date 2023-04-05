@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 
-const StyledBody = styled.div`
+const StyledDrinksSection = styled.div`
   background-color: #331012;
   /* background-color: #f5f5f5; */
   margin: 0;
-  padding: 3rem 0;
+  padding: 0;
   width: 100%;
   height: fit-content;
   min-height: 100vh;
@@ -13,7 +13,7 @@ const StyledBody = styled.div`
 
   .drinks-container,
   .drinks-container_2 {
-    margin: 3rem auto;
+    margin: 0 auto 3rem;
     width: 95vw;
     max-width: 1224px;
     height: fit-content;
@@ -151,4 +151,4 @@ const StyledBody = styled.div`
   }
 `;
 
-export default StyledBody;
+export default StyledDrinksSection;

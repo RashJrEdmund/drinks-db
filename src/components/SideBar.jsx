@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
+import StyledSideBar from '../styles/StyledSideBar';
 import { MyContext } from '../context/MyContext';
 
 export default function SideBar() {
@@ -143,7 +144,7 @@ export default function SideBar() {
   };
 
   return (
-    <div className="StyledSideBar">
+    <StyledSideBar>
       {showMenu.side && (
         <div
           className="menu-list-overlay"
@@ -205,6 +206,6 @@ export default function SideBar() {
           ))}
         </form>
       </ul>
-    </div>
+    </StyledSideBar>
   );
 }

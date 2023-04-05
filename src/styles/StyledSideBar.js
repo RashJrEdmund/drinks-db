@@ -14,14 +14,15 @@ const StyledSideBar = styled.div`
 
   .menu-list {
     background: linear-gradient(to bottom, #00000065, #000000be, #000);
-    position: absolute;
+    /* position: absolute; */
     top: 100%;
     left: 0;
-    transform: translate(-120%);
+    /* transform: translate(-120%); */
     display: flex;
     width: 60vw;
     max-width: 500px;
-    height: calc(100vh - 90px);
+    min-height: 100vh;
+    height: fit-content;
     flex-direction: column;
     align-items: center;
     list-style: none;
@@ -114,19 +115,22 @@ const StyledSideBar = styled.div`
 
   @media only screen and (max-width: 768px) {
     .navBar-container {
-      .left_group {
-        .side_menu_btn {
-          font-size: 0.9rem;
-          letter-spacing: 2px;
-          padding: 8px 10px;
-        }
-      }
-
-      .profile_section {
-        margin: 0;
-      }
-
       .menu-list {
+        background: linear-gradient(to bottom, #00000065, #000000be, #000);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        transform: translate(-120%);
+        display: flex;
+        width: 60vw;
+        max-width: 500px;
+        overflow: auto;
+        z-index: 4;
+
+        &.active-menu-list {
+          transform: translate(0);
+        }
+
         .result_count {
           display: flex;
           flex-direction: column;
@@ -138,24 +142,6 @@ const StyledSideBar = styled.div`
           width: calc(100% - 1rem);
           flex-direction: column;
           align-items: flex-start;
-        }
-      }
-    }
-  }
-
-  @media only screen and (max-width: 600px) {
-    .navBar-container {
-      .left_group {
-        margin: 0;
-
-        .user_status {
-          margin: 0 0 0 1rem;
-        }
-      }
-
-      .profile_section {
-        span {
-          /* display: none; */
         }
       }
     }
