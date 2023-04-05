@@ -70,7 +70,7 @@ const StyledRegisterLoginForm = styled.div`
         color: #000;
         width: fit-content;
         height: calc(100% - 2px);
-        padding: 0 0 0 3px;
+        padding: 0 10px;
         margin: 0;
       }
     }

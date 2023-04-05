@@ -4,6 +4,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaEyeSlash, FaEye } from 'react-icons/fa';
 import { MyContext } from '../context/MyContext';
 import StyledRegisterLoginForm from '../styles/StyledrRegisterLoginform';
 
@@ -83,7 +84,7 @@ function Login() {
               inputRef.current.focus();
             }}
           >
-            {inputType === 'password' ? 'show' : 'hide'}
+            {inputType === 'password' ? <FaEye /> : <FaEyeSlash />}
           </button>
         </span>
 

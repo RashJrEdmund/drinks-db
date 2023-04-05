@@ -4,9 +4,10 @@
 import React from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import { MyContext, CrudContext } from '../context/MyContext';
+import AdminGaurd from '../HOFs/AdminGaurd';
 import StyleCrudPage from '../styles/StyledCrudPage';
 
-export default function CrudPage() {
+function CrudPage() {
   const { customAlert } = React.useContext(MyContext);
   const navigate = useNavigate();
   const topBtnRef = React.useRef();
@@ -119,3 +120,5 @@ export default function CrudPage() {
     </CrudContext.Provider>
   );
 }
+
+export default AdminGaurd(CrudPage);

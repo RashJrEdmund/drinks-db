@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaEyeSlash, FaEye } from 'react-icons/fa';
 import { MyContext } from '../context/MyContext';
 import { register } from '../api/authentication';
 import StyledRegisterLoginForm from '../styles/StyledrRegisterLoginform';
@@ -73,7 +74,7 @@ function Register() {
               }))
             }
           >
-            {inputType.one === 'password' ? 'show' : 'hide'}
+            {inputType.one === 'password' ? <FaEye /> : <FaEyeSlash />}
           </button>
         </span>
 
@@ -93,7 +94,7 @@ function Register() {
               }))
             }
           >
-            {inputType.two === 'password' ? 'show' : 'hide'}
+            {inputType.two === 'password' ? <FaEye /> : <FaEyeSlash />}
           </button>
         </span>
 

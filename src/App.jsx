@@ -134,13 +134,11 @@ export default function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/logout" element={<LogoutPage />} />
 
-            {currentUser?.is_admin && (
-              <Route path="/cruding" element={<CrudPage />}>
-                <Route path="drinks" element={<NestedDrinks />} />
-                <Route path="categories" element={<NestedCategories />} />
-                <Route path="ingredients" element={<NestedIngredients />} />
-              </Route>
-            )}
+            <Route path="/cruding" element={<CrudPage />}>
+              <Route path="drinks" element={<NestedDrinks />} />
+              <Route path="categories" element={<NestedCategories />} />
+              <Route path="ingredients" element={<NestedIngredients />} />
+            </Route>
 
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/apipage" element={<ApiPage />} />
