@@ -13,7 +13,22 @@ const updateUserProfile = async (user) => {
 };
 
 const getCurrentUser = async () => {
-  return httpClient.get('current-user').then(({ data }) => data);
+  return httpClient.get('current-user').then(({ data }) => {
+    let user = data;
+
+    const { createdAt } = user;
+    const day = createdAt.split('-').pop().split('T').shift();
+    const month = createdAt.split('-')[1];
+    const year = createdAt.split('-')[0];
+
+    const joinedSince = `${day}-${month}-${year}`;
+
+    user = { ...user, joinedSince };
+
+    delete user.createdAt;
+
+    return user;
+  });
 };
 
 const deleteUser = async (user) => {

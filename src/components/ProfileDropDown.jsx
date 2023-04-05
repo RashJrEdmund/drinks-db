@@ -51,14 +51,12 @@ const StyledDropDown = styled.div`
 `;
 // localStorage.clear();
 
-function ProfileAndLoginBtn({ fxn }) {
-  const { currentUser } = React.useContext(MyContext);
+function ProfileAndLoginBtn({ fxn, currentUser }) {
   return <p onClick={fxn}>{currentUser ? 'Profile' : 'Login'}</p>;
 }
 
-export default function ProfileDropDown() {
-  const { currentUser, setdialogueDetails, customAlert } =
-    React.useContext(MyContext);
+export default function ProfileDropDown({ currentUser }) {
+  const { setdialogueDetails, customAlert } = React.useContext(MyContext);
   const navigate = useNavigate();
   // localStorage.removeItem('currentUser');
 
@@ -98,7 +96,7 @@ export default function ProfileDropDown() {
   ) : (
     <StyledDropDown className="profile_dropdown" id="profile_dropdown">
       <p onClick={() => window.scrollTo(0, 0)}>Home</p>
-      <ProfileAndLoginBtn fxn={checkUserLoggedIn} />
+      <ProfileAndLoginBtn fxn={checkUserLoggedIn} currentUser={currentUser} />
 
       {currentUser && <p onClick={handleLogOut}>Logout</p>}
     </StyledDropDown>

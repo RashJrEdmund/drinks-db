@@ -25,7 +25,6 @@ import NestedIngredients from './nested routes/NestedIngredients';
 
 export default function App() {
   const [fetchedData, setFetchedData] = React.useState({});
-  const [currentUser, setCurrentUser] = React.useState(null);
   const [filterData, setFilterData] = React.useState([]);
 
   const [zoomPhoto, setZoomPhoto] = React.useState(false);
@@ -56,7 +55,7 @@ export default function App() {
   //   fxntoCall() {
   //     localStorage.removeItem('currentUser');
   //     navigate('/logout');
-  //     setdialogueDetails((previous) => ({ ...previous, show: false }));
+  //     setdialogueDetails((currentUserprevious) => ({ ...previous, show: false }));
   //   },
   // }));
 
@@ -76,8 +75,6 @@ export default function App() {
   const bodyref = React.useRef();
 
   React.useEffect(() => {
-    setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
-
     FetchData()
       .then((res) => setFetchedData(res))
       .catch((err) => console.log('Erro!', err));
@@ -101,9 +98,6 @@ export default function App() {
           setLoadingAnime,
 
           fetchedData,
-
-          currentUser,
-          setCurrentUser,
 
           Simulation,
 
@@ -129,7 +123,7 @@ export default function App() {
 
         <BrowserRouter>
           <Routes>
-            <Route index element={<Main name="peter" />} />
+            <Route index element={<Main />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/logout" element={<LogoutPage />} />

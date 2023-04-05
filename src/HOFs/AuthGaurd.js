@@ -13,15 +13,14 @@ import { MyContext } from "../context/MyContext";
 const AuthGaurd = (Component) => {
   return function Gaurd(props) {
     const { customAlert, setLoadingAnime } = useContext(MyContext)
-    const [currentUser, setCurrentUser] = useState();
+    const [loadedUser, setLoadedUser] = useState();
 
     useEffect(() => {
       setLoadingAnime({message: 'getting user...', show: true})
       getCurrentUser()
         .then((res)=> {
           console.log('this res', res)
-          customAlert("logged in");
-          setCurrentUser(res);
+          setLoadedUser(res);
         })
         .catch((e) => {
           console.log('this the error', e);
@@ -31,7 +30,7 @@ const AuthGaurd = (Component) => {
         setLoadingAnime({message: '', show: false}));
     }, []);
 
-    return <Component {...props} currentUser={currentUser} />;
+    return <Component {...props} currentUser={loadedUser} />;
   };
 };
 

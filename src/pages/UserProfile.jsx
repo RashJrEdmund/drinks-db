@@ -8,18 +8,16 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import StyledUserProfile from '../styles/StyledUserProfile';
 import { MyContext } from '../context/MyContext';
-import { deleteUser, updateUserProfile } from '../api/authentication';
+import { deleteUser } from '../api/authentication';
 import uploadIcon from '../images/darkImageIcon.png';
-import { getUserReady } from '../services/utils';
 import FormData from 'form-data';
+import ProfileGaurd from '../HOFs/ProfileGaurd';
 
-export default function UserProfile() {
+function UserProfile({ currentUser }) {
   const {
     zoomPhoto,
     setZoomPhoto,
 
-    currentUser,
-    setCurrentUser,
     setdialogueDetails,
     setLoadingAnime,
     customAlert,
@@ -49,9 +47,10 @@ export default function UserProfile() {
       customAlert('cannot update profile');
       return;
     }
+    daafdaf;
 
     const user = {
-      id: JSON.parse(localStorage.getItem('currentUser')).id,
+      id: currentUser?.id,
     };
     if (firstName.value) user.first_name = firstName.value;
 
@@ -64,8 +63,6 @@ export default function UserProfile() {
     // await updateUserProfile(user)
     //   .then(async (res) => {
     //     const { data } = res;
-    //     await getUserReady(data); // stores the user in local storage with the joined since attribute
-    //     setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
     //     customAlert('Profile Updated');
     //     window.scrollTo(0, profileRef.current.scrollIntoView());
 
@@ -87,13 +84,11 @@ export default function UserProfile() {
   };
 
   const deleteAccount = async () => {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-    if (!user) return;
+    if (!currentUser) return;
 
     setLoadingAnime({ message: 'deleting...', show: true });
-    navigate('/');
 
-    await deleteUser(user)
+    await deleteUser(currentUser)
       .then(() => {
         localStorage.clear();
         navigate('/', { replace: true });
@@ -208,7 +203,7 @@ export default function UserProfile() {
                 Joined Since: <span>{currentUser?.joinedSince}</span>
               </li>
 
-              {JSON.parse(localStorage.getItem('currentUser')) && (
+              {currentUser && (
                 <button
                   type="button"
                   className="delete_acount_btn"
@@ -284,3 +279,5 @@ export default function UserProfile() {
     </StyledUserProfile>
   );
 }
+
+export default ProfileGaurd(UserProfile);

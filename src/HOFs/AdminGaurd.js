@@ -1,13 +1,12 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUser } from '../api/authentication';
 import { MyContext } from '../context/MyContext';
 
 const AdminGaurd = (Component) => {
-  return function Gaurd(props) {
+  return function Gaurd() {
     const { customAlert, setLoadingAnime } = React.useContext(MyContext);
-    const { currentUser, setCurrentUser } = React.useState(null);
+    const [currentUser, setCurrentUser] = React.useState(null);
     const navigate = useNavigate();
 
     React.useEffect(() => {
@@ -15,7 +14,6 @@ const AdminGaurd = (Component) => {
       getCurrentUser()
         .then((res) => {
           setCurrentUser(res);
-          console.log('this current-user in adminGaurd', res);
           if (!res.is_admin) {
             navigate('/', { replace: true });
           }
@@ -28,11 +26,9 @@ const AdminGaurd = (Component) => {
     }, []);
 
     return currentUser?.is_admin ? (
-      <Component {...props} />
+      <Component currentUser={currentUser} />
     ) : (
-      <h1 style={{ margin: '2rem auto', fontSize: '17px' }}>
-        Access denied...
-      </h1>
+      <>Access denied...</>
     );
   };
 };

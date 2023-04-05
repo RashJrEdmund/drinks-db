@@ -63,6 +63,7 @@ const StyledRegisterLoginForm = styled.div`
 
       button {
         background-color: #f5f5f5;
+        font-size: 1.2rem;
         position: absolute;
         right: 0;
         top: 50%;

@@ -9,12 +9,11 @@ import { MyContext } from '../context/MyContext';
 import StyledRegisterLoginForm from '../styles/StyledrRegisterLoginform';
 
 import { loginWithEmailPassword } from '../api/authentication';
-import { saveToken, getUserReady } from '../services/utils';
+import { saveToken } from '../services/utils';
 
 function Login() {
   const { customAlert, setLoadingAnime } = React.useContext(MyContext);
   const navigate = useNavigate();
-  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const [inputType, setInputType] = React.useState('password');
 
   const inputRef = React.useRef();
@@ -35,10 +34,7 @@ function Login() {
 
     try {
       await loginWithEmailPassword(user.email, user.password)
-        .then(({ data }) => {
-          saveToken(data.token);
-          getUserReady(data.user);
-        })
+        .then(({ data }) => saveToken(data.token))
         .then(() => {
           navigate('/', { replace: true });
           customAlert('logged in');
@@ -63,7 +59,6 @@ function Login() {
           type="email"
           placeholder="Login With Email"
           name="email"
-          defaultValue={currentUser?.email}
           required
         />
         <span className="password-span">

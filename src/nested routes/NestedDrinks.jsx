@@ -68,7 +68,7 @@ const StlydeNestedDrinks = styled.div`
   }
 `;
 
-export default function NestedDrinks() {
+export default function NestedDrinks({ currentUser }) {
   // const localDrinks = JSON.parse(localStorage.getItem('localDrinks'));
   const { customAlert, setLoadingAnime, setdialogueDetails } =
     React.useContext(MyContext);
@@ -102,7 +102,6 @@ export default function NestedDrinks() {
     const { log, clear } = console;
     const holder = edit;
     const [drinkToEdit] = Drinks.filter((drink) => drink.id === id);
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
     holder.drink.show = true;
     holder.drink.chosenOne = drinkToEdit;
