@@ -23,16 +23,16 @@ export default function Navbar({ currentUser }) {
         (!showMenu.side || showMenu.dropDown) &&
         window.scrollY >= YscrollHolder
       )
-        navRef.current?.classList.add('active_navBar_container');
-      else navRef.current?.classList.remove('active_navBar_container');
+        navRef.current?.classList.add('active_navBar');
+      else navRef.current?.classList.remove('active_navBar');
 
       YscrollHolder = window.scrollY;
     });
   }, [showMenu.side]);
 
   return (
-    <StyledNavBar>
-      <div ref={navRef} className="navBar-container">
+    <StyledNavBar ref={navRef}>
+      <div className="navBar-container">
         <div className="left_group">
           <button
             className="side_menu_btn"

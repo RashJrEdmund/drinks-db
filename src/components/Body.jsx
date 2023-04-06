@@ -9,21 +9,22 @@ const StyledBody = styled.div`
   display: grid;
   grid-template-columns: 30% 1fr;
   padding: 6rem 0 3rem;
-  max-width: 1600px;
+  max-width: 1400px;
   margin: 0 auto;
   gap: 10px;
 
   .sidebar_holder {
     background-color: green;
     width: 100%;
-    max-height: 150vh;
-    overflow-y: auto;
-    position: relative;
+    height: 100%;
+    /* max-height: 150vh; */
+    /* position: relative; */
   }
 
   .drinks_section {
     background-color: brown;
     width: 100%;
+    height: fit-content;
   }
 `;
 

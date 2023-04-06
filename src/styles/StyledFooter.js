@@ -1,61 +1,21 @@
 import styled from '@emotion/styled';
 
 const StyledFooter = styled.div`
-  background-color: #0f0303;
+  background-color: none;
+  border-top: 1px solid #cce;
   color: #fff;
-  margin: 0;
-  width: 100%;
+  margin: 2rem auto;
+  width: 97%;
+  max-width: 1400px;
   height: fit-content;
-  min-height: 500px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 2rem;
-  gap: 20px;
+  min-height: 100px;
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 10px;
+  gap: 10px;
 
-  .footer_column1 {
-    width: calc(100% - 10px);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-
-    p {
-      width: fit-content;
-      margin: 10px 0;
-      font-size: 1.3rem;
-
-      .getkey_btn {
-        background-color: #a52a2a;
-        margin: 0 10px;
-        padding: 6px 13px;
-        font-weight: 700;
-      }
-    }
-  }
-
-  .footer_column2 {
-    width: calc(100% - 10px);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-
-    .to_top_btn {
-      padding: 10px 15px;
-      font-size: 1.2rem;
-      font-weight: 700;
-      transition: 0.5s;
-
-      &:hover {
-        background-color: darkgray;
-      }
-    }
-
-    p {
-      width: fit-content;
-      margin: 10px 0;
-      font-size: 1.3rem;
-    }
+  p {
+    width: fit-content;
   }
 
   @media only screen and (max-width: 768px) {

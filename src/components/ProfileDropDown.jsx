@@ -91,12 +91,18 @@ export default function ProfileDropDown({ currentUser }) {
       <p onClick={() => navigate('/cruding/drinks')}>login as admin</p>
       <p onClick={() => navigate('/profile')}>Profile</p>
 
+      <p onClick={() => navigate('/apipage')}>get an api key</p>
+
       <p onClick={handleLogOut}>Logout</p>
     </StyledDropDown>
   ) : (
     <StyledDropDown className="profile_dropdown" id="profile_dropdown">
       <p onClick={() => window.scrollTo(0, 0)}>Home</p>
       <ProfileAndLoginBtn fxn={checkUserLoggedIn} currentUser={currentUser} />
+
+      {currentUser && (
+        <p onClick={() => navigate('/apipage')}>get an api key</p>
+      )}
 
       {currentUser && <p onClick={handleLogOut}>Logout</p>}
     </StyledDropDown>

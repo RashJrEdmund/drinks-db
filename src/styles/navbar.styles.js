@@ -1,29 +1,32 @@
 import styled from '@emotion/styled';
 
 const StyledNavBar = styled.div`
+  background-color: #18191a;
+  border-bottom: 1px solid #cce;
   position: fixed;
   top: 0;
   left: 0;
-  background: none;
   width: 100%;
   height: fit-content;
+  transition: 0.4s transform;
   z-index: 5;
+
+  &.active_navBar {
+    transform: translateY(-100%);
+  }
 
   .navBar-container {
     position: relative;
-    background: linear-gradient(to bottom, #00000065, #00000065, #00000065);
+    background: none;
     width: 100%;
     min-height: 90px;
+    max-width: 1500px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 1rem;
+    margin: 0 auto;
     transition: 0.6s color;
-    transition: 0.4s transform;
-
-    &.active_navBar_container {
-      transform: translateY(-100%);
-    }
 
     .left_group {
       width: fit-content;
