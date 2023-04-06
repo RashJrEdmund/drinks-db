@@ -7,6 +7,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import StyledUserProfile from '../styles/StyledUserProfile';
+
+import {
+  MdArrowBackIos,
+  MdOutlineModeEditOutline,
+  MdOutlineEditOff,
+} from 'react-icons/md';
+
 import { MyContext } from '../context/MyContext';
 import { deleteUser } from '../api/authentication';
 import uploadIcon from '../images/darkImageIcon.png';
@@ -126,7 +133,7 @@ function UserProfile({ currentUser }) {
             type="button"
             onClick={() => window.history.back()}
           >
-            Back
+            <MdArrowBackIos />
           </button>
 
           <button
@@ -134,7 +141,7 @@ function UserProfile({ currentUser }) {
             type="button"
             onClick={() => setShowSideEdit((prev) => !prev)}
           >
-            {showSideEdit ? 'cancel' : 'modify'}
+            {showSideEdit ? <MdOutlineEditOff /> : <MdOutlineModeEditOutline />}
           </button>
         </div>
 

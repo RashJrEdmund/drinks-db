@@ -4,13 +4,13 @@ import DrinksSection from './DrinksSection';
 import SideBar from './SideBar';
 
 const StyledBody = styled.div`
-  background-color: #331012;
+  /* background-color: #331012; */
   width: 100%;
   display: grid;
   grid-template-columns: 30% 1fr;
-  padding: 6rem 0 3rem;
+  padding: 2rem 0 3rem;
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 5rem auto 0;
   gap: 10px;
 
   .sidebar_holder {

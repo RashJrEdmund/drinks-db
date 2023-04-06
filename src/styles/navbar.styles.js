@@ -68,7 +68,6 @@ const StyledNavBar = styled.div`
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 0 1rem;
       padding: 0;
       cursor: pointer;
 
@@ -98,10 +97,6 @@ const StyledNavBar = styled.div`
           letter-spacing: 2px;
           padding: 8px 10px;
         }
-      }
-
-      .profile_section {
-        margin: 0;
       }
     }
   }

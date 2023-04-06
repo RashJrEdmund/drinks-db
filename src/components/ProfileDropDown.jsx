@@ -4,6 +4,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
+import { FaUser } from 'react-icons/fa';
+import {
+  MdLogin,
+  MdDashboardCustomize,
+  MdHome,
+  MdApi,
+  MdLogout,
+} from 'react-icons/md';
 import { MyContext } from '../context/MyContext';
 
 const StyledDropDown = styled.div`
@@ -12,7 +20,7 @@ const StyledDropDown = styled.div`
   top: calc(100% + 1.8rem);
   background: linear-gradient(to bottom, #000000, #000000df, #000000cf);
   width: fit-content;
-  min-width: 185px;
+  min-width: 175px;
   height: fit-content;
   padding: 1rem;
   border: 1px solid grey;
@@ -52,7 +60,15 @@ const StyledDropDown = styled.div`
 // localStorage.clear();
 
 function ProfileAndLoginBtn({ fxn, currentUser }) {
-  return <p onClick={fxn}>{currentUser ? 'Profile' : 'Login'}</p>;
+  return currentUser ? (
+    <p onClick={fxn}>
+      <FaUser /> Profile
+    </p>
+  ) : (
+    <p onClick={fxn}>
+      <MdLogin /> Login
+    </p>
+  );
 }
 
 export default function ProfileDropDown({ currentUser }) {
@@ -87,24 +103,42 @@ export default function ProfileDropDown({ currentUser }) {
 
   return currentUser?.is_admin ? (
     <StyledDropDown className="profile_dropdown" id="profile_dropdown">
-      <p onClick={() => window.scrollTo(0, 0)}>Home</p>
-      <p onClick={() => navigate('/cruding/drinks')}>login as admin</p>
-      <p onClick={() => navigate('/profile')}>Profile</p>
+      <p onClick={() => window.scrollTo(0, 0)}>
+        <MdHome /> Home
+      </p>
+      <p onClick={() => navigate('/cruding/drinks')}>
+        <MdDashboardCustomize /> dashboard
+      </p>
+      <p onClick={() => navigate('/profile')}>
+        <FaUser /> Profile
+      </p>
 
-      <p onClick={() => navigate('/apipage')}>get an api key</p>
+      <p onClick={() => navigate('/apipage')}>
+        <MdApi /> API
+      </p>
 
-      <p onClick={handleLogOut}>Logout</p>
+      <p onClick={handleLogOut}>
+        <MdLogout /> Logout
+      </p>
     </StyledDropDown>
   ) : (
     <StyledDropDown className="profile_dropdown" id="profile_dropdown">
-      <p onClick={() => window.scrollTo(0, 0)}>Home</p>
+      <p onClick={() => window.scrollTo(0, 0)}>
+        <MdHome /> Home
+      </p>
       <ProfileAndLoginBtn fxn={checkUserLoggedIn} currentUser={currentUser} />
 
       {currentUser && (
-        <p onClick={() => navigate('/apipage')}>get an api key</p>
+        <p onClick={() => navigate('/apipage')}>
+          <MdApi /> API
+        </p>
       )}
 
-      {currentUser && <p onClick={handleLogOut}>Logout</p>}
+      {currentUser && (
+        <p onClick={handleLogOut}>
+          <MdLogout /> Logout
+        </p>
+      )}
     </StyledDropDown>
   );
 }

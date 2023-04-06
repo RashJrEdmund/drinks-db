@@ -36,8 +36,7 @@ const StyledUserProfile = styled.div`
         background-color: #a52a2a;
         color: #f5f5f5;
         padding: 6px 10px;
-        font-size: 16px;
-        font-weight: 600;
+        font-size: 18px;
         margin: 0;
       }
     }
