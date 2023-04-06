@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 const StyledSideBar = styled.div`
+  width: 100%;
   .menu-list-overlay {
     background-color: #000;
     opacity: 0.05;
@@ -16,10 +17,11 @@ const StyledSideBar = styled.div`
     background: linear-gradient(to bottom, #00000065, #000000be, #000);
     /* position: absolute; */
     top: 100%;
+    top: 0;
     left: 0;
     /* transform: translate(-120%); */
     display: flex;
-    width: 60vw;
+    width: 100;
     max-width: 500px;
     min-height: 100vh;
     height: fit-content;

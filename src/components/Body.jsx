@@ -9,13 +9,19 @@ const StyledBody = styled.div`
   display: grid;
   grid-template-columns: 30% 1fr;
   padding: 6rem 0 3rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  gap: 10px;
 
   .sidebar_holder {
     background-color: green;
     width: 100%;
+    max-height: 150vh;
+    overflow-y: auto;
+    position: relative;
   }
 
-  .drink_section {
+  .drinks_section {
     background-color: brown;
     width: 100%;
   }
@@ -28,7 +34,7 @@ export default function Body() {
         <SideBar />
       </div>
 
-      <div className="drink_section">
+      <div className="drinks_section">
         <DrinksSection />
       </div>
     </StyledBody>

@@ -66,7 +66,7 @@
       "categories": "wine",
       "glasses": "glass 1",
       "ingredient_id": 1,
-      "is_alcoholic": 1,
+      "is_alcoholic": true,
       "userId": "2"
     },
     {
@@ -93,7 +93,7 @@
       "categories": "wine",
       "glasses": "glass 1",
       "ingredient_id": 1,
-      "is_alcoholic": 1,
+      "is_alcoholic": true,
       "userId": "2"
     },
     {
@@ -120,7 +120,7 @@
       "categories": "wine",
       "glasses": "glass 1",
       "ingredient_id": 1,
-      "is_alcoholic": 1,
+      "is_alcoholic": true,
       "userId": "2"
     },
     {
@@ -147,7 +147,7 @@
       "categories": "wine",
       "glasses": "glass 1",
       "ingredient_id": 5,
-      "is_alcoholic": 1,
+      "is_alcoholic": true,
       "userId": "2"
     },
     {
@@ -174,7 +174,7 @@
       "categories": "wine",
       "glasses": "glass 3",
       "ingredient_id": 1,
-      "is_alcoholic": 1,
+      "is_alcoholic": true,
       "userId": "2"
     },
     {
@@ -201,7 +201,7 @@
       "categories": "wine",
       "glasses": "glass 3",
       "ingredient_id": 1,
-      "is_alcoholic": 1,
+      "is_alcoholic": true,
       "userId": "2"
     },
     {
@@ -228,7 +228,7 @@
       "categories": "wine",
       "glasses": "glass 3",
       "ingredient_id": 1,
-      "is_alcoholic": 1,
+      "is_alcoholic": true,
       "userId": "2"
     },
     {
@@ -255,7 +255,7 @@
       "categories": "wine",
       "glasses": "glass 4",
       "ingredient_id": 1,
-      "is_alcoholic": 1,
+      "is_alcoholic": true,
       "userId": "2"
     },
     {
@@ -282,7 +282,7 @@
       "categories": "wine",
       "glasses": "glass 3",
       "ingredient_id": 1,
-      "is_alcoholic": 1,
+      "is_alcoholic": true,
       "userId": "2"
     },
     {
@@ -309,7 +309,7 @@
       "categories": "milky",
       "glasses": "glass 2",
       "ingredient_id": 1,
-      "is_alcoholic": 1,
+      "is_alcoholic": true,
       "userId": "2"
     },
     {
@@ -336,7 +336,7 @@
       "categories": "milky",
       "glasses": "glass 5",
       "ingredient_id": 1,
-      "is_alcoholic": 1,
+      "is_alcoholic": true,
       "userId": "2"
     },
     {
@@ -363,7 +363,7 @@
       "categories": "tea",
       "glasses": "glass 5",
       "ingredient_id": 1,
-      "is_alcoholic": 1,
+      "is_alcoholic": true,
       "userId": "2"
     },
     {
@@ -390,7 +390,7 @@
       "categories": "water",
       "glasses": "glass 4",
       "ingredient_id": 1,
-      "is_alcoholic": 1,
+      "is_alcoholic": true,
       "userId": "2"
     },
     {
@@ -417,7 +417,7 @@
       "categories": "tea",
       "glasses": "glass 5",
       "ingredient_id": 1,
-      "is_alcoholic": 1,
+      "is_alcoholic": true,
       "userId": "2"
     }
   ],

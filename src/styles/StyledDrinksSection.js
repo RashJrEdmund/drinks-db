@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 const StyledDrinksSection = styled.div`
   background-color: #331012;
   /* background-color: #f5f5f5; */
+  background-color: purple;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -13,9 +14,10 @@ const StyledDrinksSection = styled.div`
 
   .drinks-container,
   .drinks-container_2 {
+    background-color: gold;
     margin: 0 auto 3rem;
-    width: 95vw;
-    max-width: 1224px;
+    width: 100%;
+    max-width: 97vw;
     height: fit-content;
     min-height: 500px;
     display: grid;
@@ -30,7 +32,7 @@ const StyledDrinksSection = styled.div`
       width: 100%;
       height: fit-content;
       min-height: 300px;
-      margin: 10px 0;
+      margin: 0 0 10px;
 
       h3 {
         background-color: #a52a2a;
@@ -87,8 +89,8 @@ const StyledDrinksSection = styled.div`
   }
 
   .body_images {
-    margin: 0 auto 1rem;
-    width: 95vw;
+    margin: 1rem auto 1.5rem;
+    width: 100%;
     max-width: 1224px;
     display: flex;
     align-items: center;
@@ -100,31 +102,12 @@ const StyledDrinksSection = styled.div`
       background-repeat: no-repeat;
       height: 300px;
       width: 300px;
-      max-width: 90vw;
+      max-width: 97vw;
       box-shadow: 0 0 10px #000;
     }
   }
 
-  .body2_images {
-    background-color: green;
-    margin: 0 auto 1rem;
-    width: 95vw;
-    max-width: 1224px;
-    display: flex;
-    overflow: auto;
-
-    .first_img {
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      min-height: 300px;
-      min-width: 300px;
-      box-shadow: 0 0 10px #000;
-      margin: 0 10px;
-    }
-  }
-
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1000px) {
     .drinks-container,
     .drinks-container_2 {
       grid-template-columns: repeat(2, 1fr);
@@ -132,8 +115,9 @@ const StyledDrinksSection = styled.div`
 
     .body_images {
       .first_img {
-        height: 260px;
-        width: 260px;
+        width: 100%;
+        max-height: 270px;
+        margin: 0 5px;
       }
     }
   }

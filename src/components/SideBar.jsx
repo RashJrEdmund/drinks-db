@@ -15,10 +15,10 @@ export default function SideBar() {
   });
 
   const [showOptionList, setShowOptionList] = React.useState({
-    Categories: false,
-    Glasses: false,
-    Ingredients: false,
-    Alcoholic: false,
+    Categories: true,
+    Glasses: true,
+    Ingredients: true,
+    Alcoholic: true,
   });
 
   const navRef = React.useRef();
