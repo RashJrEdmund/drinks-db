@@ -107,7 +107,7 @@ export default function ProfileDropDown({ currentUser }) {
         <MdHome /> Home
       </p>
       <p onClick={() => navigate('/cruding/drinks')}>
-        <MdDashboardCustomize /> dashboard
+        <MdDashboardCustomize /> Dashboard
       </p>
       <p onClick={() => navigate('/profile')}>
         <FaUser /> Profile

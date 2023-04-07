@@ -1,6 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from '@emotion/styled';
+import { MdDeleteForever } from 'react-icons/md';
+import { TiEdit } from 'react-icons/ti';
+
 import simulationData from '../data/DataSimulation.json';
 import DrinksForm from '../components/DrinksForm';
 import { CrudContext, MyContext } from '../context/MyContext';
@@ -159,7 +162,7 @@ export default function NestedDrinks({ currentUser }) {
                 type="button"
                 onClick={(e) => handleDeleteDrink(+e.target.name)}
               >
-                del
+                <MdDeleteForever />
               </button>
 
               <button
@@ -167,7 +170,7 @@ export default function NestedDrinks({ currentUser }) {
                 type="button"
                 onClick={(e) => handleDrinkEdit(+e.target.name)}
               >
-                edit
+                <TiEdit /> edit
               </button>
             </div>
           </div>

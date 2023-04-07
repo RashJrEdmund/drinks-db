@@ -2,17 +2,20 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
+
 import StyledSideBar from '../styles/StyledSideBar';
 import { MyContext } from '../context/MyContext';
 
 export default function SideBar() {
-  const { Simulation, setFilterData, bodyref, customAlert } =
-    React.useContext(MyContext);
-
-  const [showMenu, setShowMenu] = React.useState({
-    side: false,
-    dropDown: false,
-  });
+  const {
+    Simulation,
+    setFilterData,
+    bodyref,
+    customAlert,
+    showMenu,
+    setShowMenu,
+  } = React.useContext(MyContext);
 
   const [showOptionList, setShowOptionList] = React.useState({
     Categories: true,
@@ -144,7 +147,7 @@ export default function SideBar() {
   };
 
   return (
-    <StyledSideBar>
+    <StyledSideBar showSide={showMenu.side}>
       {showMenu.side && (
         <div
           className="menu-list-overlay"
@@ -154,9 +157,7 @@ export default function SideBar() {
         />
       )}
 
-      <ul
-        className={showMenu.side ? 'menu-list active-menu-list' : 'menu-list'}
-      >
+      <ul className="menu-list">
         <li className="result_count">
           showing:{' '}
           <span
@@ -177,7 +178,14 @@ export default function SideBar() {
         <form onChange={handleFilterOptions}>
           {filterOptions?.map(({ title }) => (
             <li className="filter_option" key={title}>
-              <h2 onClick={() => toggleOptionList(title)}>{title}</h2>
+              <h2 onClick={() => toggleOptionList(title)}>
+                {title}{' '}
+                {showOptionList[title] ? (
+                  <MdKeyboardArrowUp />
+                ) : (
+                  <MdKeyboardArrowDown />
+                )}
+              </h2>
 
               {showOptionList[title] &&
                 (title !== 'Alcoholic'

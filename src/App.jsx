@@ -29,6 +29,11 @@ export default function App() {
 
   const [zoomPhoto, setZoomPhoto] = React.useState(false);
 
+  const [showMenu, setShowMenu] = React.useState({
+    side: false,
+    dropDown: false,
+  });
+
   const [loadingAnime, setLoadingAnime] = React.useState({
     show: false,
     message: '',
@@ -93,6 +98,9 @@ export default function App() {
           customAlert,
 
           setdialogueDetails,
+
+          showMenu,
+          setShowMenu,
 
           loadingAnime,
           setLoadingAnime,

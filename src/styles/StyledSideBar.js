@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 const StyledSideBar = styled.div`
   width: 100%;
+
   .menu-list-overlay {
     background-color: #000;
     opacity: 0.05;
@@ -14,14 +15,15 @@ const StyledSideBar = styled.div`
   }
 
   .menu-list {
-    background: linear-gradient(to bottom, #00000065, #000000be, #000);
+    background-color: #242526;
+    box-shadow: 0 0 10px;
     /* position: absolute; */
     top: 100%;
     top: 0;
     left: 0;
     /* transform: translate(-120%); */
     display: flex;
-    width: 100;
+    width: 100%;
     max-width: 500px;
     min-height: 100vh;
     height: fit-content;
@@ -96,10 +98,18 @@ const StyledSideBar = styled.div`
         align-items: flex-start;
         border-bottom: 1px solid grey;
 
+        &:nth-last-child(1) {
+          border-bottom: none;
+        }
+
         h2 {
           color: #a52a2a;
           font-size: 1.5rem;
           letter-spacing: 3px;
+          display: flex;
+          flex-wrap: nowrap;
+          align-items: flex-end;
+          gap: 13px;
           cursor: pointer;
         }
 
@@ -116,35 +126,30 @@ const StyledSideBar = styled.div`
   }
 
   @media only screen and (max-width: 768px) {
-    .navBar-container {
-      .menu-list {
-        background: linear-gradient(to bottom, #00000065, #000000be, #000);
-        position: absolute;
-        top: 100%;
-        left: 0;
-        transform: translate(-120%);
+    .menu-list {
+      background: #18191a;
+      position: fixed;
+      top: 5.7rem;
+      min-height: calc(100vh - 5.7rem);
+      left: 0;
+      transform: translate(${({ showSide }) => (showSide ? '0' : '-120%')});
+      display: flex;
+      width: 70vw;
+      max-width: 500px;
+      overflow: auto;
+      z-index: 4;
+
+      .result_count {
         display: flex;
-        width: 60vw;
-        max-width: 500px;
-        overflow: auto;
-        z-index: 4;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
 
-        &.active-menu-list {
-          transform: translate(0);
-        }
-
-        .result_count {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 5px;
-        }
-
-        form {
-          width: calc(100% - 1rem);
-          flex-direction: column;
-          align-items: flex-start;
-        }
+      form {
+        width: calc(100% - 1rem);
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   }

@@ -6,6 +6,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { MdDeleteForever } from 'react-icons/md';
 import StyledUserProfile from '../styles/StyledUserProfile';
 
 import {
@@ -216,7 +217,7 @@ function UserProfile({ currentUser }) {
                   className="delete_acount_btn"
                   onClick={handleDeleteAccount}
                 >
-                  delete account
+                  <MdDeleteForever /> delete account
                 </button>
               )}
             </ul>

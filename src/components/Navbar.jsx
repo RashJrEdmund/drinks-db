@@ -5,14 +5,12 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
+import { MyContext } from '../context/MyContext';
 import StyledNavBar from '../styles/navbar.styles';
 import ProfileDropDown from './ProfileDropDown';
 
 export default function Navbar({ currentUser }) {
-  const [showMenu, setShowMenu] = React.useState({
-    side: false,
-    dropDown: false,
-  });
+  const { showMenu, setShowMenu } = React.useContext(MyContext);
 
   const navRef = React.useRef();
 
