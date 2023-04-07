@@ -8,8 +8,6 @@ import HomeDrinks from './HomeDrinks';
 export default function DrinksSection() {
   const { Simulation, filterData } = React.useContext(MyContext);
   const { Drinks } = Simulation;
-  const secondHalf = [];
-  // const localDrinks = JSON.parse(localStorage.getItem('localDrinks'));
 
   const navIndx = +JSON.parse(localStorage.getItem('navigationIndx')) * 12 || 0;
 
@@ -19,25 +17,6 @@ export default function DrinksSection() {
       (drink, index) => index >= navIndx && index < navIndx + 12
     ),
   });
-
-  React.useEffect(() => {
-    const sortDrinks = () => {
-      const holder = filterData;
-      holder.forEach((item) => {
-        const newItem = item.split(',');
-        console.log('this item', newItem);
-      });
-      console.log('this data', holder);
-    };
-
-    if (Drinks.length >= 10) {
-      for (let i = Math.floor(Drinks.length / 2); i < Drinks.length; i += 1) {
-        secondHalf.push(Drinks[i]);
-      }
-    }
-
-    sortDrinks();
-  }, []);
 
   const choseDrinksToShow = (ID) => {
     const id = ID * 12;
@@ -53,12 +32,11 @@ export default function DrinksSection() {
     window.scrollTo(0, 0);
   };
 
+  const whatToMap = filterData.length <= 0 ? drinksToshow.showData : filterData;
+
   return (
     <StyledDrinksSection className="body-section" id="body_section">
-      <HomeDrinks
-        drinksToshow={drinksToshow.showData}
-        showInd={drinksToshow.showInd}
-      />
+      <HomeDrinks drinksToshow={whatToMap} showInd={drinksToshow.showInd} />
 
       <div className="navigation_btns">
         {new Array(Math.ceil((Drinks.length - 1) / 12))

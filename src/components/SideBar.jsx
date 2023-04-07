@@ -24,7 +24,7 @@ export default function SideBar() {
     Alcoholic: true,
   });
 
-  const navRef = React.useRef();
+  const formRef = React.useRef();
 
   const { Drinks } = Simulation;
 
@@ -52,34 +52,33 @@ export default function SideBar() {
     return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
   };
 
-  React.useEffect(() => {
-    const localDrinks = JSON.parse(localStorage.getItem('localDrinks'));
-    if (!localDrinks) {
-      localStorage.setItem('localDrinks', JSON.stringify(Drinks));
+  const checkWhichIsChecked = () => {
+    const { elements } = formRef.current;
+    let isChecked = false;
+    for (let i = 0; i < elements.length; i += 1) {
+      if (elements[i].checked) isChecked = true;
     }
-  }, []);
 
-  React.useEffect(() => {
-    let YscrollHolder = 0;
-    window.addEventListener('scroll', () => {
-      if (
-        (!showMenu.side || showMenu.dropDown) &&
-        window.scrollY >= YscrollHolder
-      )
-        navRef.current?.classList.add('active_navBar_container');
-      else navRef.current?.classList.remove('active_navBar_container');
+    if (!isChecked) {
+      localStorage.removeItem('filteredDrinks');
+      return false;
+    }
 
-      YscrollHolder = window.scrollY;
-    });
-  }, [showMenu.side]);
+    return true;
+  };
 
   const handleSearch = () => {
     console.clear();
-    // if (1 === 2) {
     customAlert('Filtering');
-    // }
 
     const searchData = JSON.parse(localStorage.getItem('filteredDrinks'));
+
+    const isChecked = checkWhichIsChecked();
+
+    if (!isChecked || searchData.length <= 0) {
+      setFilterData(Drinks);
+      return;
+    }
 
     const results = searchData?.map((item) => {
       const newItem = item.split(','); // newItem looks like ['categories', 'wine']
@@ -101,22 +100,17 @@ export default function SideBar() {
 
     console.log('this new set', new Set(finalResults));
     finalResults = Array.from(new Set(finalResults));
-    localStorage.setItem('localDrinks', JSON.stringify(finalResults));
 
-    console.log(
-      'this searchDAta',
-      searchData,
-      '\n',
-      finalResults,
-      '\n',
-      results
-    );
+    setFilterData(finalResults);
   };
 
   // localStorage.clear();
 
   const handleFilterOptions = (e) => {
     console.clear();
+    const isChecked = checkWhichIsChecked();
+
+    if (!isChecked) return;
 
     const localData = JSON.parse(localStorage.getItem('filteredDrinks'));
     if (!localData) {
@@ -134,8 +128,6 @@ export default function SideBar() {
       );
     }
 
-    setFilterData(JSON.parse(localStorage.getItem('filteredDrinks')));
-
     // handleSearch();
   };
 
@@ -145,6 +137,13 @@ export default function SideBar() {
       [nom]: !prev[nom],
     }));
   };
+
+  React.useEffect(() => {
+    const searchData = JSON.parse(localStorage.getItem('fiteredDrinks'));
+
+    if (searchData?.length <= 0) setFilterData(Drinks);
+    // else handleSearch();
+  }, []);
 
   return (
     <StyledSideBar showSide={showMenu.side}>
@@ -175,7 +174,7 @@ export default function SideBar() {
           Filter
         </button>
 
-        <form onChange={handleFilterOptions}>
+        <form ref={formRef} onChange={handleFilterOptions}>
           {filterOptions?.map(({ title }) => (
             <li className="filter_option" key={title}>
               <h2 onClick={() => toggleOptionList(title)}>

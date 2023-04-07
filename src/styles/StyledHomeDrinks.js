@@ -21,57 +21,61 @@ const StyledHomeDrinks = styled.div`
       max-width: 310px;
       height: fit-content;
       min-height: 310px;
-      margin: 0 auto 10px;
+      margin: 0 auto 35px;
 
       h3 {
-        background-color: #a52a2a;
-        background: linear-gradient(to bottom, #00000065, #00000065, #00000065);
+        background-color: #000;
         color: #fff;
         position: absolute;
         bottom: 0;
         left: 0;
+        transform: translateY(100%);
         width: 100%;
-        height: fit-content;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        height: 35px;
         font-size: 1.2rem;
-        transition: 0.5s;
+        overflow-x: auto;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
       }
 
       p {
         background-color: #a52a2a;
-        background: linear-gradient(to bottom, #00000065, #00000065, #00000065);
         color: black;
         position: absolute;
-        bottom: 0;
+        top: 0;
         left: 0;
         width: 100%;
-        height: 0;
-        font-size: 0;
+        height: 100%;
+        padding: 5px;
         display: flex;
         align-items: center;
         justify-content: center;
-        /* opacity: 0; */
+        opacity: 0;
+        letter-spacing: 1px;
+        line-height: 25px;
         transition: 0.5s;
-      }
+        z-index: 2;
+        cursor: pointer;
+        overflow: auto;
 
-      &:hover {
-        p {
-          background-color: #a52a2a;
-          background: linear-gradient(
-            to bottom,
-            #00000065,
-            #00000065,
-            #00000065
-          );
-          color: #fff;
-          opacity: 1;
-          height: 100%;
-          font-size: unset;
+        &::-webkit-scrollbar {
+          display: none;
         }
 
-        h3 {
-          bottom: unset;
-          top: 0;
-          font-size: unset;
+        &.active_description {
+          transform: scale(1.1);
+          opacity: 1;
+          border: 0.5px solid #cee;
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
       }
     }

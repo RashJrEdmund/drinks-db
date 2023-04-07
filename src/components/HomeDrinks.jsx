@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { MyContext } from '../context/MyContext';
@@ -9,22 +11,32 @@ import standingGlass from '../images/standing_wine_glass.png';
 import wineGlasses from '../images/wine_glasses.png';
 
 export default function HomeDrinks({ drinksToshow, showInd }) {
-  const { bodyref, filterData } = React.useContext(MyContext);
+  const { bodyref /* filterData */ } = React.useContext(MyContext);
 
   React.useEffect(() => {
     console.clear();
     console.log('this drinks to show', drinksToshow);
-    const sortDrinks = () => {
-      const holder = filterData;
-      holder.forEach((item) => {
-        const newItem = item.split(',');
-        console.log('this item', newItem);
-      });
-      console.log('this data', holder);
-    };
+    // const sortDrinks = () => {
+    //   const holder = filterData;
+    //   holder.forEach((item) => {
+    //     const newItem = item.split(',');
+    //     console.log('this item', newItem);
+    //   });
+    //   console.log('this data', holder);
+    // };
 
-    sortDrinks();
+    // sortDrinks();
   }, []);
+
+  const handleDrinkDescription = (e) => {
+    const { target } = e;
+    if (target.className.includes('active_description')) {
+      target.classList.remove('active_description');
+      return;
+    }
+
+    target.classList.add('active_description');
+  };
 
   return (
     <StyledHomeDrinks>
@@ -33,13 +45,14 @@ export default function HomeDrinks({ drinksToshow, showInd }) {
           return (
             <div
               key={drink.id}
+              title="tap to see drink info"
               className="drink"
               style={{ backgroundImage: `url("${drink.image_url}")` }}
             >
+              <p onClick={handleDrinkDescription}>{drink.description}</p>
               <h3>
                 {drink.name} {drink.id}
               </h3>
-              <p>{drink.description}</p>
             </div>
           );
         })}

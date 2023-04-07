@@ -133,6 +133,12 @@ const StyledSideBar = styled.div`
       max-width: 500px;
       overflow-y: scroll;
       z-index: 4;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
 
       .result_count {
         display: flex;

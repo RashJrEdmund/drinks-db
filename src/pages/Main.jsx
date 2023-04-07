@@ -2,8 +2,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
 
-import { Outlet } from 'react-router-dom';
-
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import AuthGaurd from '../HOFs/AuthGaurd';
@@ -19,7 +17,7 @@ function Main({ currentUser }) {
   return (
     <StyledMain>
       <Navbar currentUser={currentUser} />
-      <Body HomeOutlet={Outlet} />
+      <Body />
       <Footer />
     </StyledMain>
   );

@@ -72,7 +72,6 @@ const StlydeNestedDrinks = styled.div`
 `;
 
 export default function NestedDrinks({ currentUser }) {
-  // const localDrinks = JSON.parse(localStorage.getItem('localDrinks'));
   const { customAlert, setLoadingAnime, setdialogueDetails } =
     React.useContext(MyContext);
   const { edit, setEdit } = React.useContext(CrudContext);
