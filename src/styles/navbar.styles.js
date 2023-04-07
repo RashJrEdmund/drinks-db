@@ -13,6 +13,10 @@ const StyledNavBar = styled.div`
 
   &.active_navBar {
     transform: translateY(-100%);
+
+    .side_menu_btn {
+      transform: translate(-125%);
+    }
   }
 
   .navBar-container {
@@ -28,6 +32,20 @@ const StyledNavBar = styled.div`
     margin: 0 auto;
     transition: 0.6s color;
 
+    .side_menu_btn {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: green;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 3px;
+      padding: 12px 1rem;
+      margin: 7px 10px;
+      transition: 0.4s transform;
+    }
+
     .left_group {
       width: fit-content;
       height: fit-content;
@@ -35,14 +53,14 @@ const StyledNavBar = styled.div`
       display: flex;
       align-items: center;
 
-      .side_menu_btn {
-        background-color: green;
-        font-weight: 700;
-        font-size: 1rem;
-        letter-spacing: 3px;
-        padding: 12px 1rem;
-        margin: 0 1rem 0 0;
-        z-index: 4;
+      .drinks_db {
+        width: fit-content;
+        color: #a52a2a;
+        font-size: 1.4rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 7px;
       }
 
       .user_status {
@@ -53,9 +71,13 @@ const StyledNavBar = styled.div`
         font-weight: 700;
         margin: 0 0 0 4rem;
 
+        .break {
+          display: none;
+        }
+
         span {
           color: #a52a2a;
-          font-size: 2rem;
+          font-size: 1.5rem;
           font-weight: 700;
         }
       }
@@ -91,12 +113,22 @@ const StyledNavBar = styled.div`
 
   @media only screen and (max-width: 768px) {
     .navBar-container {
-      .left_group {
-        .side_menu_btn {
-          font-size: 0.9rem;
-          letter-spacing: 2px;
-          padding: 8px 10px;
-        }
+      .side_menu_btn {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+        padding: 8px 10px;
+      }
+
+      .side_menu_btn {
+        background-color: green;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        z-index: 4;
+        font-weight: 700;
+        font-size: 1rem;
+        letter-spacing: 3px;
+        padding: 10px;
       }
     }
   }
@@ -114,6 +146,31 @@ const StyledNavBar = styled.div`
       .profile_section {
         span {
           /* display: none; */
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 400px) {
+    .navBar-container {
+      .left_group {
+        margin: 0;
+
+        .drinks_db {
+          font-size: 1.3rem;
+          font-weight: 600;
+        }
+
+        .user_status {
+          font-size: 1rem;
+
+          span {
+            font-size: 1.2rem;
+          }
+
+          .break {
+            display: unset;
+          }
         }
       }
     }

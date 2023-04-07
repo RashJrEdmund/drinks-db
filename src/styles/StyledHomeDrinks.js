@@ -1,14 +1,13 @@
 import styled from '@emotion/styled';
 
 const StyledHomeDrinks = styled.div`
-  .drinks-container,
-  .drinks-container_2 {
-    background-color: gold;
+  .drinks-container {
+    padding: 1rem 5px 0;
     margin: 0 auto 3rem;
     width: 100%;
     max-width: 97vw;
     height: fit-content;
-    min-height: 500px;
+    min-height: 700px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
@@ -19,9 +18,10 @@ const StyledHomeDrinks = styled.div`
       background-position: center;
       background-size: cover;
       width: 100%;
+      max-width: 310px;
       height: fit-content;
-      min-height: 300px;
-      margin: 0 0 10px;
+      min-height: 310px;
+      margin: 0 auto 10px;
 
       h3 {
         background-color: #a52a2a;
@@ -97,23 +97,26 @@ const StyledHomeDrinks = styled.div`
   }
 
   @media only screen and (max-width: 1000px) {
-    .drinks-container,
-    .drinks-container_2 {
+    .drinks-container {
       grid-template-columns: repeat(2, 1fr);
+
+      .drink {
+        box-shadow: 0 0 10px;
+      }
     }
 
     .body_images {
       .first_img {
         width: 100%;
+        max-width: 270px;
         max-height: 270px;
         margin: 0 5px;
       }
     }
   }
 
-  @media only screen and (max-width: 600px) {
-    .drinks-container,
-    .drinks-container_2 {
+  @media only screen and (max-width: 550px) {
+    .drinks-container {
       grid-template-columns: 1fr;
     }
 

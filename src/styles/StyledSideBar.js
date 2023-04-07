@@ -17,11 +17,6 @@ const StyledSideBar = styled.div`
   .menu-list {
     background-color: #242526;
     box-shadow: 0 0 10px;
-    /* position: absolute; */
-    top: 100%;
-    top: 0;
-    left: 0;
-    /* transform: translate(-120%); */
     display: flex;
     width: 100%;
     max-width: 500px;
@@ -30,9 +25,8 @@ const StyledSideBar = styled.div`
     flex-direction: column;
     align-items: center;
     list-style: none;
-    padding: 50px 0 0;
+    padding: 40px 0;
     transition: 0.4s ease-in transform;
-    overflow: auto;
     z-index: 4;
 
     &.active-menu-list {
@@ -129,14 +123,15 @@ const StyledSideBar = styled.div`
     .menu-list {
       background: #18191a;
       position: fixed;
+      padding: 55px 0 75px;
       top: 5.7rem;
-      min-height: calc(100vh - 5.7rem);
+      height: calc(100vh - 5.7rem);
       left: 0;
       transform: translate(${({ showSide }) => (showSide ? '0' : '-120%')});
       display: flex;
       width: 70vw;
       max-width: 500px;
-      overflow: auto;
+      overflow-y: scroll;
       z-index: 4;
 
       .result_count {

@@ -3,6 +3,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
+import {
+  FaFacebook,
+  FaTwitter,
+  FaInstagramSquare,
+  FaHandsHelping,
+} from 'react-icons/fa';
+import { HiClipboardDocumentList } from 'react-icons/hi2';
 
 const StyledFooter = styled.div`
   background-color: none;
@@ -20,6 +27,9 @@ const StyledFooter = styled.div`
 
   p {
     width: fit-content;
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
     cursor: pointer;
   }
 
@@ -40,20 +50,23 @@ export default function Footer() {
         type="button"
         onClick={() => navigate('/apipage')}
       >
-        get an api key
+        <FaHandsHelping />
+        Get an API
       </p>
 
-      <p>twitter</p>
-      <p>facbook</p>
-      <p>Instagram</p>
+      <p onClick={() => window.open('http://localhost:3000/api-docs/')}>
+        <HiClipboardDocumentList /> API docs
+      </p>
 
-      <button
-        className="to_top_btn"
-        type="button"
-        onClick={() => window.scrollTo(0, 0)}
-      >
-        Back to top
-      </button>
+      <p>
+        <FaTwitter /> Twitter
+      </p>
+      <p>
+        <FaFacebook /> Facbook
+      </p>
+      <p>
+        <FaInstagramSquare /> Instagram
+      </p>
     </StyledFooter>
   );
 }

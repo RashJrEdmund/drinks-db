@@ -140,7 +140,9 @@ const StyledUserProfile = styled.div`
           .delete_acount_btn {
             background: none;
             color: #a52a2a;
-
+            display: flex;
+            align-items: flex-end;
+            gap: 5px;
             margin: 3rem 0 0;
             padding: 0;
             font-size: 15px;

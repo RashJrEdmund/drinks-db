@@ -10,9 +10,14 @@ export default function DrinksSection() {
   const { Drinks } = Simulation;
   const secondHalf = [];
   // const localDrinks = JSON.parse(localStorage.getItem('localDrinks'));
+
+  const navIndx = +JSON.parse(localStorage.getItem('navigationIndx')) * 12 || 0;
+
   const [drinksToshow, setDrinksToShow] = React.useState({
-    showInd: 0,
-    showData: Drinks.filter((drink, index) => index >= 0 && index < 12),
+    showInd: navIndx / 12,
+    showData: Drinks.filter(
+      (drink, index) => index >= navIndx && index < navIndx + 12
+    ),
   });
 
   React.useEffect(() => {
@@ -37,18 +42,23 @@ export default function DrinksSection() {
   const choseDrinksToShow = (ID) => {
     const id = ID * 12;
     const holder = drinksToshow;
+    localStorage.setItem('navigationIndx', ID);
     holder.showInd = ID;
     holder.showData = Drinks.filter(
       (drink, index) => index >= id && index < id + 12
     );
 
     setDrinksToShow({ ...holder });
-    console.log('i been clicked', id);
+
+    window.scrollTo(0, 0);
   };
 
   return (
     <StyledDrinksSection className="body-section" id="body_section">
-      <HomeDrinks drinksToshow={drinksToshow.showData} />
+      <HomeDrinks
+        drinksToshow={drinksToshow.showData}
+        showInd={drinksToshow.showInd}
+      />
 
       <div className="navigation_btns">
         {new Array(Math.ceil((Drinks.length - 1) / 12))

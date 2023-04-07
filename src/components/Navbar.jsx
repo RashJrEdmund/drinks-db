@@ -5,6 +5,9 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
+import { FaDatabase } from 'react-icons/fa';
+import { CgMenuGridR } from 'react-icons/cg';
+
 import { MyContext } from '../context/MyContext';
 import StyledNavBar from '../styles/navbar.styles';
 import ProfileDropDown from './ProfileDropDown';
@@ -31,19 +34,24 @@ export default function Navbar({ currentUser }) {
   return (
     <StyledNavBar ref={navRef}>
       <div className="navBar-container">
+        <button
+          className="side_menu_btn"
+          type="button"
+          onClick={() => {
+            setShowMenu((prev) => ({ ...prev, side: !prev.side }));
+          }}
+        >
+          <CgMenuGridR />
+          Filters
+        </button>
+
         <div className="left_group">
-          <button
-            className="side_menu_btn"
-            type="button"
-            onClick={() => {
-              setShowMenu((prev) => ({ ...prev, side: !prev.side }));
-            }}
-          >
-            {showMenu.side ? 'close Filter' : 'open Filter'}
-          </button>
+          <p className="drinks_db">
+            <FaDatabase /> DrinksDB
+          </p>
 
           <p className="user_status">
-            user Status:{' '}
+            Status: <br className="break" />{' '}
             <span>
               {currentUser?.is_admin
                 ? 'Admin'
