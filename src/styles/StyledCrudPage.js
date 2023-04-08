@@ -7,100 +7,142 @@ const StyleCrudPage = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2rem;
 
-  .admin_nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 3;
-    margin: 1rem;
-    width: fit-content;
+  .styled_crud_page_holder {
+    width: 98.5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 5rem 0 4rem;
     height: fit-content;
     display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    transition: 400ms;
+    align-items: flex-start;
+    gap: 1rem;
 
-    button {
-      background-color: #a52a2a;
-      font-weight: 600;
-      color: #f5f5f5;
-      padding: 7px 10px;
-      box-shadow: 0 0 10px #222;
-      margin: 0;
-    }
-  }
+    .admin_nav_holder {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 3;
+      margin: 1rem 0;
+      width: 100%;
+      height: fit-content;
+      transition: 400ms;
 
-  .header {
-    font-weight: 600;
-    border-bottom: 1px solid grey;
-    padding-bottom: 5px;
-    margin: 4rem 0 0;
-  }
+      .admin_nav {
+        position: relative;
+        width: 97.5vw;
+        max-width: 1400px;
+        height: fit-content;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: left;
+        gap: 20px;
+        margin: 0 auto;
 
-  .card-options {
-    max-width: calc(97vw - 10px);
-    width: fit-content;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    /* display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 50%;
-    left: 0;
-    transform: translate(0, -50%); */
-    overflow: auto;
-    gap: 20px;
-    margin: 1rem 0 0;
-    padding: 16px 10px;
+        button {
+          background-color: #a52a2a;
+          font-weight: 600;
+          color: #f5f5f5;
+          padding: 7px 10px;
+          box-shadow: 0 0 10px #222;
+          margin: 0;
 
-    [data-test] {
-      background-color: #a52a2a;
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      justify-content: center;
-      color: #f5f5f5;
-      width: 240px;
-      height: 230px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #222;
-      cursor: pointer;
-
-      h1:nth-of-type(1) {
-        color: black;
+          &.edit_btn {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: 400ms;
+          }
+        }
       }
     }
-  }
 
-  .to_top_btn {
-    display: none;
-    background: none;
-    color: #a52a2a;
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    z-index: 3;
-    margin: 1rem;
-    font-size: 50px;
+    .card-options {
+      width: fit-content;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      margin: 3.9rem 0 0;
+      padding: 0 5px;
 
-    &.active_top_btn {
-      display: unset;
+      [data-test] {
+        background-color: #a52a2a;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        color: #f5f5f5;
+        width: 240px;
+        height: 230px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #222;
+        cursor: pointer;
+
+        h1:nth-of-type(1) {
+          color: black;
+        }
+      }
+    }
+
+    .to_top_btn {
+      display: none;
+      background: none;
+      color: #a52a2a;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      z-index: 3;
+      margin: 1rem;
+      font-size: 50px;
+
+      &.active_top_btn {
+        display: unset;
+      }
     }
   }
 
   @media only screen and (max-width: 768px) {
-    .admin_nav {
-      &.active_admin_nav {
-        transform: translateY(-170%);
+    .styled_crud_page_holder {
+      .admin_nav_holder {
+        .edit_btn {
+          display: unset;
+        }
+
+        &.active_admin_nav {
+          transform: translateY(-180%);
+
+          .admin_nav {
+            button {
+              &.edit_btn {
+                transform: translateY(180%);
+              }
+            }
+          }
+        }
       }
-    }
-    .card-options {
-      overflow: auto;
+
+      .card-options {
+        max-height: 95vh;
+        overflow-y: auto;
+        position: fixed;
+        top: 70px;
+        right: 0;
+        z-index: 3;
+        transform: translate(
+          ${({ activeMenu }) => (activeMenu ? '0' : '120%')}
+        );
+        margin: 0;
+        transition: 400ms;
+
+        [data-test] {
+          width: 200px;
+          height: 130px;
+        }
+      }
     }
   }
 `;

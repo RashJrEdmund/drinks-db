@@ -18,6 +18,7 @@ function CrudPage({ currentUser }) {
   const topBtnRef = React.useRef();
   const cardOptionsRef = React.useRef();
   const adminNavRef = React.useRef();
+  const [activeMenu, setActiveMenu] = React.useState(false);
 
   const [edit, setEdit] = React.useState({
     drink: {
@@ -68,47 +69,58 @@ function CrudPage({ currentUser }) {
 
   return (
     <CrudContext.Provider value={{ edit, setEdit }}>
-      <StyleCrudPage>
-        <div ref={adminNavRef} className="admin_nav">
-          {['Home', 'Profile', 'Logout'].map((btn) => (
-            <button
-              className="back-btn"
-              type="button"
-              name={btn}
-              onClick={handleAdminNav}
-            >
-              {btn}
-            </button>
-          ))}
-        </div>
+      <StyleCrudPage activeMenu={activeMenu}>
+        <div className="styled_crud_page_holder">
+          <div ref={adminNavRef} className="admin_nav_holder">
+            <div className="admin_nav">
+              {['Home', 'Profile', 'Logout'].map((btn) => (
+                <button
+                  className="back-btn"
+                  key={btn}
+                  type="button"
+                  name={btn}
+                  onClick={handleAdminNav}
+                >
+                  {btn}
+                </button>
+              ))}
 
-        <h1 className="header">start Editing</h1>
-
-        <div ref={cardOptionsRef} className="card-options">
-          {['Drinks', 'Categories', 'Ingredients'].map((item) => (
-            <div
-              data-test
-              key={item}
-              onClick={() => navigate(item.toLowerCase(), { replace: true })}
-            >
-              <h1>
-                <TiEdit /> edit <MdDeleteForever />
-              </h1>
-              <h1>{item}</h1>
+              <button
+                type="button"
+                className="edit_btn"
+                onClick={() => setActiveMenu((prev) => !prev)}
+              >
+                Modify
+              </button>
             </div>
-          ))}
+          </div>
+
+          <Outlet currentUser={currentUser} />
+
+          <div ref={cardOptionsRef} className="card-options">
+            {['Drinks', 'Categories', 'Ingredients'].map((item) => (
+              <div
+                data-test
+                key={item}
+                onClick={() => navigate(item.toLowerCase(), { replace: true })}
+              >
+                <h1>
+                  <TiEdit /> edit <MdDeleteForever />
+                </h1>
+                <h1>{item}</h1>
+              </div>
+            ))}
+          </div>
+
+          <button
+            ref={topBtnRef}
+            className="to_top_btn"
+            type="button"
+            onClick={() => window.scrollTo(0, cardOptionsRef.current.ofsettop)}
+          >
+            <BiArrowToTop />
+          </button>
         </div>
-
-        <button
-          ref={topBtnRef}
-          className="to_top_btn"
-          type="button"
-          onClick={() => window.scrollTo(0, cardOptionsRef.current.ofsettop)}
-        >
-          <BiArrowToTop />
-        </button>
-
-        <Outlet currentUser={currentUser} />
       </StyleCrudPage>
     </CrudContext.Provider>
   );
