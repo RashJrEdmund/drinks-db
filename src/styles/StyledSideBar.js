@@ -92,7 +92,7 @@ const StyledSideBar = styled.div`
         align-items: flex-start;
         border-bottom: 1px solid grey;
 
-        &:nth-last-child(1) {
+        &:nth-last-of-type(1) {
           border-bottom: none;
         }
 

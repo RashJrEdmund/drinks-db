@@ -39,6 +39,12 @@ const StyledDrinksForm = styled.div`
     display: flex;
     flex-direction: column;
     padding: 1rem 10px 2rem;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     [name='cancel-btn'] {
       background: none;
@@ -94,6 +100,12 @@ const StyledDrinksForm = styled.div`
         margin: 7px 0;
         padding: 10px 0;
         overflow: auto;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
 
         textarea {
           height: fit-content;

@@ -6,6 +6,7 @@ import React from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import { TiEdit } from 'react-icons/ti';
 import { MdDeleteForever } from 'react-icons/md';
+import { BiArrowToTop } from 'react-icons/bi';
 
 import { MyContext, CrudContext } from '../context/MyContext';
 import AdminGaurd from '../HOFs/AdminGaurd';
@@ -32,6 +33,13 @@ function CrudPage({ currentUser }) {
       show: false,
     },
   });
+
+  const handleAdminNav = ({ target }) => {
+    const { name } = target;
+    if (name === 'Home') navigate('/');
+    else if (name === 'Profile') navigate('/profile');
+    else customAlert('Loggin out...');
+  };
 
   React.useEffect(() => {
     customAlert('admin dashboard');
@@ -62,27 +70,16 @@ function CrudPage({ currentUser }) {
     <CrudContext.Provider value={{ edit, setEdit }}>
       <StyleCrudPage>
         <div ref={adminNavRef} className="admin_nav">
-          <button
-            className="back-btn"
-            type="button"
-            onClick={() => navigate('/')}
-          >
-            Home
-          </button>
-          <button
-            className="profile-btn"
-            type="button"
-            onClick={() => navigate('/profile')}
-          >
-            Profile
-          </button>
-          <button
-            className="logout-btn"
-            type="button"
-            onClick={() => navigate('/cruding')}
-          >
-            Logout
-          </button>
+          {['Home', 'Profile', 'Logout'].map((btn) => (
+            <button
+              className="back-btn"
+              type="button"
+              name={btn}
+              onClick={handleAdminNav}
+            >
+              {btn}
+            </button>
+          ))}
         </div>
 
         <h1 className="header">start Editing</h1>
@@ -108,7 +105,7 @@ function CrudPage({ currentUser }) {
           type="button"
           onClick={() => window.scrollTo(0, cardOptionsRef.current.ofsettop)}
         >
-          {/* &top; */}
+          <BiArrowToTop />
         </button>
 
         <Outlet currentUser={currentUser} />

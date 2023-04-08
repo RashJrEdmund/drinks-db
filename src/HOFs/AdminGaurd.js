@@ -28,7 +28,7 @@ const AdminGaurd = (Component) => {
     return currentUser?.is_admin ? (
       <Component currentUser={currentUser} />
     ) : (
-      <p style={{ color: '#f5f5f5' }}>Access denied...</p>
+      <p style={{ color: '#f5f5f5' }}>Loading...</p>
     );
   };
 };
