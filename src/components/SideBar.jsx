@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -10,11 +11,12 @@ import { MyContext } from '../context/MyContext';
 export default function SideBar() {
   const {
     Simulation,
+    filterData,
     setFilterData,
     bodyref,
-    customAlert,
     showMenu,
     setShowMenu,
+    setLoadingAnime,
   } = React.useContext(MyContext);
 
   const [showOptionList, setShowOptionList] = React.useState({
@@ -69,39 +71,51 @@ export default function SideBar() {
 
   const handleSearch = () => {
     console.clear();
-    customAlert('Filtering');
+    setLoadingAnime({ message: 'Filtering...', show: true });
 
     const searchData = JSON.parse(localStorage.getItem('filteredDrinks'));
 
     const isChecked = checkWhichIsChecked();
 
     if (!isChecked || searchData.length <= 0) {
+      setTimeout(() => {
+        setLoadingAnime({ message: '', show: false });
+      }, 1500);
+
       setFilterData(Drinks);
       return;
     }
 
-    const results = searchData?.map((item) => {
-      const newItem = item.split(','); // newItem looks like ['categories', 'wine']
-      console.log('newIt[0]', newItem[0], Drinks[0][newItem[0].toLowerCase()]);
+    setTimeout(() => {
+      const results = searchData?.map((item) => {
+        const newItem = item.split(','); // newItem looks like ['categories', 'wine']
+        console.log(
+          'newIt[0]',
+          newItem[0],
+          Drinks[0][newItem[0].toLowerCase()]
+        );
 
-      return Drinks.filter(
-        (drink) => drink[newItem[0].toLowerCase()] === newItem[1]
-      );
-    });
+        return Drinks.filter(
+          (drink) => drink[newItem[0].toLowerCase()] === newItem[1]
+        );
+      });
 
-    let finalResults = [];
+      let finalResults = [];
 
-    results?.forEach((res) => {
-      finalResults = [...finalResults, ...res]; // i'm doing this since finalResults is at first an array of arrays
-    });
+      results?.forEach((res) => {
+        finalResults = [...finalResults, ...res]; // i'm doing this since finalResults is at first an array of arrays
+      });
 
-    /* Since i'm having multiple repeated values, i'll change my array to a set, then spread it 
+      /* Since i'm having multiple repeated values, i'll change my array to a set, then spread it 
     or use the Array.from(finalResults) to create a new a array with unique entries */
 
-    console.log('this new set', new Set(finalResults));
-    finalResults = Array.from(new Set(finalResults));
+      console.log('this new set', new Set(finalResults));
+      finalResults = Array.from(new Set(finalResults));
 
-    setFilterData(finalResults);
+      setLoadingAnime({ message: '', show: false });
+
+      setFilterData(finalResults);
+    }, 1500);
   };
 
   // localStorage.clear();
@@ -141,8 +155,8 @@ export default function SideBar() {
   React.useEffect(() => {
     const searchData = JSON.parse(localStorage.getItem('fiteredDrinks'));
 
-    if (searchData?.length <= 0) setFilterData(Drinks);
-    // else handleSearch();
+    if (!searchData || searchData?.length <= 0) setFilterData(Drinks);
+    else handleSearch();
   }, []);
 
   return (
@@ -166,7 +180,9 @@ export default function SideBar() {
               window.scrollTo(0, bodyref.current.offsetTop);
             }}
           >
-            {`${Drinks.length} Product${Drinks.length > 1 ? 's' : ''}`}
+            {`${filterData.length || Drinks.length} Product${
+              (filterData.length || Drinks.length) > 1 ? 's' : ''
+            }`}
           </span>
         </li>
 
@@ -177,7 +193,10 @@ export default function SideBar() {
         <form ref={formRef} onChange={handleFilterOptions}>
           {filterOptions?.map(({ title }) => (
             <li className="filter_option" key={title}>
-              <h2 onClick={() => toggleOptionList(title)}>
+              <h2
+                title={`open and close to quick clear all selected ${title}`}
+                onClick={() => toggleOptionList(title)}
+              >
                 {title}{' '}
                 {showOptionList[title] ? (
                   <MdKeyboardArrowUp />
@@ -199,10 +218,25 @@ export default function SideBar() {
                   : filterOptions.pop().list.map(
                       // i'm using a tenary to check if it's the is alcoholic part already
                       (val) => (
-                        <label htmlFor={['Alcoholic', val]} key={val}>
+                        <label
+                          htmlFor={
+                            val === 'yes'
+                              ? ['Alcoholic', true]
+                              : val === 'no'
+                              ? ['Alcoholic', false]
+                              : ['Alcoholic', 'null']
+                          }
+                          key={val}
+                        >
                           <input
                             type="radio"
-                            id={['Alcoholic', val]}
+                            id={
+                              val === 'yes'
+                                ? ['Alcoholic', true]
+                                : val === 'no'
+                                ? ['Alcoholic', false]
+                                : ['Alcoholic', 'null']
+                            }
                             name="alcoholic_options" // it show's that all the radio types should have the same name before you'll be able to alternate between them
                           />
                           {capitalizedWord(val, true)}

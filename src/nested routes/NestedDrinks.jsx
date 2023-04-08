@@ -30,29 +30,44 @@ const StlydeNestedDrinks = styled.div`
     padding: 0 0 4rem;
 
     .drink {
+      position: relative;
       border: 1px solid #a52a2a;
       padding: 10px;
       height: 300px;
       width: 100%;
-      /* border-radius: 10px; */
+      display: flex;
+      flex-direction: column;
       cursor: default;
+      z-index: 1;
 
       * {
         cursor: default;
       }
 
       .action-btns {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%);
         display: flex;
         justify-content: space-between;
-        width: 60%;
+        width: 90%;
         max-width: 200px;
-        margin: 2rem auto 0;
+        margin: 2rem auto 14px;
 
         button {
           background-color: #a52a2a;
           color: #f5f5f5;
           font-weight: 600;
+          padding: 5px 10px;
+          font-size: 30px;
           cursor: pointer;
+          border-radius: 17px;
+          box-shadow: 0 0 10px #222;
+
+          &.edit_btn {
+            background-color: green;
+          }
         }
       }
     }
@@ -72,6 +87,7 @@ const StlydeNestedDrinks = styled.div`
 `;
 
 export default function NestedDrinks({ currentUser }) {
+  // const localDrinks = JSON.parse(localStorage.getItem('localDrinks'));
   const { customAlert, setLoadingAnime, setdialogueDetails } =
     React.useContext(MyContext);
   const { edit, setEdit } = React.useContext(CrudContext);
@@ -102,16 +118,17 @@ export default function NestedDrinks({ currentUser }) {
 
   const handleDrinkEdit = (id) => {
     const { log, clear } = console;
+    clear();
+    log('clicked', id, currentUser);
     const holder = edit;
     const [drinkToEdit] = Drinks.filter((drink) => drink.id === id);
 
     holder.drink.show = true;
     holder.drink.chosenOne = drinkToEdit;
-    holder.drink.chosenOne.userId = currentUser.id;
+    holder.drink.chosenOne.userId = currentUser?.id;
 
     setEdit(() => ({ ...holder }));
 
-    clear();
     log('clicked drink', id, drinkToEdit);
   };
 
@@ -158,18 +175,20 @@ export default function NestedDrinks({ currentUser }) {
             <div className="action-btns">
               <button
                 name={drink.id}
+                className="del_btn"
                 type="button"
-                onClick={(e) => handleDeleteDrink(+e.target.name)}
+                onClick={() => handleDeleteDrink(drink.id)}
               >
                 <MdDeleteForever />
               </button>
 
               <button
                 name={drink.id}
+                className="edit_btn"
                 type="button"
-                onClick={(e) => handleDrinkEdit(+e.target.name)}
+                onClick={() => handleDrinkEdit(drink.id)}
               >
-                <TiEdit /> edit
+                <TiEdit />
               </button>
             </div>
           </div>

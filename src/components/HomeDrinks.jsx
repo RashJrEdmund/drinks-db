@@ -14,8 +14,8 @@ export default function HomeDrinks({ drinksToshow, showInd }) {
   const { bodyref /* filterData */ } = React.useContext(MyContext);
 
   React.useEffect(() => {
-    console.clear();
-    console.log('this drinks to show', drinksToshow);
+    // console.clear();
+    // console.log('this drinks to show', drinksToshow);
     // const sortDrinks = () => {
     //   const holder = filterData;
     //   holder.forEach((item) => {
@@ -24,7 +24,6 @@ export default function HomeDrinks({ drinksToshow, showInd }) {
     //   });
     //   console.log('this data', holder);
     // };
-
     // sortDrinks();
   }, []);
 

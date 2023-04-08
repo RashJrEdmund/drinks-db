@@ -183,12 +183,16 @@ const StyledDrinksForm = styled.div`
           cursor: default;
         }
 
-        img {
-          background-color: #a52a2a;
-          width: 30px;
-          height: 30px;
-          border-radius: 100px;
+        button {
+          background: none;
+          color: #a52a2a;
+          font-size: 35px;
           cursor: pointer;
+
+          * {
+            padding: 0;
+            margin: 0;
+          }
         }
       }
 

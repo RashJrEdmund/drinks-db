@@ -12,7 +12,7 @@ export default function DrinksSection() {
   const navIndx = +JSON.parse(localStorage.getItem('navigationIndx')) * 12 || 0;
 
   const [drinksToshow, setDrinksToShow] = React.useState({
-    showInd: navIndx / 12,
+    showInd: Math.ceil(filterData.length / 12) || navIndx / 12,
     showData: Drinks.filter(
       (drink, index) => index >= navIndx && index < navIndx + 12
     ),
@@ -21,9 +21,10 @@ export default function DrinksSection() {
   const choseDrinksToShow = (ID) => {
     const id = ID * 12;
     const holder = drinksToshow;
+    const data = filterData.length >= 1 ? filterData : Drinks;
     localStorage.setItem('navigationIndx', ID);
     holder.showInd = ID;
-    holder.showData = Drinks.filter(
+    holder.showData = data.filter(
       (drink, index) => index >= id && index < id + 12
     );
 
@@ -32,14 +33,15 @@ export default function DrinksSection() {
     window.scrollTo(0, 0);
   };
 
-  const whatToMap = filterData.length <= 0 ? drinksToshow.showData : filterData;
+  const whatToMap =
+    filterData?.length <= 0 ? drinksToshow.showData : filterData;
 
   return (
     <StyledDrinksSection className="body-section" id="body_section">
       <HomeDrinks drinksToshow={whatToMap} showInd={drinksToshow.showInd} />
 
       <div className="navigation_btns">
-        {new Array(Math.ceil((Drinks.length - 1) / 12))
+        {new Array(Math.ceil((filterData.length || Drinks.length - 1) / 12))
           .fill('.')
           .map((dot, ind) => (
             <span key={ind} id={ind}>

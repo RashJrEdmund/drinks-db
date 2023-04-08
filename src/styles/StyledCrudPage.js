@@ -14,6 +14,7 @@ const StyleCrudPage = styled.div`
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 3;
     margin: 1rem;
     width: fit-content;
     height: fit-content;
@@ -72,7 +73,6 @@ const StyleCrudPage = styled.div`
 
       h1:nth-of-type(1) {
         color: black;
-        letter-spacing: 10px;
       }
     }
   }
@@ -83,6 +83,7 @@ const StyleCrudPage = styled.div`
     position: fixed;
     right: 0;
     bottom: 0;
+    z-index: 3;
     margin: 1rem;
     padding: 7px 10px;
     box-shadow: 0 0 10px #222;

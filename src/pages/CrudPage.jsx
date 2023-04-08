@@ -1,13 +1,17 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/jsx-no-constructed-context-values */
 import React from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
+import { TiEdit } from 'react-icons/ti';
+import { MdDeleteForever } from 'react-icons/md';
+
 import { MyContext, CrudContext } from '../context/MyContext';
 import AdminGaurd from '../HOFs/AdminGaurd';
 import StyleCrudPage from '../styles/StyledCrudPage';
 
-function CrudPage() {
+function CrudPage({ currentUser }) {
   const { customAlert } = React.useContext(MyContext);
   const navigate = useNavigate();
   const topBtnRef = React.useRef();
@@ -84,26 +88,18 @@ function CrudPage() {
         <h1 className="header">start Editing</h1>
 
         <div ref={cardOptionsRef} className="card-options">
-          <div data-test onClick={() => navigate('drinks', { replace: true })}>
-            <h1>EDIT </h1>
-            <h1>DRINKS</h1>
-          </div>
-
-          <div
-            data-test
-            onClick={() => navigate('categories', { replace: true })}
-          >
-            <h1>EDIT </h1>
-            <h1>CATEGORIES</h1>
-          </div>
-
-          <div
-            data-test
-            onClick={() => navigate('ingredients', { replace: true })}
-          >
-            <h1>EDIT </h1>
-            <h1>INGREDIENTS</h1>
-          </div>
+          {['Drinks', 'Categories', 'Ingredients'].map((item) => (
+            <div
+              data-test
+              key={item}
+              onClick={() => navigate(item.toLowerCase(), { replace: true })}
+            >
+              <h1>
+                <TiEdit /> edit <MdDeleteForever />
+              </h1>
+              <h1>{item}</h1>
+            </div>
+          ))}
         </div>
 
         <button
@@ -115,7 +111,7 @@ function CrudPage() {
           {/* &top; */}
         </button>
 
-        <Outlet />
+        <Outlet currentUser={currentUser} />
       </StyleCrudPage>
     </CrudContext.Provider>
   );

@@ -13,7 +13,7 @@ const StyledUserProfile = styled.div`
 
   .profile_update_container {
     width: 95vw;
-    max-width: 1000px;
+    max-width: 750px;
     height: fit-content;
     min-height: 100vh;
     margin: 0 auto;

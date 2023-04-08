@@ -4,8 +4,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
+import { RiDeleteBack2Fill } from 'react-icons/ri';
+
 import StyledDrinksForm from '../styles/StyledDrinksForm';
-import closeIcon from '../images/close icon.png';
 import { MyContext } from '../context/MyContext';
 // import { postDrink } from '../api/authentication';
 
@@ -26,8 +27,9 @@ export default function DrinksForm(props) {
     });
   };
 
-  const deleteRecipe = (e) => {
-    const { name } = e.target;
+  const deleteRecipe = (name) => {
+    console.clear();
+    console.log(name);
     const newRecipeList = drinkData.recipe.filter((item) => item !== name);
     setDrinkData((prev) => ({
       ...prev,
@@ -170,15 +172,18 @@ export default function DrinksForm(props) {
           </span>
 
           {drinkData?.recipe?.map((peice, ind) => (
-            <div key={[peice, ind]} className="recipe-option">
+            <div key={[peice, ind]} className="recipe-option" name={peice}>
               <p>{peice}</p>
-              <img
+
+              <button
+                className="del_step"
+                type="button"
                 title="delete step ?"
-                src={closeIcon}
                 name={peice}
-                alt="close_icon_image"
-                onClick={deleteRecipe}
-              />
+                onClick={() => deleteRecipe(peice)}
+              >
+                <RiDeleteBack2Fill />
+              </button>
             </div>
           ))}
 
