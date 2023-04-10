@@ -138,7 +138,9 @@ export default function App() {
 
         {loadingAnime.show && <LoadingAnime message={loadingAnime.message} />}
 
-        {!itemModal.show && <DrinkModal drinks={itemModal.items} />}
+        {itemModal.show && (
+          <DrinkModal itemModal={itemModal} setItemModal={setItemModal} />
+        )}
 
         <BrowserRouter>
           <Routes>

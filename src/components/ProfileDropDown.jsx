@@ -18,7 +18,7 @@ import { MyContext } from '../context/MyContext';
 const StyledDropDown = styled.div`
   position: absolute;
   left: -170%;
-  top: calc(100% + 2.8rem);
+  top: calc(100% + 3.8rem);
   background: linear-gradient(to bottom, #000000, #000000df, #000000cf);
   width: fit-content;
   min-width: 175px;

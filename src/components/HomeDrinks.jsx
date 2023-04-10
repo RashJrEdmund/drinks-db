@@ -30,15 +30,13 @@ export default function HomeDrinks({ drinksToshow, showInd }) {
     // sortDrinks();
   }, []);
 
-  const handleToggleModal = (id) => {
-    setItemModal({ items: drinksToshow, show: true, start: id });
-    console.log('clicked', id);
-  };
+  const handleToggleModal = (id) =>
+    setItemModal({ items: drinksToshow, show: true, start: +id });
 
   return (
     <StyledHomeDrinks>
       <div ref={bodyref} className="drinks-container">
-        {drinksToshow?.map((drink) => {
+        {drinksToshow?.map((drink, ind) => {
           return (
             <div
               key={drink.id}
@@ -48,7 +46,7 @@ export default function HomeDrinks({ drinksToshow, showInd }) {
               <span
                 className="drink_info_btn"
                 title="tap to see drink info"
-                onClick={() => handleToggleModal(drink.id)}
+                onClick={() => handleToggleModal(ind)}
               >
                 <MdInfo />
               </span>

@@ -9,7 +9,7 @@ const StyleCrudPage = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 0;
-  margin: 0+;
+  margin: 0;
 
   .styled_crud_page_holder {
     width: 98.5%;
@@ -119,8 +119,12 @@ const StyleCrudPage = styled.div`
   @media only screen and (max-width: 768px) {
     .styled_crud_page_holder {
       .admin_nav_holder {
-        .edit_btn {
-          display: unset;
+        .admin_nav {
+          button {
+            &.edit_btn {
+              display: unset;
+            }
+          }
         }
 
         &.active_admin_nav {

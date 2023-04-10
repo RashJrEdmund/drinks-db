@@ -101,7 +101,10 @@ function CrudPage({ currentUser }) {
               <div
                 data-test
                 key={item}
-                onClick={() => navigate(item.toLowerCase(), { replace: true })}
+                onClick={() => {
+                  navigate(item.toLowerCase(), { replace: true });
+                  setActiveMenu(false);
+                }}
               >
                 <h1>
                   <TiEdit /> <MdSave /> <MdDeleteForever />
