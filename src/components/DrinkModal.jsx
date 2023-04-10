@@ -13,7 +13,7 @@ const StyledItemModal = styled.div`
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 4;
+    z-index: 6;
   }
 
   .item_modal_holder {
@@ -27,7 +27,7 @@ const StyledItemModal = styled.div`
     height: fit-content;
     min-height: 400px;
     transform: translate(-50%, -50%);
-    z-index: 6;
+    z-index: 7;
     display: flex;
     align-items: center;
 

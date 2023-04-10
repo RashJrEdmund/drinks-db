@@ -93,7 +93,7 @@ export default function App() {
 
   React.useEffect(() => {
     toggleBodyOverFlow();
-  }, [dialogueDetails.show, loadingAnime.show, zoomPhoto]);
+  }, [dialogueDetails.show, loadingAnime.show, itemModal.show, zoomPhoto]);
 
   // console.log('this fetchedData', fetchedData);
 
