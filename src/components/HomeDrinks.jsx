@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { MdInfo } from 'react-icons/md';
 import { MyContext } from '../context/MyContext';
 
 import StyledHomeDrinks from '../styles/StyledHomeDrinks';
@@ -11,7 +13,8 @@ import standingGlass from '../images/standing_wine_glass.png';
 import wineGlasses from '../images/wine_glasses.png';
 
 export default function HomeDrinks({ drinksToshow, showInd }) {
-  const { bodyref /* filterData */ } = React.useContext(MyContext);
+  const { bodyref /* filterData */, setItemModal } =
+    React.useContext(MyContext);
 
   React.useEffect(() => {
     // console.clear();
@@ -27,14 +30,9 @@ export default function HomeDrinks({ drinksToshow, showInd }) {
     // sortDrinks();
   }, []);
 
-  const handleDrinkDescription = (e) => {
-    const { target } = e;
-    if (target.className.includes('active_description')) {
-      target.classList.remove('active_description');
-      return;
-    }
-
-    target.classList.add('active_description');
+  const handleToggleModal = (id) => {
+    setItemModal({ items: drinksToshow, show: true, start: id });
+    console.log('clicked', id);
   };
 
   return (
@@ -44,11 +42,16 @@ export default function HomeDrinks({ drinksToshow, showInd }) {
           return (
             <div
               key={drink.id}
-              title="tap to see drink info"
               className="drink"
               style={{ backgroundImage: `url("${drink.image_url}")` }}
             >
-              <p onClick={handleDrinkDescription}>{drink.description}</p>
+              <span
+                className="drink_info_btn"
+                title="tap to see drink info"
+                onClick={() => handleToggleModal(drink.id)}
+              >
+                <MdInfo />
+              </span>
               <h3>
                 {drink.name} {drink.id}
               </h3>

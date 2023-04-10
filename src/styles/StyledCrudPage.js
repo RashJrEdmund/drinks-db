@@ -7,6 +7,9 @@ const StyleCrudPage = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  margin: 0+;
 
   .styled_crud_page_holder {
     width: 98.5%;
@@ -90,17 +93,25 @@ const StyleCrudPage = styled.div`
 
     .to_top_btn {
       display: none;
-      background: none;
+      background: #00000059;
       color: #a52a2a;
       position: fixed;
-      left: 0;
+      flex-direction: column;
+      right: 0;
       bottom: 0;
       z-index: 3;
       margin: 1rem;
       font-size: 50px;
 
+      &::after {
+        content: 'toTop';
+        color: #000;
+        font-size: 14px;
+        align-self: center;
+      }
+
       &.active_top_btn {
-        display: unset;
+        display: flex;
       }
     }
   }

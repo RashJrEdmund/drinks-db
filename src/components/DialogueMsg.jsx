@@ -52,21 +52,21 @@ const StyledDialogueDiv = styled.div`
   }
 `;
 
-export default function DialogueMsg({ message, setmessage }) {
+export default function DialogueMsg({ details, setDetails }) {
   return (
     <StyledDialogueDiv
-      onClick={() => setmessage((prev) => ({ ...prev, show: false }))}
+      onClick={() => setDetails((prev) => ({ ...prev, show: false }))}
     >
       <div className="dialogue-div">
-        <p>{message?.message1}</p>
-        <p>{message?.message2}</p>
-        <p>{message?.message3}</p>
+        <p>{details?.message1}</p>
+        <p>{details?.message2}</p>
+        <p>{details?.message3}</p>
 
         <div className="dialogue-btns">
           <button
             className="cancel-btn"
             type="button"
-            onClick={() => setmessage((prev) => ({ ...prev, show: false }))}
+            onClick={() => setDetails((prev) => ({ ...prev, show: false }))}
           >
             Cancel
           </button>
@@ -74,9 +74,9 @@ export default function DialogueMsg({ message, setmessage }) {
           <button
             className="reset"
             type="button"
-            onClick={() => message?.fxntoCall()}
+            onClick={() => details?.fxntoCall()}
           >
-            {message?.job}
+            {details?.job}
           </button>
         </div>
       </div>

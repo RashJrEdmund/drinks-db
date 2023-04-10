@@ -7,9 +7,10 @@ import {
   FaFacebook,
   FaTwitter,
   FaInstagramSquare,
-  FaHandsHelping,
+  FaGithub,
 } from 'react-icons/fa';
 import { HiClipboardDocumentList } from 'react-icons/hi2';
+import { MdInfo } from 'react-icons/md';
 
 const StyledFooter = styled.div`
   background-color: none;
@@ -43,27 +44,30 @@ const StyledFooter = styled.div`
 
 export default function Footer() {
   const navigate = useNavigate();
+
   return (
     <StyledFooter className="footer" id="footer">
-      <p
-        className="getkey_btn"
-        type="button"
-        onClick={() => navigate('/apipage')}
-      >
-        <FaHandsHelping />
-        Get an API
-      </p>
-
       <p onClick={() => window.open('http://localhost:3000/api-docs/')}>
         <HiClipboardDocumentList /> API docs
       </p>
 
-      <p>
+      <p className="getkey_btn" type="button" onClick={() => navigate('/')}>
+        <MdInfo />
+        About Author
+      </p>
+
+      <p onClick={() => window.open('https://github.com/RashJrEdmund')}>
+        <FaGithub /> Github
+      </p>
+
+      <p onClick={() => window.open('https://twitter.com/orashus')}>
         <FaTwitter /> Twitter
       </p>
+
       <p>
         <FaFacebook /> Facbook
       </p>
+
       <p>
         <FaInstagramSquare /> Instagram
       </p>

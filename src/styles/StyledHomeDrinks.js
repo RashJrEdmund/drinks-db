@@ -23,6 +23,26 @@ const StyledHomeDrinks = styled.div`
       min-height: 310px;
       margin: 0 auto 35px;
 
+      .drink_info_btn {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 1rem 14px;
+        font-size: 30px;
+        color: #a52a2a;
+        transition: 600ms;
+        z-index: -3;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      &:hover {
+        .drink_info_btn {
+          z-index: unset;
+          opacity: 1;
+        }
+      }
+
       h3 {
         background-color: #000;
         color: #fff;
@@ -43,39 +63,6 @@ const StyledHomeDrinks = styled.div`
 
         &::-webkit-scrollbar {
           display: none;
-        }
-      }
-
-      p {
-        background-color: #a52a2a;
-        color: black;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        padding: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        letter-spacing: 1px;
-        line-height: 25px;
-        transition: 0.5s;
-        z-index: 2;
-        cursor: pointer;
-        overflow: auto;
-
-        &::-webkit-scrollbar {
-          display: none;
-        }
-
-        &.active_description {
-          transform: scale(1.1);
-          opacity: 1;
-          border: 0.5px solid #cee;
-          -ms-overflow-style: none;
-          scrollbar-width: none;
         }
       }
     }
@@ -115,6 +102,15 @@ const StyledHomeDrinks = styled.div`
         max-width: 270px;
         max-height: 270px;
         margin: 0 5px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .drink {
+      .drink_info_btn {
+        z-index: 3;
+        opacity: 1;
       }
     }
   }

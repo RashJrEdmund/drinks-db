@@ -84,7 +84,6 @@ const StyledNavBar = styled.div`
     }
 
     .profile_section {
-      position: relative;
       height: fit-content;
       width: fit-content;
       display: flex;
@@ -94,6 +93,7 @@ const StyledNavBar = styled.div`
       cursor: pointer;
 
       .profile_logo {
+        position: relative;
         background-color: #f5f5f5;
         background-position: center;
         background-size: cover;

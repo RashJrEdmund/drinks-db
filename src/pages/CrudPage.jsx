@@ -5,8 +5,7 @@
 import React from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import { TiEdit } from 'react-icons/ti';
-import { MdDeleteForever } from 'react-icons/md';
-import { BiArrowToTop } from 'react-icons/bi';
+import { MdDeleteForever, MdSave, MdKeyboardControlKey } from 'react-icons/md';
 
 import { MyContext, CrudContext } from '../context/MyContext';
 import AdminGaurd from '../HOFs/AdminGaurd';
@@ -105,7 +104,7 @@ function CrudPage({ currentUser }) {
                 onClick={() => navigate(item.toLowerCase(), { replace: true })}
               >
                 <h1>
-                  <TiEdit /> edit <MdDeleteForever />
+                  <TiEdit /> <MdSave /> <MdDeleteForever />
                 </h1>
                 <h1>{item}</h1>
               </div>
@@ -118,7 +117,7 @@ function CrudPage({ currentUser }) {
             type="button"
             onClick={() => window.scrollTo(0, cardOptionsRef.current.ofsettop)}
           >
-            <BiArrowToTop />
+            <MdKeyboardControlKey />
           </button>
         </div>
       </StyleCrudPage>

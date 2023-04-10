@@ -22,12 +22,18 @@ import CrudPage from './pages/CrudPage';
 import NestedDrinks from './nested routes/NestedDrinks';
 import NestedCategories from './nested routes/NestedCategories';
 import NestedIngredients from './nested routes/NestedIngredients';
+import DrinkModal from './components/DrinkModal';
 
 export default function App() {
   const [fetchedData, setFetchedData] = React.useState({});
   const [filterData, setFilterData] = React.useState([]);
 
   const [zoomPhoto, setZoomPhoto] = React.useState(false);
+  const [itemModal, setItemModal] = React.useState({
+    items: {},
+    show: false,
+    start: 0,
+  });
 
   const [showMenu, setShowMenu] = React.useState({
     side: false,
@@ -115,6 +121,9 @@ export default function App() {
           zoomPhoto,
           setZoomPhoto,
 
+          itemModal,
+          setItemModal,
+
           bodyref,
         }}
       >
@@ -122,12 +131,14 @@ export default function App() {
 
         {dialogueDetails.show && (
           <DialogueMsg
-            message={dialogueDetails}
-            setmessage={setdialogueDetails}
+            details={dialogueDetails}
+            setDetails={setdialogueDetails}
           />
         )}
 
         {loadingAnime.show && <LoadingAnime message={loadingAnime.message} />}
+
+        {!itemModal.show && <DrinkModal drinks={itemModal.items} />}
 
         <BrowserRouter>
           <Routes>

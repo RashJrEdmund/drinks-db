@@ -9,6 +9,7 @@ import {
   MdLogin,
   MdDashboardCustomize,
   MdHome,
+  MdFavorite,
   MdApi,
   MdLogout,
 } from 'react-icons/md';
@@ -17,7 +18,7 @@ import { MyContext } from '../context/MyContext';
 const StyledDropDown = styled.div`
   position: absolute;
   left: -170%;
-  top: calc(100% + 1.8rem);
+  top: calc(100% + 2.8rem);
   background: linear-gradient(to bottom, #000000, #000000df, #000000cf);
   width: fit-content;
   min-width: 175px;
@@ -81,7 +82,7 @@ export default function ProfileDropDown({ currentUser }) {
       ...prev,
       show: true,
       job: 'Logout',
-      message2: 'are you sure you want to log out',
+      message3: 'you are about to be logged out',
       fxntoCall() {
         localStorage.clear();
         navigate('/logout', { replace: true });
@@ -113,6 +114,10 @@ export default function ProfileDropDown({ currentUser }) {
         <FaUser /> Profile
       </p>
 
+      <p onClick={() => customAlert('this feature is not yet available')}>
+        <MdFavorite /> Favorites
+      </p>
+
       <p onClick={() => navigate('/apipage')}>
         <MdApi /> API
       </p>
@@ -127,6 +132,12 @@ export default function ProfileDropDown({ currentUser }) {
         <MdHome /> Home
       </p>
       <ProfileAndLoginBtn fxn={checkUserLoggedIn} currentUser={currentUser} />
+
+      {currentUser && (
+        <p onClick={() => customAlert('this feature is not yet available')}>
+          <MdFavorite /> Favorites
+        </p>
+      )}
 
       {currentUser && (
         <p onClick={() => navigate('/apipage')}>

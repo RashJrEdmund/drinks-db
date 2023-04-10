@@ -1,9 +1,6 @@
 import styled from '@emotion/styled';
-import coverBg from '../images/dark_wine.png';
 
 const StyledUserProfile = styled.div`
-  /* background: linear-gradient(to bottom, #00000065, #00000065, #00000065),
-    url(${coverBg}); */
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
