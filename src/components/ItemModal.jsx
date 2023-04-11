@@ -73,7 +73,7 @@ const StyledItemModal = styled.div`
       }
 
       .info_div {
-        width: 100%;
+        width: 97%;
         margin: 0 5px;
 
         h3 {
@@ -93,7 +93,7 @@ const StyledItemModal = styled.div`
   @media only screen and (max-width: 900px) {
     .item_modal_holder {
       button {
-        top: calc(100% + 20px);
+        top: calc(100% + 25px);
         transform: scale(3.6);
 
         &.backward_btn {
@@ -108,11 +108,53 @@ const StyledItemModal = styled.div`
       .item_container {
         flex-direction: column;
         overflow: auto;
+        max-height: 80vh;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        .image_div {
+          height: 290px;
+          min-height: 290px;
+          width: 290px;
+          min-width: 290px;
+        }
+
+        .info_div {
+          width: 97%;
+          margin: 0 5px;
+
+          h3 {
+            margin: 15px 0 10px;
+          }
+
+          p {
+            line-height: 25px;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .item_modal_holder {
+      button {
+        top: 100%;
+        transform: scale(2.6);
+      }
+
+      .item_container {
         max-height: 550px;
 
         .image_div {
           height: 220px;
+          min-height: 220px;
           width: 220px;
+          min-width: 220px;
         }
       }
     }
