@@ -107,10 +107,12 @@ const StyledHomeDrinks = styled.div`
   }
 
   @media only screen and (max-width: 768px) {
-    .drink {
-      .drink_info_btn {
-        z-index: 3;
-        opacity: 1;
+    .drinks-container {
+      .drink {
+        .drink_info_btn {
+          z-index: unset;
+          opacity: 1;
+        }
       }
     }
   }

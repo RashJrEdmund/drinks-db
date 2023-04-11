@@ -30,20 +30,29 @@ const StyledItemModal = styled.div`
     z-index: 7;
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
+
+    .item_no {
+      color: #f5f5f5;
+      position: fixed;
+      top: 0;
+      right: 0;
+      margin: 14px 1rem;
+    }
 
     button {
-      position: relative;
-      background: none;
-      font-size: 10px;
-      transform: scale(8);
+      background: #00000097;
+      position: fixed;
+      top: 50%;
+      transform: translate(0, -50%) scale(5.6);
       color: #a52a2a;
 
       &.backward_btn {
-        left: -40px;
+        right: calc(100% + 40px);
       }
 
       &.forward_btn {
-        right: -40px;
+        left: calc(100% + 40px);
       }
     }
 
@@ -56,8 +65,8 @@ const StyledItemModal = styled.div`
       gap: 4px;
 
       .image_div {
-        min-height: 300px;
-        min-width: 300px;
+        height: 300px;
+        width: 300px;
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
@@ -68,7 +77,9 @@ const StyledItemModal = styled.div`
         margin: 0 5px;
 
         h3 {
-          margin: 0 0 10px;
+          margin: 0 0 13px;
+          padding: 0 0 10px;
+          border-bottom: 1px solid grey;
         }
 
         p {
@@ -80,11 +91,35 @@ const StyledItemModal = styled.div`
   }
 
   @media only screen and (max-width: 900px) {
-    // write querry for 900px screen size
+    .item_modal_holder {
+      button {
+        top: calc(100% + 20px);
+        transform: scale(3.6);
+
+        &.backward_btn {
+          right: calc(50% + 50px);
+        }
+
+        &.forward_btn {
+          left: calc(50% + 50px);
+        }
+      }
+
+      .item_container {
+        flex-direction: column;
+        overflow: auto;
+        max-height: 550px;
+
+        .image_div {
+          height: 220px;
+          width: 220px;
+        }
+      }
+    }
   }
 `;
 
-export default function DrinkModal({ itemModal, setItemModal }) {
+export default function ItemModal({ itemModal, setItemModal }) {
   const { items, start } = itemModal;
 
   const [ind, setind] = React.useState(start);
@@ -111,15 +146,14 @@ export default function DrinkModal({ itemModal, setItemModal }) {
         </button>
 
         <div className="item_container">
+          <span className="item_no">item: {ind + 1}</span>
           <div
             className="image_div"
             style={{ backgroundImage: `url(${items[ind]?.image_url})` }}
           />
 
           <div className="info_div">
-            <h3>
-              {items[ind]?.name} {ind}
-            </h3>
+            <h3>{items[ind]?.name}</h3>
 
             <p>{items[ind]?.description}</p>
           </div>

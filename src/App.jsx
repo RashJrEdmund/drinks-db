@@ -22,7 +22,7 @@ import CrudPage from './pages/CrudPage';
 import NestedDrinks from './nested routes/NestedDrinks';
 import NestedCategories from './nested routes/NestedCategories';
 import NestedIngredients from './nested routes/NestedIngredients';
-import DrinkModal from './components/DrinkModal';
+import ItemModal from './components/ItemModal';
 
 export default function App() {
   const [fetchedData, setFetchedData] = React.useState({});
@@ -139,7 +139,7 @@ export default function App() {
         {loadingAnime.show && <LoadingAnime message={loadingAnime.message} />}
 
         {itemModal.show && (
-          <DrinkModal itemModal={itemModal} setItemModal={setItemModal} />
+          <ItemModal itemModal={itemModal} setItemModal={setItemModal} />
         )}
 
         <BrowserRouter>

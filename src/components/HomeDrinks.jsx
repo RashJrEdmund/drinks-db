@@ -13,22 +13,7 @@ import standingGlass from '../images/standing_wine_glass.png';
 import wineGlasses from '../images/wine_glasses.png';
 
 export default function HomeDrinks({ drinksToshow, showInd }) {
-  const { bodyref /* filterData */, setItemModal } =
-    React.useContext(MyContext);
-
-  React.useEffect(() => {
-    // console.clear();
-    // console.log('this drinks to show', drinksToshow);
-    // const sortDrinks = () => {
-    //   const holder = filterData;
-    //   holder.forEach((item) => {
-    //     const newItem = item.split(',');
-    //     console.log('this item', newItem);
-    //   });
-    //   console.log('this data', holder);
-    // };
-    // sortDrinks();
-  }, []);
+  const { bodyref, setItemModal } = React.useContext(MyContext);
 
   const handleToggleModal = (id) =>
     setItemModal({ items: drinksToshow, show: true, start: +id });
