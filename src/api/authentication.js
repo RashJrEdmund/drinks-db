@@ -41,6 +41,10 @@ const postDrink = async (drink) => {
   return httpClient.post('drinks', drink);
 };
 
+const patchDrink = async (drink) => {
+  return httpClient.patch(`drinks/${drink.id}`, drink);
+};
+
 const deleteDrink = async (id) => {
   return httpClient.delete(`drinks/${id}`);
 };
@@ -59,5 +63,6 @@ export {
   deleteUser,
   deleteDrink,
   postDrink,
+  patchDrink,
   deleteCategory,
 };

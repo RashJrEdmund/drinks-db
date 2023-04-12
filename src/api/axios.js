@@ -1,12 +1,12 @@
 /* eslint-disable func-names */
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
-import API_BASE_URL from '../constants';
+import { API_BASE_URL, API_KEY } from '../constants';
 import { readToken } from '../services/utils';
 
 const httpClient = axios.create({
   baseURL: API_BASE_URL,
-  'x-api-key': process.env.API_KEY,
+  'x-api-key': API_KEY,
 });
 
 httpClient.interceptors.request.use(

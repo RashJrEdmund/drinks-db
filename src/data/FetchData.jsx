@@ -1,9 +1,8 @@
 import axios from 'axios';
-
-const apikey = 1;
+import { API_KEY, API_BASE_URL } from '../constants';
 
 const FetchData = async () => {
-  const URL = `http://localhost:3000/drinks?apikey=${apikey}`;
+  const URL = `${API_BASE_URL}drinks?apikey=${API_KEY}`;
   const allData = await axios.get(URL);
   return allData.data;
 };

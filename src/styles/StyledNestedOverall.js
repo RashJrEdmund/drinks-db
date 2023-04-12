@@ -57,6 +57,10 @@ const StlydeNestedOverall = styled.div`
           border-radius: 17px;
           box-shadow: 0 0 10px #222;
 
+          & * {
+            cursor: pointer;
+          }
+
           &.edit_btn {
             background-color: green;
           }

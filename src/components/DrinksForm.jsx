@@ -8,7 +8,7 @@ import { RiDeleteBack2Fill } from 'react-icons/ri';
 
 import StyledDrinksForm from '../styles/StyledDrinksForm';
 import { MyContext } from '../context/MyContext';
-import { postDrink } from '../api/authentication';
+import { postDrink, patchDrink } from '../api/authentication';
 
 export default function DrinksForm(props) {
   const { drink, setEdit } = props;
@@ -67,7 +67,7 @@ export default function DrinksForm(props) {
         .finally(() => setLoadingAnime({ messagee: '', show: false }));
     } else {
       setLoadingAnime({ messagee: 'saving...', show: true });
-      await postDrink(holder) // usePatch here
+      await patchDrink(holder) // usePatch here
         .then(() => customAlert('drink saved'))
         .catch((e) => {
           console.log('this error in drinks from \n', e);
@@ -211,7 +211,10 @@ export default function DrinksForm(props) {
           <button
             type="button"
             className="submit-drink-btn"
-            onClick={() => handleSubmit(formRef.current, true)} // the second parameter means, handleSubmit is allowed to call the saveDrink() function
+            onClick={() => {
+              handleSubmit(formRef.current, true);
+              closeForm();
+            }} // the second parameter means, handleSubmit is allowed to call the saveDrink() function
           >
             save Drink
           </button>
