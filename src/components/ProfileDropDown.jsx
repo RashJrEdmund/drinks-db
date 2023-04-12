@@ -19,7 +19,7 @@ const StyledDropDown = styled.div`
   position: absolute;
   left: -170%;
   top: calc(100% + 3.8rem);
-  background: linear-gradient(to bottom, #000000, #000000df, #000000cf);
+  background-color: #18191a;
   width: fit-content;
   min-width: 175px;
   height: fit-content;
@@ -30,7 +30,7 @@ const StyledDropDown = styled.div`
 
   &::before {
     content: ' ';
-    background-color: #000;
+    background-color: #18191a;
     position: absolute;
     top: 0;
     right: 0;
@@ -44,7 +44,9 @@ const StyledDropDown = styled.div`
   }
 
   p {
+    color: #ff1818;
     color: #a52a2a;
+    color: #fff;
     text-align: left;
     line-height: 40px;
     letter-spacing: 2px;

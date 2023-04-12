@@ -8,12 +8,12 @@ import { RiDeleteBack2Fill } from 'react-icons/ri';
 
 import StyledDrinksForm from '../styles/StyledDrinksForm';
 import { MyContext } from '../context/MyContext';
-// import { postDrink } from '../api/authentication';
+import { postDrink } from '../api/authentication';
 
 export default function DrinksForm(props) {
   const { drink, setEdit } = props;
 
-  const { customAlert } = React.useContext(MyContext);
+  const { customAlert, setLoadingAnime } = React.useContext(MyContext);
   const [drinkData, setDrinkData] = React.useState(drink?.chosenOne);
 
   const [imagePath, setImagePath] = React.useState();
@@ -52,14 +52,35 @@ export default function DrinksForm(props) {
       return;
     }
 
-    customAlert('createding drink...');
+    const holder = drinkData;
+    holder.recipe = drinkData.recipe.join('_/-/_');
+    console.log('handle post post Drink \n', holder);
 
-    // await postDrink(drinkData);
-    console.log('handle post Drink \n', drinkData);
+    if (drink.type === 'create') {
+      setLoadingAnime({ messagee: 'creating...', show: true });
+      await postDrink(holder)
+        .then(() => customAlert('drink saved'))
+        .catch((e) => {
+          console.log('this error in drinks from \n', e);
+          customAlert('could not create drink');
+        })
+        .finally(() => setLoadingAnime({ messagee: '', show: false }));
+    } else {
+      setLoadingAnime({ messagee: 'saving...', show: true });
+      await postDrink(holder) // usePatch here
+        .then(() => customAlert('drink saved'))
+        .catch((e) => {
+          console.log('this error in drinks from \n', e);
+          customAlert('could not saved drink');
+        })
+        .finally(() => setLoadingAnime({ messagee: '', show: false }));
+    }
+
+    console.log('handle post Drink \n', holder);
   };
 
   const handleSubmit = (e, saveDrink = false) => {
-    if (!saveDrink) e.preventDefault();
+    if (!saveDrink) e.preventDefault(); // this is to know when to refresh since e could be from the for  || save btn
 
     const { recipe, drinkName, description } = saveDrink ? e : e.target; // cant believe this worked
 

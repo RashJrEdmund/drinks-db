@@ -108,7 +108,7 @@ const StyledSideBar = styled.div`
         }
 
         label {
-          color: green;
+          color: #f5f5f5;
           width: 100%;
           text-align: left;
           padding: 10px 15px;

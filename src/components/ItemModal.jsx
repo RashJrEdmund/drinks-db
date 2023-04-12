@@ -18,7 +18,7 @@ const StyledItemModal = styled.div`
 
   .item_modal_holder {
     background: #000;
-    padding: 14px 0;
+    padding: 14px 10px;
     position: fixed;
     top: 50%;
     left: 50%;

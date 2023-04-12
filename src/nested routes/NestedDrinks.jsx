@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { MdDeleteForever } from 'react-icons/md';
 import { TiEdit } from 'react-icons/ti';
@@ -10,14 +9,35 @@ import { CrudContext, MyContext } from '../context/MyContext';
 import { deleteDrink } from '../api/authentication';
 import StlydeNestedOverall from '../styles/StyledNestedOverall';
 
-export default function NestedDrinks({ currentUser }) {
-  // const localDrinks = JSON.parse(localStorage.getItem('localDrinks'));
+export default function NestedDrinks() {
   const { customAlert, setLoadingAnime, setdialogueDetails } =
     React.useContext(MyContext);
-  const { edit, setEdit } = React.useContext(CrudContext);
+
+  const { edit, setEdit, currentUser } = React.useContext(CrudContext);
   const bodyref = React.useRef();
 
   const { Drinks } = simulationData;
+
+  const handleCreateNew = () =>
+    setEdit({
+      drink: {
+        chosenOne: {
+          userId: currentUser.id,
+        },
+        show: true,
+        type: 'create',
+      },
+      category: {
+        chosenOne: {},
+        show: false,
+        type: '',
+      },
+      ingredient: {
+        chosenOne: {},
+        show: false,
+        type: '',
+      },
+    });
 
   const handleDeleteDrink = async (id) => {
     await setdialogueDetails({
@@ -48,8 +68,9 @@ export default function NestedDrinks({ currentUser }) {
     const [drinkToEdit] = Drinks.filter((drink) => drink.id === id);
 
     holder.drink.show = true;
+    holder.drink.type = 'edit';
     holder.drink.chosenOne = drinkToEdit;
-    holder.drink.chosenOne.userId = currentUser?.id;
+    holder.drink.chosenOne.userId = currentUser.id;
 
     setEdit(() => ({ ...holder }));
 
@@ -63,22 +84,7 @@ export default function NestedDrinks({ currentUser }) {
       <button
         className="create-new-btn"
         type="button"
-        onClick={() =>
-          setEdit({
-            drink: {
-              chosenOne: {},
-              show: true,
-            },
-            category: {
-              chosenOne: {},
-              show: false,
-            },
-            ingredient: {
-              chosenOne: {},
-              show: false,
-            },
-          })
-        }
+        onClick={handleCreateNew}
       >
         create New
       </button>

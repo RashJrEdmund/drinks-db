@@ -23,14 +23,17 @@ function CrudPage({ currentUser }) {
     drink: {
       chosenOne: {},
       show: false,
+      type: '', // could be 'create' || 'edit' depending on which button clicked it
     },
     category: {
       chosenOne: {},
       show: false,
+      type: '',
     },
     ingredient: {
       chosenOne: {},
       show: false,
+      type: '',
     },
   });
 
@@ -67,7 +70,7 @@ function CrudPage({ currentUser }) {
   }, []);
 
   return (
-    <CrudContext.Provider value={{ edit, setEdit }}>
+    <CrudContext.Provider value={{ edit, setEdit, currentUser }}>
       <StyleCrudPage activeMenu={activeMenu}>
         <div className="styled_crud_page_holder">
           <div ref={adminNavRef} className="admin_nav_holder">
@@ -94,7 +97,7 @@ function CrudPage({ currentUser }) {
             </div>
           </div>
 
-          <Outlet currentUser={currentUser} />
+          <Outlet />
 
           <div ref={cardOptionsRef} className="card-options">
             {['Drinks', 'Categories', 'Ingredients'].map((item) => (
