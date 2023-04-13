@@ -87,10 +87,11 @@ export default function App() {
   React.useEffect(() => {
     FetchData()
       .then((res) => {
-        console.log('this res\n', res);
+        console.clear();
+        console.log('this data returned\n', res);
         setFetchedData(res);
       })
-      .catch((err) => console.log('Erro!', err));
+      .catch(({ message }) => customAlert(message));
   }, []);
 
   React.useEffect(() => {

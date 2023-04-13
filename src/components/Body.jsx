@@ -33,9 +33,7 @@ const StyledBody = styled.div`
 export default function Body() {
   return (
     <StyledBody>
-      <div className="sidebar_holder">
-        <SideBar />
-      </div>
+      <div className="sidebar_holder">{/* <SideBar /> */}</div>
 
       <div className="drinks_section">
         <DrinksSection />

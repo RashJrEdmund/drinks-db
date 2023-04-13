@@ -13,7 +13,7 @@ export default function DrinksSection() {
 
   const [drinksToshow, setDrinksToShow] = React.useState({
     showInd: navIndx / 12,
-    showData: Drinks.filter(
+    showData: Drinks?.filter(
       (drink, index) => index >= navIndx && index < navIndx + 12
     ),
   });
@@ -38,22 +38,24 @@ export default function DrinksSection() {
         showInd={drinksToshow.showInd}
       />
 
-      <div className="navigation_btns">
-        {new Array(Math.ceil((Drinks.length - 1) / 12))
-          .fill(' ')
-          .map((dot, ind) => (
-            <span key={ind} id={ind}>
-              <button
-                id={ind}
-                className={drinksToshow.showInd === ind ? 'active_dot' : ''}
-                type="button"
-                onClick={({ target }) => choseDrinksToShow(+target.id)}
-              >
-                {ind + 1}
-              </button>
-            </span>
-          ))}
-      </div>
+      {Drinks?.length >= 1 && (
+        <div className="navigation_btns">
+          {new Array(Math.ceil((Drinks.length - 1) / 12))
+            .fill(' ')
+            .map((dot, ind) => (
+              <span key={ind} id={ind}>
+                <button
+                  id={ind}
+                  className={drinksToshow.showInd === ind ? 'active_dot' : ''}
+                  type="button"
+                  onClick={({ target }) => choseDrinksToShow(+target.id)}
+                >
+                  {ind + 1}
+                </button>
+              </span>
+            ))}
+        </div>
+      )}
     </StyledDrinksSection>
   );
 }

@@ -180,8 +180,8 @@ export default function SideBar() {
               window.scrollTo(0, bodyref.current.offsetTop);
             }}
           >
-            {`${filterData.length || Drinks.length} Product${
-              (filterData.length || Drinks.length) > 1 ? 's' : ''
+            {`${filterData.length || Drinks?.length} Product${
+              (filterData.length || Drinks?.length) > 1 ? 's' : ''
             }`}
           </span>
         </li>
@@ -191,7 +191,7 @@ export default function SideBar() {
         </button>
 
         <form ref={formRef} onChange={handleFilterOptions}>
-          {filterOptions?.map(({ title }) => (
+          {filterOptions.map(({ title }) => (
             <li className="filter_option" key={title}>
               <h2
                 title={`open and close to quick clear all selected ${title}`}
