@@ -10,7 +10,7 @@ import { MyContext } from '../context/MyContext';
 
 export default function SideBar() {
   const {
-    Simulation,
+    fetchedData,
     filterData,
     setFilterData,
     bodyref,
@@ -28,7 +28,7 @@ export default function SideBar() {
 
   const formRef = React.useRef();
 
-  const { Drinks } = Simulation;
+  const { Drinks } = fetchedData;
 
   const filterOptions = [
     {
@@ -207,7 +207,7 @@ export default function SideBar() {
 
               {showOptionList[title] &&
                 (title !== 'Alcoholic'
-                  ? Simulation[title].map(({ name }) => {
+                  ? fetchedData[title].map(({ name }) => {
                       return (
                         <label htmlFor={[title, name]} key={name}>
                           <input type="checkbox" id={[title, name]} />

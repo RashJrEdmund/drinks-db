@@ -6,8 +6,8 @@ import { MyContext } from '../context/MyContext';
 import HomeDrinks from './HomeDrinks';
 
 export default function DrinksSection() {
-  const { Simulation } = React.useContext(MyContext);
-  const { Drinks } = Simulation;
+  const { fetchedData } = React.useContext(MyContext);
+  const { Drinks } = fetchedData;
 
   const navIndx = +JSON.parse(localStorage.getItem('navigationIndx')) * 12 || 0;
 

@@ -16,7 +16,6 @@ import AlertMessage from './components/AlertMessage';
 import DialogueMsg from './components/DialogueMsg';
 import LoadingAnime from './components/LoadingAnime';
 
-import Simulation from './data/DataSimulation.json';
 import ApiPage from './pages/ApiPage';
 import CrudPage from './pages/CrudPage';
 import NestedDrinks from './nested routes/NestedDrinks';
@@ -87,7 +86,10 @@ export default function App() {
 
   React.useEffect(() => {
     FetchData()
-      .then((res) => setFetchedData(res))
+      .then((res) => {
+        console.log('this res\n', res);
+        setFetchedData(res);
+      })
       .catch((err) => console.log('Erro!', err));
   }, []);
 
@@ -112,8 +114,6 @@ export default function App() {
           setLoadingAnime,
 
           fetchedData,
-
-          Simulation,
 
           filterData,
           setFilterData,

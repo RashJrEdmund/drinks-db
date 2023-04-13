@@ -2,7 +2,6 @@ import React from 'react';
 import { MdDeleteForever } from 'react-icons/md';
 import { TiEdit } from 'react-icons/ti';
 
-import simulationData from '../data/DataSimulation.json';
 import DrinksForm from '../components/DrinksForm';
 import { CrudContext, MyContext } from '../context/MyContext';
 
@@ -10,13 +9,11 @@ import { deleteDrink } from '../api/authentication';
 import StlydeNestedOverall from '../styles/StyledNestedOverall';
 
 export default function NestedDrinks() {
-  const { customAlert, setLoadingAnime, setdialogueDetails } =
+  const { customAlert, setLoadingAnime, setdialogueDetails, Drinks } =
     React.useContext(MyContext);
 
   const { edit, setEdit, currentUser } = React.useContext(CrudContext);
   const bodyref = React.useRef();
-
-  const { Drinks } = simulationData;
 
   const handleCreateNew = () =>
     setEdit({

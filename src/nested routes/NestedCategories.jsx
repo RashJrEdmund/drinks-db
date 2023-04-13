@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import simulationData from '../data/DataSimulation.json';
 import { CrudContext, MyContext } from '../context/MyContext';
 
 import { deleteCategory } from '../api/authentication';
@@ -67,13 +66,13 @@ const StyledNestedCategories = styled.div`
 `;
 
 export default function NestedCategories() {
-  const { customAlert, setLoadingAnime, setdialogueDetails } =
+  const { customAlert, setLoadingAnime, setdialogueDetails, fetchedData } =
     React.useContext(MyContext);
   const { edit, setEdit } = React.useContext(CrudContext);
 
-  const bodyref = React.useRef();
+  const { Categories, Drinks } = fetchedData;
 
-  const { Drinks } = simulationData;
+  const bodyref = React.useRef();
 
   const handleDeleteCategory = async (id) => {
     await setdialogueDetails({
@@ -109,7 +108,6 @@ export default function NestedCategories() {
     log('clicked drink', id, drinkToEdit);
   };
 
-  const { Categories } = simulationData;
   return (
     <StyledNestedCategories>
       <button
