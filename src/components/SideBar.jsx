@@ -28,23 +28,30 @@ export default function SideBar() {
 
   const formRef = React.useRef();
 
-  const { Drinks } = fetchedData;
+  const { Drinks, Categories, Ingredients, Glasses } = fetchedData;
 
-  const filterOptions = [
-    {
-      title: 'Categories',
-    },
-    {
-      title: 'Glasses',
-    },
-    {
-      title: 'Ingredients',
-    },
-    {
-      title: 'Alcoholic',
-      list: ['yes', 'no', 'both'],
-    },
-  ];
+  const [filterOptions, setFilterOptions] = React.useEffect({});
+
+  React.useEffect(() => {
+    // setFilterOptions([
+    //   {
+    //     title: 'Categories',
+    //     list: Categories,
+    //   },
+    //   {
+    //     title: 'Glasses',
+    //     Ingredients,
+    //   },
+    //   {
+    //     title: 'Ingredients',
+    //     Glasses,
+    //   },
+    //   {
+    //     title: 'Alcoholic',
+    //     list: ['yes', 'no', 'both'],
+    //   },
+    // ]);
+  }, []);
 
   const capitalizedWord = (word, all = false) => {
     if (all) {
