@@ -1,3 +1,7 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { MdDeleteForever } from 'react-icons/md';
 import { TiEdit } from 'react-icons/ti';
@@ -7,13 +11,19 @@ import { CrudContext, MyContext } from '../context/MyContext';
 
 import { deleteDrink } from '../api/authentication';
 import StlydeNestedOverall from '../styles/StyledNestedOverall';
+import FetchHOC from '../HOFs/FetchHOC';
 
-export default function NestedDrinks() {
-  const { customAlert, setLoadingAnime, setdialogueDetails, Drinks } =
+function NestedDrinks({ fetchedData }) {
+  const { customAlert, setLoadingAnime, setdialogueDetails, setItemModal } =
     React.useContext(MyContext);
+
+  const { Drinks } = fetchedData;
 
   const { edit, setEdit, currentUser } = React.useContext(CrudContext);
   const bodyref = React.useRef();
+
+  const handleToggleModal = (id) =>
+    setItemModal({ items: Drinks, show: true, start: +id });
 
   const handleCreateNew = () =>
     setEdit({
@@ -87,28 +97,21 @@ export default function NestedDrinks() {
       </button>
 
       <div ref={bodyref} className="container">
-        {Drinks?.map((drink) => (
-          <div
-            key={drink.id}
-            className="drink"
-            style={{ backgroundImage: `url("${drink.image_url}")` }}
-          >
-            <div style={{ backgroundImage: `url("${drink.image_url}")` }} />
-            <h3>
+        {Drinks?.map((drink, ind) => (
+          <div key={drink.id} className="drink">
+            <div
+              className="image"
+              title="tap to view"
+              style={{ backgroundImage: `url("${drink.image_url}")` }}
+              onClick={() => handleToggleModal(ind)}
+            />
+
+            <h3 onClick={() => handleToggleModal(ind)}>
               {drink.name} {drink.id}
             </h3>
             {/* <p>{drink.description}</p> */}
 
             <div className="action-btns">
-              <button
-                name={drink.id}
-                className="del_btn"
-                type="button"
-                onClick={() => handleDeleteDrink(drink.id)}
-              >
-                <MdDeleteForever />
-              </button>
-
               <button
                 name={drink.id}
                 className="edit_btn"
@@ -117,6 +120,15 @@ export default function NestedDrinks() {
               >
                 <TiEdit />
               </button>
+
+              <button
+                name={drink.id}
+                className="del_btn"
+                type="button"
+                onClick={() => handleDeleteDrink(drink.id)}
+              >
+                <MdDeleteForever />
+              </button>
             </div>
           </div>
         ))}
@@ -124,3 +136,5 @@ export default function NestedDrinks() {
     </StlydeNestedOverall>
   );
 }
+
+export default FetchHOC(NestedDrinks);

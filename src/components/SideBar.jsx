@@ -33,21 +33,28 @@ function SideBar({ fetchedData }) {
 
   const { Drinks, Categories, Ingredients, Glasses } = fetchedData;
 
-  console.log('this Drinks in sideBar', Categories, Ingredients);
-
   React.useEffect(() => {
     setFilterOptions([
       {
         title: 'Categories',
-        list: Categories,
-      },
-      {
-        title: 'Glasses',
-        list: Ingredients,
+        list:
+          Categories.length > 0
+            ? Categories
+            : [{ name: 'cat 1' }, { name: 'cat 2' }, { name: 'cat 3' }],
       },
       {
         title: 'Ingredients',
-        list: Glasses,
+        list:
+          Ingredients.length > 0
+            ? Ingredients
+            : [{ name: 'ing 1' }, { name: 'ing 2' }, { name: 'ing 3' }],
+      },
+      {
+        title: 'Glasses',
+        list:
+          Glasses.length > 0
+            ? Glasses
+            : [{ name: 'glass 1' }, { name: 'glass 2' }, { name: 'glass 3' }],
       },
       {
         title: 'Alcoholic',
@@ -55,10 +62,9 @@ function SideBar({ fetchedData }) {
       },
     ]);
 
-    console.clear();
     console.log(
       'this cate... in sideBar',
-      filterOptions,
+      // filterOptions,
       Categories,
       Ingredients,
       Glasses
@@ -76,9 +82,10 @@ function SideBar({ fetchedData }) {
   const checkWhichIsChecked = () => {
     const { elements } = formRef.current;
     let isChecked = false;
-    for (let i = 0; i < elements.length; i += 1) {
-      if (elements[i].checked) isChecked = true;
-    }
+
+    [...elements]?.forEach((el) => {
+      if (el.checked) isChecked = true;
+    });
 
     if (!isChecked) {
       localStorage.removeItem('filteredDrinks');
@@ -89,10 +96,9 @@ function SideBar({ fetchedData }) {
   };
 
   const handleSearch = () => {
-    console.clear();
     setLoadingAnime({ message: 'Filtering...', show: true });
 
-    const searchData = JSON.parse(localStorage.getItem('filteredDrinks'));
+    const searchData = JSON.parse(sessionStorage.getItem('filteredDrinks'));
 
     const isChecked = checkWhichIsChecked();
 
@@ -108,11 +114,6 @@ function SideBar({ fetchedData }) {
     setTimeout(() => {
       const results = searchData?.map((item) => {
         const newItem = item.split(','); // newItem looks like ['categories', 'wine']
-        console.log(
-          'newIt[0]',
-          newItem[0],
-          Drinks[0][newItem[0].toLowerCase()]
-        );
 
         return Drinks.filter(
           (drink) => drink[newItem[0].toLowerCase()] === newItem[1]
@@ -128,7 +129,6 @@ function SideBar({ fetchedData }) {
       /* Since i'm having multiple repeated values, i'll change my array to a set, then spread it 
     or use the Array.from(finalResults) to create a new a array with unique entries */
 
-      console.log('this new set', new Set(finalResults));
       finalResults = Array.from(new Set(finalResults));
 
       setLoadingAnime({ message: '', show: false });
@@ -137,27 +137,26 @@ function SideBar({ fetchedData }) {
     }, 1500);
   };
 
-  // localStorage.clear();
+  // sessionStorage.clear();
 
   const handleFilterOptions = (e) => {
-    console.clear();
     const isChecked = checkWhichIsChecked();
 
     if (!isChecked) return;
 
-    const localData = JSON.parse(localStorage.getItem('filteredDrinks'));
-    if (!localData) {
-      localStorage.setItem('filteredDrinks', JSON.stringify([e.target.id]));
-    } else if (localData?.includes(e.target.id)) {
-      const holder = JSON.parse(localStorage.getItem('filteredDrinks')).filter(
-        (item) => item !== e.target.id
-      );
+    const sessionChoices = JSON.parse(sessionStorage.getItem('filteredDrinks'));
+    if (!sessionChoices) {
+      sessionStorage.setItem('filteredDrinks', JSON.stringify([e.target.id]));
+    } else if (sessionChoices?.includes(e.target.id)) {
+      const holder = JSON.parse(
+        sessionStorage.getItem('filteredDrinks')
+      ).filter((item) => item !== e.target.id);
 
-      localStorage.setItem('filteredDrinks', JSON.stringify(holder));
+      sessionStorage.setItem('filteredDrinks', JSON.stringify(holder));
     } else {
-      localStorage.setItem(
+      sessionStorage.setItem(
         'filteredDrinks',
-        JSON.stringify([...localData, e.target.id])
+        JSON.stringify([...sessionChoices, e.target.id])
       );
     }
 
@@ -172,7 +171,7 @@ function SideBar({ fetchedData }) {
   };
 
   React.useEffect(() => {
-    const searchData = JSON.parse(localStorage.getItem('fiteredDrinks'));
+    const searchData = JSON.parse(sessionStorage.getItem('fiteredDrinks'));
 
     if (!searchData || searchData?.length <= 0) setFilterData(Drinks);
     else handleSearch();
@@ -199,9 +198,7 @@ function SideBar({ fetchedData }) {
               window.scrollTo(0, bodyref.current.offsetTop);
             }}
           >
-            {`${filterData.length || Drinks?.length} Product${
-              (filterData.length || Drinks?.length) > 1 ? 's' : ''
-            }`}
+            {Drinks?.length} Product{Drinks?.length > 1 ? 's' : ''}
           </span>
         </li>
 
@@ -210,10 +207,10 @@ function SideBar({ fetchedData }) {
         </button>
 
         <form ref={formRef} onChange={handleFilterOptions}>
-          {filterOptions?.map(({ title }) => (
+          {filterOptions?.map(({ title, list }) => (
             <li className="filter_option" key={title}>
               <h2
-                title={`open and close to quick clear all selected ${title}`}
+                title={`close and open to quick clear options selected ${title}`}
                 onClick={() => toggleOptionList(title)}
               >
                 {title}{' '}
@@ -224,10 +221,9 @@ function SideBar({ fetchedData }) {
                 )}
               </h2>
 
-              {1 === 2 &&
-                showOptionList[title] &&
+              {showOptionList[title] &&
                 (title !== 'Alcoholic'
-                  ? fetchedData[title]?.map(({ name }) => {
+                  ? list?.map(({ name }) => {
                       return (
                         <label htmlFor={[title, name]} key={name}>
                           <input type="checkbox" id={[title, name]} />
@@ -235,34 +231,31 @@ function SideBar({ fetchedData }) {
                         </label>
                       );
                     })
-                  : filterOptions.pop().list.map(
-                      // i'm using a tenary to check if it's the is alcoholic part already
-                      (val) => (
-                        <label
-                          htmlFor={
+                  : list.map((val) => (
+                      <label
+                        htmlFor={
+                          val === 'yes'
+                            ? ['Alcoholic', true]
+                            : val === 'no'
+                            ? ['Alcoholic', false]
+                            : ['Alcoholic', 'null']
+                        }
+                        key={val}
+                      >
+                        <input
+                          type="radio"
+                          id={
                             val === 'yes'
                               ? ['Alcoholic', true]
                               : val === 'no'
                               ? ['Alcoholic', false]
                               : ['Alcoholic', 'null']
                           }
-                          key={val}
-                        >
-                          <input
-                            type="radio"
-                            id={
-                              val === 'yes'
-                                ? ['Alcoholic', true]
-                                : val === 'no'
-                                ? ['Alcoholic', false]
-                                : ['Alcoholic', 'null']
-                            }
-                            name="alcoholic_options" // it show's that all the radio types should have the same name before you'll be able to alternate between them
-                          />
-                          {capitalizedWord(val, true)}
-                        </label>
-                      )
-                    ))}
+                          name="alcoholic_options" // it show's that all the radio types should have the same name before you'll be able to alternate between them
+                        />
+                        {capitalizedWord(val, true)}
+                      </label>
+                    )))}
             </li>
           ))}
         </form>

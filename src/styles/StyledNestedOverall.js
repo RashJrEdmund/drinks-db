@@ -13,8 +13,8 @@ const StlydeNestedOverall = styled.div`
 
   .container {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: 16px;
     margin: 10px auto 0;
     padding: 0;
@@ -25,27 +25,33 @@ const StlydeNestedOverall = styled.div`
       position: relative;
       border: 1px solid #a52a2a;
       padding: 10px;
-      height: 300px;
       width: 100%;
+      height: fit-content;
       display: flex;
-      flex-direction: column;
-      cursor: default;
-      z-index: 1;
+      align-items: center;
+      transition: 0.5s;
 
-      * {
-        cursor: default;
+      &:hover {
+        background: steelblue;
+        transform: translate(7px, -7px);
+        box-shadow: 0 0 10px #222;
+      }
+
+      .image {
+        background-position: center;
+        background-size: contain;
+        height: 70px;
+        width: 70px;
+        border-radius: 5px;
+        margin: 0 2rem 0 0;
       }
 
       .action-btns {
         position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translate(-50%);
+        right: 10px;
         display: flex;
         justify-content: space-between;
-        width: 90%;
-        max-width: 200px;
-        margin: 2rem auto 14px;
+        width: 160px;
 
         button {
           background-color: #a52a2a;
