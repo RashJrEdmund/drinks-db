@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -7,10 +8,10 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 import StyledSideBar from '../styles/StyledSideBar';
 import { MyContext } from '../context/MyContext';
+import FetchHOC from '../HOFs/FetchHOC';
 
-export default function SideBar() {
+function SideBar({ fetchedData }) {
   const {
-    fetchedData,
     filterData,
     setFilterData,
     bodyref,
@@ -26,31 +27,42 @@ export default function SideBar() {
     Alcoholic: true,
   });
 
+  const [filterOptions, setFilterOptions] = React.useState([]);
+
   const formRef = React.useRef();
 
   const { Drinks, Categories, Ingredients, Glasses } = fetchedData;
 
-  const [filterOptions, setFilterOptions] = React.useEffect({});
+  console.log('this Drinks in sideBar', Categories, Ingredients);
 
   React.useEffect(() => {
-    // setFilterOptions([
-    //   {
-    //     title: 'Categories',
-    //     list: Categories,
-    //   },
-    //   {
-    //     title: 'Glasses',
-    //     Ingredients,
-    //   },
-    //   {
-    //     title: 'Ingredients',
-    //     Glasses,
-    //   },
-    //   {
-    //     title: 'Alcoholic',
-    //     list: ['yes', 'no', 'both'],
-    //   },
-    // ]);
+    setFilterOptions([
+      {
+        title: 'Categories',
+        list: Categories,
+      },
+      {
+        title: 'Glasses',
+        list: Ingredients,
+      },
+      {
+        title: 'Ingredients',
+        list: Glasses,
+      },
+      {
+        title: 'Alcoholic',
+        list: ['yes', 'no', 'both'],
+      },
+    ]);
+
+    console.clear();
+    console.log(
+      'this cate... in sideBar',
+      filterOptions,
+      Categories,
+      Ingredients,
+      Glasses
+    );
   }, []);
 
   const capitalizedWord = (word, all = false) => {
@@ -198,7 +210,7 @@ export default function SideBar() {
         </button>
 
         <form ref={formRef} onChange={handleFilterOptions}>
-          {filterOptions.map(({ title }) => (
+          {filterOptions?.map(({ title }) => (
             <li className="filter_option" key={title}>
               <h2
                 title={`open and close to quick clear all selected ${title}`}
@@ -212,9 +224,10 @@ export default function SideBar() {
                 )}
               </h2>
 
-              {showOptionList[title] &&
+              {1 === 2 &&
+                showOptionList[title] &&
                 (title !== 'Alcoholic'
-                  ? fetchedData[title].map(({ name }) => {
+                  ? fetchedData[title]?.map(({ name }) => {
                       return (
                         <label htmlFor={[title, name]} key={name}>
                           <input type="checkbox" id={[title, name]} />
@@ -257,3 +270,5 @@ export default function SideBar() {
     </StyledSideBar>
   );
 }
+
+export default FetchHOC(SideBar);

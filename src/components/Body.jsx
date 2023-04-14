@@ -2,7 +2,6 @@ import React from 'react';
 import styled from '@emotion/styled';
 import DrinksSection from './DrinksSection';
 import SideBar from './SideBar';
-import { MyContext } from '../context/MyContext';
 
 const StyledBody = styled.div`
   width: 98%;
@@ -31,36 +30,12 @@ const StyledBody = styled.div`
   }
 `;
 
-function GettingDrinks() {
-  return (
-    <h2
-      style={{
-        position: 'fixed',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        color: '#f5f5f5',
-        minHeight: '400px',
-        width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      getting drinks...
-    </h2>
-  );
-}
-
 export default function Body() {
-  const { fetchedData } = React.useContext(MyContext);
-  const { Drinks } = fetchedData;
-
-  if (!Drinks) return <GettingDrinks />;
-
   return (
     <StyledBody>
-      <div className="sidebar_holder">{/* <SideBar /> */}</div>
+      <div className="sidebar_holder">
+        <SideBar />
+      </div>
 
       <div className="drinks_section">
         <DrinksSection />

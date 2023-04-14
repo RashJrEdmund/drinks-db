@@ -1,35 +1,48 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
+import FetchHOC from '../HOFs/FetchHOC';
 
 import StyledDrinksSection from '../styles/StyledDrinksSection';
-import { MyContext } from '../context/MyContext';
 import HomeDrinks from './HomeDrinks';
 
-export default function DrinksSection() {
-  const { fetchedData } = React.useContext(MyContext);
+function DrinksSection({ fetchedData }) {
   const { Drinks } = fetchedData;
+  const displayLength = 12;
 
-  const navIndx = +JSON.parse(localStorage.getItem('navigationIndx')) * 12 || 0;
+  const navIndx =
+    +JSON.parse(sessionStorage.getItem('navigationIndx')) * displayLength || 0;
 
   const [drinksToshow, setDrinksToShow] = React.useState({
-    showInd: navIndx / 12,
-    showData: Drinks?.filter(
-      (drink, index) => index >= navIndx && index < navIndx + 12
-    ),
+    showInd: navIndx / displayLength,
+    showData: [],
   });
 
   const choseDrinksToShow = (id) => {
     const holder = drinksToshow;
-    localStorage.setItem('navigationIndx', id);
+    sessionStorage.setItem('navigationIndx', id);
     holder.showInd = id;
     holder.showData = Drinks.filter(
-      (_, index) => index >= id * 12 && index < id * 12 + 12
+      (_, index) =>
+        index >= id * displayLength &&
+        index < id * displayLength + displayLength
     );
 
     setDrinksToShow({ ...holder });
 
     window.scrollTo(0, 0);
   };
+
+  React.useEffect(() => {
+    const data = Drinks?.filter(
+      (drink, index) => index >= navIndx && index < navIndx + displayLength
+    );
+
+    setDrinksToShow({
+      showInd: navIndx / displayLength,
+      showData: data,
+    });
+  }, []);
 
   return (
     <StyledDrinksSection className="body-section" id="body_section">
@@ -38,24 +51,24 @@ export default function DrinksSection() {
         showInd={drinksToshow.showInd}
       />
 
-      {Drinks?.length >= 1 && (
-        <div className="navigation_btns">
-          {new Array(Math.ceil((Drinks.length - 1) / 12))
-            .fill(' ')
-            .map((dot, ind) => (
-              <span key={ind} id={ind}>
-                <button
-                  id={ind}
-                  className={drinksToshow.showInd === ind ? 'active_dot' : ''}
-                  type="button"
-                  onClick={({ target }) => choseDrinksToShow(+target.id)}
-                >
-                  {ind + 1}
-                </button>
-              </span>
-            ))}
-        </div>
-      )}
+      <div className="navigation_btns">
+        {new Array(Math.ceil(Drinks.length / displayLength))
+          .fill(' ')
+          .map((_, ind) => (
+            <span key={ind} id={ind}>
+              <button
+                id={ind}
+                className={drinksToshow.showInd === ind ? 'active_dot' : ''}
+                type="button"
+                onClick={({ target }) => choseDrinksToShow(+target.id)}
+              >
+                {ind + 1}
+              </button>
+            </span>
+          ))}
+      </div>
     </StyledDrinksSection>
   );
 }
+
+export default FetchHOC(DrinksSection);

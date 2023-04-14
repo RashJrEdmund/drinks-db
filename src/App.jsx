@@ -5,7 +5,6 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { MyContext } from './context/MyContext';
-import FetchData from './data/FetchData';
 import Main from './pages/Main';
 import LogoutPage from './pages/LogoutPage';
 import Login from './components/Login';
@@ -24,7 +23,6 @@ import NestedIngredients from './nested routes/NestedIngredients';
 import ItemModal from './components/ItemModal';
 
 export default function App() {
-  const [fetchedData, setFetchedData] = React.useState({});
   const [filterData, setFilterData] = React.useState([]);
 
   const [zoomPhoto, setZoomPhoto] = React.useState(false);
@@ -85,16 +83,6 @@ export default function App() {
   const bodyref = React.useRef();
 
   React.useEffect(() => {
-    FetchData()
-      .then((res) => {
-        console.clear();
-        console.log('this data returned\n', res);
-        setFetchedData(res);
-      })
-      .catch(({ message }) => customAlert(message));
-  }, []);
-
-  React.useEffect(() => {
     toggleBodyOverFlow();
   }, [dialogueDetails.show, loadingAnime.show, itemModal.show, zoomPhoto]);
 
@@ -113,8 +101,6 @@ export default function App() {
 
           loadingAnime,
           setLoadingAnime,
-
-          fetchedData,
 
           filterData,
           setFilterData,
