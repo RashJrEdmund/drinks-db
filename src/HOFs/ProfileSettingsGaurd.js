@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUser } from '../api/authentication';
 
-export default function ProfileGaurd(Component) {
+export default function ProfileSettingsGaurd(Component) {
   return function Gaurd() {
     const [currentUser, setCurrentUser] = React.useState(null);
     const navigate = useNavigate();

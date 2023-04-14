@@ -6,20 +6,20 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MdDeleteForever } from 'react-icons/md';
-import StyledUserProfile from '../styles/StyledUserProfile';
-
 import {
+  MdDeleteForever,
   MdArrowBackIos,
   MdOutlineModeEditOutline,
   MdOutlineEditOff,
+  MdBrightness4,
 } from 'react-icons/md';
+import FormData from 'form-data';
+import StyledUserProfile from '../styles/StyledUserProfile';
 
 import { MyContext } from '../context/MyContext';
 import { deleteUser } from '../api/authentication';
 import uploadIcon from '../images/darkImageIcon.png';
-import FormData from 'form-data';
-import ProfileGaurd from '../HOFs/ProfileGaurd';
+import ProfileSettingsGaurd from '../HOFs/ProfileSettingsGaurd';
 
 function UserProfile({ currentUser }) {
   const {
@@ -55,7 +55,6 @@ function UserProfile({ currentUser }) {
       customAlert('cannot update profile');
       return;
     }
-    daafdaf;
 
     const user = {
       id: currentUser?.id,
@@ -211,15 +210,17 @@ function UserProfile({ currentUser }) {
                 Joined Since: <span>{currentUser?.joinedSince}</span>
               </li>
 
-              {currentUser && (
-                <button
-                  type="button"
-                  className="delete_acount_btn"
-                  onClick={handleDeleteAccount}
-                >
-                  <MdDeleteForever /> delete account
-                </button>
-              )}
+              <li className="to_settings" onClick={() => navigate('/settings')}>
+                <MdBrightness4 /> Settings
+              </li>
+
+              <button
+                type="button"
+                className="delete_acount_btn"
+                onClick={handleDeleteAccount}
+              >
+                <MdDeleteForever /> delete account
+              </button>
             </ul>
           </div>
 
@@ -288,4 +289,4 @@ function UserProfile({ currentUser }) {
   );
 }
 
-export default ProfileGaurd(UserProfile);
+export default ProfileSettingsGaurd(UserProfile);

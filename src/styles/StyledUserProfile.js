@@ -119,6 +119,13 @@ const StyledUserProfile = styled.div`
 
           li {
             margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            &.to_settings {
+              cursor: pointer;
+            }
 
             span {
               color: #a52a2a;
@@ -138,7 +145,7 @@ const StyledUserProfile = styled.div`
             background: none;
             color: #a52a2a;
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             gap: 5px;
             margin: 3rem 0 0;
             padding: 0;

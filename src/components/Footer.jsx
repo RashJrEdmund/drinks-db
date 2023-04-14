@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
@@ -10,7 +11,7 @@ import {
   FaGithub,
 } from 'react-icons/fa';
 import { HiClipboardDocumentList } from 'react-icons/hi2';
-import { MdInfo } from 'react-icons/md';
+import { MdInfo, MdBrightness4 } from 'react-icons/md';
 
 const StyledFooter = styled.div`
   background-color: none;
@@ -42,7 +43,7 @@ const StyledFooter = styled.div`
   }
 `;
 
-export default function Footer() {
+export default function Footer({ currentUser }) {
   const navigate = useNavigate();
 
   return (
@@ -71,6 +72,12 @@ export default function Footer() {
       <p>
         <FaInstagramSquare /> Instagram
       </p>
+
+      {currentUser && (
+        <p onClick={() => navigate('/settings')}>
+          <MdBrightness4 /> Settings
+        </p>
+      )}
     </StyledFooter>
   );
 }

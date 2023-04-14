@@ -23,16 +23,19 @@ const StlydeNestedOverall = styled.div`
     .category,
     .ingredient {
       position: relative;
-      border: 1px solid #a52a2a;
+      border-right: 1px solid #a52a2a;
+      border-bottom: 1px solid #a52a2a;
+      color: #000;
       padding: 10px;
       width: 100%;
       height: fit-content;
+      min-height: 110px;
       display: flex;
       align-items: center;
       transition: 0.5s;
 
       &:hover {
-        background: steelblue;
+        background: #a52a2aff;
         transform: translate(7px, -7px);
         box-shadow: 0 0 10px #222;
       }
@@ -40,22 +43,33 @@ const StlydeNestedOverall = styled.div`
       .image {
         background-position: center;
         background-size: contain;
-        height: 70px;
-        width: 70px;
+        height: 90px;
+        width: 90px;
         border-radius: 5px;
+        border: 1px solid grey;
         margin: 0 2rem 0 0;
+        cursor: pointer;
+      }
+
+      h3 {
+        width: calc(100% - 210px);
+        text-align: left;
+        word-wrap: break-word;
+        cursor: pointer;
       }
 
       .action-btns {
         position: absolute;
         right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
         display: flex;
         justify-content: space-between;
         width: 160px;
 
         button {
-          background-color: #a52a2a;
           color: #f5f5f5;
+          color: #a52a2a;
           font-weight: 600;
           padding: 5px 10px;
           font-size: 30px;
@@ -68,22 +82,46 @@ const StlydeNestedOverall = styled.div`
           }
 
           &.edit_btn {
-            background-color: green;
+            color: #000;
           }
         }
       }
     }
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 600px) {
     .container {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
+      .drink,
+      .category,
+      .ingredient {
+        border: 1px solid #a52a2a;
 
-  @media only screen and (max-width: 500px) {
-    .container {
-      grid-template-columns: 1fr;
+        &:hover {
+          background: none;
+          color: #000;
+          transform: unset;
+          box-shadow: none;
+        }
+
+        .image {
+          margin: 0 1rem 0 0;
+        }
+
+        h3 {
+          width: calc(100% - 170px);
+        }
+
+        .action-btns {
+          flex-direction: column;
+          height: 100%;
+          width: fit-content;
+          padding: 5px 0;
+
+          button {
+            font-size: 20px;
+          }
+        }
+      }
     }
   }
 `;

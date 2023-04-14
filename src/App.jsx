@@ -15,7 +15,7 @@ import AlertMessage from './components/AlertMessage';
 import DialogueMsg from './components/DialogueMsg';
 import LoadingAnime from './components/LoadingAnime';
 
-import ApiPage from './pages/ApiPage';
+import Settings from './pages/Settings';
 import CrudPage from './pages/CrudPage';
 import NestedDrinks from './nested routes/NestedDrinks';
 import NestedCategories from './nested routes/NestedCategories';
@@ -143,7 +143,7 @@ export default function App() {
             </Route>
 
             <Route path="/profile" element={<UserProfile />} />
-            <Route path="/apipage" element={<ApiPage />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         </BrowserRouter>
       </MyContext.Provider>

@@ -12,7 +12,7 @@ import FetchHOC from '../HOFs/FetchHOC';
 
 function SideBar({ fetchedData }) {
   const {
-    filterData,
+    // filterData,
     setFilterData,
     bodyref,
     showMenu,

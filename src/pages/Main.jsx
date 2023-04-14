@@ -18,7 +18,7 @@ function Main({ currentUser }) {
     <StyledMain>
       <Navbar currentUser={currentUser} />
       <Body />
-      <Footer />
+      <Footer currentUser={currentUser} />
     </StyledMain>
   );
 }
