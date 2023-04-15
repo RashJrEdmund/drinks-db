@@ -4,11 +4,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
 import { MyContext } from '../context/MyContext';
-import { register } from '../api/authentication';
+import { loginWithEmailPassword, register } from '../api/authentication';
 import StyledRegisterLoginForm from '../styles/StyledrRegisterLoginform';
+import { saveToken } from '../services/utils';
 
 function Register() {
-  // const URL = `http://localhost:3000/users?apikey=${apikey}`;
   const { customAlert, setLoadingAnime } = React.useContext(MyContext);
   const [inputType, setInputType] = React.useState({
     one: 'password',
@@ -20,7 +20,6 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { target } = e;
-    console.clear();
 
     if (target.password.value !== target.passwordConfirmation.value) {
       customAlert("user passwords don't match");
@@ -39,8 +38,10 @@ function Register() {
     };
 
     await register(user)
-      .then(() => {
-        navigate('/login', { replace: true });
+      .then(async () => {
+        await loginWithEmailPassword(user.email, user.password)
+          .then(({ data: { token } }) => saveToken(token))
+          .then(() => navigate('/', { replace: true }));
       })
       .catch((err) => {
         const { response, message } = err;

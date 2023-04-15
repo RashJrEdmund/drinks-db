@@ -4,7 +4,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { MdDeleteForever } from 'react-icons/md';
-import { TiEdit } from 'react-icons/ti';
+import { TiEdit, TiLockClosed, TiLockOpen } from 'react-icons/ti';
 
 import DrinksForm from '../components/DrinksForm';
 import { CrudContext, MyContext } from '../context/MyContext';
@@ -25,7 +25,7 @@ function NestedDrinks({ fetchedData }) {
   const handleToggleModal = (id) =>
     setItemModal({ items: Drinks, show: true, start: +id });
 
-  const handleCreateNew = () =>
+  const handleCreateNew = () => {
     setEdit({
       drink: {
         chosenOne: {
@@ -45,32 +45,9 @@ function NestedDrinks({ fetchedData }) {
         type: '',
       },
     });
-
-  const handleDeleteDrink = async (id) => {
-    await setdialogueDetails({
-      message1: '',
-      message2: 'are you sure you want',
-      message3: 'to delete this drink ?',
-      show: true,
-      job: 'delete',
-      async fxntoCall() {
-        setLoadingAnime({ message: 'deleting...', show: true });
-        await deleteDrink(id)
-          .then((res) => {
-            customAlert(res.data);
-          })
-          .catch(({ response }) => {
-            customAlert(response.data);
-          })
-          .finally(() => setLoadingAnime({ message: '', show: false }));
-      },
-    });
   };
 
   const handleDrinkEdit = (id) => {
-    const { log, clear } = console;
-    clear();
-    log('clicked', id, currentUser);
     const holder = edit;
     const [drinkToEdit] = Drinks.filter((drink) => drink.id === id);
 
@@ -80,8 +57,28 @@ function NestedDrinks({ fetchedData }) {
     holder.drink.chosenOne.userId = currentUser.id;
 
     setEdit(() => ({ ...holder }));
+  };
 
-    log('clicked drink', id, drinkToEdit);
+  const handleDeleteDrink = async (drink) => {
+    if (drink.userId !== currentUser.id) {
+      customAlert("you can only modify another user's drink");
+      return;
+    }
+
+    await setdialogueDetails({
+      message1: '',
+      message2: 'are you sure you want',
+      message3: 'to delete this drink ?',
+      show: true,
+      job: 'delete',
+      async fxntoCall() {
+        setLoadingAnime({ message: 'deleting...', show: true });
+        await deleteDrink(drink.id)
+          .then((res) => customAlert(res.data))
+          .catch(({ response }) => customAlert(response.data))
+          .finally(() => setLoadingAnime({ message: '', show: false }));
+      },
+    });
   };
 
   return (
@@ -97,19 +94,33 @@ function NestedDrinks({ fetchedData }) {
       </button>
 
       <div ref={bodyref} className="container">
-        {Drinks?.map((drink, ind) => (
+        {[
+          ...Drinks.filter((drink) => drink.userId === currentUser.id),
+          ...Drinks.filter((drink) => drink.userId !== currentUser.id),
+        ]?.map((drink, ind) => (
           <div key={drink.id} className="drink">
             <div
               className="image"
               title="tap to view"
               style={{ backgroundImage: `url("${drink.image_url}")` }}
               onClick={() => handleToggleModal(ind)}
-            />
+            >
+              {drink.userId === currentUser.id ? (
+                <TiLockOpen
+                  className="open_lock"
+                  title="you created this drink"
+                />
+              ) : (
+                <TiLockClosed
+                  className="closed_lock"
+                  title="you can only modify another user's drink"
+                />
+              )}
+            </div>
 
             <h3 onClick={() => handleToggleModal(ind)}>
               {drink.name} {drink.id}
             </h3>
-            {/* <p>{drink.description}</p> */}
 
             <div className="action-btns">
               <button
@@ -125,7 +136,7 @@ function NestedDrinks({ fetchedData }) {
                 name={drink.id}
                 className="del_btn"
                 type="button"
-                onClick={() => handleDeleteDrink(drink.id)}
+                onClick={() => handleDeleteDrink(drink)}
               >
                 <MdDeleteForever />
               </button>

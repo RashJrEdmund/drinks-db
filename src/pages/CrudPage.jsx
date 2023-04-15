@@ -37,8 +37,11 @@ function CrudPage({ currentUser }) {
     },
   });
 
-  const handleAdminNav = ({ target }) => {
-    const { name } = target;
+  const handleAdminNav = (e) => {
+    const {
+      target: { name },
+    } = e;
+
     if (name === 'Home') navigate('/');
     else if (name === 'Profile') navigate('/profile');
     else customAlert('Loggin out...');
@@ -46,9 +49,7 @@ function CrudPage({ currentUser }) {
 
   React.useEffect(() => {
     customAlert('admin dashboard');
-  }, []);
 
-  React.useEffect(() => {
     let YscrollHolder = 0;
     const checkAminNav = () => {
       if (window.scrollY > YscrollHolder) {
@@ -73,6 +74,11 @@ function CrudPage({ currentUser }) {
     <CrudContext.Provider value={{ edit, setEdit, currentUser }}>
       <StyleCrudPage activeMenu={activeMenu}>
         <div className="styled_crud_page_holder">
+          <div
+            className="menu_overlay"
+            onClick={() => setActiveMenu((prev) => !prev)}
+          />
+
           <div ref={adminNavRef} className="admin_nav_holder">
             <div className="admin_nav">
               {['Home', 'Profile', 'Logout'].map((btn) => (
@@ -89,10 +95,10 @@ function CrudPage({ currentUser }) {
 
               <button
                 type="button"
-                className="edit_btn"
+                className="menu_btn"
                 onClick={() => setActiveMenu((prev) => !prev)}
               >
-                Modify
+                Menu
               </button>
             </div>
           </div>

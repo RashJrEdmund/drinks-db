@@ -38,10 +38,12 @@ const deleteUser = async (user) => {
 /* Drink routes */
 
 const postDrink = async (drink) => {
+  // console.log('post drink enter', drink);
   return httpClient.post('drinks', drink);
 };
 
 const patchDrink = async (drink) => {
+  // console.log('patch drink enter', drink);
   return httpClient.patch(`drinks/${drink.id}`, drink);
 };
 

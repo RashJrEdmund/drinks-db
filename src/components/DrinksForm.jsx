@@ -28,12 +28,10 @@ export default function DrinksForm(props) {
   };
 
   const deleteRecipe = (name) => {
-    console.clear();
-    console.log(name);
     const newRecipeList = drinkData.recipe.filter((item) => item !== name);
     setDrinkData((prev) => ({
       ...prev,
-      recipe: newRecipeList,
+      recipe: [...newRecipeList],
     }));
   };
 
@@ -54,29 +52,29 @@ export default function DrinksForm(props) {
 
     const holder = drinkData;
     holder.recipe = drinkData.recipe.join('_/-/_');
-    console.log('handle post post Drink \n', holder);
+    delete holder.createdAt;
+    delete holder.deletedAt;
+    delete holder.updatedAt;
+    console.log('this holder in handleSaveDrink() \n', holder);
 
     if (drink.type === 'create') {
       setLoadingAnime({ messagee: 'creating...', show: true });
+      console.log('entered type create\n');
+
       await postDrink(holder)
         .then(() => customAlert('drink saved'))
-        .catch((e) => {
-          console.log('this error in drinks from \n', e);
-          customAlert('could not create drink');
-        })
+        .catch(() => customAlert('could not create drink'))
         .finally(() => setLoadingAnime({ messagee: '', show: false }));
     } else {
       setLoadingAnime({ messagee: 'saving...', show: true });
+      console.log('entered type edit');
+
       await patchDrink(holder) // usePatch here
         .then(() => customAlert('drink saved'))
-        .catch((e) => {
-          console.log('this error in drinks from \n', e);
-          customAlert('could not saved drink');
-        })
+        .catch(() => customAlert('could not saved drink'))
         .finally(() => setLoadingAnime({ messagee: '', show: false }));
     }
-
-    console.log('handle post Drink \n', holder);
+    closeForm();
   };
 
   const handleSubmit = (e, saveDrink = false) => {
@@ -84,25 +82,30 @@ export default function DrinksForm(props) {
 
     const { recipe, drinkName, description } = saveDrink ? e : e.target; // cant believe this worked
 
+    if (!drinkName.value) {
+      customAlert('drink must have a name');
+      return;
+    }
+
     if (!drinkData.recipe) {
-      setDrinkData((prev) => ({
-        ...prev,
-        name: drinkName.value || '',
-        recipe: [recipe.value] || [],
-        description: description.value,
-      }));
-      e.target.recipe.value = '';
+      const holder = drinkData;
+      holder.name = drinkName.value;
+      holder.recipe = [recipe.value];
+      holder.description = description.value;
+
+      setDrinkData({ ...holder });
+      recipe.value = '';
 
       if (saveDrink) {
         handleSaveDrink();
-        e.recipe.value = ''; // note that e could either be from formRef.current ('which cannot be targeted by doing e.target....') || the form ('which is targeted by e.target....')
+        recipe.value = ''; // note that e could either be from formRef.current ('which cannot be targeted by doing e.target....') || the form ('which is targeted by e.target....')
       }
 
       return;
     }
 
     const newRecipeList = recipe.value
-      ? [...drinkData.recipe, recipe.value]
+      ? Array.from(new Set([...drinkData.recipe, recipe.value])) // to prevent duplicate recipe entries
       : [...drinkData.recipe];
 
     setDrinkData((prev) => ({
@@ -114,7 +117,7 @@ export default function DrinksForm(props) {
 
     if (saveDrink) {
       handleSaveDrink();
-      e.recipe.value = ''; // note that e could either be from formRef.current ('which cannot be targeted by doing e.target....') || the form ('which is targeted by e.target....')
+      recipe.value = ''; // note that e could either be from formRef.current ('which cannot be targeted by doing e.target....') || the form ('which is targeted by e.target....')
       return;
     }
 
@@ -123,7 +126,7 @@ export default function DrinksForm(props) {
 
   return (
     <StyledDrinksForm>
-      <div className="drink_form_overlay" onClick={closeForm} />
+      <div className="drink_form_overlay" />
 
       <div className="form_container">
         <button
@@ -192,7 +195,7 @@ export default function DrinksForm(props) {
             </button>
           </span>
 
-          {drinkData?.recipe?.map((peice, ind) => (
+          {drinkData.recipe?.map((peice, ind) => (
             <div key={[peice, ind]} className="recipe-option" name={peice}>
               <p>{peice}</p>
 
@@ -213,7 +216,6 @@ export default function DrinksForm(props) {
             className="submit-drink-btn"
             onClick={() => {
               handleSubmit(formRef.current, true);
-              closeForm();
             }} // the second parameter means, handleSubmit is allowed to call the saveDrink() function
           >
             save Drink

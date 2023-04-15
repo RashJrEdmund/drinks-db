@@ -21,6 +21,10 @@ const StyleCrudPage = styled.div`
     align-items: flex-start;
     gap: 1rem;
 
+    .menu_overlay {
+      display: none;
+    }
+
     .admin_nav_holder {
       position: fixed;
       top: 0;
@@ -51,7 +55,7 @@ const StyleCrudPage = styled.div`
           box-shadow: 0 0 10px #222;
           margin: 0;
 
-          &.edit_btn {
+          &.menu_btn {
             display: none;
             position: absolute;
             right: 0;
@@ -118,10 +122,21 @@ const StyleCrudPage = styled.div`
 
   @media only screen and (max-width: 768px) {
     .styled_crud_page_holder {
+      .menu_overlay {
+        background: #000000ac;
+        display: ${({ activeMenu }) => (activeMenu ? 'unset' : 'none')};
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 4;
+      }
+
       .admin_nav_holder {
         .admin_nav {
           button {
-            &.edit_btn {
+            &.menu_btn {
               display: unset;
             }
           }
@@ -132,7 +147,7 @@ const StyleCrudPage = styled.div`
 
           .admin_nav {
             button {
-              &.edit_btn {
+              &.menu_btn {
                 transform: translateY(180%);
               }
             }
@@ -146,7 +161,7 @@ const StyleCrudPage = styled.div`
         position: fixed;
         top: 70px;
         right: 0;
-        z-index: 3;
+        z-index: 5;
         transform: translate(
           ${({ activeMenu }) => (activeMenu ? '0' : '120%')}
         );

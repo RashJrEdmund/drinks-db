@@ -6,6 +6,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { MdBrightness1, MdBrightness2, MdArrowBackIos } from 'react-icons/md';
 
+import { useNavigate } from 'react-router-dom';
 import ProfileSettingsGaurd from '../HOFs/ProfileSettingsGaurd';
 import { MyContext } from '../context/MyContext';
 
@@ -108,6 +109,8 @@ function Settings({ currentUser }) {
   const { customAlert } = React.useContext(MyContext);
   const [theme, setTheme] = React.useState(false);
 
+  const navigate = useNavigate();
+
   const changeTheme = () => {
     customAlert('this feature is not yet available');
     setTheme((prev) => !prev);
@@ -131,8 +134,40 @@ function Settings({ currentUser }) {
           </span>
         </p>
 
+        {currentUser.is_admin && (
+          <div
+            className="admin_settings"
+            onClick={() => customAlert('this feature is not yet available')}
+          >
+            <p>admin page</p>
+            <ul>
+              <li>
+                sort how items appear
+                <select name="sort" id="">
+                  <option value="item_id">item id</option>
+                  <option value="item_id">my items</option>
+                </select>
+              </li>
+              <p className="theme">
+                Admin Theme
+                <span className="toggle_theme" onClick={changeTheme}>
+                  {theme ? (
+                    <MdBrightness1 className="bright" />
+                  ) : (
+                    <MdBrightness2 className="dark" />
+                  )}
+                </span>
+              </p>
+            </ul>
+          </div>
+        )}
+
         <p onClick={() => customAlert('this feature is not yet available')}>
-          Langauge
+          Langauge: en-us
+        </p>
+
+        <p title="login to another account" onClick={() => navigate('/login')}>
+          Switch accout
         </p>
 
         <p onClick={() => window.history.back()}>

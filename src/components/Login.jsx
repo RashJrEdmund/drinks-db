@@ -34,13 +34,9 @@ function Login() {
 
     try {
       await loginWithEmailPassword(user.email, user.password)
-        .then(({ data }) => saveToken(data.token))
-        .then(() => {
-          navigate('/', { replace: true });
-          customAlert('logged in');
-        });
+        .then(({ data: { token } }) => saveToken(token))
+        .then(() => navigate('/', { replace: true }));
     } catch (e) {
-      console.log('catch entered', e);
       const { response, message } = e;
       customAlert(response?.data || message);
       if (response.status === 401) {

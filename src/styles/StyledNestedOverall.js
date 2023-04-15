@@ -38,9 +38,17 @@ const StlydeNestedOverall = styled.div`
         background: #a52a2aff;
         transform: translate(7px, -7px);
         box-shadow: 0 0 10px #222;
+
+        .image {
+          .closed_lock,
+          .open_lock {
+            background-color: #222;
+          }
+        }
       }
 
       .image {
+        position: relative;
         background-position: center;
         background-size: contain;
         height: 90px;
@@ -49,10 +57,28 @@ const StlydeNestedOverall = styled.div`
         border: 1px solid grey;
         margin: 0 2rem 0 0;
         cursor: pointer;
+        font-size: 17px;
+
+        .closed_lock {
+          color: #a52a2a;
+          position: absolute;
+          right: 0;
+          top: 0;
+          transform: translate(20px);
+        }
+
+        .open_lock {
+          color: #080;
+          position: absolute;
+          right: 0;
+          top: 0;
+          transform: translate(20px);
+        }
       }
 
       h3 {
-        width: calc(100% - 210px);
+        width: fit-content;
+        max-width: calc(100% - 275px);
         text-align: left;
         word-wrap: break-word;
         cursor: pointer;
@@ -65,7 +91,7 @@ const StlydeNestedOverall = styled.div`
         transform: translateY(-50%);
         display: flex;
         justify-content: space-between;
-        width: 160px;
+        width: 140px;
 
         button {
           color: #f5f5f5;
@@ -101,6 +127,13 @@ const StlydeNestedOverall = styled.div`
           color: #000;
           transform: unset;
           box-shadow: none;
+
+          .image {
+            .closed_lock,
+            .open_lock {
+              background: none;
+            }
+          }
         }
 
         .image {
@@ -108,7 +141,8 @@ const StlydeNestedOverall = styled.div`
         }
 
         h3 {
-          width: calc(100% - 170px);
+          width: fit-content;
+          max-width: calc(100% - 170px);
         }
 
         .action-btns {
