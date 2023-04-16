@@ -8,7 +8,7 @@ import { TiEdit } from 'react-icons/ti';
 import { MdDeleteForever, MdSave, MdKeyboardControlKey } from 'react-icons/md';
 
 import { MyContext, CrudContext } from '../context/MyContext';
-import AdminGaurd from '../HOFs/AdminGaurd';
+import AdminGaurd from '../HOCs/AdminGaurd';
 import StyleCrudPage from '../styles/StyledCrudPage';
 import Stats from '../components/Stats';
 
@@ -24,22 +24,27 @@ function CrudPage({ currentUser }) {
   });
 
   const [edit, setEdit] = React.useState({
-    drink: {
-      chosenOne: {},
-      show: false,
-      type: '', // could be 'create' || 'edit' depending on which button clicked it
-    },
-    category: {
-      chosenOne: {},
-      show: false,
-      type: '',
-    },
-    ingredient: {
-      chosenOne: {},
-      show: false,
-      type: '',
-    },
+    chosenOne: {},
+    show: false,
+    type: '', // could be 'create' || 'edit' depending on which button clicked it
   });
+
+  const handleCreateNew = (name) => {
+    if (name === 'drink')
+      setEdit({
+        chosenOne: {
+          userId: currentUser.id,
+        },
+        show: true,
+        type: 'create',
+      });
+    else
+      setEdit({
+        chosenOne: {},
+        show: true,
+        type: 'create',
+      });
+  };
 
   const handleAdminNav = (e) => {
     const {
@@ -75,7 +80,9 @@ function CrudPage({ currentUser }) {
   }, []);
 
   return (
-    <CrudContext.Provider value={{ edit, setEdit, currentUser }}>
+    <CrudContext.Provider
+      value={{ edit, setEdit, currentUser, handleCreateNew }}
+    >
       <StyleCrudPage activeMenu={activeMenu}>
         <div className="styled_crud_page_holder">
           <div

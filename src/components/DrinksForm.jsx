@@ -16,18 +16,13 @@ export default function DrinksForm(props) {
   const { customAlert, setLoadingAnime } = React.useContext(MyContext);
   const [drinkData, setDrinkData] = React.useState(drink?.chosenOne);
 
-  const tempRecipe =
-    typeof drinkData.recipe === 'object'
-      ? drinkData.recipe
-      : drinkData.recipe.split('_/-/_');
-
   const [imagePath, setImagePath] = React.useState();
   const formRef = React.useRef();
 
   const closeForm = () => {
     setEdit((prev) => {
       const holder = prev;
-      holder.drink.show = false;
+      holder.show = false;
       return { ...holder };
     });
   };
@@ -200,7 +195,7 @@ export default function DrinksForm(props) {
             </button>
           </span>
 
-          {tempRecipe.map((peice, ind) => (
+          {drinkData?.recipe?.map((peice, ind) => (
             <div key={[peice, ind]} className="recipe-option" name={peice}>
               <p>{peice}</p>
 

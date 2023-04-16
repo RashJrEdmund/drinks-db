@@ -7,7 +7,7 @@ import styled from '@emotion/styled';
 import { MdBrightness1, MdBrightness2, MdArrowBackIos } from 'react-icons/md';
 
 import { useNavigate } from 'react-router-dom';
-import ProfileSettingsGaurd from '../HOFs/ProfileSettingsGaurd';
+import ProfileSettingsGaurd from '../HOCs/ProfileSettingsGaurd';
 import { MyContext } from '../context/MyContext';
 
 const StyledSettings = styled.div`

@@ -4,7 +4,7 @@ import React from 'react';
 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import AuthGaurd from '../HOFs/AuthGaurd';
+import AuthGaurd from '../HOCs/AuthGaurd';
 import Body from '../components/Body';
 
 const StyledMain = styled.div`

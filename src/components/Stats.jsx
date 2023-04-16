@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { TiLockOpen } from 'react-icons/ti';
-import FetchHOC from '../HOFs/FetchHOC';
+import FetchHOC from '../HOCs/FetchHOC';
 import AdminLevel from './AdminLevel';
 
 function Stats({ fetchedData, currentUser }) {

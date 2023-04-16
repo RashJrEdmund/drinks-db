@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import FetchHOC from '../HOFs/FetchHOC';
+import FetchHOC from '../HOCs/FetchHOC';
 
 import StyledDrinksSection from '../styles/StyledDrinksSection';
 import HomeDrinks from './HomeDrinks';

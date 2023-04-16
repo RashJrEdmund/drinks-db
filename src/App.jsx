@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable react/jsx-no-constructed-context-values */
 import './styles/App.css';
 import React from 'react';
@@ -85,8 +84,6 @@ export default function App() {
   React.useEffect(() => {
     toggleBodyOverFlow();
   }, [dialogueDetails.show, loadingAnime.show, itemModal.show, zoomPhoto]);
-
-  // console.log('this fetchedData', fetchedData);
 
   return (
     <div className="App">

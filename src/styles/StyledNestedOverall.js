@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const StlydeNestedOverall = styled.div`
+const StyledNestedOverall = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -161,4 +161,4 @@ const StlydeNestedOverall = styled.div`
   }
 `;
 
-export default StlydeNestedOverall;
+export default StyledNestedOverall;

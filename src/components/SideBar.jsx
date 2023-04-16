@@ -8,7 +8,7 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 import StyledSideBar from '../styles/StyledSideBar';
 import { MyContext } from '../context/MyContext';
-import FetchHOC from '../HOFs/FetchHOC';
+import FetchHOC from '../HOCs/FetchHOC';
 
 function SideBar({ fetchedData }) {
   const {
@@ -61,14 +61,6 @@ function SideBar({ fetchedData }) {
         list: ['yes', 'no', 'both'],
       },
     ]);
-
-    console.log(
-      'this cate... in sideBar',
-      // filterOptions,
-      Categories,
-      Ingredients,
-      Glasses
-    );
   }, []);
 
   const capitalizedWord = (word, all = false) => {

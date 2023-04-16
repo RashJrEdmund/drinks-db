@@ -11,8 +11,8 @@ import DrinksForm from '../components/DrinksForm';
 import { CrudContext, MyContext } from '../context/MyContext';
 
 import { deleteDrink } from '../api/authentication';
-import StlydeNestedOverall from '../styles/StyledNestedOverall';
-import FetchHOC from '../HOFs/FetchHOC';
+import StyledNestedOverall from '../styles/StyledNestedOverall';
+import FetchHOC from '../HOCs/FetchHOC';
 
 function NestedDrinks({ fetchedData }) {
   const { customAlert, setLoadingAnime, setdialogueDetails, setItemModal } =
@@ -20,8 +20,8 @@ function NestedDrinks({ fetchedData }) {
 
   const { Drinks } = fetchedData;
 
-  const { edit, setEdit, currentUser } = React.useContext(CrudContext);
-  const bodyref = React.useRef();
+  const { edit, setEdit, currentUser, handleCreateNew } =
+    React.useContext(CrudContext);
 
   const handleToggleModal = (id) =>
     setItemModal({
@@ -33,38 +33,14 @@ function NestedDrinks({ fetchedData }) {
       start: +id,
     });
 
-  const handleCreateNew = () => {
-    setEdit({
-      drink: {
-        chosenOne: {
-          userId: currentUser.id,
-        },
-        show: true,
-        type: 'create',
-      },
-      category: {
-        chosenOne: {},
-        show: false,
-        type: '',
-      },
-      ingredient: {
-        chosenOne: {},
-        show: false,
-        type: '',
-      },
-    });
-  };
-
   const handleDrinkEdit = (drink) => {
-    console.clear();
-    console.log('chosen one is ', drink);
     const holder = edit;
 
     drink.userId = currentUser.id;
 
-    holder.drink.show = true;
-    holder.drink.type = 'edit';
-    holder.drink.chosenOne = drink;
+    holder.show = true;
+    holder.type = 'edit';
+    holder.chosenOne = drink;
 
     setEdit(() => ({ ...holder }));
   };
@@ -92,18 +68,18 @@ function NestedDrinks({ fetchedData }) {
   };
 
   return (
-    <StlydeNestedOverall>
-      {edit.drink.show && <DrinksForm drink={edit?.drink} setEdit={setEdit} />}
+    <StyledNestedOverall>
+      {edit?.show && <DrinksForm drink={edit} setEdit={setEdit} />}
 
       <button
         className="create-new-btn"
         type="button"
-        onClick={handleCreateNew}
+        onClick={() => handleCreateNew('drink')}
       >
         create New
       </button>
 
-      <div ref={bodyref} className="container">
+      <div className="container">
         {[
           ...Drinks.filter((drink) => drink.userId === currentUser.id),
           ...Drinks.filter((drink) => drink.userId !== currentUser.id),
@@ -152,7 +128,7 @@ function NestedDrinks({ fetchedData }) {
           </div>
         ))}
       </div>
-    </StlydeNestedOverall>
+    </StyledNestedOverall>
   );
 }
 

@@ -1,140 +1,63 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import styled from '@emotion/styled';
+import { MdDeleteForever } from 'react-icons/md';
+import { TiEdit } from 'react-icons/ti';
+
 import { CrudContext, MyContext } from '../context/MyContext';
+import FetchHOC from '../HOCs/FetchHOC';
+import StyledNestedOverall from '../styles/StyledNestedOverall';
 
 import { deleteCategory } from '../api/authentication';
 
-const StyledNestedCategories = styled.div`
-  display: flex;
-  flex-direction: column;
+function NestedCategories({ fetchedData }) {
+  const {
+    customAlert,
+    setLoadingAnime,
+    setdialogueDetails /* setItemModal */,
+  } = React.useContext(MyContext);
+  const { edit, setEdit, handleCreateNew } = React.useContext(CrudContext);
 
-  .create-new-btn {
-    margin: 0 0 1rem;
-    padding: 10px;
-    box-shadow: 0 0 10px #a52a2a;
-  }
+  const { Categories } = fetchedData;
 
-  .drinks-container {
-    width: 97vw;
-    max-width: 1224px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin: 10px auto 0;
-    padding: 0 0 4rem;
-
-    .drink {
-      border: 1px solid #a52a2a;
-      padding: 10px;
-      height: 300px;
-      width: 100%;
-      /* border-radius: 10px; */
-      cursor: default;
-
-      * {
-        cursor: default;
-      }
-
-      .action-btns {
-        display: flex;
-        justify-content: space-between;
-        width: 60%;
-        max-width: 200px;
-        margin: 2rem auto 0;
-
-        button {
-          background-color: #a52a2a;
-          color: #f5f5f5;
-          font-weight: 600;
-          cursor: pointer;
-        }
-      }
-    }
-  }
-
-  @media only screen and (max-width: 768px) {
-    .drinks-container {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media only screen and (max-width: 500px) {
-    .drinks-container {
-      grid-template-columns: 1fr;
-    }
-  }
-`;
-
-export default function NestedCategories() {
-  const { customAlert, setLoadingAnime, setdialogueDetails, fetchedData } =
-    React.useContext(MyContext);
-  const { edit, setEdit } = React.useContext(CrudContext);
-
-  const { Categories, Drinks } = fetchedData;
-
-  const bodyref = React.useRef();
-
-  const handleDeleteCategory = async (id) => {
+  const handleDeleteCategory = async ({ id }) => {
     await setdialogueDetails({
       message1: '',
       message2: 'are you sure you want',
-      message3: 'to delete this drink ?',
+      message3: 'to delete this Category ?',
       show: true,
       job: 'delete',
       async fxntoCall() {
         setLoadingAnime({ message: 'deleting...', show: true });
         await deleteCategory(id)
-          .then((res) => {
-            customAlert(res.data);
-          })
-          .catch(({ response }) => {
-            customAlert(response.data);
-          })
+          .then((res) => customAlert(res.data))
+          .catch(({ response }) => customAlert(response.data))
           .finally(() => setLoadingAnime({ message: '', show: false }));
       },
     });
   };
 
-  const handleCategoryEdit = (id) => {
-    const { log, clear } = console;
+  const handleCategoryEdit = (category) => {
     const holder = edit;
-    const [drinkToEdit] = Drinks.filter((drink) => drink.id === id);
-    holder.drink.show = true;
-    holder.drink.chosenOne = drinkToEdit;
+
+    holder.item.show = true;
+    holder.item.type = 'edit';
+    holder.item.chosenOne = category;
 
     setEdit(() => ({ ...holder }));
-
-    clear();
-    log('clicked drink', id, drinkToEdit);
   };
 
   return (
-    <StyledNestedCategories>
+    <StyledNestedOverall>
       <button
         className="create-new-btn"
         type="button"
-        onClick={() =>
-          setEdit({
-            drink: {
-              chosenOne: {},
-              show: true,
-            },
-            category: {
-              chosenOne: {},
-              show: false,
-            },
-            ingredient: {
-              chosenOne: {},
-              show: false,
-            },
-          })
-        }
+        onClick={() => handleCreateNew('category')}
       >
         create New
       </button>
       <p>nested Categories</p>
 
-      <div ref={bodyref} className="drinks-container">
+      <div className="container">
         {Categories?.map((category) => (
           <div
             key={category.id}
@@ -150,23 +73,27 @@ export default function NestedCategories() {
             <div className="action-btns">
               <button
                 name={category.id}
+                className="edit_btn"
                 type="button"
-                onClick={(e) => handleDeleteCategory(+e.target.name)}
+                onClick={() => handleCategoryEdit(category)}
               >
-                del
+                <TiEdit />
               </button>
 
               <button
                 name={category.id}
+                className="del_btn"
                 type="button"
-                onClick={(e) => handleCategoryEdit(+e.target.name)}
+                onClick={() => handleDeleteCategory(category)}
               >
-                edit
+                <MdDeleteForever />
               </button>
             </div>
           </div>
         ))}
       </div>
-    </StyledNestedCategories>
+    </StyledNestedOverall>
   );
 }
+
+export default FetchHOC(NestedCategories);

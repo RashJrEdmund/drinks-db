@@ -1,9 +1,13 @@
 import React from 'react';
+import StyledNestedOverall from '../styles/StyledNestedOverall';
+import FetchHOC from '../HOCs/FetchHOC';
 
-export default function NestedIngredients() {
+function NestedIngredients() {
   return (
-    <div>
+    <StyledNestedOverall>
       <p>nested Ingredients</p>
-    </div>
+    </StyledNestedOverall>
   );
 }
+
+export default FetchHOC(NestedIngredients);

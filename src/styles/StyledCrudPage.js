@@ -168,8 +168,8 @@ const StyleCrudPage = styled.div`
 
     .to_top_btn {
       display: none;
-      background: #00000059;
-      color: #a52a2a;
+      background: #000000ce;
+      color: #f5f5f5;
       position: fixed;
       flex-direction: column;
       right: 0;
@@ -177,13 +177,6 @@ const StyleCrudPage = styled.div`
       z-index: 3;
       margin: 15px;
       font-size: 50px;
-
-      &::after {
-        content: 'toTop';
-        color: #000;
-        font-size: 14px;
-        align-self: center;
-      }
 
       &.active_top_btn {
         display: flex;
@@ -229,6 +222,10 @@ const StyleCrudPage = styled.div`
         z-index: 3;
         margin: 15px;
         font-size: 18px;
+        padding: 10px;
+
+        background: #000000ce;
+        color: #f5f5f5;
       }
     }
   }

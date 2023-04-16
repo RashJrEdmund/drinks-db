@@ -19,7 +19,7 @@ import StyledUserProfile from '../styles/StyledUserProfile';
 import { MyContext } from '../context/MyContext';
 import { deleteUser } from '../api/authentication';
 import uploadIcon from '../images/darkImageIcon.png';
-import ProfileSettingsGaurd from '../HOFs/ProfileSettingsGaurd';
+import ProfileSettingsGaurd from '../HOCs/ProfileSettingsGaurd';
 
 function UserProfile({ currentUser }) {
   const {
