@@ -16,6 +16,11 @@ export default function DrinksForm(props) {
   const { customAlert, setLoadingAnime } = React.useContext(MyContext);
   const [drinkData, setDrinkData] = React.useState(drink?.chosenOne);
 
+  const tempRecipe =
+    typeof drinkData.recipe === 'object'
+      ? drinkData.recipe
+      : drinkData.recipe.split('_/-/_');
+
   const [imagePath, setImagePath] = React.useState();
   const formRef = React.useRef();
 
@@ -55,26 +60,26 @@ export default function DrinksForm(props) {
     delete holder.createdAt;
     delete holder.deletedAt;
     delete holder.updatedAt;
-    console.log('this holder in handleSaveDrink() \n', holder);
+
+    setLoadingAnime({
+      messagee: `${drink.type.slice(0, drink.type.length - 1)}ing...`,
+      show: true,
+    });
 
     if (drink.type === 'create') {
-      setLoadingAnime({ messagee: 'creating...', show: true });
-      console.log('entered type create\n');
-
       await postDrink(holder)
         .then(() => customAlert('drink saved'))
         .catch(() => customAlert('could not create drink'))
         .finally(() => setLoadingAnime({ messagee: '', show: false }));
     } else {
-      setLoadingAnime({ messagee: 'saving...', show: true });
-      console.log('entered type edit');
-
       await patchDrink(holder) // usePatch here
         .then(() => customAlert('drink saved'))
         .catch(() => customAlert('could not saved drink'))
         .finally(() => setLoadingAnime({ messagee: '', show: false }));
     }
+
     closeForm();
+    window.location.reload();
   };
 
   const handleSubmit = (e, saveDrink = false) => {
@@ -108,12 +113,12 @@ export default function DrinksForm(props) {
       ? Array.from(new Set([...drinkData.recipe, recipe.value])) // to prevent duplicate recipe entries
       : [...drinkData.recipe];
 
-    setDrinkData((prev) => ({
-      ...prev,
-      name: prev.name === drinkName.value ? prev.name : drinkName.value,
-      recipe: newRecipeList,
-      description: description.value,
-    }));
+    const temp = drinkData;
+    temp.name = drinkName.value;
+    temp.recipe = newRecipeList;
+    temp.description = description.value;
+
+    setDrinkData({ ...temp });
 
     if (saveDrink) {
       handleSaveDrink();
@@ -195,7 +200,7 @@ export default function DrinksForm(props) {
             </button>
           </span>
 
-          {drinkData.recipe?.map((peice, ind) => (
+          {tempRecipe.map((peice, ind) => (
             <div key={[peice, ind]} className="recipe-option" name={peice}>
               <p>{peice}</p>
 

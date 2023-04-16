@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -54,14 +55,16 @@ function NestedDrinks({ fetchedData }) {
     });
   };
 
-  const handleDrinkEdit = (id) => {
+  const handleDrinkEdit = (drink) => {
+    console.clear();
+    console.log('chosen one is ', drink);
     const holder = edit;
-    const [drinkToEdit] = Drinks.filter((drink) => drink.id === id);
+
+    drink.userId = currentUser.id;
 
     holder.drink.show = true;
     holder.drink.type = 'edit';
-    holder.drink.chosenOne = drinkToEdit;
-    holder.drink.chosenOne.userId = currentUser.id;
+    holder.drink.chosenOne = drink;
 
     setEdit(() => ({ ...holder }));
   };
@@ -132,7 +135,7 @@ function NestedDrinks({ fetchedData }) {
                 name={drink.id}
                 className="edit_btn"
                 type="button"
-                onClick={() => handleDrinkEdit(drink.id)}
+                onClick={() => handleDrinkEdit(drink)}
               >
                 <TiEdit />
               </button>

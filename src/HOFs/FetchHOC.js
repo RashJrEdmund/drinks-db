@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import styled from '@emotion/styled';
 import { MyContext } from '../context/MyContext';
@@ -26,7 +27,7 @@ const StyledLoadingMessage = styled.p`
 `;
 
 const FetchHOC = (Component) => {
-  return function Gaurd() {
+  return function Gaurd(props) {
     const { customAlert } = React.useContext(MyContext);
     const [fetchedData, setFetchedData] = React.useState(null);
 
@@ -39,7 +40,7 @@ const FetchHOC = (Component) => {
     }, []);
 
     return fetchedData?.Drinks?.length >= 0 ? (
-      <Component fetchedData={fetchedData} />
+      <Component {...props} fetchedData={fetchedData} />
     ) : (
       <StyledLoadingMessage>Loading...</StyledLoadingMessage>
     );

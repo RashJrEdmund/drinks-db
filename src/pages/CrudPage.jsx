@@ -10,6 +10,7 @@ import { MdDeleteForever, MdSave, MdKeyboardControlKey } from 'react-icons/md';
 import { MyContext, CrudContext } from '../context/MyContext';
 import AdminGaurd from '../HOFs/AdminGaurd';
 import StyleCrudPage from '../styles/StyledCrudPage';
+import Stats from '../components/Stats';
 
 function CrudPage({ currentUser }) {
   const { customAlert } = React.useContext(MyContext);
@@ -17,7 +18,10 @@ function CrudPage({ currentUser }) {
   const topBtnRef = React.useRef();
   const cardOptionsRef = React.useRef();
   const adminNavRef = React.useRef();
-  const [activeMenu, setActiveMenu] = React.useState(false);
+  const [activeMenu, setActiveMenu] = React.useState({
+    stats: false,
+    side: false,
+  });
 
   const [edit, setEdit] = React.useState({
     drink: {
@@ -44,7 +48,7 @@ function CrudPage({ currentUser }) {
 
     if (name === 'Home') navigate('/');
     else if (name === 'Profile') navigate('/profile');
-    else customAlert('Loggin out...');
+    else navigate('/settings');
   };
 
   React.useEffect(() => {
@@ -76,14 +80,13 @@ function CrudPage({ currentUser }) {
         <div className="styled_crud_page_holder">
           <div
             className="menu_overlay"
-            onClick={() => setActiveMenu((prev) => !prev)}
+            onClick={() => setActiveMenu({ stats: false, side: false })}
           />
 
           <div ref={adminNavRef} className="admin_nav_holder">
             <div className="admin_nav">
-              {['Home', 'Profile', 'Logout'].map((btn) => (
+              {['Home', 'Profile', 'Settings'].map((btn) => (
                 <button
-                  className="back-btn"
                   key={btn}
                   type="button"
                   name={btn}
@@ -93,15 +96,24 @@ function CrudPage({ currentUser }) {
                 </button>
               ))}
 
+              <form className="search_form">
+                <button type="submit">search</button>
+                <input type="text" placeholder="search item" />
+              </form>
+
               <button
                 type="button"
                 className="menu_btn"
-                onClick={() => setActiveMenu((prev) => !prev)}
+                onClick={() =>
+                  setActiveMenu((prev) => ({ ...prev, side: true }))
+                }
               >
                 Menu
               </button>
             </div>
           </div>
+
+          <Stats currentUser={currentUser} />
 
           <Outlet />
 
@@ -112,7 +124,7 @@ function CrudPage({ currentUser }) {
                 key={item}
                 onClick={() => {
                   navigate(item.toLowerCase(), { replace: true });
-                  setActiveMenu(false);
+                  setActiveMenu((prev) => ({ ...prev, side: false }));
                 }}
               >
                 <h1>
@@ -122,6 +134,16 @@ function CrudPage({ currentUser }) {
               </div>
             ))}
           </div>
+
+          <button
+            ref={topBtnRef}
+            className="stats_btn"
+            type="button"
+            onClick={() => setActiveMenu((prev) => ({ ...prev, stats: true }))}
+          >
+            Stats
+            <MdKeyboardControlKey />
+          </button>
 
           <button
             ref={topBtnRef}
