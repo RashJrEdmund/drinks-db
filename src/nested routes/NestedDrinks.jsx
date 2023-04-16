@@ -38,7 +38,7 @@ function NestedDrinks({ fetchedData }) {
 
     drink.userId = currentUser.id;
 
-    holder.show = true;
+    holder.show.drink = true;
     holder.type = 'edit';
     holder.chosenOne = drink;
 
@@ -69,7 +69,7 @@ function NestedDrinks({ fetchedData }) {
 
   return (
     <StyledNestedOverall>
-      {edit?.show && <DrinksForm drink={edit} setEdit={setEdit} />}
+      {edit.show.drink && <DrinksForm drink={edit} setEdit={setEdit} />}
 
       <button
         className="create-new-btn"

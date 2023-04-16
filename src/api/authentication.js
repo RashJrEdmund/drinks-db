@@ -38,12 +38,10 @@ const deleteUser = async (user) => {
 /* Drink routes */
 
 const postDrink = async (drink) => {
-  // console.log('post drink enter', drink);
   return httpClient.post('drinks', drink);
 };
 
 const patchDrink = async (drink) => {
-  // console.log('patch drink enter', drink);
   return httpClient.patch(`drinks/${drink.id}`, drink);
 };
 
@@ -53,8 +51,30 @@ const deleteDrink = async (id) => {
 
 /* Category routes */
 
+const postCategory = async (category) => {
+  return httpClient.post('categories', category);
+};
+
+const patchCategory = async (category) => {
+  return httpClient.patch(`categories/${category.id}`, category);
+};
+
 const deleteCategory = (id) => {
   return httpClient.delete(`categories/${id}`);
+};
+
+/* Ingredient routes */
+
+const postIngredient = async (ingredient) => {
+  return httpClient.post('ingredients', ingredient);
+};
+
+const patchIngredient = async (ingredient) => {
+  return httpClient.patch(`ingredients/${ingredient.id}`, ingredient);
+};
+
+const deleteIngredient = (id) => {
+  return httpClient.delete(`ingredients/${id}`);
 };
 
 export {
@@ -66,5 +86,10 @@ export {
   deleteDrink,
   postDrink,
   patchDrink,
+  postCategory,
+  patchCategory,
   deleteCategory,
+  postIngredient,
+  patchIngredient,
+  deleteIngredient,
 };

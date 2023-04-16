@@ -15,7 +15,8 @@ function NestedCategories({ fetchedData }) {
     setLoadingAnime,
     setdialogueDetails /* setItemModal */,
   } = React.useContext(MyContext);
-  const { edit, setEdit, handleCreateNew } = React.useContext(CrudContext);
+  const { handleCreateNew, handleCatAndIngrEdit } =
+    React.useContext(CrudContext);
 
   const { Categories } = fetchedData;
 
@@ -36,16 +37,6 @@ function NestedCategories({ fetchedData }) {
     });
   };
 
-  const handleCategoryEdit = (category) => {
-    const holder = edit;
-
-    holder.item.show = true;
-    holder.item.type = 'edit';
-    holder.item.chosenOne = category;
-
-    setEdit(() => ({ ...holder }));
-  };
-
   return (
     <StyledNestedOverall>
       <button
@@ -55,7 +46,6 @@ function NestedCategories({ fetchedData }) {
       >
         create New
       </button>
-      <p>nested Categories</p>
 
       <div className="container">
         {Categories?.map((category) => (
@@ -65,9 +55,8 @@ function NestedCategories({ fetchedData }) {
             style={{ backgroundImage: `url("${category.image_url}")` }}
           >
             <div style={{ backgroundImage: `url("${category.image_url}")` }} />
-            <h3>
-              {category.name} {category.id}
-            </h3>
+
+            <h3>{category.name}</h3>
             {/* <p>{category.description}</p> */}
 
             <div className="action-btns">
@@ -75,7 +64,7 @@ function NestedCategories({ fetchedData }) {
                 name={category.id}
                 className="edit_btn"
                 type="button"
-                onClick={() => handleCategoryEdit(category)}
+                onClick={() => handleCatAndIngrEdit('category', category)}
               >
                 <TiEdit />
               </button>

@@ -1,6 +1,14 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { TiLockOpen } from 'react-icons/ti';
+import { BsStar, BsStarHalf, BsFillStarFill } from 'react-icons/bs';
+import styled from '@emotion/styled';
+
+const StledLevel = styled.p`
+  span {
+    color: #a52a2a;
+    cursor: text;
+  }
+`;
 
 export default function AdminLevel({ currentUser, fetchedData }) {
   const [myStats, setMyStats] = React.useState({
@@ -28,11 +36,15 @@ export default function AdminLevel({ currentUser, fetchedData }) {
   }, []);
 
   return (
-    <p>
+    <StledLevel title="be an active member to gain more">
       Level{' '}
       {myStats.Drinks > 9 && (
-        <TiLockOpen className="open_lock" title="your level as an admin" />
+        <span>
+          <BsStar className="open_lock" title="your level as an admin" />
+          <BsStarHalf />
+          <BsFillStarFill />
+        </span>
       )}
-    </p>
+    </StledLevel>
   );
 }

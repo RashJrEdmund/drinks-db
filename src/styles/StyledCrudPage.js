@@ -61,6 +61,7 @@ const StyleCrudPage = styled.div`
             right: 0;
             top: 0;
             transition: 400ms;
+            transform: scale(1.2);
           }
         }
 
@@ -253,7 +254,7 @@ const StyleCrudPage = styled.div`
           .admin_nav {
             button {
               &.menu_btn {
-                transform: translateY(180%);
+                transform: translateY(180%) scale(1.2);
               }
             }
           }

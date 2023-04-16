@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { TiLockOpen } from 'react-icons/ti';
+import { BsBarChartFill } from 'react-icons/bs';
 import FetchHOC from '../HOCs/FetchHOC';
 import AdminLevel from './AdminLevel';
 
@@ -27,7 +28,9 @@ function Stats({ fetchedData, currentUser }) {
 
   return (
     <div className="stats_section">
-      <h2>Stats</h2>
+      <h2>
+        Stats <BsBarChartFill />
+      </h2>
 
       <AdminLevel fetchedData={fetchedData} currentUser={currentUser} />
 

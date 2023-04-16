@@ -22,7 +22,7 @@ export default function DrinksForm(props) {
   const closeForm = () => {
     setEdit((prev) => {
       const holder = prev;
-      holder.show = false;
+      holder.show.drink = false;
       return { ...holder };
     });
   };

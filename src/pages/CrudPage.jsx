@@ -6,11 +6,14 @@ import React from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import { TiEdit } from 'react-icons/ti';
 import { MdDeleteForever, MdSave, MdKeyboardControlKey } from 'react-icons/md';
+import { BsBarChartFill } from 'react-icons/bs';
+import { AiOutlineMenu } from 'react-icons/ai';
 
 import { MyContext, CrudContext } from '../context/MyContext';
 import AdminGaurd from '../HOCs/AdminGaurd';
 import StyleCrudPage from '../styles/StyledCrudPage';
 import Stats from '../components/Stats';
+import CategoryIngredientFrom from '../components/CategoryIngredientFrom';
 
 function CrudPage({ currentUser }) {
   const { customAlert } = React.useContext(MyContext);
@@ -25,8 +28,9 @@ function CrudPage({ currentUser }) {
 
   const [edit, setEdit] = React.useState({
     chosenOne: {},
-    show: false,
+    show: { drink: false, category: false, ingredient: false },
     type: '', // could be 'create' || 'edit' depending on which button clicked it
+    class: '',
   });
 
   const handleCreateNew = (name) => {
@@ -35,15 +39,34 @@ function CrudPage({ currentUser }) {
         chosenOne: {
           userId: currentUser.id,
         },
-        show: true,
+        show: { drink: true, category: false, ingredient: false },
         type: 'create',
+      });
+    else if (name === 'category')
+      setEdit({
+        chosenOne: {},
+        show: { drink: false, category: true, ingredient: false },
+        type: 'create',
+        class: 'category',
       });
     else
       setEdit({
         chosenOne: {},
-        show: true,
+        show: { drink: false, category: false, ingredient: true },
         type: 'create',
+        class: 'ingredient',
       });
+  };
+
+  const handleCatAndIngrEdit = (itemType, itemObj) => {
+    const holder = edit;
+
+    holder.show[`${itemType}`] = true;
+    holder.type = 'edit';
+    holder.class = itemType;
+    holder.chosenOne = itemObj;
+
+    setEdit(() => ({ ...holder }));
   };
 
   const handleAdminNav = (e) => {
@@ -81,8 +104,18 @@ function CrudPage({ currentUser }) {
 
   return (
     <CrudContext.Provider
-      value={{ edit, setEdit, currentUser, handleCreateNew }}
+      value={{
+        edit,
+        setEdit,
+        currentUser,
+        handleCreateNew,
+        handleCatAndIngrEdit,
+      }}
     >
+      {(edit.show.category || edit.show.ingredient) && (
+        <CategoryIngredientFrom edit={edit} setEdit={setEdit} />
+      )}
+
       <StyleCrudPage activeMenu={activeMenu}>
         <div className="styled_crud_page_holder">
           <div
@@ -115,7 +148,7 @@ function CrudPage({ currentUser }) {
                   setActiveMenu((prev) => ({ ...prev, side: true }))
                 }
               >
-                Menu
+                <AiOutlineMenu />
               </button>
             </div>
           </div>
@@ -148,8 +181,7 @@ function CrudPage({ currentUser }) {
             type="button"
             onClick={() => setActiveMenu((prev) => ({ ...prev, stats: true }))}
           >
-            Stats
-            <MdKeyboardControlKey />
+            <BsBarChartFill />
           </button>
 
           <button
