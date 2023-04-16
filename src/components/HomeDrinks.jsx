@@ -35,9 +35,7 @@ export default function HomeDrinks({ drinksToshow, showInd }) {
               >
                 <MdInfo />
               </span>
-              <h3>
-                {drink.name} {drink.id}
-              </h3>
+              <h3>{drink.name}</h3>
             </div>
           );
         })}

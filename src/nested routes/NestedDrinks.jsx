@@ -23,7 +23,14 @@ function NestedDrinks({ fetchedData }) {
   const bodyref = React.useRef();
 
   const handleToggleModal = (id) =>
-    setItemModal({ items: Drinks, show: true, start: +id });
+    setItemModal({
+      items: [
+        ...Drinks.filter((drink) => drink.userId === currentUser.id),
+        ...Drinks.filter((drink) => drink.userId !== currentUser.id),
+      ],
+      show: true,
+      start: +id,
+    });
 
   const handleCreateNew = () => {
     setEdit({
@@ -118,9 +125,7 @@ function NestedDrinks({ fetchedData }) {
               )}
             </div>
 
-            <h3 onClick={() => handleToggleModal(ind)}>
-              {drink.name} {drink.id}
-            </h3>
+            <h3 onClick={() => handleToggleModal(ind)}>{drink.name}</h3>
 
             <div className="action-btns">
               <button

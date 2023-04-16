@@ -51,6 +51,7 @@ const StlydeNestedOverall = styled.div`
         position: relative;
         background-position: center;
         background-size: contain;
+        background-repeat: no-repeat;
         height: 90px;
         width: 90px;
         border-radius: 5px;
