@@ -48,7 +48,7 @@ function Stats({ fetchedData, currentUser }) {
           <TiLockOpen className="open_lock" title="your creation" />
         </p>
 
-        <h3>Rrelated to my Drinks</h3>
+        <h3>Related to my Drinks</h3>
         {['Categories', 'Ingredients'].map((item) => (
           <p key={item}>
             {item} {myStats[item]}

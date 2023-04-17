@@ -87,6 +87,7 @@ export default function ProfileDropDown({ currentUser }) {
       message3: 'you are about to be logged out',
       fxntoCall() {
         localStorage.clear();
+        sessionStorage.clear();
         navigate('/logout', { replace: true });
         window.location.reload();
         customAlert('logged out');

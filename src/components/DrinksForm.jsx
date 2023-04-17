@@ -57,7 +57,7 @@ export default function DrinksForm(props) {
     delete holder.updatedAt;
 
     setLoadingAnime({
-      messagee: `${drink.type.slice(0, drink.type.length - 1)}ing...`,
+      message: `${drink.type === 'create' ? 'creating' : 'saving'}...`,
       show: true,
     });
 

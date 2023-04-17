@@ -62,6 +62,7 @@ const StyleCrudPage = styled.div`
             top: 0;
             transition: 400ms;
             transform: scale(1.2);
+            margin-right: 5px;
           }
         }
 
@@ -107,7 +108,7 @@ const StyleCrudPage = styled.div`
       align-items: flex-start;
       gap: 20px;
       margin: 3.9rem 0 0;
-      padding: 16px 5px;
+      padding: 16px 10px;
       box-shadow: 0 0 10px #000;
 
       h2 {
@@ -314,6 +315,10 @@ const StyleCrudPage = styled.div`
             }
           }
         }
+      }
+
+      .stats_section {
+        margin: 2rem 5px 0;
       }
     }
   }

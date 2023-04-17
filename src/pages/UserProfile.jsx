@@ -261,11 +261,13 @@ function UserProfile({ currentUser }) {
 
             <input
               type="text"
+              defaultValue={currentUser?.first_name}
               placeholder={`first Name: ${currentUser?.first_name}`}
               name="firstName"
             />
             <input
               type="text"
+              defaultValue={currentUser?.last_name}
               placeholder={`last Name: ${currentUser?.last_name}`}
               name="lastName"
             />
@@ -273,10 +275,10 @@ function UserProfile({ currentUser }) {
               type="email"
               value={currentUser?.email}
               placeholder={`emai: ${currentUser?.email}`}
-              disabled
             />
             <input
               type="tel"
+              defaultValue={currentUser?.phone}
               placeholder={`Phone: ${currentUser?.phone}`}
               name="phone"
             />

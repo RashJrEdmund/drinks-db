@@ -40,9 +40,9 @@ export default function AdminLevel({ currentUser, fetchedData }) {
       Level{' '}
       {myStats.Drinks > 9 && (
         <span>
-          <BsStar className="open_lock" title="your level as an admin" />
-          <BsStarHalf />
           <BsFillStarFill />
+          <BsStarHalf />
+          <BsStar className="open_lock" title="your level as an admin" />
         </span>
       )}
     </StledLevel>
