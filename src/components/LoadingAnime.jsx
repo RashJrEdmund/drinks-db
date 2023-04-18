@@ -57,7 +57,7 @@ export default function LoadingAnime({ message }) {
     <StyledLoadingAmin>
       <div className="loading_container">
         <img src={loadingIcon} alt="Image_loading_icon" />
-        <p>{message || 'processing...'}</p>
+        <p>{message}</p>
       </div>
     </StyledLoadingAmin>
   );
