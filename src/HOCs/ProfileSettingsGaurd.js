@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUser } from '../api/authentication';
+import LoadingText from './LoadingText';
 
 export default function ProfileSettingsGaurd(Component) {
   return function Gaurd() {
@@ -16,7 +17,7 @@ export default function ProfileSettingsGaurd(Component) {
     return currentUser ? (
       <Component currentUser={currentUser} />
     ) : (
-      <p style={{ color: '#f5f5f5' }}>Access denied...</p>
+      <LoadingText />
     );
   };
 }

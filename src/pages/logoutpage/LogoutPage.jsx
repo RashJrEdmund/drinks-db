@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
-import logoutBg from '../images/wine_collection.png';
+import logoutBg from '../../images/wine_collection.png';
 
 const StyledLogoutPage = styled.div`
   background: linear-gradient(to bottom, #00000065, #00000065, #00000065),

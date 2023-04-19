@@ -1,5 +1,9 @@
 import httpClient from './axios';
 
+const getAllData = async () => {
+  return httpClient.get('all');
+};
+
 const register = async (user) => {
   return httpClient.post(`users`, user);
 };
@@ -78,6 +82,7 @@ const deleteIngredient = (id) => {
 };
 
 export {
+  getAllData,
   register,
   loginWithEmailPassword,
   updateUserProfile,

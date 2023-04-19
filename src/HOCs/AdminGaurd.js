@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUser } from '../api/authentication';
 import { MyContext } from '../context/MyContext';
+import LoadingText from './LoadingText';
 
 const AdminGaurd = (Component) => {
   return function Gaurd() {
@@ -28,7 +29,7 @@ const AdminGaurd = (Component) => {
     return currentUser?.is_admin ? (
       <Component currentUser={currentUser} />
     ) : (
-      <p style={{ color: '#f5f5f5' }}>Loading...</p>
+      <LoadingText />
     );
   };
 };

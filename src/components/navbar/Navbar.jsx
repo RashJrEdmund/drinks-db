@@ -8,9 +8,9 @@ import React from 'react';
 import { FaDatabase } from 'react-icons/fa';
 import { CgMenuGridR } from 'react-icons/cg';
 
-import { MyContext } from '../context/MyContext';
-import StyledNavBar from '../styles/navbar.styles';
-import ProfileDropDown from './ProfileDropDown';
+import { MyContext } from '../../context/MyContext';
+import StyledNavBar from './navbar.styles';
+import ProfileDropDown from '../ProfileDropDown';
 
 export default function Navbar({ currentUser }) {
   const { showMenu, setShowMenu } = React.useContext(MyContext);

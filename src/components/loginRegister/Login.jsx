@@ -5,11 +5,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
-import { MyContext } from '../context/MyContext';
-import StyledRegisterLoginForm from '../styles/StyledrRegisterLoginform';
+import { MyContext } from '../../context/MyContext';
+import StyledRegisterLoginForm from './StyledrRegisterLoginform';
 
-import { loginWithEmailPassword } from '../api/authentication';
-import { saveToken } from '../services/utils';
+import { loginWithEmailPassword } from '../../api/authentication';
+import { saveToken } from '../../services/utils';
 
 function Login() {
   const { customAlert, setLoadingAnime } = React.useContext(MyContext);

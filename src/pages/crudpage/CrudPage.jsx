@@ -9,11 +9,11 @@ import { MdDeleteForever, MdSave, MdKeyboardControlKey } from 'react-icons/md';
 import { BsBarChartFill } from 'react-icons/bs';
 import { AiOutlineMenu } from 'react-icons/ai';
 
-import { MyContext, CrudContext } from '../context/MyContext';
-import AdminGaurd from '../HOCs/AdminGaurd';
-import StyleCrudPage from '../styles/StyledCrudPage';
-import Stats from '../components/Stats';
-import CategoryIngredientFrom from '../components/CategoryIngredientFrom';
+import { MyContext, CrudContext } from '../../context/MyContext';
+import AdminGaurd from '../../HOCs/AdminGaurd';
+import StyleCrudPage from './StyledCrudPage';
+import Stats from '../../components/Stats';
+import CategoryIngredientFrom from '../../components/categoryIngredientForm/CategoryIngredientForm';
 
 function CrudPage({ currentUser }) {
   const { customAlert } = React.useContext(MyContext);

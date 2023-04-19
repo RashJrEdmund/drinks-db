@@ -13,13 +13,12 @@ import {
   MdOutlineEditOff,
   MdBrightness4,
 } from 'react-icons/md';
-import FormData from 'form-data';
-import StyledUserProfile from '../styles/StyledUserProfile';
+import StyledUserProfile from './StyledUserProfile';
 
-import { MyContext } from '../context/MyContext';
-import { deleteUser } from '../api/authentication';
-import uploadIcon from '../images/darkImageIcon.png';
-import ProfileSettingsGaurd from '../HOCs/ProfileSettingsGaurd';
+import { MyContext } from '../../context/MyContext';
+import { deleteUser } from '../../api/authentication';
+import uploadIcon from '../../images/darkImageIcon.png';
+import ProfileSettingsGaurd from '../../HOCs/ProfileSettingsGaurd';
 
 function UserProfile({ currentUser }) {
   const {
@@ -38,14 +37,14 @@ function UserProfile({ currentUser }) {
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
 
-    // setLoadingAnime({ message: 'updating...', show: true });
+    customAlert('loading..');
+    setLoadingAnime({ message: 'updating...', show: true });
     const { firstName, lastName, phone, imageUpload } = e.target;
     const formData = new FormData();
 
     if (imageUpload.value) {
       formData.append('image', imageUpload.files[0]);
       console.clear();
-      console.log('this image', imageUpload.files[0], formData);
     }
 
     if (
@@ -65,29 +64,29 @@ function UserProfile({ currentUser }) {
 
     if (phone.value) user.phone = phone.value;
 
-    // if (imageUpload.value) user.image_url = imageUpload.files[0];
+    if (imageUpload.value) user.image_url = imageUpload.files[0];
 
-    // await updateUserProfile(user)
-    //   .then(async (res) => {
-    //     const { data } = res;
-    //     customAlert('Profile Updated');
-    //     window.scrollTo(0, profileRef.current.scrollIntoView());
+    await updateUserProfile(user)
+      .then(async (res) => {
+        const { data } = res;
+        customAlert('Profile Updated');
+        window.scrollTo(0, profileRef.current.scrollIntoView());
 
-    //     if (firstName.value) firstName.value = '';
+        if (firstName.value) firstName.value = '';
 
-    //     if (lastName.value) lastName.value = '';
+        if (lastName.value) lastName.value = '';
 
-    //     if (phone.value) phone.value = '';
+        if (phone.value) phone.value = '';
 
-    //     if (imageUpload.value) imageUpload.value = '';
+        if (imageUpload.value) imageUpload.value = '';
 
-    //     setShowSideEdit(false);
-    //   })
-    //   .catch((er) => {
-    //     const { response, message } = er;
-    //     customAlert(response?.data || message);
-    //   })
-    //   .finally(() => setLoadingAnime({ message: '', show: false }));
+        setShowSideEdit(false);
+      })
+      .catch((er) => {
+        const { response, message } = er;
+        customAlert(response?.data || message);
+      })
+      .finally(() => setLoadingAnime({ message: '', show: false }));
   };
 
   const deleteAccount = async () => {
@@ -261,13 +260,11 @@ function UserProfile({ currentUser }) {
 
             <input
               type="text"
-              defaultValue={currentUser?.first_name}
               placeholder={`first Name: ${currentUser?.first_name}`}
               name="firstName"
             />
             <input
               type="text"
-              defaultValue={currentUser?.last_name}
               placeholder={`last Name: ${currentUser?.last_name}`}
               name="lastName"
             />
@@ -278,7 +275,6 @@ function UserProfile({ currentUser }) {
             />
             <input
               type="tel"
-              defaultValue={currentUser?.phone}
               placeholder={`Phone: ${currentUser?.phone}`}
               name="phone"
             />

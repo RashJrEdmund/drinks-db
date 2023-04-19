@@ -5,7 +5,7 @@ import { TiEdit } from 'react-icons/ti';
 
 import { CrudContext, MyContext } from '../context/MyContext';
 import FetchHOC from '../HOCs/FetchHOC';
-import StyledNestedOverall from '../styles/StyledNestedOverall';
+import StyledNestedOverall from './StyledNestedOverall';
 
 import { deleteIngredient } from '../api/authentication';
 

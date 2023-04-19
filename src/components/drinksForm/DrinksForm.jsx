@@ -6,9 +6,9 @@
 import React from 'react';
 import { RiDeleteBack2Fill } from 'react-icons/ri';
 
-import StyledDrinksForm from '../styles/StyledDrinksForm';
-import { MyContext } from '../context/MyContext';
-import { postDrink, patchDrink } from '../api/authentication';
+import StyledDrinksForm from './StyledDrinksForm';
+import { MyContext } from '../../context/MyContext';
+import { postDrink, patchDrink } from '../../api/authentication';
 
 export default function DrinksForm(props) {
   const { drink, setEdit } = props;
@@ -74,7 +74,6 @@ export default function DrinksForm(props) {
     }
 
     closeForm();
-    window.location.reload();
   };
 
   const handleSubmit = (e, saveDrink = false) => {
@@ -135,7 +134,7 @@ export default function DrinksForm(props) {
           type="button"
           onClick={closeForm}
         >
-          cancel
+          Discard
         </button>
 
         <form ref={formRef} onSubmit={handleSubmit}>

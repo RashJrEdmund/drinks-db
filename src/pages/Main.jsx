@@ -2,7 +2,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
 
-import Navbar from '../components/Navbar';
+import Navbar from '../components/navbar/Navbar';
 import Footer from '../components/Footer';
 import AuthGaurd from '../HOCs/AuthGaurd';
 import Body from '../components/Body';

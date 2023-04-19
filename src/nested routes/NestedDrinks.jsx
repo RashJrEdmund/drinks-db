@@ -7,11 +7,11 @@ import React from 'react';
 import { MdDeleteForever } from 'react-icons/md';
 import { TiEdit, TiLockClosed, TiLockOpen } from 'react-icons/ti';
 
-import DrinksForm from '../components/DrinksForm';
+import DrinksForm from '../components/drinksForm/DrinksForm';
 import { CrudContext, MyContext } from '../context/MyContext';
 
 import { deleteDrink } from '../api/authentication';
-import StyledNestedOverall from '../styles/StyledNestedOverall';
+import StyledNestedOverall from './StyledNestedOverall';
 import FetchHOC from '../HOCs/FetchHOC';
 
 function NestedDrinks({ fetchedData }) {

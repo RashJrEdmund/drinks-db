@@ -17,9 +17,7 @@ export default function AdminLevel({ currentUser, fetchedData }) {
     Ingredients: 0,
   });
 
-  const date = new Date();
-
-  console.log('currentUser.joined since', currentUser?.joinedSince, date);
+  // const date = new Date();
 
   React.useEffect(() => {
     setMyStats(() => {

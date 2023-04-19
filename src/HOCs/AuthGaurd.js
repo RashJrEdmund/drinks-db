@@ -15,7 +15,7 @@ const AuthGaurd = (Component) => {
     const [loadedUser, setLoadedUser] = useState();
 
     useEffect(() => {
-      setLoadingAnime({ message: 'getting user...', show: true });
+      setLoadingAnime({ message: 'getting ready...', show: true });
       getCurrentUser()
         .then(setLoadedUser)
         .catch(() => customAlert('you are not logged in'))

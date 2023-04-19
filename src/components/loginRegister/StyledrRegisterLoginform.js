@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import formBg from '../images/pour_wine_glass.png';
+import formBg from '../../images/pour_wine_glass.png';
 
 const StyledRegisterLoginForm = styled.div`
   background: linear-gradient(to bottom, #000000a9, #000000a9, #000000a9),

@@ -6,9 +6,9 @@
 import React from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
-import StyledSideBar from '../styles/StyledSideBar';
-import { MyContext } from '../context/MyContext';
-import FetchHOC from '../HOCs/FetchHOC';
+import StyledSideBar from './StyledSideBar';
+import { MyContext } from '../../context/MyContext';
+import FetchHOC from '../../HOCs/FetchHOC';
 
 function SideBar({ fetchedData }) {
   const {
@@ -37,24 +37,15 @@ function SideBar({ fetchedData }) {
     setFilterOptions([
       {
         title: 'Categories',
-        list:
-          Categories.length > 0
-            ? Categories
-            : [{ name: 'cat 1' }, { name: 'cat 2' }, { name: 'cat 3' }],
+        list: Categories,
       },
       {
         title: 'Ingredients',
-        list:
-          Ingredients.length > 0
-            ? Ingredients
-            : [{ name: 'ing 1' }, { name: 'ing 2' }, { name: 'ing 3' }],
+        list: Ingredients,
       },
       {
         title: 'Glasses',
-        list:
-          Glasses.length > 0
-            ? Glasses
-            : [{ name: 'glass 1' }, { name: 'glass 2' }, { name: 'glass 3' }],
+        list: Glasses,
       },
       {
         title: 'Alcoholic',

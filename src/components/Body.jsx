@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import DrinksSection from './DrinksSection';
-import SideBar from './SideBar';
+import DrinksSection from './drinksSection/DrinksSection';
+import SideBar from './sidebar/SideBar';
 
 const StyledBody = styled.div`
   width: 98%;

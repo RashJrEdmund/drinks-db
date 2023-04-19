@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import FetchHOC from '../HOCs/FetchHOC';
+import FetchHOC from '../../HOCs/FetchHOC';
 
-import StyledDrinksSection from '../styles/StyledDrinksSection';
-import HomeDrinks from './HomeDrinks';
+import StyledDrinksSection from './StyledDrinksSection';
+import HomeDrinks from '../homeDrinks/HomeDrinks';
 
 function DrinksSection({ fetchedData }) {
   const { Drinks } = fetchedData;

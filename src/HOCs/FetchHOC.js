@@ -1,30 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import styled from '@emotion/styled';
+import { getAllData } from '../api/authentication';
 import { MyContext } from '../context/MyContext';
-import FetchData from '../data/FetchData';
-
-const StyledLoadingMessage = styled.p`
-  @keyframes LoadingAnime {
-    from {
-      color: #4682b4;
-    }
-    to {
-      color: #a52a2a;
-    }
-  }
-
-  height: 70vh;
-  width: 100%;
-  letter-spacing: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  animation: LoadingAnime;
-  animation-duration: 1.5s;
-  animation-iteration-count: infinite;
-`;
+import LoadingText from './LoadingText';
 
 const FetchHOC = (Component) => {
   return function Gaurd(props) {
@@ -32,9 +10,9 @@ const FetchHOC = (Component) => {
     const [fetchedData, setFetchedData] = React.useState(null);
 
     React.useEffect(() => {
-      FetchData()
-        .then((res) => {
-          setFetchedData(res);
+      getAllData()
+        .then(({ data }) => {
+          setFetchedData(data);
         })
         .catch(({ message }) => customAlert(message));
     }, []);
@@ -42,7 +20,7 @@ const FetchHOC = (Component) => {
     return fetchedData?.Drinks?.length >= 0 ? (
       <Component {...props} fetchedData={fetchedData} />
     ) : (
-      <StyledLoadingMessage>Loading...</StyledLoadingMessage>
+      <LoadingText />
     );
   };
 };

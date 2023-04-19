@@ -4,13 +4,13 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { MdInfo } from 'react-icons/md';
-import { MyContext } from '../context/MyContext';
+import { MyContext } from '../../context/MyContext';
 
-import StyledHomeDrinks from '../styles/StyledHomeDrinks';
-import pourWineImg from '../images/pour_wine_glass_2.png';
-import blueWine from '../images/blue_wine_glass.png';
-import standingGlass from '../images/standing_wine_glass.png';
-import wineGlasses from '../images/wine_glasses.png';
+import StyledHomeDrinks from './StyledHomeDrinks';
+import pourWineImg from '../../images/pour_wine_glass_2.png';
+import blueWine from '../../images/blue_wine_glass.png';
+import standingGlass from '../../images/standing_wine_glass.png';
+import wineGlasses from '../../images/wine_glasses.png';
 
 export default function HomeDrinks({ drinksToshow, showInd }) {
   const { bodyref, setItemModal } = React.useContext(MyContext);

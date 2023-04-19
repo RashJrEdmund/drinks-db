@@ -3,10 +3,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
-import { MyContext } from '../context/MyContext';
-import { loginWithEmailPassword, register } from '../api/authentication';
-import StyledRegisterLoginForm from '../styles/StyledrRegisterLoginform';
-import { saveToken } from '../services/utils';
+import { MyContext } from '../../context/MyContext';
+import { loginWithEmailPassword, register } from '../../api/authentication';
+import StyledRegisterLoginForm from './StyledrRegisterLoginform';
+import { saveToken } from '../../services/utils';
 
 function Register() {
   const { customAlert, setLoadingAnime } = React.useContext(MyContext);

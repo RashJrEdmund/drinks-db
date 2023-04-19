@@ -5,17 +5,17 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { MyContext } from './context/MyContext';
 import Main from './pages/Main';
-import LogoutPage from './pages/LogoutPage';
-import Login from './components/Login';
-import Register from './components/Register';
-import UserProfile from './pages/UserProfile';
+import LogoutPage from './pages/logoutpage/LogoutPage';
+import Login from './components/loginRegister/Login';
+import Register from './components/loginRegister/Register';
+import UserProfile from './pages/userprofile/UserProfile';
 
 import AlertMessage from './components/AlertMessage';
 import DialogueMsg from './components/DialogueMsg';
 import LoadingAnime from './components/LoadingAnime';
 
 import Settings from './pages/Settings';
-import CrudPage from './pages/CrudPage';
+import CrudPage from './pages/crudpage/CrudPage';
 import NestedDrinks from './nested routes/NestedDrinks';
 import NestedCategories from './nested routes/NestedCategories';
 import NestedIngredients from './nested routes/NestedIngredients';

@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { MyContext } from '../context/MyContext';
+import { MyContext } from '../../context/MyContext';
 
-import StyledCategoryIngredientFrom from '../styles/StyledCategoryIngredientFrom';
+import StyledCategoryIngredientForm from './StyledCategoryIngredientForm';
 
 import {
   postCategory,
   patchCategory,
   postIngredient,
   patchIngredient,
-} from '../api/authentication';
+} from '../../api/authentication';
 
 export default function CategoryIngredientFrom(props) {
   const { edit, setEdit } = props;
@@ -29,7 +29,6 @@ export default function CategoryIngredientFrom(props) {
   const terminatePromiseChain = () => {
     setLoadingAnime({ messagee: '', show: false });
     closeForm();
-    window.location.reload();
   };
 
   const handleCategory = async (category) => {
@@ -83,7 +82,7 @@ export default function CategoryIngredientFrom(props) {
   };
 
   return (
-    <StyledCategoryIngredientFrom>
+    <StyledCategoryIngredientForm>
       <div className="item_form_overlay" />
 
       <div className="form_container">
@@ -93,7 +92,7 @@ export default function CategoryIngredientFrom(props) {
           type="button"
           onClick={closeForm}
         >
-          cancel
+          Discard
         </button>
 
         <form onSubmit={handleSubmit}>
@@ -126,6 +125,6 @@ export default function CategoryIngredientFrom(props) {
           </button>
         </form>
       </div>
-    </StyledCategoryIngredientFrom>
+    </StyledCategoryIngredientForm>
   );
 }
