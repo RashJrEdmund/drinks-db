@@ -28,7 +28,6 @@ export default function CategoryIngredientFrom(props) {
 
   const terminatePromiseChain = () => {
     setLoadingAnime({ messagee: '', show: false });
-    closeForm();
   };
 
   const handleCategory = async (category) => {
@@ -76,6 +75,8 @@ export default function CategoryIngredientFrom(props) {
     delete holder.createdAt;
     delete holder.deletedAt;
     delete holder.updatedAt;
+
+    closeForm();
 
     if (edit.class === 'category') handleCategory(holder);
     else handleIngredient(holder);

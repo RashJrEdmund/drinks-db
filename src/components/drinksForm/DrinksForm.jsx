@@ -61,6 +61,8 @@ export default function DrinksForm(props) {
       show: true,
     });
 
+    closeForm();
+
     if (drink.type === 'create') {
       await postDrink(holder)
         .then(() => customAlert('drink saved'))
@@ -72,8 +74,6 @@ export default function DrinksForm(props) {
         .catch(() => customAlert('could not saved drink'))
         .finally(() => setLoadingAnime({ messagee: '', show: false }));
     }
-
-    closeForm();
   };
 
   const handleSubmit = (e, saveDrink = false) => {
