@@ -189,10 +189,12 @@ export default function ItemModal({ itemModal, setItemModal }) {
 
         <div className="item_container">
           <span className="item_no">item: {ind + 1}</span>
-          <div
-            className="image_div"
-            style={{ backgroundImage: `url(${items[ind]?.image_url})` }}
-          />
+          {items[ind].image_url && (
+            <div
+              className="image_div"
+              style={{ backgroundImage: `url(${items[ind]?.image_url})` }}
+            />
+          )}
 
           <div className="info_div">
             <h3>{items[ind]?.name}</h3>

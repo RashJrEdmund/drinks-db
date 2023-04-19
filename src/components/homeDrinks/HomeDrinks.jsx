@@ -13,15 +13,12 @@ import standingGlass from '../../images/standing_wine_glass.png';
 import wineGlasses from '../../images/wine_glasses.png';
 
 export default function HomeDrinks({ drinksToshow, showInd }) {
-  const { bodyref, setItemModal } = React.useContext(MyContext);
-
-  const handleToggleModal = (id) =>
-    setItemModal({ items: drinksToshow, show: true, start: +id });
+  const { bodyref, handleToggleModal } = React.useContext(MyContext);
 
   return (
     <StyledHomeDrinks>
       <div ref={bodyref} className="drinks-container">
-        {drinksToshow?.map((drink, ind) => {
+        {drinksToshow?.map((drink, ind, arrDrinksToshow) => {
           return (
             <div
               key={drink.id}
@@ -31,7 +28,7 @@ export default function HomeDrinks({ drinksToshow, showInd }) {
               <span
                 className="drink_info_btn"
                 title="tap to see drink info"
-                onClick={() => handleToggleModal(ind)}
+                onClick={() => handleToggleModal(ind, arrDrinksToshow)}
               >
                 <MdInfo />
               </span>

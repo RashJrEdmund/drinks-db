@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { MdDeleteForever } from 'react-icons/md';
@@ -13,7 +15,8 @@ function NestedIngredients({ fetchedData }) {
   const {
     customAlert,
     setLoadingAnime,
-    setdialogueDetails /* setItemModal */,
+    setdialogueDetails,
+    handleToggleModal,
   } = React.useContext(MyContext);
   const { handleCreateNew, handleCatAndIngrEdit } =
     React.useContext(CrudContext);
@@ -48,18 +51,15 @@ function NestedIngredients({ fetchedData }) {
       </button>
 
       <div className="container">
-        {Ingredients?.map((ingredient) => (
+        {Ingredients?.map((ingredient, ind, arrIngredients) => (
           <div
             key={ingredient.id}
             className="ingredient"
             style={{ backgroundImage: `url("${ingredient.image_url}")` }}
           >
-            <div
-              style={{ backgroundImage: `url("${ingredient.image_url}")` }}
-            />
-
-            <h3>{ingredient.name}</h3>
-            {/* <p>{ingredient.description}</p> */}
+            <h3 onClick={() => handleToggleModal(ind, arrIngredients)}>
+              {ingredient.name}
+            </h3>
 
             <div className="action-btns">
               <button

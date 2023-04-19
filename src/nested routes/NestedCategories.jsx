@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { MdDeleteForever } from 'react-icons/md';
@@ -13,7 +15,8 @@ function NestedCategories({ fetchedData }) {
   const {
     customAlert,
     setLoadingAnime,
-    setdialogueDetails /* setItemModal */,
+    setdialogueDetails,
+    handleToggleModal,
   } = React.useContext(MyContext);
   const { handleCreateNew, handleCatAndIngrEdit } =
     React.useContext(CrudContext);
@@ -48,16 +51,15 @@ function NestedCategories({ fetchedData }) {
       </button>
 
       <div className="container">
-        {Categories?.map((category) => (
+        {Categories?.map((category, ind, arrCategories) => (
           <div
             key={category.id}
             className="category"
             style={{ backgroundImage: `url("${category.image_url}")` }}
           >
-            <div style={{ backgroundImage: `url("${category.image_url}")` }} />
-
-            <h3>{category.name}</h3>
-            {/* <p>{category.description}</p> */}
+            <h3 onClick={() => handleToggleModal(ind, arrCategories)}>
+              {category.name}
+            </h3>
 
             <div className="action-btns">
               <button

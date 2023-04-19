@@ -79,6 +79,13 @@ export default function App() {
       document.body.style.overflow === 'hidden' ? 'unset' : 'hidden';
   };
 
+  const handleToggleModal = (id, items) =>
+    setItemModal({
+      items,
+      show: true,
+      start: +id,
+    });
+
   const bodyref = React.useRef();
 
   React.useEffect(() => {
@@ -92,6 +99,7 @@ export default function App() {
           customAlert,
 
           setdialogueDetails,
+          handleToggleModal,
 
           showMenu,
           setShowMenu,

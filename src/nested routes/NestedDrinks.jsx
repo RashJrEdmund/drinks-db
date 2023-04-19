@@ -15,23 +15,17 @@ import StyledNestedOverall from './StyledNestedOverall';
 import FetchHOC from '../HOCs/FetchHOC';
 
 function NestedDrinks({ fetchedData }) {
-  const { customAlert, setLoadingAnime, setdialogueDetails, setItemModal } =
-    React.useContext(MyContext);
+  const {
+    customAlert,
+    setLoadingAnime,
+    setdialogueDetails,
+    handleToggleModal,
+  } = React.useContext(MyContext);
 
   const { Drinks } = fetchedData;
 
   const { edit, setEdit, currentUser, handleCreateNew } =
     React.useContext(CrudContext);
-
-  const handleToggleModal = (id) =>
-    setItemModal({
-      items: [
-        ...Drinks.filter((drink) => drink.userId === currentUser.id),
-        ...Drinks.filter((drink) => drink.userId !== currentUser.id),
-      ],
-      show: true,
-      start: +id,
-    });
 
   const handleDrinkEdit = (drink) => {
     const holder = edit;
@@ -83,7 +77,7 @@ function NestedDrinks({ fetchedData }) {
         {[
           ...Drinks.filter((drink) => drink.userId === currentUser.id),
           ...Drinks.filter((drink) => drink.userId !== currentUser.id),
-        ]?.map((drink, ind) => (
+        ]?.map((drink, ind, arrDrinks) => (
           <div key={drink.id} className="drink">
             <div
               className="image"
@@ -104,7 +98,9 @@ function NestedDrinks({ fetchedData }) {
               )}
             </div>
 
-            <h3 onClick={() => handleToggleModal(ind)}>{drink.name}</h3>
+            <h3 onClick={() => handleToggleModal(ind, arrDrinks)}>
+              {drink.name}
+            </h3>
 
             <div className="action-btns">
               <button
