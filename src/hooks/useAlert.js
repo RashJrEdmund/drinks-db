@@ -67,7 +67,7 @@ const useAlert = () => {
     );
   }
 
-  const displayAlert = (msg) => {
+  const customAlert = (msg) => {
     setAlertMsg(() => ({ message: msg, show: true }));
 
     setTimeout(() => {
@@ -75,7 +75,7 @@ const useAlert = () => {
     }, 2000);
   };
 
-  return { AlertComponet, displayAlert, alertMsg };
+  return { AlertComponet, customAlert, alertMsg };
 };
 
 export default useAlert;

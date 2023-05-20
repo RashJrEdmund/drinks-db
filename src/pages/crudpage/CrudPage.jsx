@@ -179,6 +179,7 @@ function CrudPage({ currentUser }) {
             ref={topBtnRef}
             className="stats_btn"
             type="button"
+            title="view statistics"
             onClick={() => setActiveMenu((prev) => ({ ...prev, stats: true }))}
           >
             <BsBarChartFill />
@@ -188,6 +189,7 @@ function CrudPage({ currentUser }) {
             ref={topBtnRef}
             className="to_top_btn"
             type="button"
+            title="scroll to top"
             onClick={() => window.scrollTo(0, cardOptionsRef.current.ofsettop)}
           >
             <MdKeyboardControlKey />

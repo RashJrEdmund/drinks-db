@@ -12,15 +12,18 @@ import StyledNestedOverall from './StyledNestedOverall';
 import { deleteCategory } from '../api/authentication';
 import useDialogue from '../hooks/useDialogue';
 import useLoader from '../hooks/useLoader';
+import useModal from '../hooks/UseModal/useModal';
 
 function NestedCategories({ fetchedData }) {
-  const { customAlert, handleToggleModal } = React.useContext(MyContext);
+  const { customAlert } = React.useContext(MyContext);
   const { handleCreateNew, handleCatAndIngrEdit } =
     React.useContext(CrudContext);
 
   const { LoadingComponent, setLoadingAnime, loadingAnime } = useLoader();
 
   const { DialogueComponent, dialogueDetails, displayDialogue } = useDialogue();
+
+  const { ModalComponent, itemModal, mountItemModal } = useModal();
 
   const { Categories } = fetchedData;
 
@@ -47,6 +50,8 @@ function NestedCategories({ fetchedData }) {
 
       {loadingAnime.show && <LoadingComponent />}
 
+      {itemModal.show && <ModalComponent />}
+
       <button
         className="create-new-btn"
         type="button"
@@ -62,7 +67,7 @@ function NestedCategories({ fetchedData }) {
             className="category"
             style={{ backgroundImage: `url("${category.image_url}")` }}
           >
-            <h3 onClick={() => handleToggleModal(ind, arrCategories)}>
+            <h3 onClick={() => mountItemModal(ind, arrCategories)}>
               {category.name}
             </h3>
 
@@ -71,6 +76,7 @@ function NestedCategories({ fetchedData }) {
                 name={category.id}
                 className="edit_btn"
                 type="button"
+                title="edit this category"
                 onClick={() => handleCatAndIngrEdit('category', category)}
               >
                 <TiEdit />
@@ -80,6 +86,7 @@ function NestedCategories({ fetchedData }) {
                 name={category.id}
                 className="del_btn"
                 type="button"
+                title="delete this category"
                 onClick={() => handleDeleteCategory(category)}
               >
                 <MdDeleteForever />

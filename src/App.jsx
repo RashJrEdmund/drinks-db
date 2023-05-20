@@ -10,60 +10,38 @@ import Login from './components/loginRegister/Login';
 import Register from './components/loginRegister/Register';
 import UserProfile from './pages/userprofile/UserProfile';
 
-import AlertMessage from './components/AlertMessage';
-
 import Settings from './pages/Settings';
 import CrudPage from './pages/crudpage/CrudPage';
 import NestedDrinks from './nested routes/NestedDrinks';
 import NestedCategories from './nested routes/NestedCategories';
 import NestedIngredients from './nested routes/NestedIngredients';
-import ItemModal from './components/ItemModal';
 import useDialogue from './hooks/useDialogue';
 import useLoader from './hooks/useLoader';
+import useModal from './hooks/UseModal/useModal';
+import useAlert from './hooks/useAlert';
 
 export default function App() {
   const [filterData, setFilterData] = React.useState([]);
 
   const [zoomPhoto, setZoomPhoto] = React.useState(false);
-  const [itemModal, setItemModal] = React.useState({
-    items: {},
-    show: false,
-    start: 0,
-  });
 
   const [showMenu, setShowMenu] = React.useState({
     side: false,
     dropDown: false,
   });
 
-  const [alertMsg, setAlertMsg] = React.useState({
-    message: '',
-    show: false,
-  });
-
   const { dialogueDetails } = useDialogue();
+
+  const { itemModal } = useModal();
 
   const { LoadingComponent, setLoadingAnime, loadingAnime } = useLoader();
 
-  const customAlert = (msg) => {
-    setAlertMsg(() => ({ message: msg, show: true }));
-
-    setTimeout(() => {
-      setAlertMsg(() => ({ message: '', show: false }));
-    }, 2000);
-  };
+  const { AlertComponet, customAlert, alertMsg } = useAlert(); // will use it only at the top level
 
   const toggleBodyOverFlow = () => {
     document.body.style.overflow =
       document.body.style.overflow === 'hidden' ? 'unset' : 'hidden';
   };
-
-  const handleToggleModal = (id, items) =>
-    setItemModal({
-      items,
-      show: true,
-      start: +id,
-    });
 
   const bodyref = React.useRef();
 
@@ -76,7 +54,6 @@ export default function App() {
       <MyContext.Provider
         value={{
           customAlert,
-          handleToggleModal,
           setLoadingAnime,
 
           showMenu,
@@ -88,18 +65,11 @@ export default function App() {
           zoomPhoto,
           setZoomPhoto,
 
-          itemModal,
-          setItemModal,
-
           bodyref,
         }}
       >
-        {alertMsg.show && <AlertMessage message={alertMsg.message} />}
+        {alertMsg.show && <AlertComponet />}
         {loadingAnime.show && <LoadingComponent />}
-
-        {itemModal.show && (
-          <ItemModal itemModal={itemModal} setItemModal={setItemModal} />
-        )}
 
         <BrowserRouter>
           <Routes>

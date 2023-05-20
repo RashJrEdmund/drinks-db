@@ -11,13 +11,18 @@ import pourWineImg from '../../images/pour_wine_glass_2.png';
 import blueWine from '../../images/blue_wine_glass.png';
 import standingGlass from '../../images/standing_wine_glass.png';
 import wineGlasses from '../../images/wine_glasses.png';
+import useModal from '../../hooks/UseModal/useModal';
 
 export default function HomeDrinks({ drinksToshow, showInd }) {
-  const { bodyref, handleToggleModal } = React.useContext(MyContext);
+  const { bodyref } = React.useContext(MyContext);
+
+  const { ModalComponent, itemModal, mountItemModal } = useModal();
 
   return (
     <StyledHomeDrinks>
       <div ref={bodyref} className="drinks-container">
+        {itemModal.show && <ModalComponent />}
+
         {drinksToshow?.map((drink, ind, arrDrinksToshow) => {
           return (
             <div
@@ -28,7 +33,7 @@ export default function HomeDrinks({ drinksToshow, showInd }) {
               <span
                 className="drink_info_btn"
                 title="tap to see drink info"
-                onClick={() => handleToggleModal(ind, arrDrinksToshow)}
+                onClick={() => mountItemModal(ind, arrDrinksToshow)}
               >
                 <MdInfo />
               </span>

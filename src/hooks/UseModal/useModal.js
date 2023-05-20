@@ -66,7 +66,7 @@ const useModal = () => {
 
   const clearModal = () =>
     setItemModal({
-      items: [],
+      items: {},
       start: 0,
       show: false,
     });
@@ -81,8 +81,12 @@ const useModal = () => {
     );
   }
 
-  const mountItemModal = (options) => {
-    setItemModal({ ...options, show: true });
+  const mountItemModal = (ind, items) => {
+    setItemModal({
+      items,
+      show: true,
+      start: +ind,
+    });
   };
 
   return { ModalComponent, itemModal, mountItemModal };

@@ -12,15 +12,18 @@ import StyledNestedOverall from './StyledNestedOverall';
 import { deleteIngredient } from '../api/authentication';
 import useDialogue from '../hooks/useDialogue';
 import useLoader from '../hooks/useLoader';
+import useModal from '../hooks/UseModal/useModal';
 
 function NestedIngredients({ fetchedData }) {
-  const { customAlert, handleToggleModal } = React.useContext(MyContext);
+  const { customAlert } = React.useContext(MyContext);
   const { handleCreateNew, handleCatAndIngrEdit } =
     React.useContext(CrudContext);
 
   const { LoadingComponent, setLoadingAnime, loadingAnime } = useLoader();
 
   const { DialogueComponent, dialogueDetails, displayDialogue } = useDialogue();
+
+  const { ModalComponent, itemModal, mountItemModal } = useModal();
 
   const { Ingredients } = fetchedData;
 
@@ -45,6 +48,7 @@ function NestedIngredients({ fetchedData }) {
     <StyledNestedOverall>
       {dialogueDetails.show && <DialogueComponent />}
       {loadingAnime.show && <LoadingComponent />}
+      {itemModal.show && <ModalComponent />}
 
       <button
         className="create-new-btn"
@@ -61,7 +65,7 @@ function NestedIngredients({ fetchedData }) {
             className="ingredient"
             style={{ backgroundImage: `url("${ingredient.image_url}")` }}
           >
-            <h3 onClick={() => handleToggleModal(ind, arrIngredients)}>
+            <h3 onClick={() => mountItemModal(ind, arrIngredients)}>
               {ingredient.name}
             </h3>
 
@@ -70,6 +74,7 @@ function NestedIngredients({ fetchedData }) {
                 name={ingredient.id}
                 className="edit_btn"
                 type="button"
+                title="edit this ingredient"
                 onClick={() => handleCatAndIngrEdit('ingredient', ingredient)}
               >
                 <TiEdit />
@@ -79,6 +84,7 @@ function NestedIngredients({ fetchedData }) {
                 name={ingredient.id}
                 className="del_btn"
                 type="button"
+                title="delete this ingredient"
                 onClick={() => handleDeleteIngredient(ingredient)}
               >
                 <MdDeleteForever />

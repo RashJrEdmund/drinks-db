@@ -15,9 +15,10 @@ import StyledNestedOverall from './StyledNestedOverall';
 import FetchHOC from '../HOCs/FetchHOC';
 import useDialogue from '../hooks/useDialogue';
 import useLoader from '../hooks/useLoader';
+import useModal from '../hooks/UseModal/useModal';
 
 function NestedDrinks({ fetchedData }) {
-  const { customAlert, handleToggleModal } = React.useContext(MyContext);
+  const { customAlert } = React.useContext(MyContext);
 
   const { Drinks } = fetchedData;
 
@@ -27,6 +28,8 @@ function NestedDrinks({ fetchedData }) {
   const { LoadingComponent, setLoadingAnime, loadingAnime } = useLoader();
 
   const { DialogueComponent, dialogueDetails, displayDialogue } = useDialogue();
+
+  const { ModalComponent, itemModal, mountItemModal } = useModal();
 
   const handleDrinkEdit = (drink) => {
     const holder = edit;
@@ -67,6 +70,7 @@ function NestedDrinks({ fetchedData }) {
       {edit.show.drink && <DrinksForm drink={edit} setEdit={setEdit} />}
       {dialogueDetails.show && <DialogueComponent />}
       {loadingAnime.show && <LoadingComponent />}
+      {itemModal.show && <ModalComponent />}
 
       <button
         className="create-new-btn"
@@ -86,7 +90,7 @@ function NestedDrinks({ fetchedData }) {
               className="image"
               title="tap to view"
               style={{ backgroundImage: `url("${drink.image_url}")` }}
-              onClick={() => handleToggleModal(ind)}
+              onClick={() => mountItemModal(ind, arrDrinks)}
             >
               {drink.userId === currentUser.id ? (
                 <TiLockOpen
@@ -101,15 +105,14 @@ function NestedDrinks({ fetchedData }) {
               )}
             </div>
 
-            <h3 onClick={() => handleToggleModal(ind, arrDrinks)}>
-              {drink.name}
-            </h3>
+            <h3 onClick={() => mountItemModal(ind, arrDrinks)}>{drink.name}</h3>
 
             <div className="action-btns">
               <button
                 name={drink.id}
                 className="edit_btn"
                 type="button"
+                title="edit this drink"
                 onClick={() => handleDrinkEdit(drink)}
               >
                 <TiEdit />
@@ -119,6 +122,7 @@ function NestedDrinks({ fetchedData }) {
                 name={drink.id}
                 className="del_btn"
                 type="button"
+                title="delete this drink"
                 onClick={() => handleDeleteDrink(drink)}
               >
                 <MdDeleteForever />
