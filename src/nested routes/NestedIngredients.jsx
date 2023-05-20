@@ -10,26 +10,23 @@ import FetchHOC from '../HOCs/FetchHOC';
 import StyledNestedOverall from './StyledNestedOverall';
 
 import { deleteIngredient } from '../api/authentication';
+import useDialogue from '../hooks/useDialogue';
 
 function NestedIngredients({ fetchedData }) {
-  const {
-    customAlert,
-    setLoadingAnime,
-    setdialogueDetails,
-    handleToggleModal,
-  } = React.useContext(MyContext);
+  const { customAlert, setLoadingAnime, handleToggleModal } =
+    React.useContext(MyContext);
   const { handleCreateNew, handleCatAndIngrEdit } =
     React.useContext(CrudContext);
+
+  const { DialogueComponent, dialogueDetails, displayDialogue } = useDialogue();
 
   const { Ingredients } = fetchedData;
 
   const handleDeleteIngredient = async ({ id }) => {
-    await setdialogueDetails({
-      message1: '',
+    const options = {
       message2: 'are you sure you want',
       message3: 'to delete this Ingredient ?',
-      show: true,
-      job: 'delete',
+      agreeTxt: 'delete',
       async fxntoCall() {
         setLoadingAnime({ message: 'deleting...', show: true });
         await deleteIngredient(id)
@@ -37,11 +34,15 @@ function NestedIngredients({ fetchedData }) {
           .catch(({ response }) => customAlert(response.data))
           .finally(() => setLoadingAnime({ message: '', show: false }));
       },
-    });
+    };
+
+    displayDialogue(options);
   };
 
   return (
     <StyledNestedOverall>
+      {dialogueDetails.show && <DialogueComponent />}
+
       <button
         className="create-new-btn"
         type="button"

@@ -19,20 +19,17 @@ import { MyContext } from '../../context/MyContext';
 import { deleteUser } from '../../api/authentication';
 import uploadIcon from '../../images/darkImageIcon.png';
 import ProfileSettingsGaurd from '../../HOCs/ProfileSettingsGaurd';
+import useDialogue from '../../hooks/useDialogue';
 
 function UserProfile({ currentUser }) {
-  const {
-    zoomPhoto,
-    setZoomPhoto,
-
-    setdialogueDetails,
-    setLoadingAnime,
-    customAlert,
-  } = React.useContext(MyContext);
+  const { zoomPhoto, setZoomPhoto, setLoadingAnime, customAlert } =
+    React.useContext(MyContext);
   const navigate = useNavigate();
   const profileRef = React.useRef();
   const [imagePath, setImagePath] = React.useState(null);
   const [showSideEdit, setShowSideEdit] = React.useState(false);
+
+  const { DialogueComponent, dialogueDetails, displayDialogue } = useDialogue();
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
@@ -106,16 +103,17 @@ function UserProfile({ currentUser }) {
   };
 
   const handleDeleteAccount = () => {
-    setdialogueDetails({
+    const options = {
       message1: 'are you sure you want to delete account?',
       message2: "all changes you've made will be lost",
       message3: 'this action cannot be undone',
-      job: 'Proceed',
-      show: true,
+      agreeTxt: 'Proceed',
       fxntoCall() {
         deleteAccount();
       },
-    });
+    };
+
+    displayDialogue(options);
   };
 
   const handleProfilePhoto = (e) => {
@@ -125,6 +123,8 @@ function UserProfile({ currentUser }) {
 
   return (
     <StyledUserProfile>
+      {dialogueDetails.show && <DialogueComponent />}
+
       <div className="profile_update_container">
         <div className="profile-btns">
           <button

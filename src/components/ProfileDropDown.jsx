@@ -14,6 +14,7 @@ import {
   MdLogout,
 } from 'react-icons/md';
 import { MyContext } from '../context/MyContext';
+import useDialogue from '../hooks/useDialogue';
 
 const StyledDropDown = styled.div`
   position: absolute;
@@ -75,15 +76,13 @@ function ProfileAndLoginBtn({ fxn, currentUser }) {
 }
 
 export default function ProfileDropDown({ currentUser }) {
-  const { setdialogueDetails, customAlert } = React.useContext(MyContext);
+  const { customAlert } = React.useContext(MyContext);
+  const { DialogueComponent, dialogueDetails, displayDialogue } = useDialogue();
   const navigate = useNavigate();
-  // localStorage.removeItem('currentUser');
 
   const handleLogOut = () => {
-    setdialogueDetails((prev) => ({
-      ...prev,
-      show: true,
-      job: 'Logout',
+    const options = {
+      agreeTxt: 'Logout',
       message3: 'you are about to be logged out',
       fxntoCall() {
         localStorage.clear();
@@ -91,9 +90,10 @@ export default function ProfileDropDown({ currentUser }) {
         navigate('/logout', { replace: true });
         window.location.reload();
         customAlert('logged out');
-        setdialogueDetails((previous) => ({ ...previous, show: false }));
       },
-    }));
+    };
+
+    displayDialogue(options);
   };
 
   const checkUserLoggedIn = () => {
@@ -108,6 +108,7 @@ export default function ProfileDropDown({ currentUser }) {
   return currentUser?.is_admin ? (
     <StyledDropDown className="profile_dropdown" id="profile_dropdown">
       <p onClick={() => window.scrollTo(0, 0)}>
+        {!dialogueDetails.show && <DialogueComponent />}
         <MdHome /> Home
       </p>
       <p onClick={() => navigate('/cruding/drinks')}>
@@ -131,6 +132,8 @@ export default function ProfileDropDown({ currentUser }) {
     </StyledDropDown>
   ) : (
     <StyledDropDown className="profile_dropdown" id="profile_dropdown">
+      {dialogueDetails.show && <DialogueComponent />}
+
       <p onClick={() => window.scrollTo(0, 0)}>
         <MdHome /> Home
       </p>

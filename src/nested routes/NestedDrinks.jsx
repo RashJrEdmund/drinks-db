@@ -13,19 +13,18 @@ import { CrudContext, MyContext } from '../context/MyContext';
 import { deleteDrink } from '../api/authentication';
 import StyledNestedOverall from './StyledNestedOverall';
 import FetchHOC from '../HOCs/FetchHOC';
+import useDialogue from '../hooks/useDialogue';
 
 function NestedDrinks({ fetchedData }) {
-  const {
-    customAlert,
-    setLoadingAnime,
-    setdialogueDetails,
-    handleToggleModal,
-  } = React.useContext(MyContext);
+  const { customAlert, setLoadingAnime, handleToggleModal } =
+    React.useContext(MyContext);
 
   const { Drinks } = fetchedData;
 
   const { edit, setEdit, currentUser, handleCreateNew } =
     React.useContext(CrudContext);
+
+  const { DialogueComponent, dialogueDetails, displayDialogue } = useDialogue();
 
   const handleDrinkEdit = (drink) => {
     const holder = edit;
@@ -45,12 +44,10 @@ function NestedDrinks({ fetchedData }) {
       return;
     }
 
-    await setdialogueDetails({
-      message1: '',
+    const options = {
       message2: 'are you sure you want',
       message3: 'to delete this drink ?',
-      show: true,
-      job: 'delete',
+      agreeTxt: 'delete',
       async fxntoCall() {
         setLoadingAnime({ message: 'deleting...', show: true });
         await deleteDrink(drink.id)
@@ -58,12 +55,15 @@ function NestedDrinks({ fetchedData }) {
           .catch(({ response }) => customAlert(response.data))
           .finally(() => setLoadingAnime({ message: '', show: false }));
       },
-    });
+    };
+
+    displayDialogue(options);
   };
 
   return (
     <StyledNestedOverall>
       {edit.show.drink && <DrinksForm drink={edit} setEdit={setEdit} />}
+      {dialogueDetails.show && <DialogueComponent />}
 
       <button
         className="create-new-btn"

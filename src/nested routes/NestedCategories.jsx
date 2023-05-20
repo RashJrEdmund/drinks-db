@@ -10,26 +10,23 @@ import FetchHOC from '../HOCs/FetchHOC';
 import StyledNestedOverall from './StyledNestedOverall';
 
 import { deleteCategory } from '../api/authentication';
+import useDialogue from '../hooks/useDialogue';
 
 function NestedCategories({ fetchedData }) {
-  const {
-    customAlert,
-    setLoadingAnime,
-    setdialogueDetails,
-    handleToggleModal,
-  } = React.useContext(MyContext);
+  const { customAlert, setLoadingAnime, handleToggleModal } =
+    React.useContext(MyContext);
   const { handleCreateNew, handleCatAndIngrEdit } =
     React.useContext(CrudContext);
 
+  const { DialogueComponent, dialogueDetails, displayDialogue } = useDialogue();
+
   const { Categories } = fetchedData;
 
-  const handleDeleteCategory = async ({ id }) => {
-    await setdialogueDetails({
-      message1: '',
+  const handleDeleteCategory = ({ id }) => {
+    const options = {
       message2: 'are you sure you want',
       message3: 'to delete this Category ?',
-      show: true,
-      job: 'delete',
+      agreeTxt: 'delete',
       async fxntoCall() {
         setLoadingAnime({ message: 'deleting...', show: true });
         await deleteCategory(id)
@@ -37,11 +34,15 @@ function NestedCategories({ fetchedData }) {
           .catch(({ response }) => customAlert(response.data))
           .finally(() => setLoadingAnime({ message: '', show: false }));
       },
-    });
+    };
+
+    displayDialogue(options);
   };
 
   return (
     <StyledNestedOverall>
+      {dialogueDetails.show && <DialogueComponent />}
+
       <button
         className="create-new-btn"
         type="button"

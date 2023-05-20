@@ -11,7 +11,6 @@ import Register from './components/loginRegister/Register';
 import UserProfile from './pages/userprofile/UserProfile';
 
 import AlertMessage from './components/AlertMessage';
-import DialogueMsg from './components/DialogueMsg';
 import LoadingAnime from './components/LoadingAnime';
 
 import Settings from './pages/Settings';
@@ -20,6 +19,7 @@ import NestedDrinks from './nested routes/NestedDrinks';
 import NestedCategories from './nested routes/NestedCategories';
 import NestedIngredients from './nested routes/NestedIngredients';
 import ItemModal from './components/ItemModal';
+import useDialogue from './hooks/useDialogue';
 
 export default function App() {
   const [filterData, setFilterData] = React.useState([]);
@@ -46,25 +46,7 @@ export default function App() {
     show: false,
   });
 
-  const [dialogueDetails, setdialogueDetails] = React.useState({
-    message1: '',
-    message2: '',
-    job: '',
-    fxntoCall: null,
-    show: false,
-  });
-
-  // setdialogueDetails((prev) => ({ // edit and call this function along where you want it to work
-  //   ...prev,
-  //   show: true,
-  //   job: 'Logout',
-  //   message2: 'are you sure you want to log out',
-  //   fxntoCall() {
-  //     localStorage.removeItem('currentUser');
-  //     navigate('/logout');
-  //     setdialogueDetails((currentUserprevious) => ({ ...previous, show: false }));
-  //   },
-  // }));
+  const { dialogueDetails } = useDialogue();
 
   const customAlert = (msg) => {
     setAlertMsg(() => ({ message: msg, show: true }));
@@ -98,7 +80,6 @@ export default function App() {
         value={{
           customAlert,
 
-          setdialogueDetails,
           handleToggleModal,
 
           showMenu,
@@ -120,13 +101,6 @@ export default function App() {
         }}
       >
         {alertMsg.show && <AlertMessage message={alertMsg.message} />}
-
-        {dialogueDetails.show && (
-          <DialogueMsg
-            details={dialogueDetails}
-            setDetails={setdialogueDetails}
-          />
-        )}
 
         {loadingAnime.show && <LoadingAnime message={loadingAnime.message} />}
 
