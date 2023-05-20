@@ -9,12 +9,15 @@ import { RiDeleteBack2Fill } from 'react-icons/ri';
 import StyledDrinksForm from './StyledDrinksForm';
 import { MyContext } from '../../context/MyContext';
 import { postDrink, patchDrink } from '../../api/authentication';
+import useLoader from '../../hooks/useLoader';
 
 export default function DrinksForm(props) {
   const { drink, setEdit } = props;
 
-  const { customAlert, setLoadingAnime } = React.useContext(MyContext);
+  const { customAlert } = React.useContext(MyContext);
   const [drinkData, setDrinkData] = React.useState(drink?.chosenOne);
+
+  const { LoadingComponent, setLoadingAnime, loadingAnime } = useLoader();
 
   const [imagePath, setImagePath] = React.useState();
   const formRef = React.useRef();
@@ -125,6 +128,8 @@ export default function DrinksForm(props) {
 
   return (
     <StyledDrinksForm>
+      {loadingAnime.show && <LoadingComponent />}
+
       <div className="drink_form_overlay" />
 
       <div className="form_container">

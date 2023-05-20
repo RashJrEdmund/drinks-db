@@ -111,6 +111,7 @@ const useDialogue = () => {
   }
 
   const displayDialogue = (options) => {
+    console.log('this options', options);
     setDialogueDetails({ ...options, show: true });
   };
 

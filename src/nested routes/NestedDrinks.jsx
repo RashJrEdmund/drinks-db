@@ -14,15 +14,17 @@ import { deleteDrink } from '../api/authentication';
 import StyledNestedOverall from './StyledNestedOverall';
 import FetchHOC from '../HOCs/FetchHOC';
 import useDialogue from '../hooks/useDialogue';
+import useLoader from '../hooks/useLoader';
 
 function NestedDrinks({ fetchedData }) {
-  const { customAlert, setLoadingAnime, handleToggleModal } =
-    React.useContext(MyContext);
+  const { customAlert, handleToggleModal } = React.useContext(MyContext);
 
   const { Drinks } = fetchedData;
 
   const { edit, setEdit, currentUser, handleCreateNew } =
     React.useContext(CrudContext);
+
+  const { LoadingComponent, setLoadingAnime, loadingAnime } = useLoader();
 
   const { DialogueComponent, dialogueDetails, displayDialogue } = useDialogue();
 
@@ -64,6 +66,7 @@ function NestedDrinks({ fetchedData }) {
     <StyledNestedOverall>
       {edit.show.drink && <DrinksForm drink={edit} setEdit={setEdit} />}
       {dialogueDetails.show && <DialogueComponent />}
+      {loadingAnime.show && <LoadingComponent />}
 
       <button
         className="create-new-btn"

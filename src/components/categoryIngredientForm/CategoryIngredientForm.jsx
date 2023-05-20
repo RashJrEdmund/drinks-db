@@ -10,11 +10,14 @@ import {
   postIngredient,
   patchIngredient,
 } from '../../api/authentication';
+import useLoader from '../../hooks/useLoader';
 
 export default function CategoryIngredientFrom(props) {
   const { edit, setEdit } = props;
 
-  const { customAlert, setLoadingAnime } = React.useContext(MyContext);
+  const { customAlert } = React.useContext(MyContext);
+
+  const { LoadingComponent, setLoadingAnime, loadingAnime } = useLoader();
 
   const closeForm = () => {
     setEdit((prev) => {
@@ -84,6 +87,8 @@ export default function CategoryIngredientFrom(props) {
 
   return (
     <StyledCategoryIngredientForm>
+      {loadingAnime.show && <LoadingComponent />}
+
       <div className="item_form_overlay" />
 
       <div className="form_container">

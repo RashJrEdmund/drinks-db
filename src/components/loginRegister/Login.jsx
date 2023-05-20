@@ -10,11 +10,14 @@ import StyledRegisterLoginForm from './StyledrRegisterLoginform';
 
 import { loginWithEmailPassword } from '../../api/authentication';
 import { saveToken } from '../../services/utils';
+import useLoader from '../../hooks/useLoader';
 
 function Login() {
-  const { customAlert, setLoadingAnime } = React.useContext(MyContext);
+  const { customAlert } = React.useContext(MyContext);
   const navigate = useNavigate();
   const [inputType, setInputType] = React.useState('password');
+
+  const { LoadingComponent, setLoadingAnime, loadingAnime } = useLoader();
 
   const inputRef = React.useRef();
 
@@ -30,7 +33,7 @@ function Login() {
       password: target.password.value,
     };
 
-    await setLoadingAnime({ message: 'processing...', show: true });
+    setLoadingAnime({ message: 'getting user...', show: true });
 
     try {
       await loginWithEmailPassword(user.email, user.password)
@@ -49,6 +52,8 @@ function Login() {
 
   return (
     <StyledRegisterLoginForm>
+      {loadingAnime.show && <LoadingComponent />}
+
       <form className="login_form" onSubmit={handleSubmit}>
         <h1>Login to your account</h1>
         <input

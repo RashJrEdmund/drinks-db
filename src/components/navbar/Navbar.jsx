@@ -17,19 +17,19 @@ export default function Navbar({ currentUser }) {
 
   const navRef = React.useRef();
 
-  React.useEffect(() => {
-    let YscrollHolder = 0;
-    window.addEventListener('scroll', () => {
-      if (
-        (!showMenu.side || showMenu.dropDown) &&
-        window.scrollY >= YscrollHolder
-      )
-        navRef.current?.classList.add('active_navBar');
-      else navRef.current?.classList.remove('active_navBar');
+  // React.useEffect(() => {
+  //   let YscrollHolder = 0;
+  //   window.addEventListener('scroll', () => {
+  //     if (
+  //       (!showMenu.side || showMenu.dropDown) &&
+  //       window.scrollY >= YscrollHolder
+  //     )
+  //       navRef.current?.classList.add('active_navBar');
+  //     else navRef.current?.classList.remove('active_navBar');
 
-      YscrollHolder = window.scrollY;
-    });
-  }, [showMenu.side]);
+  //     YscrollHolder = window.scrollY;
+  //   });
+  // }, [showMenu.side]);
 
   return (
     <StyledNavBar ref={navRef}>
@@ -63,9 +63,15 @@ export default function Navbar({ currentUser }) {
         <span
           className="profile_section"
           tabIndex="0"
-          onClick={() =>
-            setShowMenu((prev) => ({ ...prev, dropDown: !prev.dropDown }))
-          }
+          onClick={(e) => {
+            console.log(e.currentTarget);
+            if (!showMenu.dropDown) {
+              setShowMenu((prev) => ({
+                ...prev,
+                dropDown: !showMenu.dropDown,
+              }));
+            }
+          }}
           onBlur={() => setShowMenu((prev) => ({ ...prev, dropDown: false }))}
         >
           <div className="profile_logo" title="go to profile">

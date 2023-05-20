@@ -11,7 +11,6 @@ import Register from './components/loginRegister/Register';
 import UserProfile from './pages/userprofile/UserProfile';
 
 import AlertMessage from './components/AlertMessage';
-import LoadingAnime from './components/LoadingAnime';
 
 import Settings from './pages/Settings';
 import CrudPage from './pages/crudpage/CrudPage';
@@ -20,6 +19,7 @@ import NestedCategories from './nested routes/NestedCategories';
 import NestedIngredients from './nested routes/NestedIngredients';
 import ItemModal from './components/ItemModal';
 import useDialogue from './hooks/useDialogue';
+import useLoader from './hooks/useLoader';
 
 export default function App() {
   const [filterData, setFilterData] = React.useState([]);
@@ -36,17 +36,14 @@ export default function App() {
     dropDown: false,
   });
 
-  const [loadingAnime, setLoadingAnime] = React.useState({
-    show: false,
-    message: '',
-  });
-
   const [alertMsg, setAlertMsg] = React.useState({
     message: '',
     show: false,
   });
 
   const { dialogueDetails } = useDialogue();
+
+  const { LoadingComponent, setLoadingAnime, loadingAnime } = useLoader();
 
   const customAlert = (msg) => {
     setAlertMsg(() => ({ message: msg, show: true }));
@@ -79,14 +76,11 @@ export default function App() {
       <MyContext.Provider
         value={{
           customAlert,
-
           handleToggleModal,
+          setLoadingAnime,
 
           showMenu,
           setShowMenu,
-
-          loadingAnime,
-          setLoadingAnime,
 
           filterData,
           setFilterData,
@@ -101,8 +95,7 @@ export default function App() {
         }}
       >
         {alertMsg.show && <AlertMessage message={alertMsg.message} />}
-
-        {loadingAnime.show && <LoadingAnime message={loadingAnime.message} />}
+        {loadingAnime.show && <LoadingComponent />}
 
         {itemModal.show && (
           <ItemModal itemModal={itemModal} setItemModal={setItemModal} />

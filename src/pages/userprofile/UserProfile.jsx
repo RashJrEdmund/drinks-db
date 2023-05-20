@@ -20,14 +20,16 @@ import { deleteUser } from '../../api/authentication';
 import uploadIcon from '../../images/darkImageIcon.png';
 import ProfileSettingsGaurd from '../../HOCs/ProfileSettingsGaurd';
 import useDialogue from '../../hooks/useDialogue';
+import useLoader from '../../hooks/useLoader';
 
 function UserProfile({ currentUser }) {
-  const { zoomPhoto, setZoomPhoto, setLoadingAnime, customAlert } =
-    React.useContext(MyContext);
+  const { zoomPhoto, setZoomPhoto, customAlert } = React.useContext(MyContext);
   const navigate = useNavigate();
   const profileRef = React.useRef();
   const [imagePath, setImagePath] = React.useState(null);
   const [showSideEdit, setShowSideEdit] = React.useState(false);
+
+  const { LoadingComponent, setLoadingAnime, loadingAnime } = useLoader();
 
   const { DialogueComponent, dialogueDetails, displayDialogue } = useDialogue();
 
@@ -124,6 +126,7 @@ function UserProfile({ currentUser }) {
   return (
     <StyledUserProfile>
       {dialogueDetails.show && <DialogueComponent />}
+      {loadingAnime.show && <LoadingComponent />}
 
       <div className="profile_update_container">
         <div className="profile-btns">

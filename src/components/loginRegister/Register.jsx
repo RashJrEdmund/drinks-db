@@ -7,13 +7,16 @@ import { MyContext } from '../../context/MyContext';
 import { loginWithEmailPassword, register } from '../../api/authentication';
 import StyledRegisterLoginForm from './StyledrRegisterLoginform';
 import { saveToken } from '../../services/utils';
+import useLoader from '../../hooks/useLoader';
 
 function Register() {
-  const { customAlert, setLoadingAnime } = React.useContext(MyContext);
+  const { customAlert } = React.useContext(MyContext);
   const [inputType, setInputType] = React.useState({
     one: 'password',
     two: 'password',
   });
+
+  const { LoadingComponent, setLoadingAnime, loadingAnime } = useLoader();
 
   const navigate = useNavigate();
 
@@ -52,6 +55,8 @@ function Register() {
 
   return (
     <StyledRegisterLoginForm>
+      {loadingAnime.show && <LoadingComponent />}
+
       <form className="regiter_form" onSubmit={handleSubmit}>
         <h1>Create An account</h1>
         <input type="text" placeholder="First Name" name="firstName" required />

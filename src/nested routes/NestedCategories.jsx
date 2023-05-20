@@ -11,12 +11,14 @@ import StyledNestedOverall from './StyledNestedOverall';
 
 import { deleteCategory } from '../api/authentication';
 import useDialogue from '../hooks/useDialogue';
+import useLoader from '../hooks/useLoader';
 
 function NestedCategories({ fetchedData }) {
-  const { customAlert, setLoadingAnime, handleToggleModal } =
-    React.useContext(MyContext);
+  const { customAlert, handleToggleModal } = React.useContext(MyContext);
   const { handleCreateNew, handleCatAndIngrEdit } =
     React.useContext(CrudContext);
+
+  const { LoadingComponent, setLoadingAnime, loadingAnime } = useLoader();
 
   const { DialogueComponent, dialogueDetails, displayDialogue } = useDialogue();
 
@@ -42,6 +44,8 @@ function NestedCategories({ fetchedData }) {
   return (
     <StyledNestedOverall>
       {dialogueDetails.show && <DialogueComponent />}
+
+      {loadingAnime.show && <LoadingComponent />}
 
       <button
         className="create-new-btn"

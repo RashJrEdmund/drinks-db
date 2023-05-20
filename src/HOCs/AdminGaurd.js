@@ -29,7 +29,7 @@ const AdminGaurd = (Component) => {
     return currentUser?.is_admin ? (
       <Component currentUser={currentUser} />
     ) : (
-      <LoadingText />
+      <LoadingText message="getting user..." />
     );
   };
 };

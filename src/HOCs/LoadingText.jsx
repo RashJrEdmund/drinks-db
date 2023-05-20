@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from '@emotion/styled';
 
-export default function LoadingText() {
+export default function LoadingText({ message }) {
   const StyledLoadingMessage = styled.p`
     @keyframes LoadingAnime {
       from {
@@ -24,5 +25,5 @@ export default function LoadingText() {
     animation-iteration-count: infinite;
   `;
 
-  return <StyledLoadingMessage>Loading...</StyledLoadingMessage>;
+  return <StyledLoadingMessage>{message || 'Loading...'}</StyledLoadingMessage>;
 }

@@ -9,6 +9,7 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 import StyledSideBar from './StyledSideBar';
 import { MyContext } from '../../context/MyContext';
 import FetchHOC from '../../HOCs/FetchHOC';
+import useLoader from '../../hooks/useLoader';
 
 function SideBar({ fetchedData }) {
   const {
@@ -17,7 +18,6 @@ function SideBar({ fetchedData }) {
     bodyref,
     showMenu,
     setShowMenu,
-    setLoadingAnime,
   } = React.useContext(MyContext);
 
   const [showOptionList, setShowOptionList] = React.useState({
@@ -26,6 +26,8 @@ function SideBar({ fetchedData }) {
     Ingredients: true,
     Alcoholic: true,
   });
+
+  const { LoadingComponent, setLoadingAnime, loadingAnime } = useLoader();
 
   const [filterOptions, setFilterOptions] = React.useState([]);
 
@@ -162,6 +164,8 @@ function SideBar({ fetchedData }) {
 
   return (
     <StyledSideBar showSide={showMenu.side}>
+      {loadingAnime.show && <LoadingComponent />}
+
       {showMenu.side && (
         <div
           className="menu-list-overlay"

@@ -107,8 +107,9 @@ export default function ProfileDropDown({ currentUser }) {
 
   return currentUser?.is_admin ? (
     <StyledDropDown className="profile_dropdown" id="profile_dropdown">
+      {dialogueDetails.show && <DialogueComponent />}
+
       <p onClick={() => window.scrollTo(0, 0)}>
-        {!dialogueDetails.show && <DialogueComponent />}
         <MdHome /> Home
       </p>
       <p onClick={() => navigate('/cruding/drinks')}>
