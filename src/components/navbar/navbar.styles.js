@@ -83,6 +83,33 @@ const StyledNavBar = styled.div`
       }
     }
 
+    // .profile_section {
+    //   height: fit-content;
+    //   width: fit-content;
+    //   display: flex;
+    //   flex-direction: column;
+    //   align-items: center;
+    //   padding: 0;
+    //   cursor: pointer;
+
+    //   .profile_logo {
+    //     position: relative;
+    //     background-color: #f5f5f5;
+    //     background-position: center;
+    //     background-size: cover;
+    //     height: 60px;
+    //     width: 60px;
+    //     border-radius: 50px;
+    //     margin: 5px 0 0;
+    //   }
+
+    //   span {
+    //     color: #a52a2a;
+    //     font-weight: 700;
+    //     margin: 5px 0 2px;
+    //   }
+    // }
+
     .profile_section {
       height: fit-content;
       width: fit-content;
@@ -91,6 +118,14 @@ const StyledNavBar = styled.div`
       align-items: center;
       padding: 0;
       cursor: pointer;
+
+      &:focus {
+        border: none;
+        outline: none;
+        border-color: inherit;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
 
       .profile_logo {
         position: relative;

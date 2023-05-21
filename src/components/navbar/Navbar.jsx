@@ -10,12 +10,20 @@ import { CgMenuGridR } from 'react-icons/cg';
 
 import { MyContext } from '../../context/MyContext';
 import StyledNavBar from './navbar.styles';
-import ProfileDropDown from '../ProfileDropDown';
+import ProfileDropDown from '../profileDropDown/ProfileDropDown';
 
 export default function Navbar({ currentUser }) {
   const { showMenu, setShowMenu } = React.useContext(MyContext);
 
+  // const { DialogueComponent, dialogueDetails, displayDialogue } = useDialogue();
+
   const navRef = React.useRef();
+
+  const toggleDropDown = () =>
+    setShowMenu((prev) => ({
+      ...prev,
+      dropDown: !prev.dropDown,
+    }));
 
   // React.useEffect(() => {
   //   let YscrollHolder = 0;
@@ -60,7 +68,7 @@ export default function Navbar({ currentUser }) {
           </p>
         </div>
 
-        <span
+        {/* <span
           className="profile_section"
           tabIndex="0"
           onClick={(e) => {
@@ -68,10 +76,23 @@ export default function Navbar({ currentUser }) {
             if (!showMenu.dropDown) {
               setShowMenu((prev) => ({
                 ...prev,
-                dropDown: !showMenu.dropDown,
+                dropDown: !prev.dropDown,
               }));
             }
           }}
+          onBlur={() => setShowMenu((prev) => ({ ...prev, dropDown: false }))}
+        >
+          <div className="profile_logo" title="go to profile">
+            {showMenu.dropDown && <ProfileDropDown currentUser={currentUser} />}
+          </div>
+
+          <span>{currentUser?.last_name || 'userName'}</span>
+        </span> */}
+
+        <span
+          className="profile_section"
+          tabIndex="0"
+          onClick={toggleDropDown}
           onBlur={() => setShowMenu((prev) => ({ ...prev, dropDown: false }))}
         >
           <div className="profile_logo" title="go to profile">
