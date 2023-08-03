@@ -7,6 +7,8 @@ import StyledDrinksSection from './StyledDrinksSection';
 import HomeDrinks from '../homeDrinks/HomeDrinks';
 
 function DrinksSection({ fetchedData }) {
+  if (!fetchedData) return <p>No fetched Data</p>;
+
   const { Drinks } = fetchedData;
   const displayLength = 12;
 

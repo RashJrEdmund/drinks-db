@@ -23,5 +23,4 @@ httpClient.interceptors.request.use(
   }
 );
 
-// export { httpClient };
 export default httpClient;

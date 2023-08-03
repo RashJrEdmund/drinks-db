@@ -189,8 +189,6 @@ const StyledNavBar = styled.div`
   @media only screen and (max-width: 400px) {
     .navBar-container {
       .left_group {
-        margin: 0;
-
         .drinks_db {
           font-size: 1.3rem;
           font-weight: 600;

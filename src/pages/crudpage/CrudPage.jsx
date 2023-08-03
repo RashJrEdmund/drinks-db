@@ -4,16 +4,16 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import React from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
-import { TiEdit } from 'react-icons/ti';
-import { MdDeleteForever, MdSave, MdKeyboardControlKey } from 'react-icons/md';
+import { MdKeyboardControlKey } from 'react-icons/md';
 import { BsBarChartFill } from 'react-icons/bs';
-import { AiOutlineMenu } from 'react-icons/ai';
 
 import { MyContext, CrudContext } from '../../context/MyContext';
 import AdminGaurd from '../../HOCs/AdminGaurd';
 import StyleCrudPage from './StyledCrudPage';
 import Stats from '../../components/Stats';
 import CategoryIngredientFrom from '../../components/categoryIngredientForm/CategoryIngredientForm';
+import CrudSideMenu from './crud_side_menu';
+import AdminNavBar from './admin_nav/index.nav';
 
 function CrudPage({ currentUser }) {
   const { customAlert } = React.useContext(MyContext);
@@ -123,57 +123,21 @@ function CrudPage({ currentUser }) {
             onClick={() => setActiveMenu({ stats: false, side: false })}
           />
 
-          <div ref={adminNavRef} className="admin_nav_holder">
-            <div className="admin_nav">
-              {['Home', 'Profile', 'Settings'].map((btn) => (
-                <button
-                  key={btn}
-                  type="button"
-                  name={btn}
-                  onClick={handleAdminNav}
-                >
-                  {btn}
-                </button>
-              ))}
-
-              <form className="search_form">
-                <button type="submit">search</button>
-                <input type="text" placeholder="search item" />
-              </form>
-
-              <button
-                type="button"
-                className="menu_btn"
-                onClick={() =>
-                  setActiveMenu((prev) => ({ ...prev, side: true }))
-                }
-              >
-                <AiOutlineMenu />
-              </button>
-            </div>
-          </div>
+          <AdminNavBar
+            adminNavRef={adminNavRef}
+            handleAdminNav={handleAdminNav}
+            setActiveMenu={setActiveMenu}
+          />
 
           <Stats currentUser={currentUser} />
 
           <Outlet />
 
-          <div ref={cardOptionsRef} className="card-options">
-            {['Drinks', 'Categories', 'Ingredients'].map((item) => (
-              <div
-                data-test
-                key={item}
-                onClick={() => {
-                  navigate(item.toLowerCase(), { replace: true });
-                  setActiveMenu((prev) => ({ ...prev, side: false }));
-                }}
-              >
-                <h1>
-                  <TiEdit /> <MdSave /> <MdDeleteForever />
-                </h1>
-                <h1>{item}</h1>
-              </div>
-            ))}
-          </div>
+          <CrudSideMenu
+            cardOptionsRef={cardOptionsRef}
+            activeMenu={activeMenu}
+            setActiveMenu={setActiveMenu}
+          />
 
           <button
             ref={topBtnRef}

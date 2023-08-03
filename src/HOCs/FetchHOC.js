@@ -8,19 +8,21 @@ const FetchHOC = (Component) => {
   return function Gaurd(props) {
     const { customAlert } = React.useContext(MyContext);
     const [fetchedData, setFetchedData] = React.useState(null);
+    const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
       getAllData()
         .then(({ data }) => {
           setFetchedData(data);
         })
-        .catch(({ message }) => customAlert(message));
+        .catch(({ message }) => customAlert(message))
+        .finally(() => setLoading(false));
     }, []);
 
-    return fetchedData?.Drinks?.length >= 0 ? (
-      <Component {...props} fetchedData={fetchedData} />
-    ) : (
+    return loading ? (
       <LoadingText />
+    ) : (
+      <Component {...props} fetchedData={fetchedData} />
     );
   };
 };

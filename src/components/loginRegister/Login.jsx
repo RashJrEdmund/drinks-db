@@ -43,7 +43,7 @@ function Login() {
       const { response, message } = e;
       customAlert(response?.data || message);
       if (response.status === 401) {
-        customAlert('Invalid username or password');
+        customAlert('Invalid email or password');
       }
     } finally {
       setLoadingAnime({ message: '', show: false });
