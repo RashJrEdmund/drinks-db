@@ -5,15 +5,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
-import { MyContext } from '../../context/MyContext';
 import StyledRegisterLoginForm from './StyledrRegisterLoginform';
 
 import { loginWithEmailPassword } from '../../api/authentication';
 import { saveToken } from '../../services/utils';
 import useLoader from '../../hooks/useLoader';
+import { useAppContext } from '../../context/AppContext';
 
 function Login() {
-  const { customAlert } = React.useContext(MyContext);
+  const { customAlert } = useAppContext();
   const navigate = useNavigate();
   const [inputType, setInputType] = React.useState('password');
 

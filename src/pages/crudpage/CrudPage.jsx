@@ -2,12 +2,12 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/jsx-no-constructed-context-values */
-import React from 'react';
-import { useNavigate, Outlet } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Outlet } from 'react-router-dom';
 import { MdKeyboardControlKey } from 'react-icons/md';
 import { BsBarChartFill } from 'react-icons/bs';
 
-import { MyContext, CrudContext } from '../../context/MyContext';
+import CrudContext from '../../context/CrudContext';
 import AdminGaurd from '../../HOCs/AdminGaurd';
 import StyleCrudPage from './StyledCrudPage';
 import Stats from '../../components/Stats';
@@ -16,8 +16,7 @@ import CrudSideMenu from './crud_side_menu';
 import AdminNavBar from './admin_nav/index.nav';
 
 function CrudPage({ currentUser }) {
-  const { customAlert } = React.useContext(MyContext);
-  const navigate = useNavigate();
+  const { customAlert } = useContext(CrudContext);
   const topBtnRef = React.useRef();
   const cardOptionsRef = React.useRef();
   const adminNavRef = React.useRef();
@@ -69,16 +68,6 @@ function CrudPage({ currentUser }) {
     setEdit(() => ({ ...holder }));
   };
 
-  const handleAdminNav = (e) => {
-    const {
-      target: { name },
-    } = e;
-
-    if (name === 'Home') navigate('/');
-    else if (name === 'Profile') navigate('/profile');
-    else navigate('/settings');
-  };
-
   React.useEffect(() => {
     customAlert('admin dashboard');
 
@@ -125,7 +114,6 @@ function CrudPage({ currentUser }) {
 
           <AdminNavBar
             adminNavRef={adminNavRef}
-            handleAdminNav={handleAdminNav}
             setActiveMenu={setActiveMenu}
           />
 

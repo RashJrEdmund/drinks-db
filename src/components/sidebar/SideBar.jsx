@@ -7,9 +7,9 @@ import React from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 import StyledSideBar from './StyledSideBar';
-import { MyContext } from '../../context/MyContext';
 import FetchHOC from '../../HOCs/FetchHOC';
 import useLoader from '../../hooks/useLoader';
+import { useAppContext } from '../../context/AppContext';
 
 function SideBar({ fetchedData }) {
   const {
@@ -18,7 +18,7 @@ function SideBar({ fetchedData }) {
     bodyref,
     showMenu,
     setShowMenu,
-  } = React.useContext(MyContext);
+  } = useAppContext();
 
   const [showOptionList, setShowOptionList] = React.useState({
     Categories: true,

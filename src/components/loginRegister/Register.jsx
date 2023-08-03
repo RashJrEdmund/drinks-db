@@ -3,14 +3,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
-import { MyContext } from '../../context/MyContext';
 import { loginWithEmailPassword, register } from '../../api/authentication';
 import StyledRegisterLoginForm from './StyledrRegisterLoginform';
 import { saveToken } from '../../services/utils';
 import useLoader from '../../hooks/useLoader';
+import { useAppContext } from '../../context/AppContext';
 
 function Register() {
-  const { customAlert } = React.useContext(MyContext);
+  const { customAlert } = useAppContext();
   const [inputType, setInputType] = React.useState({
     one: 'password',
     two: 'password',

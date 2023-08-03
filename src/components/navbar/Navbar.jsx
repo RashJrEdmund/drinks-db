@@ -8,12 +8,12 @@ import React from 'react';
 import { FaDatabase } from 'react-icons/fa';
 import { CgMenuGridR } from 'react-icons/cg';
 
-import { MyContext } from '../../context/MyContext';
 import StyledNavBar from './navbar.styles';
 import ProfileDropDown from '../profileDropDown/ProfileDropDown';
+import { useAppContext } from '../../context/AppContext';
 
 export default function Navbar({ currentUser }) {
-  const { showMenu, setShowMenu } = React.useContext(MyContext);
+  const { showMenu, setShowMenu } = useAppContext();
 
   // const { DialogueComponent, dialogueDetails, displayDialogue } = useDialogue();
 

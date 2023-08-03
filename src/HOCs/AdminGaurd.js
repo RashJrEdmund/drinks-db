@@ -1,12 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUser } from '../api/authentication';
-import { MyContext } from '../context/MyContext';
 import LoadingText from './LoadingText';
+import { useAppContext } from '../context/AppContext';
 
 const AdminGaurd = (Component) => {
   return function Gaurd() {
-    const { customAlert, setLoadingAnime } = React.useContext(MyContext);
+    const { customAlert, setLoadingAnime } = useAppContext();
     const [currentUser, setCurrentUser] = React.useState(null);
     const navigate = useNavigate();
 

@@ -7,14 +7,14 @@ import React from 'react';
 import { RiDeleteBack2Fill } from 'react-icons/ri';
 
 import StyledDrinksForm from './StyledDrinksForm';
-import { MyContext } from '../../context/MyContext';
 import { postDrink, patchDrink } from '../../api/authentication';
 import useLoader from '../../hooks/useLoader';
+import { useAppContext } from '../../context/AppContext';
 
 export default function DrinksForm(props) {
   const { drink, setEdit } = props;
 
-  const { customAlert } = React.useContext(MyContext);
+  const { customAlert } = useAppContext();
   const [drinkData, setDrinkData] = React.useState(drink?.chosenOne);
 
   const { LoadingComponent, setLoadingAnime, loadingAnime } = useLoader();

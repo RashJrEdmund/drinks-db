@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { getAllData } from '../api/authentication';
-import { MyContext } from '../context/MyContext';
 import LoadingText from './LoadingText';
+import { useAppContext } from '../context/AppContext';
 
 const FetchHOC = (Component) => {
   return function Gaurd(props) {
-    const { customAlert } = React.useContext(MyContext);
+    const { customAlert } = useAppContext();
     const [fetchedData, setFetchedData] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
 

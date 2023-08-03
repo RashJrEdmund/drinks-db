@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { getCurrentUser } from '../api/authentication';
-import { MyContext } from '../context/MyContext';
+import { useAppContext } from '../context/AppContext';
 
 // const logIn = () => {
 //   return new Promise((resolve, reject) => {
@@ -11,7 +11,7 @@ import { MyContext } from '../context/MyContext';
 
 const AuthGaurd = (Component) => {
   return function Gaurd(props) {
-    const { customAlert, setLoadingAnime } = useContext(MyContext);
+    const { customAlert, setLoadingAnime } = useAppContext();
     const [loadedUser, setLoadedUser] = useState();
 
     useEffect(() => {

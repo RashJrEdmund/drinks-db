@@ -5,7 +5,7 @@ import React from 'react';
 import { MdDeleteForever } from 'react-icons/md';
 import { TiEdit } from 'react-icons/ti';
 
-import { CrudContext, MyContext } from '../context/MyContext';
+import CrudContext from '../context/CrudContext';
 import FetchHOC from '../HOCs/FetchHOC';
 import StyledNestedOverall from './StyledNestedOverall';
 
@@ -13,9 +13,10 @@ import { deleteCategory } from '../api/authentication';
 import useDialogue from '../hooks/useDialogue';
 import useLoader from '../hooks/useLoader';
 import useModal from '../hooks/UseModal/useModal';
+import { useAppContext } from '../context/AppContext';
 
 function NestedCategories({ fetchedData }) {
-  const { customAlert } = React.useContext(MyContext);
+  const { customAlert } = useAppContext();
   const { handleCreateNew, handleCatAndIngrEdit } =
     React.useContext(CrudContext);
 

@@ -14,8 +14,8 @@ import {
 } from 'react-icons/md';
 
 import StyledDropDown from './StyledDropDown';
-import { MyContext } from '../../context/MyContext';
 import useDialogue from '../../hooks/useDialogue';
+import { useAppContext } from '../../context/AppContext';
 
 // localStorage.clear();
 
@@ -32,7 +32,7 @@ function ProfileAndLoginBtn({ fxn, currentUser }) {
 }
 
 export default function ProfileDropDown({ currentUser }) {
-  const { customAlert } = React.useContext(MyContext);
+  const { customAlert } = useAppContext();
   const { DialogueComponent, dialogueDetails, displayDialogue } = useDialogue();
   const navigate = useNavigate();
 

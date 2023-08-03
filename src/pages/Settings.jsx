@@ -8,7 +8,7 @@ import { MdBrightness1, MdBrightness2, MdArrowBackIos } from 'react-icons/md';
 
 import { useNavigate } from 'react-router-dom';
 import ProfileSettingsGaurd from '../HOCs/ProfileSettingsGaurd';
-import { MyContext } from '../context/MyContext';
+import { useAppContext } from '../context/AppContext';
 
 const StyledSettings = styled.div`
   width: 100%;
@@ -106,7 +106,7 @@ const StyledSettings = styled.div`
 `;
 
 function Settings({ currentUser }) {
-  const { customAlert } = React.useContext(MyContext);
+  const { customAlert } = useAppContext();
   const [theme, setTheme] = React.useState(false);
 
   const navigate = useNavigate();

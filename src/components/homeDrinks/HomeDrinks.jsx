@@ -4,7 +4,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { MdInfo } from 'react-icons/md';
-import { MyContext } from '../../context/MyContext';
 
 import StyledHomeDrinks from './StyledHomeDrinks';
 import pourWineImg from '../../images/pour_wine_glass_2.png';
@@ -12,9 +11,10 @@ import blueWine from '../../images/blue_wine_glass.png';
 import standingGlass from '../../images/standing_wine_glass.png';
 import wineGlasses from '../../images/wine_glasses.png';
 import useModal from '../../hooks/UseModal/useModal';
+import { useAppContext } from '../../context/AppContext';
 
 export default function HomeDrinks({ drinksToshow, showInd }) {
-  const { bodyref } = React.useContext(MyContext);
+  const { bodyref } = useAppContext();
 
   const { ModalComponent, itemModal, mountItemModal } = useModal();
 

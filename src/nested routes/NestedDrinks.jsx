@@ -8,7 +8,7 @@ import { MdDeleteForever } from 'react-icons/md';
 import { TiEdit, TiLockClosed, TiLockOpen } from 'react-icons/ti';
 
 import DrinksForm from '../components/drinksForm/DrinksForm';
-import { CrudContext, MyContext } from '../context/MyContext';
+import CrudContext from '../context/CrudContext';
 
 import { deleteDrink } from '../api/authentication';
 import StyledNestedOverall from './StyledNestedOverall';
@@ -16,9 +16,10 @@ import FetchHOC from '../HOCs/FetchHOC';
 import useDialogue from '../hooks/useDialogue';
 import useLoader from '../hooks/useLoader';
 import useModal from '../hooks/UseModal/useModal';
+import { useAppContext } from '../context/AppContext';
 
 function NestedDrinks({ fetchedData }) {
-  const { customAlert } = React.useContext(MyContext);
+  const { customAlert } = useAppContext();
 
   const { Drinks } = fetchedData;
 

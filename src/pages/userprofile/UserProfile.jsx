@@ -15,15 +15,15 @@ import {
 } from 'react-icons/md';
 import StyledUserProfile from './StyledUserProfile';
 
-import { MyContext } from '../../context/MyContext';
 import { deleteUser } from '../../api/authentication';
 import uploadIcon from '../../images/darkImageIcon.png';
 import ProfileSettingsGaurd from '../../HOCs/ProfileSettingsGaurd';
 import useDialogue from '../../hooks/useDialogue';
 import useLoader from '../../hooks/useLoader';
+import { useAppContext } from '../../context/AppContext';
 
 function UserProfile({ currentUser }) {
-  const { zoomPhoto, setZoomPhoto, customAlert } = React.useContext(MyContext);
+  const { zoomPhoto, setZoomPhoto, customAlert } = useAppContext();
   const navigate = useNavigate();
   const profileRef = React.useRef();
   const [imagePath, setImagePath] = React.useState(null);

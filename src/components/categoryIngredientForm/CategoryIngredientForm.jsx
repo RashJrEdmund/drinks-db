@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { MyContext } from '../../context/MyContext';
 
 import StyledCategoryIngredientForm from './StyledCategoryIngredientForm';
 
@@ -11,11 +10,12 @@ import {
   patchIngredient,
 } from '../../api/authentication';
 import useLoader from '../../hooks/useLoader';
+import { useAppContext } from '../../context/AppContext';
 
 export default function CategoryIngredientFrom(props) {
   const { edit, setEdit } = props;
 
-  const { customAlert } = React.useContext(MyContext);
+  const { customAlert } = useAppContext();
 
   const { LoadingComponent, setLoadingAnime, loadingAnime } = useLoader();
 
